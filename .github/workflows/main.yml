@@ -1,0 +1,21 @@
+on:
+  schedule:
+    - cron:  '0 */4 * * *' # every 4 hours
+  push:
+    branches:    
+      - main
+jobs:
+  push:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v2 # Checking out the repo
+      - name: Commit and push if changed
+        run: |
+          git diff
+          git config --global user.email "rrvq@example.com"
+          git config --global user.name "rrvq"
+          mkdir -p feeds
+          wget -nc -O devmoe https://dev.moe/feed
+          git add .
+          git commit -m "auto update"
+          git push
