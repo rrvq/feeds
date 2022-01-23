@@ -16,6 +16,7 @@ jobs:
           git config --global user.name "rrvq"
           mkdir -p feeds
           wget -nc -O devmoe https://dev.moe/feed
+          wget -nc -O atri https://blog.atri.tk/atom.xml
           git add .
           git commit -m "auto update"
           git push
