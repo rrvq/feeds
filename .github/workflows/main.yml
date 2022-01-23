@@ -14,10 +14,10 @@ jobs:
           git diff
           git config --global user.email "rrvq@example.com"
           git config --global user.name "rrvq"
-          curl ipinfo.io # show current ip
+          curl -6 ipinfo.io # show current ip
           mkdir -p feeds
-          wget -nc -O devmoe https://dev.moe/feed
-          wget -nc -O atri https://blog.atri.tk/atom.xml
+          wget -6 -nc -O devmoe https://dev.moe/feed
+          wget -6 -nc -O atri https://blog.atri.tk/atom.xml
           git add .
           git commit -m "auto update"
           git push
