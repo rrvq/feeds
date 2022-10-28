@@ -33,7 +33,7 @@
 <site xmlns="com-wordpress:feed-additions:1">66418562</site>	<item>
 		<title>ESXi 7.0 + R8168 / R8169 安装笔记</title>
 		<link>https://dev.moe/2794</link>
-					<comments>https://dev.moe/2794#respond</comments>
+					<comments>https://dev.moe/2794#comments</comments>
 		
 		<dc:creator><![CDATA[Coxxs]]></dc:creator>
 		<pubDate>Thu, 18 Aug 2022 23:10:59 +0000</pubDate>
@@ -125,7 +125,7 @@ ubuntu kernel: [ 2581.050921] WARNING: CPU: 0 PID: 0 at net/sched/sch_generic.c:
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://dev.moe/2794/feed</wfw:commentRss>
-			<slash:comments>0</slash:comments>
+			<slash:comments>1</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">2794</post-id>	</item>
