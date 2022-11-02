@@ -388,17 +388,17 @@
     
     <category term="Web" scheme="https://blog.atri.tk/tags/Web/"/>
     
-    <category term="Linux" scheme="https://blog.atri.tk/tags/Linux/"/>
-    
-    <category term="Nginx" scheme="https://blog.atri.tk/tags/Nginx/"/>
-    
-    <category term="IaaS" scheme="https://blog.atri.tk/tags/IaaS/"/>
-    
     <category term="Typecho" scheme="https://blog.atri.tk/tags/Typecho/"/>
+    
+    <category term="Linux" scheme="https://blog.atri.tk/tags/Linux/"/>
     
     <category term="PHP" scheme="https://blog.atri.tk/tags/PHP/"/>
     
+    <category term="Nginx" scheme="https://blog.atri.tk/tags/Nginx/"/>
+    
     <category term="MySQL" scheme="https://blog.atri.tk/tags/MySQL/"/>
+    
+    <category term="IaaS" scheme="https://blog.atri.tk/tags/IaaS/"/>
     
   </entry>
   
@@ -454,11 +454,11 @@
     
     <category term="Nginx" scheme="https://blog.atri.tk/tags/Nginx/"/>
     
+    <category term="IaaS" scheme="https://blog.atri.tk/tags/IaaS/"/>
+    
     <category term="Caddy" scheme="https://blog.atri.tk/tags/Caddy/"/>
     
     <category term="HaProxy" scheme="https://blog.atri.tk/tags/HaProxy/"/>
-    
-    <category term="IaaS" scheme="https://blog.atri.tk/tags/IaaS/"/>
     
   </entry>
   
