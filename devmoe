@@ -21,7 +21,7 @@
 	hourly	</sy:updatePeriod>
 	<sy:updateFrequency>
 	1	</sy:updateFrequency>
-	<generator>https://wordpress.org/?v=6.0.3</generator>
+	<generator>https://wordpress.org/?v=6.1</generator>
 
 <image>
 	<url>https://dev.moe/wp-content/uploads/2015/11/cropped-0e9d3ee98a13c72bf9e698bd46214bb7-32x32.png</url>
@@ -60,7 +60,7 @@
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-full is-resized"><a href="https://dev.moe/wp-content/uploads/2022/08/image.png"><img src="https://dev.moe/wp-content/uploads/2022/08/image.png" alt="" class="wp-image-2795" width="279" height="167" srcset="https://dev.moe/wp-content/uploads/2022/08/image.png 827w, https://dev.moe/wp-content/uploads/2022/08/image-300x180.png 300w, https://dev.moe/wp-content/uploads/2022/08/image-768x462.png 768w" sizes="(max-width: 279px) 100vw, 279px" /></a><figcaption>USB NIC</figcaption></figure></div>
+<figure class="aligncenter size-full is-resized"><a href="https://dev.moe/wp-content/uploads/2022/08/image.png"><img decoding="async" src="https://dev.moe/wp-content/uploads/2022/08/image.png" alt="" class="wp-image-2795" width="279" height="167" srcset="https://dev.moe/wp-content/uploads/2022/08/image.png 827w, https://dev.moe/wp-content/uploads/2022/08/image-300x180.png 300w, https://dev.moe/wp-content/uploads/2022/08/image-768x462.png 768w" sizes="(max-width: 279px) 100vw, 279px" /></a><figcaption>USB NIC</figcaption></figure></div>
 
 
 <p>幸运的是，ESXi 现在提供了几款热门 USB 网卡的原生驱动（ASIX88179, RTL8152/RTL8153, AQC111U）。我们可以购买一个支持的 USB NIC 适配器，然后制作包含 <a href="https://flings.vmware.com/usb-network-native-driver-for-esxi" target="_blank" rel="noreferrer noopener">VMKUSB-NIC-FLING</a> 驱动的镜像来安装 ESXi。</p>
@@ -147,7 +147,7 @@ ubuntu kernel: [ 2581.050921] WARNING: CPU: 0 PID: 0 at net/sched/sch_generic.c:
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2022/06/image.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/06/image-1024x698.png" alt="" class="wp-image-2722" width="444" height="302" srcset="https://dev.moe/wp-content/uploads/2022/06/image-1024x698.png 1024w, https://dev.moe/wp-content/uploads/2022/06/image-300x204.png 300w, https://dev.moe/wp-content/uploads/2022/06/image-768x523.png 768w, https://dev.moe/wp-content/uploads/2022/06/image.png 1055w" sizes="(max-width: 444px) 100vw, 444px" /></a><figcaption>听我说谢谢你，因为有你，温暖了四季&#8230;</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2022/06/image.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2022/06/image-1024x698.png" alt="" class="wp-image-2722" width="444" height="302" srcset="https://dev.moe/wp-content/uploads/2022/06/image-1024x698.png 1024w, https://dev.moe/wp-content/uploads/2022/06/image-300x204.png 300w, https://dev.moe/wp-content/uploads/2022/06/image-768x523.png 768w, https://dev.moe/wp-content/uploads/2022/06/image.png 1055w" sizes="(max-width: 444px) 100vw, 444px" /></a><figcaption>听我说谢谢你，因为有你，温暖了四季&#8230;</figcaption></figure></div>
 
 
 <p>更难受的是，小米平板 5 Pro 并未在全球发售，唯一支持的 MIUI 国行系统自带<strong>全链路反诈</strong>。隔壁低配的小米平板 5 反倒是又有国际版 MIUI，又有 Android 13 DP（开发者预览）。</p>
@@ -391,7 +391,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1024x640.png" alt="" class="wp-image-2723" width="737" height="460" srcset="https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1024x640.png 1024w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-300x188.png 300w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-768x480.png 768w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1536x960.png 1536w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-2048x1280.png 2048w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1568x980.png 1568w" sizes="(max-width: 737px) 100vw, 737px" /></a><figcaption>怕被叫成二次元，在 Pixel 壁纸库里换了张艺术壁纸！</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1024x640.png" alt="" class="wp-image-2723" width="737" height="460" srcset="https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1024x640.png 1024w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-300x188.png 300w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-768x480.png 768w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1536x960.png 1536w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-2048x1280.png 2048w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1568x980.png 1568w" sizes="(max-width: 737px) 100vw, 737px" /></a><figcaption>怕被叫成二次元，在 Pixel 壁纸库里换了张艺术壁纸！</figcaption></figure></div>
 
 
 <p>本文撰写过程中参考了以下内容，在此表示感谢：</p>
@@ -407,7 +407,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://dev.moe/2716/feed</wfw:commentRss>
-			<slash:comments>2</slash:comments>
+			<slash:comments>3</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">2716</post-id>	</item>
@@ -429,7 +429,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/im.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/im-1024x709.png" alt="" class="wp-image-2676" width="627" height="434" srcset="https://dev.moe/wp-content/uploads/2022/05/im-1024x709.png 1024w, https://dev.moe/wp-content/uploads/2022/05/im-300x208.png 300w, https://dev.moe/wp-content/uploads/2022/05/im-768x532.png 768w, https://dev.moe/wp-content/uploads/2022/05/im.png 1238w" sizes="(max-width: 627px) 100vw, 627px" /></a><figcaption>Telegram 的<a href="https://status.gotd.dev/" target="_blank" rel="noreferrer noopener">运行状态</a></figcaption></figure></div>
+<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/im.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/im-1024x709.png" alt="" class="wp-image-2676" width="627" height="434" srcset="https://dev.moe/wp-content/uploads/2022/05/im-1024x709.png 1024w, https://dev.moe/wp-content/uploads/2022/05/im-300x208.png 300w, https://dev.moe/wp-content/uploads/2022/05/im-768x532.png 768w, https://dev.moe/wp-content/uploads/2022/05/im.png 1238w" sizes="(max-width: 627px) 100vw, 627px" /></a><figcaption>Telegram 的<a href="https://status.gotd.dev/" target="_blank" rel="noreferrer noopener">运行状态</a></figcaption></figure></div>
 
 
 
@@ -453,7 +453,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-1.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-1-1024x1006.png" alt="" class="wp-image-2567" width="574" height="564" srcset="https://dev.moe/wp-content/uploads/2022/05/image-1-1024x1006.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-1-300x295.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-1-768x755.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-1.png 1255w" sizes="(max-width: 574px) 100vw, 574px" /></a></figure></div>
+<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-1.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-1-1024x1006.png" alt="" class="wp-image-2567" width="574" height="564" srcset="https://dev.moe/wp-content/uploads/2022/05/image-1-1024x1006.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-1-300x295.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-1-768x755.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-1.png 1255w" sizes="(max-width: 574px) 100vw, 574px" /></a></figure></div>
 
 
 
@@ -473,7 +473,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<figure class="wp-block-image size-large"><a href="https://dev.moe/wp-content/uploads/2022/05/image.png"><img loading="lazy" width="1024" height="214" src="https://dev.moe/wp-content/uploads/2022/05/image-1024x214.png" alt="" class="wp-image-2566" srcset="https://dev.moe/wp-content/uploads/2022/05/image-1024x214.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-300x63.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-768x160.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-1536x321.png 1536w, https://dev.moe/wp-content/uploads/2022/05/image-2048x428.png 2048w, https://dev.moe/wp-content/uploads/2022/05/image-1568x328.png 1568w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption>通过搜索 bot 的消息，用户位于 DC1 的有 360 条，DC4 有 50 条，DC5 有 390 条。DC2 与 DC3 有 0 条。</figcaption></figure>
+<figure class="wp-block-image size-large"><a href="https://dev.moe/wp-content/uploads/2022/05/image.png"><img decoding="async" loading="lazy" width="1024" height="214" src="https://dev.moe/wp-content/uploads/2022/05/image-1024x214.png" alt="" class="wp-image-2566" srcset="https://dev.moe/wp-content/uploads/2022/05/image-1024x214.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-300x63.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-768x160.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-1536x321.png 1536w, https://dev.moe/wp-content/uploads/2022/05/image-2048x428.png 2048w, https://dev.moe/wp-content/uploads/2022/05/image-1568x328.png 1568w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption>通过搜索 bot 的消息，用户位于 DC1 的有 360 条，DC4 有 50 条，DC5 有 390 条。DC2 与 DC3 有 0 条。</figcaption></figure>
 
 
 
@@ -529,7 +529,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<figure class="wp-block-image size-large"><a href="https://dev.moe/wp-content/uploads/2022/05/image-4.png"><img loading="lazy" width="1024" height="166" src="https://dev.moe/wp-content/uploads/2022/05/image-4-1024x166.png" alt="" class="wp-image-2576" srcset="https://dev.moe/wp-content/uploads/2022/05/image-4-1024x166.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-4-300x48.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-4-768x124.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-4-1536x248.png 1536w, https://dev.moe/wp-content/uploads/2022/05/image-4-1568x253.png 1568w, https://dev.moe/wp-content/uploads/2022/05/image-4.png 1720w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></figure>
+<figure class="wp-block-image size-large"><a href="https://dev.moe/wp-content/uploads/2022/05/image-4.png"><img decoding="async" loading="lazy" width="1024" height="166" src="https://dev.moe/wp-content/uploads/2022/05/image-4-1024x166.png" alt="" class="wp-image-2576" srcset="https://dev.moe/wp-content/uploads/2022/05/image-4-1024x166.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-4-300x48.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-4-768x124.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-4-1536x248.png 1536w, https://dev.moe/wp-content/uploads/2022/05/image-4-1568x253.png 1568w, https://dev.moe/wp-content/uploads/2022/05/image-4.png 1720w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></figure>
 
 
 
@@ -549,7 +549,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-5.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-5-1024x457.png" alt="" class="wp-image-2595" width="587" height="262" srcset="https://dev.moe/wp-content/uploads/2022/05/image-5-1024x457.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-5-300x134.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-5-768x343.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-5.png 1493w" sizes="(max-width: 587px) 100vw, 587px" /></a></figure></div>
+<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-5.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-5-1024x457.png" alt="" class="wp-image-2595" width="587" height="262" srcset="https://dev.moe/wp-content/uploads/2022/05/image-5-1024x457.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-5-300x134.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-5-768x343.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-5.png 1493w" sizes="(max-width: 587px) 100vw, 587px" /></a></figure></div>
 
 
 
@@ -557,7 +557,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<div class="wp-block-image size-full"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-6.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-6.png" alt="" class="wp-image-2597" width="567" height="247" srcset="https://dev.moe/wp-content/uploads/2022/05/image-6.png 871w, https://dev.moe/wp-content/uploads/2022/05/image-6-300x131.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-6-768x335.png 768w" sizes="(max-width: 567px) 100vw, 567px" /></a></figure></div>
+<div class="wp-block-image size-full"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-6.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-6.png" alt="" class="wp-image-2597" width="567" height="247" srcset="https://dev.moe/wp-content/uploads/2022/05/image-6.png 871w, https://dev.moe/wp-content/uploads/2022/05/image-6-300x131.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-6-768x335.png 768w" sizes="(max-width: 567px) 100vw, 567px" /></a></figure></div>
 
 
 
@@ -577,7 +577,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<div class="wp-block-image size-full"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-7.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-7.png" alt="" class="wp-image-2598" width="454" height="204" srcset="https://dev.moe/wp-content/uploads/2022/05/image-7.png 739w, https://dev.moe/wp-content/uploads/2022/05/image-7-300x135.png 300w" sizes="(max-width: 454px) 100vw, 454px" /></a><figcaption>bot 说，该帐号所在的数据中心为 DC4（阿姆斯特丹，荷兰）</figcaption></figure></div>
+<div class="wp-block-image size-full"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-7.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-7.png" alt="" class="wp-image-2598" width="454" height="204" srcset="https://dev.moe/wp-content/uploads/2022/05/image-7.png 739w, https://dev.moe/wp-content/uploads/2022/05/image-7-300x135.png 300w" sizes="(max-width: 454px) 100vw, 454px" /></a><figcaption>bot 说，该帐号所在的数据中心为 DC4（阿姆斯特丹，荷兰）</figcaption></figure></div>
 
 
 
@@ -589,7 +589,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-8.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-8-1024x334.png" alt="" class="wp-image-2599" width="532" height="173" srcset="https://dev.moe/wp-content/uploads/2022/05/image-8-1024x334.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-8-300x98.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-8-768x251.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-8.png 1164w" sizes="(max-width: 532px) 100vw, 532px" /></a></figure></div>
+<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-8.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-8-1024x334.png" alt="" class="wp-image-2599" width="532" height="173" srcset="https://dev.moe/wp-content/uploads/2022/05/image-8-1024x334.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-8-300x98.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-8-768x251.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-8.png 1164w" sizes="(max-width: 532px) 100vw, 532px" /></a></figure></div>
 
 
 
@@ -609,7 +609,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-9.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-9-1024x642.png" alt="" class="wp-image-2621" width="552" height="346" srcset="https://dev.moe/wp-content/uploads/2022/05/image-9-1024x642.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-9-300x188.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-9-768x481.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-9.png 1492w" sizes="(max-width: 552px) 100vw, 552px" /></a></figure></div>
+<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-9.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-9-1024x642.png" alt="" class="wp-image-2621" width="552" height="346" srcset="https://dev.moe/wp-content/uploads/2022/05/image-9-1024x642.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-9-300x188.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-9-768x481.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-9.png 1492w" sizes="(max-width: 552px) 100vw, 552px" /></a></figure></div>
 
 
 
@@ -617,7 +617,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<figure class="wp-block-image size-large"><a href="https://dev.moe/wp-content/uploads/2022/05/image-10.png"><img loading="lazy" width="1024" height="238" src="https://dev.moe/wp-content/uploads/2022/05/image-10-1024x238.png" alt="" class="wp-image-2622" srcset="https://dev.moe/wp-content/uploads/2022/05/image-10-1024x238.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-10-300x70.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-10-768x179.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-10-1536x357.png 1536w, https://dev.moe/wp-content/uploads/2022/05/image-10-1568x365.png 1568w, https://dev.moe/wp-content/uploads/2022/05/image-10.png 1603w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></figure>
+<figure class="wp-block-image size-large"><a href="https://dev.moe/wp-content/uploads/2022/05/image-10.png"><img decoding="async" loading="lazy" width="1024" height="238" src="https://dev.moe/wp-content/uploads/2022/05/image-10-1024x238.png" alt="" class="wp-image-2622" srcset="https://dev.moe/wp-content/uploads/2022/05/image-10-1024x238.png 1024w, https://dev.moe/wp-content/uploads/2022/05/image-10-300x70.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-10-768x179.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-10-1536x357.png 1536w, https://dev.moe/wp-content/uploads/2022/05/image-10-1568x365.png 1568w, https://dev.moe/wp-content/uploads/2022/05/image-10.png 1603w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></figure>
 
 
 
@@ -629,7 +629,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<div class="wp-block-image size-full"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-12.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-12.png" alt="" class="wp-image-2624" width="513" height="251" srcset="https://dev.moe/wp-content/uploads/2022/05/image-12.png 982w, https://dev.moe/wp-content/uploads/2022/05/image-12-300x147.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-12-768x377.png 768w" sizes="(max-width: 513px) 100vw, 513px" /></a></figure></div>
+<div class="wp-block-image size-full"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-12.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-12.png" alt="" class="wp-image-2624" width="513" height="251" srcset="https://dev.moe/wp-content/uploads/2022/05/image-12.png 982w, https://dev.moe/wp-content/uploads/2022/05/image-12-300x147.png 300w, https://dev.moe/wp-content/uploads/2022/05/image-12-768x377.png 768w" sizes="(max-width: 513px) 100vw, 513px" /></a></figure></div>
 
 
 
@@ -641,7 +641,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-14.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-14-1003x1024.png" alt="" class="wp-image-2637" width="716" height="731" srcset="https://dev.moe/wp-content/uploads/2022/05/image-14-1003x1024.png 1003w, https://dev.moe/wp-content/uploads/2022/05/image-14-294x300.png 294w, https://dev.moe/wp-content/uploads/2022/05/image-14-768x784.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-14.png 1500w" sizes="(max-width: 716px) 100vw, 716px" /></a></figure></div>
+<div class="wp-block-image size-large"><figure class="aligncenter is-resized"><a href="https://dev.moe/wp-content/uploads/2022/05/image-14.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2022/05/image-14-1003x1024.png" alt="" class="wp-image-2637" width="716" height="731" srcset="https://dev.moe/wp-content/uploads/2022/05/image-14-1003x1024.png 1003w, https://dev.moe/wp-content/uploads/2022/05/image-14-294x300.png 294w, https://dev.moe/wp-content/uploads/2022/05/image-14-768x784.png 768w, https://dev.moe/wp-content/uploads/2022/05/image-14.png 1500w" sizes="(max-width: 716px) 100vw, 716px" /></a></figure></div>
 
 
 
@@ -732,7 +732,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/12/powerplan.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/12/powerplan-1024x529.png" alt="" class="wp-image-2509" width="637" height="328" srcset="https://dev.moe/wp-content/uploads/2021/12/powerplan-1024x529.png 1024w, https://dev.moe/wp-content/uploads/2021/12/powerplan-300x155.png 300w, https://dev.moe/wp-content/uploads/2021/12/powerplan-768x397.png 768w, https://dev.moe/wp-content/uploads/2021/12/powerplan-1536x794.png 1536w, https://dev.moe/wp-content/uploads/2021/12/powerplan-2048x1058.png 2048w, https://dev.moe/wp-content/uploads/2021/12/powerplan-1568x810.png 1568w" sizes="(max-width: 637px) 100vw, 637px" /></a></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/12/powerplan.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/12/powerplan-1024x529.png" alt="" class="wp-image-2509" width="637" height="328" srcset="https://dev.moe/wp-content/uploads/2021/12/powerplan-1024x529.png 1024w, https://dev.moe/wp-content/uploads/2021/12/powerplan-300x155.png 300w, https://dev.moe/wp-content/uploads/2021/12/powerplan-768x397.png 768w, https://dev.moe/wp-content/uploads/2021/12/powerplan-1536x794.png 1536w, https://dev.moe/wp-content/uploads/2021/12/powerplan-2048x1058.png 2048w, https://dev.moe/wp-content/uploads/2021/12/powerplan-1568x810.png 1568w" sizes="(max-width: 637px) 100vw, 637px" /></a></figure></div>
 
 
 
@@ -752,7 +752,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/12/image-1.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/12/image-1-1024x310.png" alt="" class="wp-image-2527" width="618" height="187" srcset="https://dev.moe/wp-content/uploads/2021/12/image-1-1024x310.png 1024w, https://dev.moe/wp-content/uploads/2021/12/image-1-300x91.png 300w, https://dev.moe/wp-content/uploads/2021/12/image-1-768x233.png 768w, https://dev.moe/wp-content/uploads/2021/12/image-1.png 1353w" sizes="(max-width: 618px) 100vw, 618px" /></a><figcaption>新版控制面板中的 Power mode，一般设置为 Recommended 即可</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/12/image-1.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/12/image-1-1024x310.png" alt="" class="wp-image-2527" width="618" height="187" srcset="https://dev.moe/wp-content/uploads/2021/12/image-1-1024x310.png 1024w, https://dev.moe/wp-content/uploads/2021/12/image-1-300x91.png 300w, https://dev.moe/wp-content/uploads/2021/12/image-1-768x233.png 768w, https://dev.moe/wp-content/uploads/2021/12/image-1.png 1353w" sizes="(max-width: 618px) 100vw, 618px" /></a><figcaption>新版控制面板中的 Power mode，一般设置为 Recommended 即可</figcaption></figure></div>
 
 
 
@@ -808,7 +808,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/12/image.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/12/image-1024x246.png" alt="" class="wp-image-2510" width="679" height="163" srcset="https://dev.moe/wp-content/uploads/2021/12/image-1024x246.png 1024w, https://dev.moe/wp-content/uploads/2021/12/image-300x72.png 300w, https://dev.moe/wp-content/uploads/2021/12/image-768x184.png 768w, https://dev.moe/wp-content/uploads/2021/12/image.png 1213w" sizes="(max-width: 679px) 100vw, 679px" /></a><figcaption>中间一段为关闭了无线网卡的 MIMO power save mode，此时断流消失</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/12/image.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/12/image-1024x246.png" alt="" class="wp-image-2510" width="679" height="163" srcset="https://dev.moe/wp-content/uploads/2021/12/image-1024x246.png 1024w, https://dev.moe/wp-content/uploads/2021/12/image-300x72.png 300w, https://dev.moe/wp-content/uploads/2021/12/image-768x184.png 768w, https://dev.moe/wp-content/uploads/2021/12/image.png 1213w" sizes="(max-width: 679px) 100vw, 679px" /></a><figcaption>中间一段为关闭了无线网卡的 MIMO power save mode，此时断流消失</figcaption></figure></div>
 
 
 
@@ -883,7 +883,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/08/default.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/08/default-1024x568.png" alt="" class="wp-image-2489" width="501" height="277" srcset="https://dev.moe/wp-content/uploads/2021/08/default-1024x568.png 1024w, https://dev.moe/wp-content/uploads/2021/08/default-300x166.png 300w, https://dev.moe/wp-content/uploads/2021/08/default-768x426.png 768w, https://dev.moe/wp-content/uploads/2021/08/default.png 1207w" sizes="(max-width: 501px) 100vw, 501px" /></a></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/08/default.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/08/default-1024x568.png" alt="" class="wp-image-2489" width="501" height="277" srcset="https://dev.moe/wp-content/uploads/2021/08/default-1024x568.png 1024w, https://dev.moe/wp-content/uploads/2021/08/default-300x166.png 300w, https://dev.moe/wp-content/uploads/2021/08/default-768x426.png 768w, https://dev.moe/wp-content/uploads/2021/08/default.png 1207w" sizes="(max-width: 501px) 100vw, 501px" /></a></figure></div>
 
 
 
@@ -953,7 +953,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-1024x743.png" alt="" class="wp-image-2461" width="593" height="429" srcset="https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-1024x743.png 1024w, https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-300x218.png 300w, https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-768x557.png 768w, https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-1536x1114.png 1536w, https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-1568x1137.png 1568w, https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00.png 1748w" sizes="(max-width: 593px) 100vw, 593px" /></a><figcaption>安装 20.2.2 以上版本的驱动会弹出“不受支持”</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-1024x743.png" alt="" class="wp-image-2461" width="593" height="429" srcset="https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-1024x743.png 1024w, https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-300x218.png 300w, https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-768x557.png 768w, https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-1536x1114.png 1536w, https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00-1568x1137.png 1568w, https://dev.moe/wp-content/uploads/2021/08/Snipaste_2021-08-13_21-30-00.png 1748w" sizes="(max-width: 593px) 100vw, 593px" /></a><figcaption>安装 20.2.2 以上版本的驱动会弹出“不受支持”</figcaption></figure></div>
 
 
 
@@ -981,7 +981,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/08/rxvega.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/08/rxvega-1024x819.png" alt="" class="wp-image-2460" width="506" height="404" srcset="https://dev.moe/wp-content/uploads/2021/08/rxvega-1024x819.png 1024w, https://dev.moe/wp-content/uploads/2021/08/rxvega-300x240.png 300w, https://dev.moe/wp-content/uploads/2021/08/rxvega-768x614.png 768w, https://dev.moe/wp-content/uploads/2021/08/rxvega.png 1388w" sizes="(max-width: 506px) 100vw, 506px" /></a></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/08/rxvega.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/08/rxvega-1024x819.png" alt="" class="wp-image-2460" width="506" height="404" srcset="https://dev.moe/wp-content/uploads/2021/08/rxvega-1024x819.png 1024w, https://dev.moe/wp-content/uploads/2021/08/rxvega-300x240.png 300w, https://dev.moe/wp-content/uploads/2021/08/rxvega-768x614.png 768w, https://dev.moe/wp-content/uploads/2021/08/rxvega.png 1388w" sizes="(max-width: 506px) 100vw, 506px" /></a></figure></div>
 
 
 
@@ -1048,7 +1048,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-12.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-12-1024x570.png" alt="本世代最强 —— PS5 与 Xbox Series X" class="wp-image-2358" width="519" height="289" srcset="https://dev.moe/wp-content/uploads/2021/06/image-12-1024x570.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-12-300x167.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-12-768x427.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-12-1536x855.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-12-1568x873.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-12.png 1689w" sizes="(max-width: 519px) 100vw, 519px" /></a><figcaption>PS5 / Xbox Series X</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-12.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-12-1024x570.png" alt="本世代最强 —— PS5 与 Xbox Series X" class="wp-image-2358" width="519" height="289" srcset="https://dev.moe/wp-content/uploads/2021/06/image-12-1024x570.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-12-300x167.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-12-768x427.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-12-1536x855.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-12-1568x873.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-12.png 1689w" sizes="(max-width: 519px) 100vw, 519px" /></a><figcaption>PS5 / Xbox Series X</figcaption></figure></div>
 
 
 <p>每位玩家更关注的地方都不尽相同，因此本文会从尽可能多的角度，比较两款机器的各个方面。阅读本文时，可仅阅读自己关注的部分。</p>
@@ -1107,14 +1107,14 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-3.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-3.png" alt="这台 Nidec 风扇的 PS5，运行时会发出 180Hz 与 1000Hz 的噪音" class="wp-image-2348" width="566" height="310" srcset="https://dev.moe/wp-content/uploads/2021/06/image-3.png 979w, https://dev.moe/wp-content/uploads/2021/06/image-3-300x164.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-3-768x420.png 768w" sizes="(max-width: 566px) 100vw, 566px" /></a><figcaption>这两条 180Hz 与 1000Hz 的线，将全程陪伴着 PS5 玩家 —— 如果抽中 Nidec 风扇的话</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-3.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-3.png" alt="这台 Nidec 风扇的 PS5，运行时会发出 180Hz 与 1000Hz 的噪音" class="wp-image-2348" width="566" height="310" srcset="https://dev.moe/wp-content/uploads/2021/06/image-3.png 979w, https://dev.moe/wp-content/uploads/2021/06/image-3-300x164.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-3-768x420.png 768w" sizes="(max-width: 566px) 100vw, 566px" /></a><figcaption>这两条 180Hz 与 1000Hz 的线，将全程陪伴着 PS5 玩家 —— 如果抽中 Nidec 风扇的话</figcaption></figure></div>
 
 
 <p>由于 PS5 的风扇抽奖活动过于热烈，淘宝上卖 PS5 风扇的店家已经将价格从几十块涨到了接近￥400。好在更换 PS5 风扇操作简便，也无需戳破保修标签。如果不想抽奖，又很在意噪音，建议在问题解决前，避免购买 PS5。</p>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-14.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-14-1024x694.png" alt="Microsoft 通过添加减震胶的方式，尽可能消除电源啸叫。这很简单粗暴，但也很有效。" class="wp-image-2360" width="544" height="368" srcset="https://dev.moe/wp-content/uploads/2021/06/image-14-1024x694.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-14-300x203.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-14-768x521.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-14.png 1201w" sizes="(max-width: 544px) 100vw, 544px" /></a><figcaption>Xbox 电源内的减震胶，简单粗暴但有效 (<a href="https://www.youtube.com/watch?v=YG0U4I6dSR4&amp;t=392s" target="_blank" rel="noreferrer noopener">Source</a>)</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-14.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-14-1024x694.png" alt="Microsoft 通过添加减震胶的方式，尽可能消除电源啸叫。这很简单粗暴，但也很有效。" class="wp-image-2360" width="544" height="368" srcset="https://dev.moe/wp-content/uploads/2021/06/image-14-1024x694.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-14-300x203.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-14-768x521.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-14.png 1201w" sizes="(max-width: 544px) 100vw, 544px" /></a><figcaption>Xbox 电源内的减震胶，简单粗暴但有效 (<a href="https://www.youtube.com/watch?v=YG0U4I6dSR4&amp;t=392s" target="_blank" rel="noreferrer noopener">Source</a>)</figcaption></figure></div>
 
 
 <p><strong>Xbox Series X 则是近几年来最安静的游戏主机</strong>。从电源内部一坨坨的减震胶，也能看出 Microsoft 对噪音控制有多么重视。唯一的遗憾是光驱在播放蓝光电影时并不那么安静。</p>
@@ -1129,7 +1129,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-15.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-15-1024x572.png" alt="Xbox Series X 标配手柄与 PS5 DualSense 中，只有一款是减噪设计" class="wp-image-2361" width="399" height="222" srcset="https://dev.moe/wp-content/uploads/2021/06/image-15-1024x572.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-15-300x168.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-15-768x429.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-15.png 1389w" sizes="(max-width: 399px) 100vw, 399px" /></a><figcaption>Xbox Series X 标配手柄与 PS5 DualSense 中，只有一款是减噪设计</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-15.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-15-1024x572.png" alt="Xbox Series X 标配手柄与 PS5 DualSense 中，只有一款是减噪设计" class="wp-image-2361" width="399" height="222" srcset="https://dev.moe/wp-content/uploads/2021/06/image-15-1024x572.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-15-300x168.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-15-768x429.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-15.png 1389w" sizes="(max-width: 399px) 100vw, 399px" /></a><figcaption>Xbox Series X 标配手柄与 PS5 DualSense 中，只有一款是减噪设计</figcaption></figure></div>
 
 
 <figure class="wp-block-table is-style-stripes"><table><tbody><tr><td></td><td><strong>标配手柄</strong></td><td><strong>耳机</strong></td><td><strong>评分</strong></td></tr><tr><td>PS5</td><td>有减噪设计，有一些声音</td><td>手柄可插有线耳机<br>主机只支持专用无线耳机<br>主机可插 USB 蓝牙声卡</td><td><strong>4/5</strong></td></tr><tr><td>Xbox Series X|S</td><td>无减噪设计，声音大</td><td>手柄可插有线耳机<br>主机只支持专用无线耳机<br>不支持第三方 USB 声卡 </td><td>1/5</td></tr></tbody></table></figure>
@@ -1156,14 +1156,14 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-6.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-6-1024x576.png" alt="全新的 PS5 系统，遗憾的是并非全面的进步。PS4 系统的主题与自定义壁纸功能被取消。" class="wp-image-2352" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-6-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-6-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-6-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-6-1536x864.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-6-1568x882.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-6.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>PS5 系统焕然一新，不过没了主题和自定义壁纸的功能</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-6.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-6-1024x576.png" alt="全新的 PS5 系统，遗憾的是并非全面的进步。PS4 系统的主题与自定义壁纸功能被取消。" class="wp-image-2352" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-6-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-6-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-6-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-6-1536x864.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-6-1568x882.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-6.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>PS5 系统焕然一新，不过没了主题和自定义壁纸的功能</figcaption></figure></div>
 
 
 <p><strong>这些机能在 PS5 自带的 Astro&#8217;s Playroom 游戏中发挥得淋漓尽致</strong>，让人上手惊呼“这才是次世代”。遗憾的是，在其他游戏中，这些机能用的并不多，也用得并不那么惊艳。好在手柄价格并未因此上涨太多，这些机能有总比没有好——<strong>在 PS5 的游戏中，我们可以期待会有更好的瞄准体验，以及更真实的震感、触感；在 PS5 的网战中，也可默认每位玩家都会有麦克风可用</strong>。</p>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-4.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-4-1024x576.png" alt="按下 DualSense 手柄的扳机键，阻力会变。外加 3D 震动，让玩家感受到游戏的真实。" class="wp-image-2350" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-4-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-4-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-4-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-4-1536x864.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-4-1568x882.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-4.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>阻力会变的自适应扳机与 3D 震动的结合 (Astro&#8217;s Playroom, PS5)</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-4.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-4-1024x576.png" alt="按下 DualSense 手柄的扳机键，阻力会变。外加 3D 震动，让玩家感受到游戏的真实。" class="wp-image-2350" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-4-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-4-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-4-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-4-1536x864.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-4-1568x882.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-4.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>阻力会变的自适应扳机与 3D 震动的结合 (Astro&#8217;s Playroom, PS5)</figcaption></figure></div>
 
 
 <p>在软件上，PS5 加入了<strong>无剧透指南</strong>功能（需 PS Plus 会员），游戏卡关时无需上网查攻略，按下 PS 按钮，即可直接查看游戏开发者制作的无剧透视频指南。还可以使用新的分屏功能，把指南/网页固定在屏幕两侧，边看边玩游戏。</p>
@@ -1174,7 +1174,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/vr.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/vr-1024x575.png" alt="极具未来感的次世代 VR，图片来自 Sony 博客。" class="wp-image-2343" width="424" height="237" srcset="https://dev.moe/wp-content/uploads/2021/06/vr-1024x575.png 1024w, https://dev.moe/wp-content/uploads/2021/06/vr-300x168.png 300w, https://dev.moe/wp-content/uploads/2021/06/vr-768x431.png 768w, https://dev.moe/wp-content/uploads/2021/06/vr.png 1275w" sizes="(max-width: 424px) 100vw, 424px" /></a><figcaption>极具未来感的次世代 VR (Sony)</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/vr.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/vr-1024x575.png" alt="极具未来感的次世代 VR，图片来自 Sony 博客。" class="wp-image-2343" width="424" height="237" srcset="https://dev.moe/wp-content/uploads/2021/06/vr-1024x575.png 1024w, https://dev.moe/wp-content/uploads/2021/06/vr-300x168.png 300w, https://dev.moe/wp-content/uploads/2021/06/vr-768x431.png 768w, https://dev.moe/wp-content/uploads/2021/06/vr.png 1275w" sizes="(max-width: 424px) 100vw, 424px" /></a><figcaption>极具未来感的次世代 VR (Sony)</figcaption></figure></div>
 
 
 <hr class="wp-block-separator has-css-opacity"/>
@@ -1185,7 +1185,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-1024x576.png" alt="Xbox 有了 Quick Resume，游戏可以随时切换，不会丢失进度。" class="wp-image-2344" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>有了 Quick Resume，游戏想切就切 (Xbox)</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-1024x576.png" alt="Xbox 有了 Quick Resume，游戏可以随时切换，不会丢失进度。" class="wp-image-2344" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>有了 Quick Resume，游戏想切就切 (Xbox)</figcaption></figure></div>
 
 
 <p>Xbox Series X 还有优化老游戏的 FPS Boost 及 Auto HDR 功能。</p>
@@ -1220,7 +1220,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-5.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-5-1024x576.png" alt="Xbox 可以在部分老游戏开启 Auto HDR 和 FPS Boost 功能，让老游戏焕发新生。" class="wp-image-2351" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-5-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-5-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-5-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-5.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>老游戏新生 (Xbox)</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-5.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-5-1024x576.png" alt="Xbox 可以在部分老游戏开启 Auto HDR 和 FPS Boost 功能，让老游戏焕发新生。" class="wp-image-2351" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-5-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-5-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-5-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-5.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>老游戏新生 (Xbox)</figcaption></figure></div>
 
 
 <p>PS5 可兼容 PS4 的游戏，但对画面及帧率的提升有限。</p>
@@ -1267,7 +1267,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-2.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-2-1024x576.png" alt="数了一下目前的 Xbox Game Pass 游戏库，竟有 300 多款游戏，这还没算上 EA Play 的 70 多款游戏。" class="wp-image-2346" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-2-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-2-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-2-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-2.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>数了一下目前的 Xbox Game Pass 游戏库 ——共有 51 行（这还没算上 EA Play 的 70+ 游戏）</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-2.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-2-1024x576.png" alt="数了一下目前的 Xbox Game Pass 游戏库，竟有 300 多款游戏，这还没算上 EA Play 的 70 多款游戏。" class="wp-image-2346" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-2-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-2-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-2-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-2.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>数了一下目前的 Xbox Game Pass 游戏库 ——共有 51 行（这还没算上 EA Play 的 70+ 游戏）</figcaption></figure></div>
 
 
 <h3 id="ps5">PS5</h3>
@@ -1278,7 +1278,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-7.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-7-1024x576.png" alt="PS5 玩家拿到机器，开通 PS Plus 会员后，可以立即获得 20 款 PS4 经典大作。" class="wp-image-2353" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-7-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-7-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-7-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-7-1536x864.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-7-1568x882.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-7.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>20 款知名经典游戏，开会员即玩 (PS5)</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-7.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-7-1024x576.png" alt="PS5 玩家拿到机器，开通 PS Plus 会员后，可以立即获得 20 款 PS4 经典大作。" class="wp-image-2353" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-7-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-7-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-7-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-7-1536x864.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-7-1568x882.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-7.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>20 款知名经典游戏，开会员即玩 (PS5)</figcaption></figure></div>
 
 
 <p>在 Xbox 上，利用巴西等低价区可用接近一半的价格购买游戏。Xbox Game Pass（XGP）游戏库内也有大量的大作（甚至发售当日的作品）可以直接游玩，没有试错成本。</p>
@@ -1321,20 +1321,20 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-9.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-9-1024x576.png" alt="在 Xbox 中可以录制过去发生的事，但有时间限制。" class="wp-image-2355" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-9-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-9-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-9-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-9.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>录制过去发生的事&#8230; (Xbox)</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-9.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-9-1024x576.png" alt="在 Xbox 中可以录制过去发生的事，但有时间限制。" class="wp-image-2355" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-9-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-9-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-9-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-9.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>录制过去发生的事&#8230; (Xbox)</figcaption></figure></div>
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-10.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-10-1024x576.png" alt="在 Xbox 中，1080p 只能录制 1 分钟。" class="wp-image-2356" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-10-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-10-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-10-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-10.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>&#8230;但最长 1 分钟 (Xbox)</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-10.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-10-1024x576.png" alt="在 Xbox 中，1080p 只能录制 1 分钟。" class="wp-image-2356" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-10-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-10-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-10-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-10.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>&#8230;但最长 1 分钟 (Xbox)</figcaption></figure></div>
 
 
 <p>PS5 则是相比上一代全面提升，远程游玩支持了 HDR，直播推流更方便，截屏及录制的交互也再度升级，获得奖杯时还会自动生成一段录像，更加完善好用。</p>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/achievement.jpg"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/achievement-1024x576.jpg" alt="PS5 会自动录制获得成就的精彩瞬间，以及之前30秒发生的故事。" class="wp-image-2349" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/achievement-1024x576.jpg 1024w, https://dev.moe/wp-content/uploads/2021/06/achievement-300x169.jpg 300w, https://dev.moe/wp-content/uploads/2021/06/achievement-768x432.jpg 768w, https://dev.moe/wp-content/uploads/2021/06/achievement-1536x864.jpg 1536w, https://dev.moe/wp-content/uploads/2021/06/achievement-1568x882.jpg 1568w, https://dev.moe/wp-content/uploads/2021/06/achievement.jpg 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>自动记录获得成就的精彩瞬间，以及之前30秒发生的故事 (PS5)</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/achievement.jpg"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/achievement-1024x576.jpg" alt="PS5 会自动录制获得成就的精彩瞬间，以及之前30秒发生的故事。" class="wp-image-2349" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/achievement-1024x576.jpg 1024w, https://dev.moe/wp-content/uploads/2021/06/achievement-300x169.jpg 300w, https://dev.moe/wp-content/uploads/2021/06/achievement-768x432.jpg 768w, https://dev.moe/wp-content/uploads/2021/06/achievement-1536x864.jpg 1536w, https://dev.moe/wp-content/uploads/2021/06/achievement-1568x882.jpg 1568w, https://dev.moe/wp-content/uploads/2021/06/achievement.jpg 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>自动记录获得成就的精彩瞬间，以及之前30秒发生的故事 (PS5)</figcaption></figure></div>
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-11.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-11-1024x577.png" alt="PS5 的分享界面可以录制过去发生的事（图中显示可以录制 60 分钟）、截图、开始录制，以及推流到直播平台。" class="wp-image-2357" width="512" height="289" srcset="https://dev.moe/wp-content/uploads/2021/06/image-11-1024x577.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-11-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-11-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-11-1536x865.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-11-1568x883.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-11.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>录制过去发生的事、截图、开始录制，以及开始推流 (PS5) </figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-11.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-11-1024x577.png" alt="PS5 的分享界面可以录制过去发生的事（图中显示可以录制 60 分钟）、截图、开始录制，以及推流到直播平台。" class="wp-image-2357" width="512" height="289" srcset="https://dev.moe/wp-content/uploads/2021/06/image-11-1024x577.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-11-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-11-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-11-1536x865.png 1536w, https://dev.moe/wp-content/uploads/2021/06/image-11-1568x883.png 1568w, https://dev.moe/wp-content/uploads/2021/06/image-11.png 1920w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>录制过去发生的事、截图、开始录制，以及开始推流 (PS5) </figcaption></figure></div>
 
 
 <p>需要注意，由于 PS5 手柄自带麦克风，如果推流时无需录音，每次推流时需手动关闭麦克风。</p>
@@ -1349,7 +1349,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter is-resized"><img loading="lazy" src="https://images.pushsquare.com/7ca47b655e6e4/ps5-playstation-5-dust-catcher-1.original.jpg" alt="PS5 的清灰孔之一，用吸尘器可以清灰。" width="656" height="369"/><figcaption>清灰孔之一 (PS5)</figcaption></figure></div>
+<figure class="aligncenter is-resized"><img decoding="async" loading="lazy" src="https://images.pushsquare.com/7ca47b655e6e4/ps5-playstation-5-dust-catcher-1.original.jpg" alt="PS5 的清灰孔之一，用吸尘器可以清灰。" width="656" height="369"/><figcaption>清灰孔之一 (PS5)</figcaption></figure></div>
 
 
 <p>固态硬盘：PS5 的固态硬盘是焊在主板上的，寿命耗尽后机器或将报废。Xbox Series X 内置的固态硬盘可更换（会破坏保修贴，过程较复杂）。</p>
@@ -1435,7 +1435,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/unnamed.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/unnamed-1024x576.png" alt="" class="wp-image-2166" width="540" height="303" srcset="https://dev.moe/wp-content/uploads/2020/11/unnamed-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2020/11/unnamed-300x169.png 300w, https://dev.moe/wp-content/uploads/2020/11/unnamed-768x432.png 768w, https://dev.moe/wp-content/uploads/2020/11/unnamed.png 1138w" sizes="(max-width: 540px) 100vw, 540px" /></a><figcaption>包含了 Live2D 动画的 Press START 画面</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/unnamed.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/unnamed-1024x576.png" alt="" class="wp-image-2166" width="540" height="303" srcset="https://dev.moe/wp-content/uploads/2020/11/unnamed-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2020/11/unnamed-300x169.png 300w, https://dev.moe/wp-content/uploads/2020/11/unnamed-768x432.png 768w, https://dev.moe/wp-content/uploads/2020/11/unnamed.png 1138w" sizes="(max-width: 540px) 100vw, 540px" /></a><figcaption>包含了 Live2D 动画的 Press START 画面</figcaption></figure></div>
 
 
 
@@ -1472,7 +1472,7 @@ production-web.sekai.colorfulpalette.org
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-9.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-9-1024x269.png" alt="" class="wp-image-2158" width="483" height="126" srcset="https://dev.moe/wp-content/uploads/2020/11/image-9-1024x269.png 1024w, https://dev.moe/wp-content/uploads/2020/11/image-9-300x79.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-9-768x202.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-9.png 1027w" sizes="(max-width: 483px) 100vw, 483px" /></a><figcaption>这个头部一开始以为是自研的文件打包格式，原来是 xor 后的 UnityFS&#8230;</figcaption></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-9.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-9-1024x269.png" alt="" class="wp-image-2158" width="483" height="126" srcset="https://dev.moe/wp-content/uploads/2020/11/image-9-1024x269.png 1024w, https://dev.moe/wp-content/uploads/2020/11/image-9-300x79.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-9-768x202.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-9.png 1027w" sizes="(max-width: 483px) 100vw, 483px" /></a><figcaption>这个头部一开始以为是自研的文件打包格式，原来是 xor 后的 UnityFS&#8230;</figcaption></figure>
 
 
 
@@ -1504,7 +1504,7 @@ production-web.sekai.colorfulpalette.org
 
 
 
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-10.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-10-765x1024.png" alt="" class="wp-image-2159" width="381" height="511" srcset="https://dev.moe/wp-content/uploads/2020/11/image-10-765x1024.png 765w, https://dev.moe/wp-content/uploads/2020/11/image-10-224x300.png 224w, https://dev.moe/wp-content/uploads/2020/11/image-10-768x1028.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-10.png 845w" sizes="(max-width: 381px) 100vw, 381px" /></a><figcaption>(★ ω ★)</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-10.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-10-765x1024.png" alt="" class="wp-image-2159" width="381" height="511" srcset="https://dev.moe/wp-content/uploads/2020/11/image-10-765x1024.png 765w, https://dev.moe/wp-content/uploads/2020/11/image-10-224x300.png 224w, https://dev.moe/wp-content/uploads/2020/11/image-10-768x1028.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-10.png 845w" sizes="(max-width: 381px) 100vw, 381px" /></a><figcaption>(★ ω ★)</figcaption></figure></div>
 
 
 
@@ -1916,7 +1916,7 @@ if __name__ == "__main__":
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-7.1.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-7.1.png" alt="" class="wp-image-2120" width="428" height="211" srcset="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-7.1.png 787w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-7.1-300x148.png 300w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-7.1-768x380.png 768w" sizes="(max-width: 428px) 100vw, 428px" /></a><figcaption>贴心的打包下载功能</figcaption></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-7.1.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-7.1.png" alt="" class="wp-image-2120" width="428" height="211" srcset="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-7.1.png 787w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-7.1-300x148.png 300w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-7.1-768x380.png 768w" sizes="(max-width: 428px) 100vw, 428px" /></a><figcaption>贴心的打包下载功能</figcaption></figure>
 
 
 
@@ -1973,11 +1973,11 @@ if __name__ == "__main__":
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-1.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-1-1024x440.png" alt="" class="wp-image-2121" width="632" height="271" srcset="https://dev.moe/wp-content/uploads/2020/11/image-1-1024x440.png 1024w, https://dev.moe/wp-content/uploads/2020/11/image-1-300x129.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-1-768x330.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-1.png 1474w" sizes="(max-width: 632px) 100vw, 632px" /></a><figcaption>sshoshoushou&#8217;yshou&#8217;ye首页</figcaption></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-1.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-1-1024x440.png" alt="" class="wp-image-2121" width="632" height="271" srcset="https://dev.moe/wp-content/uploads/2020/11/image-1-1024x440.png 1024w, https://dev.moe/wp-content/uploads/2020/11/image-1-300x129.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-1-768x330.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-1.png 1474w" sizes="(max-width: 632px) 100vw, 632px" /></a><figcaption>sshoshoushou&#8217;yshou&#8217;ye首页</figcaption></figure>
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-2.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-2-1024x660.png" alt="" class="wp-image-2122" width="525" height="338" srcset="https://dev.moe/wp-content/uploads/2020/11/image-2-1024x660.png 1024w, https://dev.moe/wp-content/uploads/2020/11/image-2-300x193.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-2-768x495.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-2.png 1193w" sizes="(max-width: 525px) 100vw, 525px" /></a><figcaption>帮助中心</figcaption></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-2.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-2-1024x660.png" alt="" class="wp-image-2122" width="525" height="338" srcset="https://dev.moe/wp-content/uploads/2020/11/image-2-1024x660.png 1024w, https://dev.moe/wp-content/uploads/2020/11/image-2-300x193.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-2-768x495.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-2.png 1193w" sizes="(max-width: 525px) 100vw, 525px" /></a><figcaption>帮助中心</figcaption></figure>
 
 
 
@@ -2055,11 +2055,11 @@ function connectProxy(secret) {
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-3.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-3-1024x538.png" alt="" class="wp-image-2124" width="584" height="306" srcset="https://dev.moe/wp-content/uploads/2020/11/image-3-1024x538.png 1024w, https://dev.moe/wp-content/uploads/2020/11/image-3-300x158.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-3-768x404.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-3.png 1397w" sizes="(max-width: 584px) 100vw, 584px" /></a></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-3.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-3-1024x538.png" alt="" class="wp-image-2124" width="584" height="306" srcset="https://dev.moe/wp-content/uploads/2020/11/image-3-1024x538.png 1024w, https://dev.moe/wp-content/uploads/2020/11/image-3-300x158.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-3-768x404.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-3.png 1397w" sizes="(max-width: 584px) 100vw, 584px" /></a></figure>
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-4.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-4-1024x516.png" alt="" class="wp-image-2125" width="581" height="293" srcset="https://dev.moe/wp-content/uploads/2020/11/image-4-1024x516.png 1024w, https://dev.moe/wp-content/uploads/2020/11/image-4-300x151.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-4-768x387.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-4.png 1438w" sizes="(max-width: 581px) 100vw, 581px" /></a><figcaption>开启 shuffle 后</figcaption></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-4.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-4-1024x516.png" alt="" class="wp-image-2125" width="581" height="293" srcset="https://dev.moe/wp-content/uploads/2020/11/image-4-1024x516.png 1024w, https://dev.moe/wp-content/uploads/2020/11/image-4-300x151.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-4-768x387.png 768w, https://dev.moe/wp-content/uploads/2020/11/image-4.png 1438w" sizes="(max-width: 581px) 100vw, 581px" /></a><figcaption>开启 shuffle 后</figcaption></figure>
 
 
 
@@ -2067,7 +2067,7 @@ function connectProxy(secret) {
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-6.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-6.png" alt="" class="wp-image-2127" width="219" height="148" srcset="https://dev.moe/wp-content/uploads/2020/11/image-6.png 624w, https://dev.moe/wp-content/uploads/2020/11/image-6-300x203.png 300w" sizes="(max-width: 219px) 100vw, 219px" /></a></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-6.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-6.png" alt="" class="wp-image-2127" width="219" height="148" srcset="https://dev.moe/wp-content/uploads/2020/11/image-6.png 624w, https://dev.moe/wp-content/uploads/2020/11/image-6-300x203.png 300w" sizes="(max-width: 219px) 100vw, 219px" /></a></figure>
 
 
 
@@ -2365,7 +2365,7 @@ for pos in range(len(ret) + 1, 70):
 
 
 
-<figure class="wp-block-image size-large"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2.png"><img loading="lazy" width="1024" height="503" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-1024x503.png" alt="" class="wp-image-2112" srcset="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-1024x503.png 1024w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-300x147.png 300w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-768x377.png 768w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-1536x754.png 1536w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-1568x770.png 1568w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2.png 1766w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></figure>
+<figure class="wp-block-image size-large"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2.png"><img decoding="async" loading="lazy" width="1024" height="503" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-1024x503.png" alt="" class="wp-image-2112" srcset="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-1024x503.png 1024w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-300x147.png 300w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-768x377.png 768w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-1536x754.png 1536w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2-1568x770.png 1568w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-4.2.png 1766w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></figure>
 
 
 
@@ -2385,7 +2385,7 @@ for pos in range(len(ret) + 1, 70):
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/2.2.gif"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/2.2.gif" alt="" class="wp-image-2108" width="469" height="536"/></a></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/2.2.gif"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/2.2.gif" alt="" class="wp-image-2108" width="469" height="536"/></a></figure>
 
 
 
@@ -2393,7 +2393,7 @@ for pos in range(len(ret) + 1, 70):
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-2.2.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-2.2.png" alt="" class="wp-image-2110" width="570" height="464"/></a></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-2.2.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-2.2.png" alt="" class="wp-image-2110" width="570" height="464"/></a></figure>
 
 
 
@@ -2401,7 +2401,7 @@ for pos in range(len(ret) + 1, 70):
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/2.3.gif"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/2.3.gif" alt="" class="wp-image-2107" width="460" height="526"/></a></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/2.3.gif"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/2.3.gif" alt="" class="wp-image-2107" width="460" height="526"/></a></figure>
 
 
 
@@ -2413,7 +2413,7 @@ for pos in range(len(ret) + 1, 70):
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image.png" alt="" class="wp-image-2115" width="445" height="265" srcset="https://dev.moe/wp-content/uploads/2020/11/image.png 822w, https://dev.moe/wp-content/uploads/2020/11/image-300x179.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-768x459.png 768w" sizes="(max-width: 445px) 100vw, 445px" /></a></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image.png" alt="" class="wp-image-2115" width="445" height="265" srcset="https://dev.moe/wp-content/uploads/2020/11/image.png 822w, https://dev.moe/wp-content/uploads/2020/11/image-300x179.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-768x459.png 768w" sizes="(max-width: 445px) 100vw, 445px" /></a></figure>
 
 
 
@@ -2498,7 +2498,7 @@ if __name__ == "__main__":
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1-1024x549.png" alt="" class="wp-image-2116" width="541" height="290" srcset="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1-1024x549.png 1024w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1-300x161.png 300w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1-768x412.png 768w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1.png 1167w" sizes="(max-width: 541px) 100vw, 541px" /></a></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1-1024x549.png" alt="" class="wp-image-2116" width="541" height="290" srcset="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1-1024x549.png 1024w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1-300x161.png 300w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1-768x412.png 768w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-5.1.png 1167w" sizes="(max-width: 541px) 100vw, 541px" /></a></figure>
 
 
 
@@ -2518,7 +2518,7 @@ if __name__ == "__main__":
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-8.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-8.png" alt="" class="wp-image-2147" width="575" height="416" srcset="https://dev.moe/wp-content/uploads/2020/11/image-8.png 816w, https://dev.moe/wp-content/uploads/2020/11/image-8-300x218.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-8-768x557.png 768w" sizes="(max-width: 575px) 100vw, 575px" /></a><figcaption>是井字棋游戏</figcaption></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/image-8.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/image-8.png" alt="" class="wp-image-2147" width="575" height="416" srcset="https://dev.moe/wp-content/uploads/2020/11/image-8.png 816w, https://dev.moe/wp-content/uploads/2020/11/image-8-300x218.png 300w, https://dev.moe/wp-content/uploads/2020/11/image-8-768x557.png 768w" sizes="(max-width: 575px) 100vw, 575px" /></a><figcaption>是井字棋游戏</figcaption></figure>
 
 
 
@@ -2607,7 +2607,7 @@ fs.writeFile('output.bin', new Uint8Array(output))</pre>
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.1.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.1.png" alt="" class="wp-image-2101" width="390" height="335" srcset="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.1.png 745w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.1-300x258.png 300w" sizes="(max-width: 390px) 100vw, 390px" /></a></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.1.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.1.png" alt="" class="wp-image-2101" width="390" height="335" srcset="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.1.png 745w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.1-300x258.png 300w" sizes="(max-width: 390px) 100vw, 390px" /></a></figure>
 
 
 
@@ -2631,7 +2631,7 @@ fs.writeFile('output.bin', new Uint8Array(output))</pre>
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2.png" alt="" class="wp-image-2103" width="471" height="161" srcset="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2.png 891w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2-300x103.png 300w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2-768x264.png 768w" sizes="(max-width: 471px) 100vw, 471px" /></a><figcaption>https://www.w3.org/TR/wai-aria-practices-1.1/#slider</figcaption></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2.png" alt="" class="wp-image-2103" width="471" height="161" srcset="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2.png 891w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2-300x103.png 300w, https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2-768x264.png 768w" sizes="(max-width: 471px) 100vw, 471px" /></a><figcaption>https://www.w3.org/TR/wai-aria-practices-1.1/#slider</figcaption></figure>
 
 
 
@@ -2647,7 +2647,7 @@ fs.writeFile('output.bin', new Uint8Array(output))</pre>
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2.gif"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2.gif" alt="" class="wp-image-2102" width="420" height="277"/></a><figcaption>cchchachanchang长</figcaption></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2.gif"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/11/dTkSFYZLNSgTr-1.2.gif" alt="" class="wp-image-2102" width="420" height="277"/></a><figcaption>cchchachanchang长</figcaption></figure>
 
 
 
@@ -2758,7 +2758,7 @@ clientSocket.on('data', (data) => {
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/2.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/2-1024x516.png" alt="" class="wp-image-1913" width="627" height="316" srcset="https://dev.moe/wp-content/uploads/2020/10/2-1024x516.png 1024w, https://dev.moe/wp-content/uploads/2020/10/2-300x151.png 300w, https://dev.moe/wp-content/uploads/2020/10/2-768x387.png 768w, https://dev.moe/wp-content/uploads/2020/10/2.png 1060w" sizes="(max-width: 627px) 100vw, 627px" /></a><figcaption>前去（B站内网）解题</figcaption></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/2.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/2-1024x516.png" alt="" class="wp-image-1913" width="627" height="316" srcset="https://dev.moe/wp-content/uploads/2020/10/2-1024x516.png 1024w, https://dev.moe/wp-content/uploads/2020/10/2-300x151.png 300w, https://dev.moe/wp-content/uploads/2020/10/2-768x387.png 768w, https://dev.moe/wp-content/uploads/2020/10/2.png 1060w" sizes="(max-width: 627px) 100vw, 627px" /></a><figcaption>前去（B站内网）解题</figcaption></figure>
 
 
 
@@ -2790,7 +2790,7 @@ clientSocket.on('data', (data) => {
 
 
 
-<figure class="wp-block-image size-large"><a href="https://dev.moe/wp-content/uploads/2020/10/image.png"><img loading="lazy" width="1024" height="846" src="https://dev.moe/wp-content/uploads/2020/10/image-1024x846.png" alt="" class="wp-image-1914" srcset="https://dev.moe/wp-content/uploads/2020/10/image-1024x846.png 1024w, https://dev.moe/wp-content/uploads/2020/10/image-300x248.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-768x634.png 768w, https://dev.moe/wp-content/uploads/2020/10/image.png 1354w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption>我是弱密码哟~ ✧</figcaption></figure>
+<figure class="wp-block-image size-large"><a href="https://dev.moe/wp-content/uploads/2020/10/image.png"><img decoding="async" loading="lazy" width="1024" height="846" src="https://dev.moe/wp-content/uploads/2020/10/image-1024x846.png" alt="" class="wp-image-1914" srcset="https://dev.moe/wp-content/uploads/2020/10/image-1024x846.png 1024w, https://dev.moe/wp-content/uploads/2020/10/image-300x248.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-768x634.png 768w, https://dev.moe/wp-content/uploads/2020/10/image.png 1354w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption>我是弱密码哟~ ✧</figcaption></figure>
 
 
 
@@ -2818,7 +2818,7 @@ clientSocket.on('data', (data) => {
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-5.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-5.png" alt="" class="wp-image-2074" width="522" height="104" srcset="https://dev.moe/wp-content/uploads/2020/10/image-5.png 935w, https://dev.moe/wp-content/uploads/2020/10/image-5-300x60.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-5-768x154.png 768w" sizes="(max-width: 522px) 100vw, 522px" /></a></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-5.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-5.png" alt="" class="wp-image-2074" width="522" height="104" srcset="https://dev.moe/wp-content/uploads/2020/10/image-5.png 935w, https://dev.moe/wp-content/uploads/2020/10/image-5-300x60.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-5-768x154.png 768w" sizes="(max-width: 522px) 100vw, 522px" /></a></figure>
 
 
 
@@ -2830,7 +2830,7 @@ clientSocket.on('data', (data) => {
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-6.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-6-1024x153.png" alt="" class="wp-image-2075" width="628" height="93" srcset="https://dev.moe/wp-content/uploads/2020/10/image-6-1024x153.png 1024w, https://dev.moe/wp-content/uploads/2020/10/image-6-300x45.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-6-768x115.png 768w, https://dev.moe/wp-content/uploads/2020/10/image-6-1536x229.png 1536w, https://dev.moe/wp-content/uploads/2020/10/image-6.png 1554w" sizes="(max-width: 628px) 100vw, 628px" /></a></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-6.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-6-1024x153.png" alt="" class="wp-image-2075" width="628" height="93" srcset="https://dev.moe/wp-content/uploads/2020/10/image-6-1024x153.png 1024w, https://dev.moe/wp-content/uploads/2020/10/image-6-300x45.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-6-768x115.png 768w, https://dev.moe/wp-content/uploads/2020/10/image-6-1536x229.png 1536w, https://dev.moe/wp-content/uploads/2020/10/image-6.png 1554w" sizes="(max-width: 628px) 100vw, 628px" /></a></figure>
 
 
 
@@ -2843,11 +2843,11 @@ aes_128_ecb_decrypt(base64_decode(base64_decode(data)), 'aes_key\0\0\0\0\0\0\0\0
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-3.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-3-1024x591.png" alt="" class="wp-image-2030" width="577" height="333" srcset="https://dev.moe/wp-content/uploads/2020/10/image-3-1024x591.png 1024w, https://dev.moe/wp-content/uploads/2020/10/image-3-300x173.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-3-768x443.png 768w, https://dev.moe/wp-content/uploads/2020/10/image-3.png 1339w" sizes="(max-width: 577px) 100vw, 577px" /></a></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-3.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-3-1024x591.png" alt="" class="wp-image-2030" width="577" height="333" srcset="https://dev.moe/wp-content/uploads/2020/10/image-3-1024x591.png 1024w, https://dev.moe/wp-content/uploads/2020/10/image-3-300x173.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-3-768x443.png 768w, https://dev.moe/wp-content/uploads/2020/10/image-3.png 1339w" sizes="(max-width: 577px) 100vw, 577px" /></a></figure>
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-4.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-4.png" alt="" class="wp-image-2031" width="575" height="137" srcset="https://dev.moe/wp-content/uploads/2020/10/image-4.png 1019w, https://dev.moe/wp-content/uploads/2020/10/image-4-300x72.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-4-768x183.png 768w" sizes="(max-width: 575px) 100vw, 575px" /></a></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-4.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-4.png" alt="" class="wp-image-2031" width="575" height="137" srcset="https://dev.moe/wp-content/uploads/2020/10/image-4.png 1019w, https://dev.moe/wp-content/uploads/2020/10/image-4-300x72.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-4-768x183.png 768w" sizes="(max-width: 575px) 100vw, 575px" /></a></figure>
 
 
 
@@ -2859,7 +2859,7 @@ aes_128_ecb_decrypt(base64_decode(base64_decode(data)), 'aes_key\0\0\0\0\0\0\0\0
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-2.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-2-1024x467.png" alt="" class="wp-image-2027" width="765" height="348" srcset="https://dev.moe/wp-content/uploads/2020/10/image-2-1024x467.png 1024w, https://dev.moe/wp-content/uploads/2020/10/image-2-300x137.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-2-1536x701.png 1536w, https://dev.moe/wp-content/uploads/2020/10/image-2-2048x935.png 2048w, https://dev.moe/wp-content/uploads/2020/10/image-2-1568x716.png 1568w" sizes="(max-width: 765px) 100vw, 765px" /></a></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-2.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-2-1024x467.png" alt="" class="wp-image-2027" width="765" height="348" srcset="https://dev.moe/wp-content/uploads/2020/10/image-2-1024x467.png 1024w, https://dev.moe/wp-content/uploads/2020/10/image-2-300x137.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-2-1536x701.png 1536w, https://dev.moe/wp-content/uploads/2020/10/image-2-2048x935.png 2048w, https://dev.moe/wp-content/uploads/2020/10/image-2-1568x716.png 1568w" sizes="(max-width: 765px) 100vw, 765px" /></a></figure>
 
 
 
@@ -2949,7 +2949,7 @@ print('result:', result)
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-1.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-1.png" alt="" class="wp-image-1927" width="424" height="165" srcset="https://dev.moe/wp-content/uploads/2020/10/image-1.png 588w, https://dev.moe/wp-content/uploads/2020/10/image-1-300x117.png 300w" sizes="(max-width: 424px) 100vw, 424px" /></a><figcaption>运行结果</figcaption></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-1.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-1.png" alt="" class="wp-image-1927" width="424" height="165" srcset="https://dev.moe/wp-content/uploads/2020/10/image-1.png 588w, https://dev.moe/wp-content/uploads/2020/10/image-1-300x117.png 300w" sizes="(max-width: 424px) 100vw, 424px" /></a><figcaption>运行结果</figcaption></figure>
 
 
 
@@ -2957,7 +2957,7 @@ print('result:', result)
 
 
 
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/1.png"><img loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/1.png" alt="" class="wp-image-1912" width="457" height="331" srcset="https://dev.moe/wp-content/uploads/2020/10/1.png 597w, https://dev.moe/wp-content/uploads/2020/10/1-300x217.png 300w" sizes="(max-width: 457px) 100vw, 457px" /></a><figcaption>看来B站钱都花在前端上了</figcaption></figure>
+<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/1.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/1.png" alt="" class="wp-image-1912" width="457" height="331" srcset="https://dev.moe/wp-content/uploads/2020/10/1.png 597w, https://dev.moe/wp-content/uploads/2020/10/1-300x217.png 300w" sizes="(max-width: 457px) 100vw, 457px" /></a><figcaption>看来B站钱都花在前端上了</figcaption></figure>
 
 
 
