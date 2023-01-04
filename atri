@@ -146,11 +146,11 @@
     
     <category term="GitHub" scheme="https://blog.atri.tk/tags/GitHub/"/>
     
+    <category term="CI/CD" scheme="https://blog.atri.tk/tags/CI-CD/"/>
+    
     <category term="Cloudflare" scheme="https://blog.atri.tk/tags/Cloudflare/"/>
     
     <category term="Cloudflare Pages" scheme="https://blog.atri.tk/tags/Cloudflare-Pages/"/>
-    
-    <category term="CI/CD" scheme="https://blog.atri.tk/tags/CI-CD/"/>
     
   </entry>
   
@@ -301,9 +301,9 @@
     
     <category term="GitHub Pages" scheme="https://blog.atri.tk/tags/GitHub-Pages/"/>
     
-    <category term="CI/CD" scheme="https://blog.atri.tk/tags/CI-CD/"/>
-    
     <category term="GitHub Actions" scheme="https://blog.atri.tk/tags/GitHub-Actions/"/>
+    
+    <category term="CI/CD" scheme="https://blog.atri.tk/tags/CI-CD/"/>
     
   </entry>
   
@@ -411,17 +411,17 @@
     
     <category term="Web" scheme="https://blog.atri.tk/tags/Web/"/>
     
-    <category term="Linux" scheme="https://blog.atri.tk/tags/Linux/"/>
-    
-    <category term="Nginx" scheme="https://blog.atri.tk/tags/Nginx/"/>
-    
-    <category term="IaaS" scheme="https://blog.atri.tk/tags/IaaS/"/>
-    
     <category term="Typecho" scheme="https://blog.atri.tk/tags/Typecho/"/>
+    
+    <category term="Linux" scheme="https://blog.atri.tk/tags/Linux/"/>
     
     <category term="PHP" scheme="https://blog.atri.tk/tags/PHP/"/>
     
+    <category term="Nginx" scheme="https://blog.atri.tk/tags/Nginx/"/>
+    
     <category term="MySQL" scheme="https://blog.atri.tk/tags/MySQL/"/>
+    
+    <category term="IaaS" scheme="https://blog.atri.tk/tags/IaaS/"/>
     
   </entry>
   
@@ -477,11 +477,11 @@
     
     <category term="Nginx" scheme="https://blog.atri.tk/tags/Nginx/"/>
     
+    <category term="IaaS" scheme="https://blog.atri.tk/tags/IaaS/"/>
+    
     <category term="Caddy" scheme="https://blog.atri.tk/tags/Caddy/"/>
     
     <category term="HaProxy" scheme="https://blog.atri.tk/tags/HaProxy/"/>
-    
-    <category term="IaaS" scheme="https://blog.atri.tk/tags/IaaS/"/>
     
   </entry>
   
