@@ -15,7 +15,7 @@
 	<atom:link href="https://dev.moe/feed" rel="self" type="application/rss+xml" />
 	<link>https://dev.moe/</link>
 	<description></description>
-	<lastBuildDate>Thu, 18 Aug 2022 23:29:56 +0000</lastBuildDate>
+	<lastBuildDate>Sun, 22 Jan 2023 12:48:55 +0000</lastBuildDate>
 	<language>zh-CN</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -147,7 +147,7 @@ ubuntu kernel: [ 2581.050921] WARNING: CPU: 0 PID: 0 at net/sched/sch_generic.c:
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2022/06/image.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2022/06/image-1024x698.png" alt="" class="wp-image-2722" width="444" height="302" srcset="https://dev.moe/wp-content/uploads/2022/06/image-1024x698.png 1024w, https://dev.moe/wp-content/uploads/2022/06/image-300x204.png 300w, https://dev.moe/wp-content/uploads/2022/06/image-768x523.png 768w, https://dev.moe/wp-content/uploads/2022/06/image.png 1055w" sizes="(max-width: 444px) 100vw, 444px" /></a><figcaption>听我说谢谢你，因为有你，温暖了四季&#8230;</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2022/06/image.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2022/06/image-1024x698.png" alt="" class="wp-image-2722" width="444" height="302" srcset="https://dev.moe/wp-content/uploads/2022/06/image-1024x698.png 1024w, https://dev.moe/wp-content/uploads/2022/06/image-300x204.png 300w, https://dev.moe/wp-content/uploads/2022/06/image-768x523.png 768w, https://dev.moe/wp-content/uploads/2022/06/image.png 1055w" sizes="(max-width: 444px) 100vw, 444px" /></a><figcaption class="wp-element-caption">听我说谢谢你，因为有你，温暖了四季&#8230;</figcaption></figure></div>
 
 
 <p>更难受的是，小米平板 5 Pro 并未在全球发售，唯一支持的 MIUI 国行系统自带<strong>全链路反诈</strong>。隔壁低配的小米平板 5 反倒是又有国际版 MIUI，又有 Android 13 DP（开发者预览）。</p>
@@ -182,7 +182,13 @@ ubuntu kernel: [ 2581.050921] WARNING: CPU: 0 PID: 0 at net/sched/sch_generic.c:
 
 
 
-<ol><li>关机时按住 <code>音量减</code>&nbsp;+&nbsp;<code>电源键</code> 进入 Bootloader。</li><li>连接电脑，按解锁程序提示操作即可。如果程序提示要等 7 天，则 7 天后再次尝试。</li></ol>
+<ol>
+<li>关机时按住 <code>音量减</code>&nbsp;+&nbsp;<code>电源键</code> 进入 Bootloader。</li>
+
+
+
+<li>连接电脑，按解锁程序提示操作即可。如果程序提示要等 7 天，则 7 天后再次尝试。</li>
+</ol>
 
 
 
@@ -190,7 +196,7 @@ ubuntu kernel: [ 2581.050921] WARNING: CPU: 0 PID: 0 at net/sched/sch_generic.c:
 
 
 
-<h2>安装 Magisk（可选）</h2>
+<h2>安装 Magisk</h2>
 
 
 
@@ -198,7 +204,29 @@ ubuntu kernel: [ 2581.050921] WARNING: CPU: 0 PID: 0 at net/sched/sch_generic.c:
 
 
 
-<ol><li>下载与平板系统相同版本的线刷包，提取其中的 <code>boot.img</code>，复制进平板。</li><li>进入系统安装 Magisk.apk，用 Magisk Manager 给 <code>boot.img</code> 手动补丁（Install -&gt; Select and Patch a File）。</li><li>将获得的&nbsp;<code>magisk_patched-XXX.img</code>&nbsp;传回电脑。</li><li>进入 Bootloader，连接电脑，输入&nbsp;<code>fastboot boot magisk_patched-XXX.img</code>&nbsp;临时进入支持 Magisk 的系统。<ul><li>如果未成功进入，可以重新进入 Bootloader 再试一次</li></ul></li><li>自动开机后，在 Magisk Manager 中正式安装 Magisk（Install -&gt; Direct Install）。</li></ol>
+<ol>
+<li>下载与平板系统相同版本的线刷包，提取其中的 <code>boot.img</code>，复制进平板。</li>
+
+
+
+<li>进入系统安装 Magisk.apk，用 Magisk Manager 给 <code>boot.img</code> 手动补丁（Install -&gt; Select and Patch a File）。</li>
+
+
+
+<li>将获得的&nbsp;<code>magisk_patched-XXX.img</code>&nbsp;传回电脑。</li>
+
+
+
+<li>进入 Bootloader，连接电脑，输入&nbsp;<code>fastboot boot magisk_patched-XXX.img</code>&nbsp;临时进入支持 Magisk 的系统。
+<ul>
+<li>如果未成功进入，可以重新进入 Bootloader 再试一次</li>
+</ul>
+</li>
+
+
+
+<li>自动开机后，在 Magisk Manager 中正式安装 Magisk（Install -&gt; Direct Install）。</li>
+</ol>
 
 
 
@@ -210,7 +238,13 @@ ubuntu kernel: [ 2581.050921] WARNING: CPU: 0 PID: 0 at net/sched/sch_generic.c:
 
 
 
-<ol><li>进入 MIUI 系统，开启 USB 调试。</li><li>连接电脑，输入以下命令。</li></ol>
+<ol>
+<li>进入 MIUI 系统，开启 USB 调试。</li>
+
+
+
+<li>连接电脑，输入以下命令。</li>
+</ol>
 
 
 
@@ -238,11 +272,87 @@ adb pull /sdcard/persist.img</pre>
 
 
 
-<ul><li><a href="https://github.com/ponces/treble_build_pe/releases">Pixel Experience Plus</a><ul><li>带 Plus 的版本有一些额外功能，如网速显示</li><li>基于 Pixel 手机系统，颜值较高，但平板上用会有一些布局错位</li></ul></li><li><a href="https://sourceforge.net/projects/andyyan-gsi/files/lineage-19.x/" target="_blank" rel="noreferrer noopener">Lineage</a><ul><li>测试无法通过 SafetyNet</li><li>对平板适配较好</li></ul></li><li><a href="https://github.com/phhusson/treble_experimentations/releases/">AOSP (phhusson)</a><ul><li>上面的 ROM 都是基于 phhusson 大神的这个项目制作的</li></ul></li><li><a href="https://developer.android.com/about/versions/13/gsi-release-notes" target="_blank" rel="noreferrer noopener">Android 13 GSI</a><ul><li>蓝牙无法使用（Beta 3）</li></ul></li></ul>
+<ul>
+<li><a href="https://github.com/ponces/treble_build_pe/releases">Pixel Experience Plus</a>
+<ul>
+<li>带 Plus 的版本有一些额外功能，如网速显示</li>
 
 
 
-<ol><li>下载解压 ROM，获得 <code>system.img</code>。</li><li>进入 Bootloader，连接电脑。</li><li><code>fastboot flash --disable-verity --disable-verification vbmeta vbmeta.img</code><ul><li>此步骤用于停用 <a href="https://source.android.com/security/verifiedboot" target="_blank" rel="noreferrer noopener">Verified Boot</a> 分区验证，只需执行一次</li><li>如果已经安装了 Magisk，可以跳过本步骤，但未来要一直安装着 Magisk，否则 <code>system</code> 分区通不过校验可能会被禁用，需要重刷</li></ul></li><li><code>fastboot reboot fastboot</code><ul><li>此步骤用于进入 <a href="https://source.android.com/devices/bootloader/fastbootd" target="_blank" rel="noreferrer noopener">fastboot<strong>d</strong></a>，进入后屏幕上应显示 fastbootd</li></ul></li><li><code>fastboot flash system system.img</code>，等待刷写完毕</li><li><code>fastboot reboot recovery</code>，进入 Recovery 后，按提示操作清除数据并重启系统<ul><li>刷入不同类型 ROM 或版本降级时必须清除数据，否则无法进入系统</li></ul></li></ol>
+<li>基于 Pixel 手机系统，颜值较高，但平板上用会有一些布局错位</li>
+</ul>
+</li>
+
+
+
+<li><a href="https://sourceforge.net/projects/andyyan-gsi/files/lineage-19.x/" target="_blank" rel="noreferrer noopener">Lineage</a>
+<ul>
+<li>测试无法通过 SafetyNet</li>
+
+
+
+<li>对平板适配较好</li>
+</ul>
+</li>
+
+
+
+<li><a href="https://github.com/phhusson/treble_experimentations/releases/">AOSP (phhusson)</a>
+<ul>
+<li>上面的 ROM 都是基于 phhusson 大神的这个项目制作的</li>
+</ul>
+</li>
+
+
+
+<li><a href="https://developer.android.com/about/versions/13/gsi-release-notes" target="_blank" rel="noreferrer noopener">Android 13 GSI</a>
+<ul>
+<li>蓝牙无法使用（Beta 3）</li>
+</ul>
+</li>
+</ul>
+
+
+
+<ol>
+<li>下载解压 ROM，获得 <code>system.img</code>。</li>
+
+
+
+<li>进入 Bootloader，连接电脑。</li>
+
+
+
+<li><code>fastboot flash --disable-verity --disable-verification vbmeta vbmeta.img</code>
+<ul>
+<li>此步骤用于停用 <a href="https://source.android.com/security/verifiedboot" target="_blank" rel="noreferrer noopener">Verified Boot</a> 分区验证，只需执行一次</li>
+
+
+
+<li>如果已经安装了 Magisk，可以跳过本步骤，但未来要一直安装着 Magisk，否则 <code>system</code> 分区通不过校验可能会被禁用，需要重刷</li>
+</ul>
+</li>
+
+
+
+<li><code>fastboot reboot fastboot</code>
+<ul>
+<li>此步骤用于进入 <a href="https://source.android.com/devices/bootloader/fastbootd" target="_blank" rel="noreferrer noopener">fastboot<strong>d</strong></a>，进入后屏幕上应显示 fastbootd</li>
+</ul>
+</li>
+
+
+
+<li><code>fastboot flash system system.img</code>，等待刷写完毕</li>
+
+
+
+<li><code>fastboot reboot recovery</code>，进入 Recovery 后，按提示操作清除数据并重启系统
+<ul>
+<li>刷入不同类型 ROM 或版本降级时必须清除数据，否则无法进入系统</li>
+</ul>
+</li>
+</ol>
 
 
 
@@ -255,6 +365,22 @@ adb pull /sdcard/persist.img</pre>
 
 
 <p>由于 GSI 镜像并非针对小米平板 5 开发，有一些细节问题需要修复。</p>
+
+
+
+<h3>修复启动器 / 任务栏</h3>
+
+
+
+<p><a href="https://github.com/Coxxs/hide-tablet-taskbar">hide-tablet-taskbar</a>（Magisk 模块）</p>
+
+
+
+<p>PixelExperience 系统对平板的支持有些小问题（比如任务栏只显示一半）。写了个 Magisk 模块修复之。另外似乎还没有模块支持隐藏 Android 12.1 平板模式下的底部提示条，这里也顺便支持了隐藏。</p>
+
+
+
+<p><strong>本模块一并修复了 PixelExperience 13 下启动器崩溃的问题，可以从系统设置中找到 Magisk，安装本模块修复启动器。</strong></p>
 
 
 
@@ -283,6 +409,10 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
+<p>此外，PixelExperience 13 ROM 可启用 Settings -> Treble -> Misc -> Use System Wide BT HAL 并重启以修复蓝牙音频。</p>
+
+
+
 <h3>移除屏幕锐化</h3>
 
 
@@ -292,26 +422,6 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 <p>注意到屏幕会经常出现锐化的效果，看了下 MIUI 并不会有这种情况，费半天劲找到了引起问题的设置，写 Magisk 模块修复之。</p>
-
-
-
-<h3>修复任务栏</h3>
-
-
-
-<p><a href="https://github.com/Coxxs/hide-tablet-taskbar">hide-tablet-taskbar</a>（Magisk 模块）</p>
-
-
-
-<p>因为 Pixel 目前还没发布平板，所以 PixelExperience 系统对平板的支持有些小问题（比如任务栏只显示一半）。写了个 Magisk 模块修复之。另外似乎还没有模块支持隐藏 Android 12.1 平板模式下的底部提示条，这里也顺便支持了隐藏。</p>
-
-
-
-<p><s>本来想用 <a href="https://source.android.com/devices/architecture/rros" target="_blank" rel="noreferrer noopener">Resource Overlay</a> 的方式实现的，但不知为何不生效，只能用 Xposed 了。</s></p>
-
-
-
-<p>已经用 Overlay 实现了。</p>
 
 
 
@@ -339,7 +449,21 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<ol><li>打开 Magisk，设置里选择 Hide the Magisk app</li><li>打开 Magisk，设置里启用 Zygisk 及 Enforce DenyList</li><li>进入 Configure DenyList，找到 Google Play services，只需勾选 <code>com.google.android.gms</code> 及 <code>com.google.android.gms.unstable</code> 两项。</li><li>进入设置，清除 Google Play services 及 Google Play Store 的数据。</li></ol>
+<ol>
+<li>打开 Magisk，设置里选择 Hide the Magisk app</li>
+
+
+
+<li>打开 Magisk，设置里启用 Zygisk 及 Enforce DenyList</li>
+
+
+
+<li>进入 Configure DenyList，找到 Google Play services，只需勾选 <code>com.google.android.gms</code> 及 <code>com.google.android.gms.unstable</code> 两项。</li>
+
+
+
+<li>进入设置，清除 Google Play services 及 Google Play Store 的数据。</li>
+</ol>
 
 
 
@@ -355,7 +479,37 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<ol><li>确保 SafetyNet 已通过</li><li>将 Netflix 添加到 DenyList 列表</li><li>用 Magisk 模块在 <code>build.prop</code> 添加一行 <code>ro.netflix.bsp_rev=Q8250-19134-1</code><ul><li>该值仅适用于小米平板 5 Pro</li><li>Magisk 模块写法非常简单，可以参考上面的「移除屏幕锐化」模块</li><li>修改 <code>build.prop</code> 后需要清除 Netflix 应用数据重新登录</li><li>该修改<a href="https://github.com/phhusson/device_phh_treble/pull/313/files" target="_blank" rel="noreferrer noopener">已合并至上游</a>，一段时间后的新版 ROM 可能已经自带了</li><li>感谢几位朋友的帮助！</li></ul></li></ol>
+<ol>
+<li>确保 SafetyNet 已通过</li>
+
+
+
+<li>将 Netflix 添加到 DenyList 列表</li>
+
+
+
+<li>用 Magisk 模块在 <code>build.prop</code> 添加一行 <code>ro.netflix.bsp_rev=Q8250-19134-1</code>
+<ul>
+<li>该值仅适用于小米平板 5 Pro</li>
+
+
+
+<li>Magisk 模块写法非常简单，可以参考上面的「移除屏幕锐化」模块</li>
+
+
+
+<li>修改 <code>build.prop</code> 后需要清除 Netflix 应用数据重新登录</li>
+
+
+
+<li>该修改<a href="https://github.com/phhusson/device_phh_treble/pull/313/files" target="_blank" rel="noreferrer noopener">已合并至上游</a>，一段时间后的新版 ROM 可能已经自带了</li>
+
+
+
+<li>感谢几位朋友的帮助！</li>
+</ul>
+</li>
+</ol>
 
 
 
@@ -375,7 +529,17 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<ul><li>如刷机刚开始时出现错误，不要试图修改刷机脚本绕过。请检查机型是否正确、是否触发防回滚检测。移除脚本中的自检代码强行刷入将会变砖，无法自行恢复。</li><li><strong>恢复时<span style="text-decoration: underline;">不建议</span>锁定 Bootloader</strong>（在 Mi Flash 底部选择）。</li><li>目前（2022-06）如将基于 Android 12 的 MIUI 13 作为底包，后续刷入 GSI 时，会出现一些兼容性问题。如果可能的话，建议刷入基于 Android 11 的 MIUI 13 稳定版。</li></ul>
+<ul>
+<li>如刷机刚开始时出现错误，不要试图修改刷机脚本绕过。请检查机型是否正确、是否触发防回滚检测。移除脚本中的自检代码强行刷入将会变砖，无法自行恢复。</li>
+
+
+
+<li><strong>恢复时<span style="text-decoration: underline;">不建议</span>锁定 Bootloader</strong>（在 Mi Flash 底部选择）。</li>
+
+
+
+<li>目前（2022-06）如将基于 Android 12 的 MIUI 13 作为底包，后续刷入 GSI 时，会出现一些兼容性问题。如果可能的话，建议刷入基于 Android 11 的 MIUI 13 稳定版。</li>
+</ul>
 
 
 
@@ -391,23 +555,27 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1024x640.png" alt="" class="wp-image-2723" width="737" height="460" srcset="https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1024x640.png 1024w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-300x188.png 300w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-768x480.png 768w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1536x960.png 1536w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-2048x1280.png 2048w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1568x980.png 1568w" sizes="(max-width: 737px) 100vw, 737px" /></a><figcaption>怕被叫成二次元，在 Pixel 壁纸库里换了张艺术壁纸！</figcaption></figure></div>
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1024x640.png" alt="" class="wp-image-2723" width="737" height="460" srcset="https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1024x640.png 1024w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-300x188.png 300w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-768x480.png 768w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1536x960.png 1536w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-2048x1280.png 2048w, https://dev.moe/wp-content/uploads/2022/06/Screenshot_20220611-Pixel-Launcher-1568x980.png 1568w" sizes="(max-width: 737px) 100vw, 737px" /></a><figcaption class="wp-element-caption">怕被叫成二次元，在 Pixel 壁纸库里换了张艺术壁纸！</figcaption></figure></div>
 
 
 <p>本文撰写过程中参考了以下内容，在此表示感谢：</p>
 
 
 
-<ul><li><a href="https://forum.xda-developers.com/t/run-an-gsi-on-your-mi-pad-5.4352591/" target="_blank" rel="noreferrer noopener">XDA</a></li></ul>
+<ul>
+<li><a href="https://forum.xda-developers.com/t/run-an-gsi-on-your-mi-pad-5.4352591/" target="_blank" rel="noreferrer noopener">XDA</a></li>
+</ul>
 
 
 
-<blockquote class="wp-block-quote"><p>本文（<a href="https://dev.moe/2716">https://dev.moe/2716</a>）由 Coxxs 原创，转载请注明原文链接。</p></blockquote>
+<blockquote class="wp-block-quote">
+<p>本文（<a href="https://dev.moe/2716">https://dev.moe/2716</a>）由 Coxxs 原创，转载请注明原文链接。</p>
+</blockquote>
 <p><a rel="nofollow" href="https://dev.moe/2716">小米平板 5 Pro 刷入 GSI Android 教程</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://dev.moe/2716/feed</wfw:commentRss>
-			<slash:comments>4</slash:comments>
+			<slash:comments>5</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">2716</post-id>	</item>
