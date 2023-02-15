@@ -15,7 +15,7 @@
 	<atom:link href="https://dev.moe/feed" rel="self" type="application/rss+xml" />
 	<link>https://dev.moe/</link>
 	<description></description>
-	<lastBuildDate>Sun, 22 Jan 2023 12:48:55 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 15 Feb 2023 05:40:34 +0000</lastBuildDate>
 	<language>zh-CN</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -892,16 +892,17 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<blockquote class="wp-block-quote"><p>打开注册表，导航至 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\bc5038f7-23e0-4960-96da-33abaf5935ec</code>，将 <code>Attributes</code> 设置为 2。</p></blockquote>
+<blockquote class="wp-block-quote">
+<p>打开注册表，导航至 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\bc5038f7-23e0-4960-96da-33abaf5935ec</code>，将 <code>Attributes</code> 设置为 2。</p>
+</blockquote>
 
 
 
 <p>修改后，在电源选项中就可以设置最大 CPU 频率了。我们可以新建一个名为「静音」的电源计划，在其中限制 CPU 频率，日常使用时也方便来回切换电源计划。</p>
 
 
-
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/12/powerplan.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/12/powerplan-1024x529.png" alt="" class="wp-image-2509" width="637" height="328" srcset="https://dev.moe/wp-content/uploads/2021/12/powerplan-1024x529.png 1024w, https://dev.moe/wp-content/uploads/2021/12/powerplan-300x155.png 300w, https://dev.moe/wp-content/uploads/2021/12/powerplan-768x397.png 768w, https://dev.moe/wp-content/uploads/2021/12/powerplan-1536x794.png 1536w, https://dev.moe/wp-content/uploads/2021/12/powerplan-2048x1058.png 2048w, https://dev.moe/wp-content/uploads/2021/12/powerplan-1568x810.png 1568w" sizes="(max-width: 637px) 100vw, 637px" /></a></figure></div>
-
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/12/powerplan.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/12/powerplan-1024x529.png" alt="" class="wp-image-2509" width="637" height="328" srcset="https://dev.moe/wp-content/uploads/2021/12/powerplan-1024x529.png 1024w, https://dev.moe/wp-content/uploads/2021/12/powerplan-300x155.png 300w, https://dev.moe/wp-content/uploads/2021/12/powerplan-768x397.png 768w, https://dev.moe/wp-content/uploads/2021/12/powerplan-1536x794.png 1536w, https://dev.moe/wp-content/uploads/2021/12/powerplan-2048x1058.png 2048w, https://dev.moe/wp-content/uploads/2021/12/powerplan-1568x810.png 1568w" sizes="(max-width: 637px) 100vw, 637px" /></a></figure></div>
 
 
 <p>设置为 99% 即为关闭 Turbo Boost，CPU 频率不会超过基准频率（Base Speed）。继续降低则可以进一步限制频率。</p>
@@ -912,16 +913,17 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<blockquote class="wp-block-quote"><p>打开注册表，导航至 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\bfeba2e4-fdcc-41d9-93f4-3f6991c1f730\a4a0ab02-11f1-4584-bc52-cbb98eabdb0b\DefaultPowerSchemeValues\381b4222-f694-41f0-9685-ff5bb260df2e</code>，将 <code>ACSettingIndex</code> 设置为 2。</p></blockquote>
+<blockquote class="wp-block-quote">
+<p>打开注册表，导航至 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\bfeba2e4-fdcc-41d9-93f4-3f6991c1f730\a4a0ab02-11f1-4584-bc52-cbb98eabdb0b\DefaultPowerSchemeValues\381b4222-f694-41f0-9685-ff5bb260df2e</code>，将 <code>ACSettingIndex</code> 设置为 2。</p>
+</blockquote>
 
 
 
 <p>修改后，可能需要在控制面板中改变一下 Power Mode，或插拔电源，使设置生效。</p>
 
 
-
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/12/image-1.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/12/image-1-1024x310.png" alt="" class="wp-image-2527" width="618" height="187" srcset="https://dev.moe/wp-content/uploads/2021/12/image-1-1024x310.png 1024w, https://dev.moe/wp-content/uploads/2021/12/image-1-300x91.png 300w, https://dev.moe/wp-content/uploads/2021/12/image-1-768x233.png 768w, https://dev.moe/wp-content/uploads/2021/12/image-1.png 1353w" sizes="(max-width: 618px) 100vw, 618px" /></a><figcaption>新版控制面板中的 Power mode，一般设置为 Recommended 即可</figcaption></figure></div>
-
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/12/image-1.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/12/image-1-1024x310.png" alt="" class="wp-image-2527" width="618" height="187" srcset="https://dev.moe/wp-content/uploads/2021/12/image-1-1024x310.png 1024w, https://dev.moe/wp-content/uploads/2021/12/image-1-300x91.png 300w, https://dev.moe/wp-content/uploads/2021/12/image-1-768x233.png 768w, https://dev.moe/wp-content/uploads/2021/12/image-1.png 1353w" sizes="(max-width: 618px) 100vw, 618px" /></a><figcaption class="wp-element-caption">新版控制面板中的 Power mode，一般设置为 Recommended 即可</figcaption></figure></div>
 
 
 <p>遗憾的是 Surface 似乎未对 Windows 暴露风扇接口，无法直接对风扇控制启停及调速。有兴趣的小伙伴可以逆向研究一下 Surface SMF Client Driver 等，其中似乎有管理 EC 集成控制器（Surface 称之为 Surface System Aggregator）电源策略的接口。</p>
@@ -944,11 +946,33 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
+<p><strong>值得一提的是，Surface 的屏幕是已经过校色的，即默认偏黄的色温实际上是更准确的<strong>（大多数影视、游戏是在该色温下创作的）。</strong></strong>建议保留默认的校色配置，如实在不适应可以考虑按以下方法禁用。</p>
+
+
+
 <p>新款 Surface 中，可以在设备管理器（Device Manager）中禁用 Surface 的调色。</p>
 
 
 
-<ol><li>保存并关闭所有程序，打开设备管理器（Device Manager）</li><li>显示器（Monitors）-&gt;  Surface Panel</li><li>右键 -&gt; Update Driver -&gt; Browse my computer for drivers -&gt; Let me pick from a list of available drivers on my computer</li><li>选择 Generic PnP Monitor（通用即插即用监视器），保存</li><li>此时屏幕背光可能会被关闭，且亮度暂时无法调节，重启电脑即可恢复正常</li></ol>
+<ol>
+<li>保存并关闭所有程序，打开设备管理器（Device Manager）</li>
+
+
+
+<li>显示器（Monitors）-&gt;  Surface Panel</li>
+
+
+
+<li>右键 -&gt; Update Driver -&gt; Browse my computer for drivers -&gt; Let me pick from a list of available drivers on my computer</li>
+
+
+
+<li>选择 Generic PnP Monitor（通用即插即用监视器），保存</li>
+
+
+
+<li>此时屏幕背光可能会被关闭，且亮度暂时无法调节，重启电脑即可恢复正常</li>
+</ol>
 
 
 
@@ -960,7 +984,21 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<ol><li>打开设备管理器（Device Manager）</li><li>蓝牙（Bluetooth） -&gt; Intel(R) Wireless Bluetooth(R)</li><li>右键 -&gt; 属性 -&gt; 电源管理（Power Managerment）</li><li>取消勾选「允许计算机关闭此设备以节省电量（Allow the computer to turn off this device to save power）」</li></ol>
+<ol>
+<li>打开设备管理器（Device Manager）</li>
+
+
+
+<li>蓝牙（Bluetooth） -&gt; Intel(R) Wireless Bluetooth(R)</li>
+
+
+
+<li>右键 -&gt; 属性 -&gt; 电源管理（Power Managerment）</li>
+
+
+
+<li>取消勾选「允许计算机关闭此设备以节省电量（Allow the computer to turn off this device to save power）」</li>
+</ol>
 
 
 
@@ -975,16 +1013,29 @@ adb shell settings put system peak_refresh_rate 120</pre>
 <p>在用远程串流这类对网络质量敏感的应用时，有时会发现声音画面隔几秒种会停一下。通过 PingPlotter 间隔 0.05 秒对本地网络进行测试，发现无线网络确实存在波动。</p>
 
 
-
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/12/image.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/12/image-1024x246.png" alt="" class="wp-image-2510" width="679" height="163" srcset="https://dev.moe/wp-content/uploads/2021/12/image-1024x246.png 1024w, https://dev.moe/wp-content/uploads/2021/12/image-300x72.png 300w, https://dev.moe/wp-content/uploads/2021/12/image-768x184.png 768w, https://dev.moe/wp-content/uploads/2021/12/image.png 1213w" sizes="(max-width: 679px) 100vw, 679px" /></a><figcaption>中间一段为关闭了无线网卡的 MIMO power save mode，此时断流消失</figcaption></figure></div>
-
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/12/image.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/12/image-1024x246.png" alt="" class="wp-image-2510" width="679" height="163" srcset="https://dev.moe/wp-content/uploads/2021/12/image-1024x246.png 1024w, https://dev.moe/wp-content/uploads/2021/12/image-300x72.png 300w, https://dev.moe/wp-content/uploads/2021/12/image-768x184.png 768w, https://dev.moe/wp-content/uploads/2021/12/image.png 1213w" sizes="(max-width: 679px) 100vw, 679px" /></a><figcaption class="wp-element-caption">中间一段为关闭了无线网卡的 MIMO power save mode，此时断流消失</figcaption></figure></div>
 
 
 <p>打开设备管理器，调整 AX201 省电相关的设置后，问题解决。</p>
 
 
 
-<ol><li>打开设备管理器（Device Manager）</li><li>网络适配器（Network adapters） -&gt; Intel(R) Wi-Fi 6 AX201 160MHz</li><li>右键 -&gt; 属性 -&gt; 高级（Advanced）</li><li>将 MIMO Power Save Mode 设置为 No SMPS</li></ol>
+<ol>
+<li>打开设备管理器（Device Manager）</li>
+
+
+
+<li>网络适配器（Network adapters） -&gt; Intel(R) Wi-Fi 6 AX201 160MHz</li>
+
+
+
+<li>右键 -&gt; 属性 -&gt; 高级（Advanced）</li>
+
+
+
+<li>将 MIMO Power Save Mode 设置为 No SMPS</li>
+</ol>
 
 
 
@@ -1016,7 +1067,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<hr class="wp-block-separator"/>
+<hr class="wp-block-separator has-css-opacity"/>
 
 
 
