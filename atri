@@ -138,19 +138,19 @@
     <category term="笔记" scheme="https://blog.atri.tk/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
+    <category term="Blog" scheme="https://blog.atri.tk/tags/Blog/"/>
+    
+    <category term="Hexo" scheme="https://blog.atri.tk/tags/Hexo/"/>
+    
     <category term="Web" scheme="https://blog.atri.tk/tags/Web/"/>
+    
+    <category term="GitHub" scheme="https://blog.atri.tk/tags/GitHub/"/>
     
     <category term="Cloudflare" scheme="https://blog.atri.tk/tags/Cloudflare/"/>
     
     <category term="Cloudflare Pages" scheme="https://blog.atri.tk/tags/Cloudflare-Pages/"/>
     
     <category term="CI/CD" scheme="https://blog.atri.tk/tags/CI-CD/"/>
-    
-    <category term="GitHub" scheme="https://blog.atri.tk/tags/GitHub/"/>
-    
-    <category term="Blog" scheme="https://blog.atri.tk/tags/Blog/"/>
-    
-    <category term="Hexo" scheme="https://blog.atri.tk/tags/Hexo/"/>
     
   </entry>
   
@@ -293,15 +293,15 @@
     <category term="笔记" scheme="https://blog.atri.tk/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-    <category term="CI/CD" scheme="https://blog.atri.tk/tags/CI-CD/"/>
-    
-    <category term="GitHub" scheme="https://blog.atri.tk/tags/GitHub/"/>
-    
     <category term="Blog" scheme="https://blog.atri.tk/tags/Blog/"/>
     
     <category term="Hexo" scheme="https://blog.atri.tk/tags/Hexo/"/>
     
+    <category term="GitHub" scheme="https://blog.atri.tk/tags/GitHub/"/>
+    
     <category term="GitHub Pages" scheme="https://blog.atri.tk/tags/GitHub-Pages/"/>
+    
+    <category term="CI/CD" scheme="https://blog.atri.tk/tags/CI-CD/"/>
     
     <category term="GitHub Actions" scheme="https://blog.atri.tk/tags/GitHub-Actions/"/>
     
@@ -407,9 +407,9 @@
     <category term="笔记" scheme="https://blog.atri.tk/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-    <category term="Web" scheme="https://blog.atri.tk/tags/Web/"/>
-    
     <category term="Blog" scheme="https://blog.atri.tk/tags/Blog/"/>
+    
+    <category term="Web" scheme="https://blog.atri.tk/tags/Web/"/>
     
     <category term="Typecho" scheme="https://blog.atri.tk/tags/Typecho/"/>
     
@@ -502,15 +502,15 @@
     <category term="摸鱼" scheme="https://blog.atri.tk/categories/%E6%91%B8%E9%B1%BC/"/>
     
     
-    <category term="Web" scheme="https://blog.atri.tk/tags/Web/"/>
-    
-    <category term="GitHub" scheme="https://blog.atri.tk/tags/GitHub/"/>
-    
     <category term="Blog" scheme="https://blog.atri.tk/tags/Blog/"/>
     
     <category term="Hexo" scheme="https://blog.atri.tk/tags/Hexo/"/>
     
     <category term="Hexo theme" scheme="https://blog.atri.tk/tags/Hexo-theme/"/>
+    
+    <category term="Web" scheme="https://blog.atri.tk/tags/Web/"/>
+    
+    <category term="GitHub" scheme="https://blog.atri.tk/tags/GitHub/"/>
     
     <category term="GitHub Pages" scheme="https://blog.atri.tk/tags/GitHub-Pages/"/>
     
