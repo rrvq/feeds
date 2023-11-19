@@ -131,7 +131,7 @@ netsh int tcp set supplemental template=Compat congestionprovider=BBR2</pre>
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://dev.moe/2829/feed</wfw:commentRss>
-			<slash:comments>3</slash:comments>
+			<slash:comments>4</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">2829</post-id>	</item>
