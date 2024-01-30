@@ -245,11 +245,11 @@
     
     <category term="GitHub" scheme="https://blog.atri.tk/tags/GitHub/"/>
     
-    <category term="CI/CD" scheme="https://blog.atri.tk/tags/CI-CD/"/>
-    
     <category term="Cloudflare" scheme="https://blog.atri.tk/tags/Cloudflare/"/>
     
     <category term="Cloudflare Pages" scheme="https://blog.atri.tk/tags/Cloudflare-Pages/"/>
+    
+    <category term="CI/CD" scheme="https://blog.atri.tk/tags/CI-CD/"/>
     
   </entry>
   
@@ -400,9 +400,9 @@
     
     <category term="GitHub Pages" scheme="https://blog.atri.tk/tags/GitHub-Pages/"/>
     
-    <category term="GitHub Actions" scheme="https://blog.atri.tk/tags/GitHub-Actions/"/>
-    
     <category term="CI/CD" scheme="https://blog.atri.tk/tags/CI-CD/"/>
+    
+    <category term="GitHub Actions" scheme="https://blog.atri.tk/tags/GitHub-Actions/"/>
     
   </entry>
   
